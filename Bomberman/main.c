@@ -7,9 +7,11 @@
 #include <allegro5/keycodes.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
+#include <math.h>
 static const int width = 800;
 static const int height = 600;
-
+bool wasd[4] = { false, false, false, false };
+double deltaTime = 0;
 enum CharacterType
 {
     PlayerType,
@@ -29,17 +31,73 @@ struct Transform
 struct Character
 {   
     struct Transform Transform;
+    float Speed;
+    ALLEGRO_BITMAP* sprite;
     bool enabled;
-
 };
+struct Character Player;
 
-void buttonDown(int key, ALLEGRO_DISPLAY* display)
+void MovePlayer(struct Vector2 dir)
+{
+    dir.x = (dir.x * deltaTime)*40;
+    dir.y = (dir.y * deltaTime)*40;
+    if (abs(Player.Transform.position.x + dir.x) > (Player.Transform.scale.x/2.0) * 128)
+    {
+        Player.Transform.position.x += dir.x;
+    }
+    if (abs(Player.Transform.position.y + dir.y) > (Player.Transform.scale.y / 2.0) * 128)
+    {
+        Player.Transform.position.y += dir.y;
+    }
+}
+void playerMovement()
+{
+    struct Vector2 dir;
+    dir.x = 0;
+    dir.y = 0;
+    if (wasd[0] && !wasd[2])
+    {
+        dir.y = -1;
+    }
+    else if (!wasd[0] && wasd[2])
+    {
+        dir.y = 1;
+    }
+    if (wasd[1] && !wasd[3])
+    {
+        dir.x = -1;
+    }
+    else if (!wasd[1] && wasd[3])
+    {
+        dir.x = 1;
+    }
+    if (dir.x != 0 && dir.y != 0) { dir.x = dir.x *0.7; dir.y = dir.y * 0.7; }
+    dir.x *= Player.Speed;
+    dir.y *= Player.Speed;
+    MovePlayer(dir);
+}
+void button(int key, bool down)
 {
     switch (key)
     {
     case ALLEGRO_KEY_W:
     {
-
+        wasd[0] = down;
+        break;
+    }
+    case ALLEGRO_KEY_A:
+    {
+        wasd[1] = down;
+        break;
+    }
+    case ALLEGRO_KEY_S:
+    {
+        wasd[2] = down;
+        break;
+    }
+    case ALLEGRO_KEY_D:
+    {
+        wasd[3] = down;
         break;
     }
     default:
@@ -48,10 +106,8 @@ void buttonDown(int key, ALLEGRO_DISPLAY* display)
     }
     }
 }
-
 bool zamknij = false;
 const int FPS = 30;
-struct Character Player;
 int main()
 {
     if (!al_init()) {
@@ -62,19 +118,22 @@ int main()
     {
         return -1;
     }
-    Player.Transform.scale.x = 0.05*width;
-    Player.Transform.scale.y = 0.05*height;
+    Player.Transform.scale.x = 0.5;
+    Player.Transform.scale.y = 0.5;
+    Player.Transform.position.x = width / 2;
+    Player.Transform.position.y = height / 2;
+    Player.Speed = 2.0;
     Player.enabled = true;
     ALLEGRO_DISPLAY* display = NULL;
     ALLEGRO_EVENT_QUEUE* queue = NULL;
     ALLEGRO_TIMER* timer = NULL;
-    bool redraw = true;
 
     // Initialize allegro
 
     if (!al_init_primitives_addon()) { return -1; }
     if (!al_install_keyboard()) { return -1; }
     if (!al_init_ttf_addon()) { return -1; }
+    if (!al_init_image_addon()) { return -1; }
     // Initialize the timer
     timer = al_create_timer(1.0 / FPS);
     if (!timer) {
@@ -111,39 +170,48 @@ int main()
         printf("Blad odczytu czcionki. \n");
         return -3;
     }
-    /*ALLEGRO_BITMAP* playerBMP = al_load_bitmap("player.bmp");
-    if (playerBMP == NULL)
+    Player.sprite = al_load_bitmap("data/player.bmp");
+    if (Player.sprite == NULL)
     {
-        ALLEGRO_PATH* resource_path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
-        printf("Nie uda³o siê wczytaæ pliku: %s\n", al_path_cstr(resource_path, '/'));
+        printf("Nie uda³o siê wczytaæ pliku bmp gracza\n%d\n", al_get_errno());
         return -1;
-    }*/
+    }
+    double time = al_get_time();
+    double oldTime = time;
     while (!zamknij) {
         ALLEGRO_TIMEOUT timeout;
         al_init_timeout(&timeout, 0.06);
         ALLEGRO_EVENT event;
-        al_draw_text(font, al_map_rgb(255, 255, 255), 150, 150, ALLEGRO_ALIGN_CENTER, "Hello, World!");
-        al_wait_for_event_timed(queue, &event, 0.1);
-        //al_wait_for_vsync();
-
+        al_wait_for_event_timed(queue, &event, 0.00);
+        al_wait_for_vsync();
+        time = al_get_time();
+        deltaTime = time - oldTime;
+        oldTime = time;
         switch (event.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
                 zamknij = true;
                 break;
             case ALLEGRO_EVENT_KEY_DOWN:
             {
-                buttonDown(event.keyboard.keycode, display);
+                button(event.keyboard.keycode, true);
+                break;
+            }
+            case ALLEGRO_EVENT_KEY_UP:
+            {
+                button(event.keyboard.keycode, false);
                 break;
             }
         }
-        al_clear_to_color(al_map_rgb(50, 255, 0));
+        al_clear_to_color(al_map_rgb(10, 100, 10));
         ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
         if (Player.enabled)
         {
-            al_draw_filled_rectangle(Player.Transform.position.x - Player.Transform.scale.x / 2.0, Player.Transform.position.y - Player.Transform.scale.y / 2.0, Player.Transform.position.x + Player.Transform.scale.x, Player.Transform.position.y + Player.Transform.scale.y, color_blue);
+            //al_draw_filled_rectangle(Player.Transform.position.x - Player.Transform.scale.x / 2.0, Player.Transform.position.y - Player.Transform.scale.y / 2.0, Player.Transform.position.x + Player.Transform.scale.x, Player.Transform.position.y + Player.Transform.scale.y, color_blue);
+            al_draw_scaled_rotated_bitmap(Player.sprite, 64, 64, Player.Transform.position.x, Player.Transform.position.y, Player.Transform.scale.x, Player.Transform.scale.y, 0, 0);
+            playerMovement();
         }
         al_flip_display();
-        puts("printed frame");
+
     }
 
     al_uninstall_keyboard();
