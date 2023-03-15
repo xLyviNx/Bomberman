@@ -1,4 +1,4 @@
 ﻿  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(147,10): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(217,23): warning C4101: "color_blue": lokalna zmienna, do której nie istnieje odwołanie
-  Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe
+L:\LyviN_2\VS\Bomberman\Bomberman\main.c(320,29): warning C4013: 'al_init_image_addon' undefined; assuming extern returning int
+L:\LyviN_2\VS\Bomberman\Bomberman\main.c(402,23): warning C4101: 'color_blue': unreferenced local variable
+  Bomberman.vcxproj -> L:\LyviN_2\VS\Bomberman\x64\Debug\Bomberman.exe

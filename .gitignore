@@ -53,3 +53,4 @@ dkms.conf
 
 #nie wiem
 .vs/*
+.packages/*

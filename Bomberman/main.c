@@ -9,21 +9,117 @@
 #include <allegro5/allegro_ttf.h>
 #include <math.h>
 
-#define exploTime = 3.0f;
-static const int width = 800;
-static const int height = 600;
+#define exploTime 3.0;
+#define maxBombs 3;
+const int width = 800;
+const int height = 600;
+const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
-enum CharacterType
-{
-    PlayerType,
-    AI
-};
 struct Vector2
 {
     double x;
     double y;
 };
+
+struct BombList
+{
+    float timeLeft;
+    struct Vector2 Position;
+    bool isRemote;
+    struct BombList* next;
+    struct BombList* prev;
+};
+struct BombList* bombs = NULL;
+struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
+{
+    struct BombList* nB = (struct BombList*)malloc(sizeof(struct BombList));
+    if (nB != NULL)
+    {
+        nB->Position = pos;
+        nB->isRemote = remote;
+        nB->prev = NULL;
+        nB->next = NULL;
+        nB->timeLeft = exploTime;
+    }
+    return nB;
+}
+struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, bool remote)
+{
+    struct BombList* nB = NULL;
+    if (first != NULL)
+    {
+        nB = (struct BombList*)malloc(sizeof(struct BombList));
+        if (nB != NULL)
+        {
+            nB->Position = pos;
+            nB->isRemote = remote;
+            nB->timeLeft = exploTime;
+            struct BombList* end = first;
+            while (end->next != NULL)
+            {
+                end = end->next;
+            }
+            printf("Added at the end of %p\n", end);
+            nB->prev = end;
+            nB->next = NULL;
+            end->next = nB;
+        }
+    }
+    return nB;
+}
+bool Bomb_Remove(struct BombList* bomb)
+{
+    if (debug)
+    {
+        printf("Deleting Bomb: %p\n", bomb);
+    }
+    if (bomb != NULL)
+    {
+        struct BombList* prev = bomb->prev;
+        struct BombList* next = bomb->next;
+        printf("PREV ADDRESS: %p\n", prev);
+        bool any = false;
+        if (prev != NULL)
+        {
+            prev->next = bomb->next;
+            any = true;
+        }
+        else
+        {
+            bombs = bomb->next;
+        }
+        if (next != NULL)
+        {
+            next->prev = bomb->prev;
+            any = true;
+        }
+        if (!any)
+        {
+            bombs = NULL;
+        }
+        free(bomb);
+        bomb = NULL;
+        return true;
+    }
+    return false;
+}
+unsigned int Bomb_count(struct BombList* first)
+{
+    unsigned int count = 0;
+    printf("first: %p\n", first);
+    if (first != NULL)
+    {
+        count = 1;
+        struct BombList* end = first;
+        while (end->next != NULL)
+        {
+            end = end->next;
+            count++;
+        }
+    }
+    return count;
+}
 struct Transform
 {
     struct Vector2 position;
@@ -35,6 +131,7 @@ struct Character
     struct Transform Transform;
     float Speed;
     ALLEGRO_BITMAP* sprite;
+    bool remoteBombs;
     bool enabled;
 };
 struct Character Player;
@@ -81,6 +178,78 @@ void playerMovement()
     dir.y *= Player.Speed;
     MovePlayer(dir);
 }
+void plantBomb()
+{
+    bool canplant = false;
+    struct BombList* planted = NULL;
+    if (Player.enabled)
+    {
+        unsigned int count = Bomb_count(bombs);
+        printf("Bombs BEFORE: %d\n", count);
+        if (count>0)
+        {
+            canplant = true;
+        }
+        else 
+        {
+            planted = Bomb_CreateList(Player.Transform.position, Player.remoteBombs);
+            bombs = planted;
+            printf("Bombs 0, creating a list. Address: %p\n   prev: %p\n   next: %p\n", bombs, bombs->prev, bombs->next);
+        }
+    }
+    if (canplant)
+    {
+        planted = Bomb_InsertInto(bombs, Player.Transform.position, Player.remoteBombs);
+    }
+
+    if (planted == NULL)
+    {
+        printf("Bomb NOT planted.\n");
+    }
+    else {
+        printf("Bomb planted.\n");
+
+    }
+}
+void renderBombs(ALLEGRO_BITMAP* bombSprite)
+{
+    if (bombs != NULL)
+    {
+        struct BombList* bomb = bombs;
+        while (bombs != NULL && bomb != NULL)
+        {
+            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x, bomb->Position.y, Player.Transform.scale.x, Player.Transform.scale.y, 0, 0);
+            if (bomb->next != NULL) {
+                bomb = bomb->next;
+            }
+            else break;
+        }
+    }
+}
+void loopBombs()
+{
+    if (bombs != NULL)
+    {
+        struct BombList* bomb = bombs;
+        int i = 0;
+        while (bombs != NULL && bomb != NULL)
+        {
+            bomb->timeLeft -= deltaTime;
+            if (bomb->timeLeft <= 0)
+            {
+                printf("BOMB (ID: %d) SHOULD NOW EXPLODE!\n", i);
+                //explodeBomb(bomb);
+                Bomb_Remove(bomb);
+                return;
+            }
+            if (bomb->next != NULL) {
+                bomb = bomb->next;
+            }
+            else break;
+            i++;
+        }
+    }
+}
 void button(int key, bool down)
 {
     switch (key)
@@ -119,10 +288,7 @@ void button(int key, bool down)
     }
     }
 }
-void plantBomb()
-{
 
-}
 bool zamknij = false;
 const int FPS = 30;
 int main()
@@ -140,6 +306,7 @@ int main()
     Player.Transform.position.x = width / 2;
     Player.Transform.position.y = height / 2;
     Player.Speed = 2.0;
+    Player.remoteBombs = false;
     Player.enabled = true;
     ALLEGRO_DISPLAY* display = NULL;
     ALLEGRO_EVENT_QUEUE* queue = NULL;
@@ -164,7 +331,7 @@ int main()
         fprintf(stderr, "Failed to create display.\n");
         return 1;
     }
-
+    //al_set_display_option(display, ALLEGRO_VSYNC, 1);
     // Create the event queue
     queue = al_create_event_queue();
     if (!queue) {
@@ -181,8 +348,8 @@ int main()
 
     // Start the timer
     al_start_timer(timer);
-    ALLEGRO_FONT* font = al_load_ttf_font("data/data-unifon.ttf", 24, 0);
-    if (font == NULL)
+    ALLEGRO_FONT* debugFont = al_load_ttf_font("data/data-unifon.ttf", 12, 0);
+    if (debugFont == NULL)
     {
         printf("Blad odczytu czcionki. \n");
         return -3;
@@ -193,17 +360,29 @@ int main()
         printf("Nie uda³o siê wczytaæ pliku bmp gracza\n%d\n", al_get_errno());
         return -1;
     }
+    ALLEGRO_BITMAP* BombSprite = al_load_bitmap("data/bomb.bmp");
+    if (BombSprite == NULL)
+    {
+        printf("Nie uda³o siê wczytaæ pliku bmp bomby\n%d\n", al_get_errno());
+        return -1;
+    }
     double time = al_get_time();
     double oldTime = time;
+    float displayFps=0;
+    float displayFpsDelay = 0;
+    int frames = 0;
+    double syncDeltaTime = 0;
     while (!zamknij) {
-        ALLEGRO_TIMEOUT timeout;
-        al_init_timeout(&timeout, 0.06);
+        //ALLEGRO_TIMEOUT timeout;
+        //al_init_timeout(&timeout, 0.06);
+        //al_wait_for_vsync();
         ALLEGRO_EVENT event;
         al_wait_for_event_timed(queue, &event, 0.00);
-        al_wait_for_vsync();
         time = al_get_time();
         deltaTime = time - oldTime;
+        syncDeltaTime += deltaTime;
         oldTime = time;
+        frames++;
         switch (event.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
                 zamknij = true;
@@ -227,8 +406,26 @@ int main()
             al_draw_scaled_rotated_bitmap(Player.sprite, 64, 64, Player.Transform.position.x, Player.Transform.position.y, Player.Transform.scale.x, Player.Transform.scale.y, 0, 0);
             playerMovement();
         }
+        if (debug)
+        {
+            if (displayFpsDelay<=0) 
+            {
+                //printf("Synced Delta Time: %lf. FRAMES: %d\n", syncDeltaTime, frames);
+                displayFps = frames / syncDeltaTime;
+                displayFpsDelay = 0.2;
+                syncDeltaTime = 0;
+                frames = 0;
+            }
+            else
+            {
+                displayFpsDelay -= deltaTime;
+            }
+            al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 5, 5, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
+            al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 5, 17, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+        }
+        renderBombs(BombSprite);
+        loopBombs();
         al_flip_display();
-
     }
 
     al_uninstall_keyboard();
