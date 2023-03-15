@@ -8,6 +8,8 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <math.h>
+
+#define exploTime = 3.0f;
 static const int width = 800;
 static const int height = 600;
 bool wasd[4] = { false, false, false, false };
@@ -41,14 +43,17 @@ void MovePlayer(struct Vector2 dir)
 {
     dir.x = (dir.x * deltaTime)*40;
     dir.y = (dir.y * deltaTime)*40;
-    if (abs(Player.Transform.position.x + dir.x) > (Player.Transform.scale.x/2.0) * 128)
+    float npy = (Player.Transform.position.y + dir.y);
+    float npx = (Player.Transform.position.x + dir.x);
+    if (npx > (Player.Transform.scale.x/2.0) * 128 && npx < width - (Player.Transform.scale.x / 2.0) * 128)
     {
-        Player.Transform.position.x += dir.x;
+        Player.Transform.position.x = npx;
     }
-    if (abs(Player.Transform.position.y + dir.y) > (Player.Transform.scale.y / 2.0) * 128)
+    if (npy > (Player.Transform.scale.y / 2.0) * 128 && npy < height - (Player.Transform.scale.y / 2.0) * 128)
     {
-        Player.Transform.position.y += dir.y;
+        Player.Transform.position.y = npy;
     }
+    //printf("%lf, %lf\n", Player.Transform.position.x, Player.Transform.position.y);
 }
 void playerMovement()
 {
@@ -100,11 +105,23 @@ void button(int key, bool down)
         wasd[3] = down;
         break;
     }
+    case ALLEGRO_KEY_SPACE:
+    {
+        if (down)
+        {
+            plantBomb();
+        }
+        break;
+    }
     default:
     {
         break;
     }
     }
+}
+void plantBomb()
+{
+
 }
 bool zamknij = false;
 const int FPS = 30;
