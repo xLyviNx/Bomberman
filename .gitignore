@@ -53,4 +53,11 @@ dkms.conf
 
 #nie wiem
 .vs/*
+.vs/Bomberman/*
+*/v17/*
+*.suo
 .packages/*
+.vs/Bomberman/v17/.suo
+.vs/Bomberman/v17/.suo
+*.log
+.vs/Bomberman/v17/Browse.VC.db

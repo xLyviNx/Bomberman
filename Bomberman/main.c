@@ -190,6 +190,11 @@ void plantBomb()
 {
     if (Player != NULL)
     {
+        float x = (float)((int)(Player->Transform.position.x / ((Player->Transform.scale.x / 2.0) * 128)) * (Player->Transform.scale.x / 2.0) * 128); //Ÿle, ale chce spróbowaæ zrobiæ by "równo" podk³ada³o te bomby, na "kratki"
+        float y = (float)((int)(Player->Transform.position.y / ((Player->Transform.scale.y / 2.0) * 128)) * (Player->Transform.scale.y / 2.0) * 128);//to samo co wy¿ej
+        struct Vector2 pos;
+        pos.x = x;
+        pos.y = y;
         bool canplant = false;
         struct BombList* planted = NULL;
         if (Player->enabled)
@@ -204,14 +209,14 @@ void plantBomb()
             }
             else
             {
-                planted = Bomb_CreateList(Player->Transform.position, Player->remoteBombs);
+                planted = Bomb_CreateList(pos, Player->remoteBombs);
                 bombs = planted;
                 printf("Bombs 0, creating a list. Address: %p\n   prev: %p\n   next: %p\n", bombs, bombs->prev, bombs->next);
             }
         }
         if (canplant)
         {
-            planted = Bomb_InsertInto(bombs, Player->Transform.position, Player->remoteBombs);
+            planted = Bomb_InsertInto(bombs, pos, Player->remoteBombs);
         }
 
         if (planted == NULL)
