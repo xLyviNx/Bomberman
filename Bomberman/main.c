@@ -10,8 +10,8 @@
 #include <math.h>
 
 #define exploTime 3.0;
-const int width = 800;
-const int height = 600;
+const int width = 768;
+const int height = 768;
 const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
@@ -84,9 +84,27 @@ unsigned int Bomb_count(struct BombList* first)
     }
     return count;
 }
+bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
+{
+    if (first != NULL)
+    {
+        struct BombList* seek = first;
+        do
+        {
+            printf("%lf vs %lf\n%lf vs %lf", seek->Position.x, pos.x, seek->Position.y, pos.y);
+            if (seek->Position.x == pos.x && seek->Position.y == pos.y)
+            {
+                return true;
+            }
+            seek = seek->next;
+        } while (seek != NULL? seek->next != NULL : false);
+    }
+    return false;
+}
 struct Transform
 {
     struct Vector2 position;
+    struct Vector2 gridPosition;
     struct Vector2 rotation;
     struct Vector2 scale;
 };
@@ -157,6 +175,12 @@ void MovePlayer(struct Vector2 dir)
         {
             Player->Transform.position.y = npy;
         }
+        int cellsizex = (int)(128 * Player->Transform.scale.x);
+        int cellsizey = (int)(128 * Player->Transform.scale.y);
+        float x = (int)(cellsizex*((int)(Player->Transform.position.x / cellsizex))+cellsizex/2);
+        float y = (int)(cellsizex * ((int)(Player->Transform.position.y / cellsizey)) + cellsizey / 2);
+        Player->Transform.gridPosition.x = x;
+        Player->Transform.gridPosition.y = y;
         //printf("%lf, %lf\n", Player->Transform.position.x, Player->Transform.position.y);
     }
 }
@@ -190,11 +214,8 @@ void plantBomb()
 {
     if (Player != NULL)
     {
-        float x = (float)((int)(Player->Transform.position.x / ((Player->Transform.scale.x / 2.0) * 128)) * (Player->Transform.scale.x / 2.0) * 128); //Ÿle, ale chce spróbowaæ zrobiæ by "równo" podk³ada³o te bomby, na "kratki"
-        float y = (float)((int)(Player->Transform.position.y / ((Player->Transform.scale.y / 2.0) * 128)) * (Player->Transform.scale.y / 2.0) * 128);//to samo co wy¿ej
         struct Vector2 pos;
-        pos.x = x;
-        pos.y = y;
+        pos = Player->Transform.gridPosition;
         bool canplant = false;
         struct BombList* planted = NULL;
         if (Player->enabled)
@@ -203,7 +224,9 @@ void plantBomb()
             printf("Bombs BEFORE: %d\n", count);
             if (count > 0)
             {
-                if (count < Player->maxBombs) {
+                if (count < Player->maxBombs && !Bomb_ExistsAt(bombs, pos))
+                {
+
                     canplant = true;
                 }
             }
@@ -306,7 +329,28 @@ void button(int key, bool down)
     }
     }
 }
+void drawUI(ALLEGRO_FONT** uiFont)
+{
+    al_draw_filled_rectangle(5, 5, width - 5, 55, al_map_rgba(0, 0, 0, 150));
 
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), width - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBS: %d/%d", Player->displayBombs, Player->maxBombs);
+}
+void drawGrid(int maxx, int maxy, int xsize, int ysize)
+{
+    if (Player != NULL) {
+        int i, j;
+
+        //printf("grid: %d, %d\nmax X: %d\max Y: %d\n", xsize, ysize, maxx, maxy);
+        for (i = 0; i < maxx; i++)
+        {
+            //printf("i: %d\n", i);
+            for (j = 0; j < maxy; j++)
+            {
+                al_draw_rectangle((i * xsize) - xsize, (j * ysize) - ysize, (i * xsize) + xsize, (j * ysize) + ysize, al_map_rgba(255, 180, 30, 1), 1.5);
+            }
+        }
+    }
+}
 bool zamknij = false;
 const int FPS = 30;
 int main()
@@ -396,6 +440,14 @@ int main()
         float displayFpsDelay = 0;
         int frames = 0;
         double syncDeltaTime = 0;
+
+
+        int xsize = (int)(128 * Player->Transform.scale.x);
+        int ysize = (int)(128 * Player->Transform.scale.y);
+        int maxx = (int)(width / (xsize / 2));
+        int maxy = (int)(width / (ysize / 2));
+
+        bool gridEnabled = true;
         while (!zamknij) {
             //ALLEGRO_TIMEOUT timeout;
             //al_init_timeout(&timeout, 0.06);
@@ -427,10 +479,16 @@ int main()
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
-                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 80), width-10, 10, ALLEGRO_ALIGN_RIGHT, "BOMBS: %d/%d", Player->displayBombs, Player->maxBombs);
                 al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x, Player->Transform.position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2), (Player->Transform.gridPosition.y - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2), (Player->Transform.gridPosition.y + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
                 playerMovement();
             }
+            if (gridEnabled)
+            {
+                drawGrid(maxx, maxy, xsize, ysize);
+            }
+            drawUI(&uiFont);
             if (debug)
             {
                 if (displayFpsDelay <= 0)
@@ -445,8 +503,8 @@ int main()
                 {
                     displayFpsDelay -= deltaTime;
                 }
-                al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 5, 5, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
-                al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 5, 17, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+                al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, 10, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
+                al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
             }
             renderBombs(BombSprite);
             loopBombs();
