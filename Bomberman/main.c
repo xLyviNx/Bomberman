@@ -15,7 +15,7 @@ const int height = 768;
 const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
-
+float cam_x_offset = 0;
 struct Vector2
 {
     double x;
@@ -167,20 +167,36 @@ void MovePlayer(struct Vector2 dir)
         dir.y = (dir.y * deltaTime) * 40;
         float npy = (Player->Transform.position.y + dir.y);
         float npx = (Player->Transform.position.x + dir.x);
-        if (npx > (Player->Transform.scale.x / 2.0) * 128 && npx < width - (Player->Transform.scale.x / 2.0) * 128)
+        if ((npx >= (Player->Transform.scale.x / 2.0) * 128))
         {
+            if (npx < 0) npx = 0;
+            if (cam_x_offset >= 0)
+            {
+                if ((npx - cam_x_offset - 50 < (Player->Transform.scale.x / 2.0) * 128
+                    && dir.x < 0)
+                    ||
+                    (npx - cam_x_offset + 50 > width - ((Player->Transform.scale.x / 2.0) * 128)
+                        && dir.x > 0))
+                {
+                    cam_x_offset += dir.x * 5;
+                }
+            }
             Player->Transform.position.x = npx;
         }
+        //printf("offset: %lf!\n", cam_x_offset);
+
         if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height - (Player->Transform.scale.y / 2.0) * 128)
         {
             Player->Transform.position.y = npy;
         }
         int cellsizex = (int)(128 * Player->Transform.scale.x);
         int cellsizey = (int)(128 * Player->Transform.scale.y);
-        float x = (int)(cellsizex*((int)(Player->Transform.position.x / cellsizex))+cellsizex/2);
+        float x = (int)(cellsizex * ((int)(Player->Transform.position.x / cellsizex))+cellsizex/2);
         float y = (int)(cellsizex * ((int)(Player->Transform.position.y / cellsizey)) + cellsizey / 2);
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
+        if (cam_x_offset < 0) cam_x_offset = 0;
+        printf("x: %lf\n", Player->Transform.position.x);
         //printf("%lf, %lf\n", Player->Transform.position.x, Player->Transform.position.y);
     }
 }
@@ -259,7 +275,7 @@ void renderBombs(ALLEGRO_BITMAP* bombSprite)
         struct BombList* bomb = bombs;
         while (bombs != NULL && bomb != NULL)
         {
-            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x, bomb->Position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x-cam_x_offset, bomb->Position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
             if (bomb->next != NULL) {
                 bomb = bomb->next;
             }
@@ -323,6 +339,7 @@ void button(int key, bool down)
         }
         break;
     }
+
     default:
     {
         break;
@@ -339,14 +356,26 @@ void drawGrid(int maxx, int maxy, int xsize, int ysize)
 {
     if (Player != NULL) {
         int i, j;
+        float x_offset = fmod(cam_x_offset, width);
+        int window_ext = (int)(cam_x_offset / width);
 
-        //printf("grid: %d, %d\nmax X: %d\max Y: %d\n", xsize, ysize, maxx, maxy);
-        for (i = 0; i < maxx; i++)
+        for (i = -window_ext; i < maxx + 1; i++)
         {
-            //printf("i: %d\n", i);
+            float x1 = (i * xsize) - xsize - x_offset;
+            float x2 = (i * xsize) + xsize - x_offset;
+
+            if (x1 > width) {
+                x1 -= width;
+                x2 -= width;
+            }
+            else if (x2 < 0) {
+                x1 += width;
+                x2 += width;
+            }
+
             for (j = 0; j < maxy; j++)
             {
-                al_draw_rectangle((i * xsize) - xsize, (j * ysize) - ysize, (i * xsize) + xsize, (j * ysize) + ysize, al_map_rgba(255, 180, 30, 1), 1.5);
+                al_draw_rectangle(x1+xsize, (j * ysize) - ysize, x2 + xsize, (j * ysize) + ysize, al_map_rgba(255, 180, 30, 1), 1.5);
             }
         }
     }
@@ -370,7 +399,7 @@ int main()
         Player->Transform.scale.y = 0.5;
         Player->Transform.position.x = width / 2;
         Player->Transform.position.y = height / 2;
-        Player->Speed = 2.0;
+        Player->Speed = 15.0;
         Player->displayBombs = 0;
         Player->maxBombs = 8;
         Player->remoteBombs = false;
@@ -444,8 +473,8 @@ int main()
 
         int xsize = (int)(128 * Player->Transform.scale.x);
         int ysize = (int)(128 * Player->Transform.scale.y);
-        int maxx = (int)(width / (xsize / 2));
-        int maxy = (int)(width / (ysize / 2));
+        int maxx = (int)(width / (xsize ));
+        int maxy = (int)(width / (ysize ));
 
         bool gridEnabled = true;
         while (!zamknij) {
@@ -479,9 +508,9 @@ int main()
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
-                al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x, Player->Transform.position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2), (Player->Transform.gridPosition.y - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2), (Player->Transform.gridPosition.y + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
+                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
                 playerMovement();
             }
             if (gridEnabled)
