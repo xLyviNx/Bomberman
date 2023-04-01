@@ -10,8 +10,8 @@
 #include <math.h>
 
 #define exploTime 3.0;
-const int width = 768;
-const int height = 768;
+const int width = 832;
+const int height = 832;
 const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
@@ -159,35 +159,57 @@ bool Bomb_Remove(struct BombList* bomb)
     }
     return false;
 }
+bool is_on_block(float x, float y, float dX, float dY) {
+    int gridSize = (int)(128 * Player->Transform.scale.x);
+    float tarx = Player->Transform.position.x + (dX * ((float)gridSize/6));
+    float tary = Player->Transform.position.y + (dY * ((float)gridSize/6));
+    float xdiv = x / gridSize;
+    float ydiv = y / gridSize;
+
+    if (debug) {
+        //printf("div: %lf, %lf\n", xdiv, ydiv);
+        al_draw_rectangle((xdiv * gridSize) - gridSize / 2, (ydiv * gridSize) - gridSize / 2, (xdiv * gridSize) + gridSize / 2, (ydiv * gridSize) + gridSize / 2, al_map_rgba(255, 0, 0, 50), 3);
+        al_draw_rectangle(tarx - gridSize / 2, tary - gridSize / 2, tarx + gridSize / 2, tary + gridSize / 2, al_map_rgba(0, 0, 255, 50), 3);
+    }
+    bool con1 = ((int)xdiv & 1) && ((int)ydiv & 1);
+    bool con2 = ((int)xdiv & 1) && (int)tary / gridSize & 1;
+    bool con3 = ((int)tarx / gridSize & 1 && (int)ydiv & 1);
+    return con1 || con2 || con3;
+}
 void MovePlayer(struct Vector2 dir)
 {
     if (Player != NULL)
     {
-        dir.x = (dir.x * deltaTime) * 40;
-        dir.y = (dir.y * deltaTime) * 40;
-        float npy = (Player->Transform.position.y + dir.y);
-        float npx = (Player->Transform.position.x + dir.x);
-        if ((npx >= (Player->Transform.scale.x / 2.0) * 128))
-        {
-            if (npx < 0) npx = 0;
-            if (cam_x_offset >= 0)
+        struct Vector2 nDir;
+        if (dir.x != 0 && dir.y != 0) { nDir.x = dir.x * 0.7; nDir.y = dir.y * 0.7; }
+        nDir.x = (dir.x * deltaTime) * 40;
+        nDir.y = (dir.y * deltaTime) * 40;
+        float npy = (Player->Transform.position.y + nDir.y);
+        float npx = (Player->Transform.position.x + nDir.x);
+        if (!is_on_block(npx, Player->Transform.position.y, dir.x, 0)) {
+            if ((npx >= (Player->Transform.scale.x / 2.0) * 128))
             {
-                if ((npx - cam_x_offset - 50 < (Player->Transform.scale.x / 2.0) * 128
-                    && dir.x < 0)
-                    ||
-                    (npx - cam_x_offset + 50 > width - ((Player->Transform.scale.x / 2.0) * 128)
-                        && dir.x > 0))
+                if (npx < 0) npx = 0;
+                if (cam_x_offset >= 0)
                 {
-                    cam_x_offset += dir.x * 5;
+                    if ((npx - cam_x_offset - 50 < (Player->Transform.scale.x / 2.0) * 128
+                        && nDir.x < 0)
+                        ||
+                        (npx - cam_x_offset + 50 > width - ((Player->Transform.scale.x / 2.0) * 128)
+                            && nDir.x > 0))
+                    {
+                        cam_x_offset += nDir.x * 5;
+                    }
                 }
+                Player->Transform.position.x = npx;
             }
-            Player->Transform.position.x = npx;
+            //printf("offset: %lf!\n", cam_x_offset);
         }
-        //printf("offset: %lf!\n", cam_x_offset);
-
-        if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height - (Player->Transform.scale.y / 2.0) * 128)
-        {
-            Player->Transform.position.y = npy;
+        if (!is_on_block(Player->Transform.position.x, npy, 0, dir.y)) {
+            if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height - (Player->Transform.scale.y / 2.0) * 128)
+            {
+                Player->Transform.position.y = npy;
+            }
         }
         int cellsizex = (int)(128 * Player->Transform.scale.x);
         int cellsizey = (int)(128 * Player->Transform.scale.y);
@@ -196,8 +218,22 @@ void MovePlayer(struct Vector2 dir)
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
         if (cam_x_offset < 0) cam_x_offset = 0;
-        printf("x: %lf\n", Player->Transform.position.x);
+        //printf("x: %lf\n", Player->Transform.position.x);
         //printf("%lf, %lf\n", Player->Transform.position.x, Player->Transform.position.y);
+    }
+}
+void drawAllFilledRectInView() {
+    int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
+    float rectX, rectY;
+    int i, j;
+    for (i = cam_x_offset - (int)fmod(cam_x_offset + gridSize, gridSize * 2) - gridSize + gridSize; i < cam_x_offset + width + gridSize; i += gridSize * 2) {
+        for (j = (int)fmod(gridSize + 1, 2) - gridSize + gridSize; j < height; j += gridSize * 2) {
+            if ((i / gridSize + j / gridSize) % 2 == 1) {
+                rectX = i - cam_x_offset;
+                rectY = j - gridSize;
+                al_draw_filled_rectangle(rectX, rectY, rectX + gridSize, rectY + gridSize, al_map_rgb(150, 150, 150));
+            }
+        }
     }
 }
 void playerMovement()
@@ -221,7 +257,6 @@ void playerMovement()
     {
         dir.x = 1;
     }
-    if (dir.x != 0 && dir.y != 0) { dir.x = dir.x *0.7; dir.y = dir.y * 0.7; }
     dir.x *= Player->Speed;
     dir.y *= Player->Speed;
     MovePlayer(dir);
@@ -399,7 +434,7 @@ int main()
         Player->Transform.scale.y = 0.5;
         Player->Transform.position.x = width / 2;
         Player->Transform.position.y = height / 2;
-        Player->Speed = 15.0;
+        Player->Speed = 3.0;
         Player->displayBombs = 0;
         Player->maxBombs = 8;
         Player->remoteBombs = false;
@@ -476,7 +511,7 @@ int main()
         int maxx = (int)(width / (xsize ));
         int maxy = (int)(width / (ysize ));
 
-        bool gridEnabled = true;
+        bool gridEnabled = false;
         while (!zamknij) {
             //ALLEGRO_TIMEOUT timeout;
             //al_init_timeout(&timeout, 0.06);
@@ -505,6 +540,7 @@ int main()
             }
             al_clear_to_color(al_map_rgb(10, 100, 10));
             ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
+            drawAllFilledRectInView();
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
