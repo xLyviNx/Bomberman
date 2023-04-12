@@ -68,6 +68,47 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
     }
     return nB;
 }
+struct dstr_block
+{
+    int gridX;
+    int gridY;
+    struct dstr_block* next;
+};
+struct dstr_block* Block_Insert(struct BombList* first, int X, int Y)
+{
+    struct dstr_block* nB = NULL;
+    if (first != NULL)
+    {
+        nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
+        if (nB != NULL)
+        {
+            nB->gridX = X;
+            nB->gridY = Y;
+            struct dstr_block* end = first;
+            while (end->next != NULL)
+            {
+                end = end->next;
+            }
+            printf("Added BLOCK at the end of %p\n", end);
+            nB->next = NULL;
+            end->next = nB;
+        }
+    }
+    return nB;
+}
+bool Block_Exists(struct dstr_block* first, int X, int Y)
+{
+    struct dstr_block* block = first;
+    while (block != NULL)
+    {
+        if (block->gridX == X && block->gridY == Y)
+        {
+            return true;
+        }
+        block = block->next;
+    }
+    return false;
+}
 unsigned int Bomb_count(struct BombList* first)
 {
     unsigned int count = 0;
@@ -245,7 +286,7 @@ void MovePlayer(struct Vector2 dir)
         {
             y += cellsizey;
         }
-        printf("ydf: %lf, %lf\n", ydf, dir.y);
+        //printf("ydf: %lf, %lf\n", ydf, dir.y);
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
         if (cam_x_offset < 0) cam_x_offset = 0;
@@ -264,6 +305,29 @@ void drawAllFilledRectInView() {
                 rectY = j - gridSize;
                 al_draw_filled_rectangle(rectX, rectY, rectX + gridSize, rectY + gridSize, al_map_rgb(150, 150, 150));
             }
+        }
+    }
+}
+void Blocks_draw(struct dstr_block* first)
+{
+    struct dstr_block* temp = first;
+    int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
+    while (temp != NULL)
+    {
+        if (temp != NULL) {
+            printf("NOT NULL %p\n", temp);
+            if (temp->gridX - cam_x_offset < width && temp->gridX - cam_x_offset > 0)
+            {
+                if (temp->gridY < height && temp->gridY > 0)
+                {
+                    al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY + gridSize / 2, al_map_rgb(20, 20, 20));
+                }
+            }
+            temp = temp->next;
+        }
+        else
+        {
+            printf("TEMP = NULL\n");
         }
     }
 }
@@ -448,6 +512,39 @@ void drawGrid(int maxx, int maxy, int xsize, int ysize)
 }
 bool zamknij = false;
 const int FPS = 30;
+void Block_random(struct dstr_block* first, int level, int* X, int* Y)
+{
+    srand(level);
+    int gridSize = (int)(128 * Player->Transform.scale.x);
+    int rX = rand() % (int)(width / Player->Transform.scale.x);
+    int rY = rand() % (int)(height / Player->Transform.scale.y);
+    if (Block_Exists(first, rX * gridSize, rY * gridSize))
+    {
+        Block_random(first, level, X, Y);
+    }
+    *X = rX * gridSize;
+    *Y = rY * gridSize;
+}
+struct dstr_block* generate_blocks(int level)
+{
+    srand(level);
+    struct dstr_block* Blocks = NULL;
+    int limit = level * 10;
+    for (int i = 0; i < limit; i++)
+    {
+        struct dstr_block* bl = Block_Insert
+        if (bl != NULL)
+        {
+            int X = 0;
+            int Y = 0;
+            Block_random(Blocks, level, &X, &Y);
+            bl->gridX = X;
+            bl->gridX = Y;
+            bl->next = NULL;
+        }
+    }
+    return Blocks;
+}
 int main()
 {
     Player = (struct Character*)malloc(sizeof(struct Character));
@@ -541,6 +638,9 @@ int main()
         int ysize = (int)(128 * Player->Transform.scale.y);
         int maxx = (int)(width / (xsize ));
         int maxy = (int)(width / (ysize ));
+        int level = 1;
+
+        struct dstr_block* blocks = generate_blocks(level);
 
         bool gridEnabled = false;
         while (!zamknij) {
@@ -572,6 +672,7 @@ int main()
             al_clear_to_color(al_map_rgb(10, 100, 10));
             ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
             drawAllFilledRectInView();
+            Blocks_draw(&blocks);
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
