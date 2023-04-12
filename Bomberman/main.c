@@ -161,20 +161,30 @@ bool Bomb_Remove(struct BombList* bomb)
 }
 bool is_on_block(float x, float y, float dX, float dY) {
     int gridSize = (int)(128 * Player->Transform.scale.x);
-    float tarx = Player->Transform.position.x + (dX * ((float)gridSize/6));
-    float tary = Player->Transform.position.y + (dY * ((float)gridSize/6));
+    //float tarx = Player->Transform.position.x + (dX * ((float)gridSize/4));
+    //float tary = Player->Transform.position.y + (dY * ((float)gridSize/4));
     float xdiv = x / gridSize;
     float ydiv = y / gridSize;
 
     if (debug) {
         //printf("div: %lf, %lf\n", xdiv, ydiv);
-        al_draw_rectangle((xdiv * gridSize) - gridSize / 2, (ydiv * gridSize) - gridSize / 2, (xdiv * gridSize) + gridSize / 2, (ydiv * gridSize) + gridSize / 2, al_map_rgba(255, 0, 0, 50), 3);
-        al_draw_rectangle(tarx - gridSize / 2, tary - gridSize / 2, tarx + gridSize / 2, tary + gridSize / 2, al_map_rgba(0, 0, 255, 50), 3);
+        //al_draw_rectangle((xdiv * gridSize) - gridSize / 2, (ydiv * gridSize) - gridSize / 2, (xdiv * gridSize) + gridSize / 2, (ydiv * gridSize) + gridSize / 2, al_map_rgba(255, 0, 0, 50), 3);
+        //al_draw_rectangle(tarx - gridSize / 2, tary - gridSize / 2, tarx + gridSize / 2, tary + gridSize / 2, al_map_rgba(0, 0, 255, 50), 3);
     }
     bool con1 = ((int)xdiv & 1) && ((int)ydiv & 1);
-    bool con2 = ((int)xdiv & 1) && (int)tary / gridSize & 1;
-    bool con3 = ((int)tarx / gridSize & 1 && (int)ydiv & 1);
-    return con1 || con2 || con3;
+    //bool con2 = ((int)xdiv & 1) && (int)tary / gridSize & 1;
+    //bool con2 = false;
+    //bool con3 = false;
+    //bool con3 = ((int)tarx / gridSize & 1 && (int)ydiv & 1);
+    //int cx = (int)tarx / gridSize;
+    //int cy = (int)tary / gridSize;
+    //float xdiff = x/ gridSize - (floor(x / gridSize));
+    //float diff = y/ gridSize - (floor(y / gridSize));
+
+    //bool con4 = cx & 1 && cy & 1;
+    //bool con4 = false;
+    //printf(":%lf, %lf, %d, %d, %d\n", xdiff, diff, con4, cx, cy);
+    return con1;
 }
 void MovePlayer(struct Vector2 dir)
 {
@@ -186,8 +196,9 @@ void MovePlayer(struct Vector2 dir)
         nDir.y = (dir.y * deltaTime) * 40;
         float npy = (Player->Transform.position.y + nDir.y);
         float npx = (Player->Transform.position.x + nDir.x);
-        if (!is_on_block(npx, Player->Transform.position.y, dir.x, 0)) {
-            if ((npx >= (Player->Transform.scale.x / 2.0) * 128))
+        float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
+        if (!is_on_block(npx, Player->Transform.position.y, dir.x, dir.y)) {
+            if (npx >= halfplayer && npx <= ((width*2)-halfplayer))
             {
                 if (npx < 0) npx = 0;
                 if (cam_x_offset >= 0)
@@ -211,10 +222,30 @@ void MovePlayer(struct Vector2 dir)
                 Player->Transform.position.y = npy;
             }
         }
+        //}
         int cellsizex = (int)(128 * Player->Transform.scale.x);
         int cellsizey = (int)(128 * Player->Transform.scale.y);
         float x = (int)(cellsizex * ((int)(Player->Transform.position.x / cellsizex))+cellsizex/2);
         float y = (int)(cellsizex * ((int)(Player->Transform.position.y / cellsizey)) + cellsizey / 2);
+        float xdf = Player->Transform.position.x/cellsizex - (int)(floor(Player->Transform.position.x / cellsizex));
+        float ydf = Player->Transform.position.y/cellsizey - (int)(floor(Player->Transform.position.y / cellsizey));
+        if (xdf > 0.6 && dir.x > 0)
+        {
+            x += cellsizex;
+        }
+        else if (xdf < 0.4 && dir.x < 0)
+        {
+            x -= cellsizey;
+        }
+        if (ydf > 0.6 && dir.y > 0)
+        {
+            y -= cellsizey;
+        }
+        else if (xdf < 0.4 && dir.y < 0)
+        {
+            y += cellsizey;
+        }
+        printf("ydf: %lf, %lf\n", ydf, dir.y);
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
         if (cam_x_offset < 0) cam_x_offset = 0;

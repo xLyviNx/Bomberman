@@ -1,5 +1,5 @@
 ﻿  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(451,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(492,165): warning C4133: ":": niezgodne typy - od "Character *" do "ALLEGRO_BITMAP *"
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(542,27): warning C4101: "color_blue": lokalna zmienna, do której nie istnieje odwołanie
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(482,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(523,165): warning C4133: ":": niezgodne typy - od "Character *" do "ALLEGRO_BITMAP *"
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(573,27): warning C4101: "color_blue": lokalna zmienna, do której nie istnieje odwołanie
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe
