@@ -21,12 +21,30 @@ struct Vector2
     double x;
     double y;
 };
-
+struct Transform
+{
+    struct Vector2 position;
+    struct Vector2 gridPosition;
+    struct Vector2 rotation;
+    struct Vector2 scale;
+};
+struct Character
+{
+    struct Transform Transform;
+    float Speed;
+    ALLEGRO_BITMAP* sprite;
+    bool remoteBombs;
+    unsigned short int displayBombs;
+    unsigned short int maxBombs;
+    bool enabled;
+};
+struct Character* Player = NULL;
 struct BombList
 {
     float timeLeft;
     struct Vector2 Position;
     bool isRemote;
+    bool exploded;
     struct BombList* next;
     struct BombList* prev;
 };
@@ -39,6 +57,7 @@ struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
         nB->Position = pos;
         nB->isRemote = remote;
         nB->prev = NULL;
+        nB->exploded = false;
         nB->next = NULL;
         nB->timeLeft = exploTime;
     }
@@ -55,6 +74,7 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
             nB->Position = pos;
             nB->isRemote = remote;
             nB->timeLeft = exploTime;
+            nB->exploded = false;
             struct BombList* end = first;
             while (end->next != NULL)
             {
@@ -68,47 +88,113 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
     }
     return nB;
 }
+struct Explosion
+{
+    float timeLeft;
+    int gridX;
+    int gridY;
+    struct Explosion* next;
+};
+struct Explosion* explosions = NULL;
+
+struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y)
+{
+    struct Explosion* nE = (struct Explosion*)malloc(sizeof(struct Explosion));
+    if (nE != NULL)
+    {
+        nE->gridX = X;
+        nE->gridY = Y;
+        nE->next = NULL;
+        nE->timeLeft = 0.5;
+        if (first != NULL && *first != NULL)
+        {
+            struct Explosion* end = *first;
+            while (end->next != NULL)
+            {
+                end = end->next;
+            }
+            end->next = nE;
+        }
+        else if (first != NULL)
+        {
+            *first = nE;
+        }
+        else if (first == NULL)
+        {
+            first = &nE;
+        }
+    }
+    return nE;
+}
+
 struct dstr_block
 {
     int gridX;
     int gridY;
     struct dstr_block* next;
 };
-struct dstr_block* Block_Insert(struct BombList* first, int X, int Y)
-{
-    struct dstr_block* nB = NULL;
-    if (first != NULL)
-    {
-        nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
-        if (nB != NULL)
-        {
-            nB->gridX = X;
-            nB->gridY = Y;
-            struct dstr_block* end = first;
-            while (end->next != NULL)
-            {
-                end = end->next;
-            }
-            printf("Added BLOCK at the end of %p\n", end);
-            nB->next = NULL;
-            end->next = nB;
-        }
-    }
-    return nB;
-}
-bool Block_Exists(struct dstr_block* first, int X, int Y)
+bool Block_Exists(struct dstr_block* first, int X, int Y, bool around)
 {
     struct dstr_block* block = first;
+    int gridSize = (int)(128 * Player->Transform.scale.x);
+    //int gX = (int)round((float)X / gridSize);
+    //int gY = (int)round((float)Y / gridSize);
+    printf("X: %d, Y: %d\n", X, Y);
+    int mp = 2;
+    if (!around) { mp = 1; }
     while (block != NULL)
     {
-        if (block->gridX == X && block->gridY == Y)
+        if (block->gridX < X + (gridSize/mp) && block->gridX > X - (gridSize / mp))
         {
-            return true;
+            if (block->gridY < Y + (gridSize / mp) && block->gridY > Y - (gridSize / mp))
+            {
+                return true;
+            }
+            else if (block->gridY - gridSize == Y)
+            {
+                return around;
+            }
+            else if (block->gridY + gridSize == Y)
+            {
+                return around;
+            }
         }
         block = block->next;
     }
     return false;
 }
+struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
+{
+    struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
+    if (nB != NULL)
+    {
+        nB->gridX = X;
+        nB->gridY = Y;
+        nB->next = NULL;
+        printf("%p - ADD (%d - %d, %d - %d)\n", nB->next, X, nB->gridX, Y, nB->gridY);
+        if (first != NULL && *first != NULL)
+        {
+            struct dstr_block* end = *first;
+            while (end->next != NULL)
+            {
+                end = end->next;
+            }
+            end->next = nB;
+        }
+        else if (first != NULL)
+        {
+            *first = nB;
+        }
+        else if (first == NULL)
+        {
+            first = &nB;
+        }
+    }
+    printf("address: %p\n", nB);
+
+    return nB;
+}
+
 unsigned int Bomb_count(struct BombList* first)
 {
     unsigned int count = 0;
@@ -125,6 +211,22 @@ unsigned int Bomb_count(struct BombList* first)
     }
     return count;
 }
+unsigned int Blocks_Count(struct dstr_block* first)
+{
+    unsigned int count = 0;
+    printf("first: %p\n", first);
+    if (first != NULL)
+    {
+        count = 1;
+        struct dstr_block* end = first;
+        while (end->next != NULL)
+        {
+            end = end->next;
+            count++;
+        }
+    }
+    return count;
+}
 bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
 {
     if (first != NULL)
@@ -132,7 +234,7 @@ bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
         struct BombList* seek = first;
         do
         {
-            printf("%lf vs %lf\n%lf vs %lf", seek->Position.x, pos.x, seek->Position.y, pos.y);
+            //printf("%lf vs %lf\n%lf vs %lf", seek->Position.x, pos.x, seek->Position.y, pos.y);
             if (seek->Position.x == pos.x && seek->Position.y == pos.y)
             {
                 return true;
@@ -142,25 +244,8 @@ bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
     }
     return false;
 }
-struct Transform
-{
-    struct Vector2 position;
-    struct Vector2 gridPosition;
-    struct Vector2 rotation;
-    struct Vector2 scale;
-};
-struct Character
-{   
-    struct Transform Transform;
-    float Speed;
-    ALLEGRO_BITMAP* sprite;
-    bool remoteBombs;
-    unsigned short int displayBombs;
-    unsigned short int maxBombs;
-    bool enabled;
-};
-struct Character* Player = NULL;
-bool Bomb_Remove(struct BombList* bomb)
+
+bool Bomb_Remove(struct BombList** bomb)
 {
     if (debug)
     {
@@ -168,29 +253,30 @@ bool Bomb_Remove(struct BombList* bomb)
     }
     if (bomb != NULL)
     {
-        struct BombList* prev = bomb->prev;
-        struct BombList* next = bomb->next;
+        struct BombList* prev = (*bomb)->prev;
+        struct BombList* next = (*bomb)->next;
         printf("PREV ADDRESS: %p\n", prev);
         bool any = false;
         if (prev != NULL)
         {
-            prev->next = bomb->next;
+            prev->next = (*bomb)->next;
             any = true;
         }
         else
         {
-            bombs = bomb->next;
+            bombs = (*bomb)->next;
         }
         if (next != NULL)
         {
-            next->prev = bomb->prev;
+            next->prev = (*bomb)->prev;
             any = true;
         }
         if (!any)
         {
             bombs = NULL;
         }
-        free(bomb);
+        free((*bomb));
+        *bomb = NULL;
         bomb = NULL;
         if (Player != NULL)
         {
@@ -200,22 +286,22 @@ bool Bomb_Remove(struct BombList* bomb)
     }
     return false;
 }
-bool is_on_block(float x, float y, float dX, float dY) {
+bool is_on_block(struct dstr_block* blocks, float x, float y, float dX, float dY) {
     int gridSize = (int)(128 * Player->Transform.scale.x);
     //float tarx = Player->Transform.position.x + (dX * ((float)gridSize/4));
     //float tary = Player->Transform.position.y + (dY * ((float)gridSize/4));
-    float xdiv = x / gridSize;
-    float ydiv = y / gridSize;
-
-    if (debug) {
-        //printf("div: %lf, %lf\n", xdiv, ydiv);
-        //al_draw_rectangle((xdiv * gridSize) - gridSize / 2, (ydiv * gridSize) - gridSize / 2, (xdiv * gridSize) + gridSize / 2, (ydiv * gridSize) + gridSize / 2, al_map_rgba(255, 0, 0, 50), 3);
-        //al_draw_rectangle(tarx - gridSize / 2, tary - gridSize / 2, tarx + gridSize / 2, tary + gridSize / 2, al_map_rgba(0, 0, 255, 50), 3);
-    }
+    int xdiv = (int)(x / gridSize);
+    int ydiv = (int)(y / gridSize);
+    int nX = x + (dX * (gridSize / 6));
+    int nY = y + (dY * (gridSize / 6));
+    int nX2 = x - (dX * (gridSize / 6));
+    int nY2 = y - (dY * (gridSize / 6));
     bool con1 = ((int)xdiv & 1) && ((int)ydiv & 1);
     //bool con2 = ((int)xdiv & 1) && (int)tary / gridSize & 1;
-    //bool con2 = false;
-    //bool con3 = false;
+    //bool con2 = (int)(nX / gridSize) & 1 && (int)(nY / gridSize) & 1;
+    //bool con3 = (int)(nX2 / gridSize) & 1 && (int)(nY2 / gridSize) & 1;
+    bool con2 = false;
+    bool con3 = false;
     //bool con3 = ((int)tarx / gridSize & 1 && (int)ydiv & 1);
     //int cx = (int)tarx / gridSize;
     //int cy = (int)tary / gridSize;
@@ -225,20 +311,23 @@ bool is_on_block(float x, float y, float dX, float dY) {
     //bool con4 = cx & 1 && cy & 1;
     //bool con4 = false;
     //printf(":%lf, %lf, %d, %d, %d\n", xdiff, diff, con4, cx, cy);
-    return con1;
+    bool con5 = Block_Exists(blocks, x, y, false);
+    al_draw_filled_circle(nX, nY, 10, al_map_rgb(100, 0, 0));
+    //printf("DIV: %d, %d\n", xdiv, ydiv);
+    return con1 || con2 || con3 || con5;
 }
-void MovePlayer(struct Vector2 dir)
+void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
 {
     if (Player != NULL)
     {
         struct Vector2 nDir;
-        if (dir.x != 0 && dir.y != 0) { nDir.x = dir.x * 0.7; nDir.y = dir.y * 0.7; }
         nDir.x = (dir.x * deltaTime) * 40;
         nDir.y = (dir.y * deltaTime) * 40;
+        if (dir.x != 0 && dir.y != 0) { nDir.y *= 0.7; nDir.x *= 0.7; }
         float npy = (Player->Transform.position.y + nDir.y);
         float npx = (Player->Transform.position.x + nDir.x);
         float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
-        if (!is_on_block(npx, Player->Transform.position.y, dir.x, dir.y)) {
+        if (!is_on_block(blocks, npx, Player->Transform.position.y, dir.x, dir.y)) {
             if (npx >= halfplayer && npx <= ((width*2)-halfplayer))
             {
                 if (npx < 0) npx = 0;
@@ -257,7 +346,7 @@ void MovePlayer(struct Vector2 dir)
             }
             //printf("offset: %lf!\n", cam_x_offset);
         }
-        if (!is_on_block(Player->Transform.position.x, npy, 0, dir.y)) {
+        if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y)) {
             if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height - (Player->Transform.scale.y / 2.0) * 128)
             {
                 Player->Transform.position.y = npy;
@@ -268,7 +357,7 @@ void MovePlayer(struct Vector2 dir)
         int cellsizey = (int)(128 * Player->Transform.scale.y);
         float x = (int)(cellsizex * ((int)(Player->Transform.position.x / cellsizex))+cellsizex/2);
         float y = (int)(cellsizex * ((int)(Player->Transform.position.y / cellsizey)) + cellsizey / 2);
-        float xdf = Player->Transform.position.x/cellsizex - (int)(floor(Player->Transform.position.x / cellsizex));
+        /*float xdf = Player->Transform.position.x / cellsizex - (int)(floor(Player->Transform.position.x / cellsizex));
         float ydf = Player->Transform.position.y/cellsizey - (int)(floor(Player->Transform.position.y / cellsizey));
         if (xdf > 0.6 && dir.x > 0)
         {
@@ -280,12 +369,12 @@ void MovePlayer(struct Vector2 dir)
         }
         if (ydf > 0.6 && dir.y > 0)
         {
-            y -= cellsizey;
+            y += cellsizey;
         }
         else if (xdf < 0.4 && dir.y < 0)
         {
-            y += cellsizey;
-        }
+            y -= cellsizey;
+        }*/
         //printf("ydf: %lf, %lf\n", ydf, dir.y);
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
@@ -298,8 +387,8 @@ void drawAllFilledRectInView() {
     int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
     float rectX, rectY;
     int i, j;
-    for (i = cam_x_offset - (int)fmod(cam_x_offset + gridSize, gridSize * 2) - gridSize + gridSize; i < cam_x_offset + width + gridSize; i += gridSize * 2) {
-        for (j = (int)fmod(gridSize + 1, 2) - gridSize + gridSize; j < height; j += gridSize * 2) {
+    for (i = gridSize; i < cam_x_offset + width + gridSize; i += gridSize * 2) {
+        for (j = 0; j < height; j += gridSize * 2) {
             if ((i / gridSize + j / gridSize) % 2 == 1) {
                 rectX = i - cam_x_offset;
                 rectY = j - gridSize;
@@ -308,6 +397,7 @@ void drawAllFilledRectInView() {
         }
     }
 }
+
 void Blocks_draw(struct dstr_block* first)
 {
     struct dstr_block* temp = first;
@@ -315,12 +405,13 @@ void Blocks_draw(struct dstr_block* first)
     while (temp != NULL)
     {
         if (temp != NULL) {
-            printf("NOT NULL %p\n", temp);
-            if (temp->gridX - cam_x_offset < width && temp->gridX - cam_x_offset > 0)
+            //printf("NOT NULL %p\n", temp);
+            if (temp->gridX - cam_x_offset -gridSize/2 < width && temp->gridX - cam_x_offset + gridSize/2 > 0)
             {
                 if (temp->gridY < height && temp->gridY > 0)
                 {
-                    al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY + gridSize / 2, al_map_rgb(20, 20, 20));
+                    al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY + gridSize / 2, al_map_rgb(120, 120, 120));
+                    //printf("Drawing.");
                 }
             }
             temp = temp->next;
@@ -331,7 +422,7 @@ void Blocks_draw(struct dstr_block* first)
         }
     }
 }
-void playerMovement()
+void playerMovement(struct dstr_block* blocks)
 {
     struct Vector2 dir;
     dir.x = 0;
@@ -354,7 +445,7 @@ void playerMovement()
     }
     dir.x *= Player->Speed;
     dir.y *= Player->Speed;
-    MovePlayer(dir);
+    MovePlayer(dir, blocks);
 }
 void plantBomb()
 {
@@ -413,6 +504,10 @@ void renderBombs(ALLEGRO_BITMAP* bombSprite)
         }
     }
 }
+void explodeBomb()
+{
+
+}
 void loopBombs()
 {
     if (bombs != NULL)
@@ -422,11 +517,11 @@ void loopBombs()
         while (bombs != NULL && bomb != NULL)
         {
             bomb->timeLeft -= deltaTime;
-            if (bomb->timeLeft <= 0)
+            if (bomb->timeLeft <= 0 && !bomb->exploded)
             {
                 printf("BOMB (ID: %d) SHOULD NOW EXPLODE!\n", i);
-                //explodeBomb(bomb);
-                Bomb_Remove(bomb);
+                explodeBomb(*bomb);
+                //Bomb_Remove(&bomb);
                 return;
             }
             if (bomb->next != NULL) {
@@ -512,36 +607,44 @@ void drawGrid(int maxx, int maxy, int xsize, int ysize)
 }
 bool zamknij = false;
 const int FPS = 30;
-void Block_random(struct dstr_block* first, int level, int* X, int* Y)
+
+void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i)
 {
-    srand(level);
+    srand(level * i);
     int gridSize = (int)(128 * Player->Transform.scale.x);
-    int rX = rand() % (int)(width / Player->Transform.scale.x);
-    int rY = rand() % (int)(height / Player->Transform.scale.y);
-    if (Block_Exists(first, rX * gridSize, rY * gridSize))
+    int rX = 0;
+    int rY = 0;
+    do
     {
-        Block_random(first, level, X, Y);
-    }
-    *X = rX * gridSize;
-    *Y = rY * gridSize;
+        rX = (((rand() % (width / gridSize))* 2)+1);
+        rY = rand() % (height / gridSize);
+        *X = (rX * gridSize) - gridSize / 2;
+        *Y = (rY * gridSize) - gridSize / 2;
+        //*Y += 1;
+    } while (Block_Exists(first, *X, *Y, true));
+
+    printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
 }
 struct dstr_block* generate_blocks(int level)
 {
-    srand(level);
     struct dstr_block* Blocks = NULL;
-    int limit = level * 10;
+    int limit = level * 50;
     for (int i = 0; i < limit; i++)
     {
-        struct dstr_block* bl = Block_Insert
+        int X = 0;
+        int Y = 0;
+        Block_random(Blocks, level, &X, &Y, i);
+        struct dstr_block* bl = Block_Insert(&Blocks, X, Y);
+        printf("count: %d\n", Blocks_Count(Blocks));
+
         if (bl != NULL)
         {
-            int X = 0;
-            int Y = 0;
-            Block_random(Blocks, level, &X, &Y);
-            bl->gridX = X;
-            bl->gridX = Y;
             bl->next = NULL;
+            if (Blocks == NULL) {
+                Blocks = bl;
+            }
         }
+
     }
     return Blocks;
 }
@@ -672,14 +775,14 @@ int main()
             al_clear_to_color(al_map_rgb(10, 100, 10));
             ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
             drawAllFilledRectInView();
-            Blocks_draw(&blocks);
+            Blocks_draw(blocks);
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
                 al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
-                playerMovement();
+                playerMovement(blocks);
             }
             if (gridEnabled)
             {
