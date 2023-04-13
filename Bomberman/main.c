@@ -16,6 +16,7 @@ const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
 float cam_x_offset = 0;
+float cam_y_offset = 0;
 struct Vector2
 {
     double x;
@@ -108,9 +109,10 @@ struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i
         nE->gridX = X;
         nE->gridY = Y;
         nE->next = NULL;
-        nE->timeLeft = 0.5;
+        nE->prev = NULL;
+        nE->timeLeft = 0.2;
         nE->i = i;
-        if (first != NULL && *first != NULL)
+        if ((*first) != NULL)
         {
             struct Explosion* end = *first;
             while (end->next != NULL)
@@ -118,53 +120,107 @@ struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i
                 end = end->next;
             }
             end->next = nE;
+            nE->prev = end;
         }
-        else if (first != NULL)
+        else
         {
-            *first = nE;
+            (*first) = nE;
         }
-        else if (first == NULL)
+        struct Explosion* t = (*first);
+        int i = 0;
+        while (t != NULL)
         {
-            first = &nE;
+            printf("- %d: prev: %p,  next: %p\n", i, t->prev, t->next);
+            t = t->next;
+            i++;
         }
+
     }
     return nE;
 }
-
+bool Explosion_Remove(struct Explosion** exp)
+{
+    if (debug)
+    {
+        printf("Deleting EXPLOSIOON: %p\n", (*exp));
+    }
+    if (exp != NULL && (*exp) != NULL)
+    {
+        struct Explosion* prev = (*exp)->prev;
+        struct Explosion* next = (*exp)->next;
+        if (next != NULL) {
+            printf("next: %d\n", next->gridX);
+        }
+        if (prev != NULL) {
+            printf("prev: %d\n", prev->gridX);
+        }
+        free((*exp));
+        if (prev != NULL)
+        {
+            prev->next = next;
+            if (next != NULL) {
+                next->prev = prev;
+            }
+            (*exp) = prev;
+        }
+        else if (next != NULL)
+        {
+            next->prev = NULL;
+            printf("Swapping with %p\n", next);
+            (*exp) = next;
+        }
+        else {
+            (*exp) = NULL;
+        }
+        printf("Now: %p\n", (*exp));
+        return true;
+    }
+    return false;
+}
 struct dstr_block
 {
     int gridX;
     int gridY;
+    bool exists;
     struct dstr_block* next;
     struct dstr_block* prev;
 };
 bool Block_Exists(struct dstr_block* first, int X, int Y, bool around)
 {
-    struct dstr_block* block = first;
-    int gridSize = (int)(128 * Player->Transform.scale.x);
-    //int gX = (int)round((float)X / gridSize);
-    //int gY = (int)round((float)Y / gridSize);
-    //printf("X: %d, Y: %d\n", X, Y);
-    int mp = 2;
-    if (!around) { mp = 1; }
-    while (block != NULL)
-    {
-        if (block->gridX < X + (gridSize/mp) && block->gridX > X - (gridSize / mp))
+    if (first != NULL) {
+        struct dstr_block* block = first;
+        int gridSize = (int)(128 * Player->Transform.scale.x);
+        int mp = 2;
+        if (!around) { mp = 1; }
+        while (block != NULL)
         {
-            if (block->gridY < Y + (gridSize / mp) && block->gridY > Y - (gridSize / mp))
-            {
-                return true;
+            if (block != NULL) {
+                //printf("ADDRESS: %p\n", block);
+                if (block->gridX < X + (gridSize / mp) && block->gridX > X - (gridSize / mp)) // here's the issue
+                {
+                    if (block->gridY < Y + (gridSize / mp) && block->gridY > Y - (gridSize / mp))
+                    {
+                        return true;
+                    }
+                    else if (block->gridY - gridSize == Y)
+                    {
+                        return around;
+                    }
+                    else if (block->gridY + gridSize == Y)
+                    {
+                        return around;
+                    }
+                }
+                block = block->next;
+                if (block == NULL)
+                {
+                    break;
+                }
             }
-            else if (block->gridY - gridSize == Y)
-            {
-                return around;
-            }
-            else if (block->gridY + gridSize == Y)
-            {
-                return around;
+            else {
+                break;
             }
         }
-        block = block->next;
     }
     return false;
 }
@@ -177,7 +233,7 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
         nB->gridY = Y;
         nB->next = NULL;
         nB->prev = NULL;
-        printf("%p - ADD (%d - %d, %d - %d)\n", nB->next, X, nB->gridX, Y, nB->gridY);
+        nB->exists = true;
         if (first != NULL && *first != NULL)
         {
             struct dstr_block* end = *first;
@@ -192,13 +248,22 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
         {
             *first = nB;
         }
-        else if (first == NULL)
-        {
-            first = &nB;
-        }
     }
     printf("address: %p\n", nB);
 
+    return nB;
+}
+struct dstr_block* Block_createList(int X, int Y)
+{
+    struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
+    if (nB != NULL)
+    {
+        nB->gridX = X;
+        nB->gridY = Y;
+        nB->next = NULL;
+        nB->prev = NULL;
+        nB->exists = true;
+    }
     return nB;
 }
 struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
@@ -207,10 +272,11 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
     if (blocks != NULL)
     {
         struct dstr_block* block = blocks;
-        while (block->next != NULL)
+        while (block != NULL)
         {
-            if (block->gridX == X && block->gridY == Y)
+            if (block->gridX == X && block->gridY == Y && block->exists)
             {
+                //printf("Returning.\n");
                 return block;
             }
             block = block->next;
@@ -218,41 +284,38 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
     }
     return found;
 }
-bool Block_Remove(struct dstr_block** block)
+bool Block_Remove(struct dstr_block** first, struct dstr_block** block)
 {
     if (debug)
     {
-        printf("Deleting BLOCK: %p\n", block);
+        printf("Deleting BLOCK: %p (FIRST IS: %p)\n", (*block), (*first));
     }
-    if (block != NULL && (*block) != NULL)
+    if (block != NULL && (*block))
     {
         struct dstr_block* prev = (*block)->prev;
         struct dstr_block* next = (*block)->next;
-        printf("PREV ADDRESS: %p\n", prev);
-        bool any = false;
-        if (prev != NULL)
+        if (debug)
         {
-            prev->next = (*block)->next;
-            any = true;
+            //printf("XY: %d, %d, PREV: %p, NEXT: %p\n", (*block)->gridX, (*block)->gridY, (*block)->prev, (*block)->next);
+        }
+        if ((*block) == (*first))
+        {
+            printf("Is first.\n");
+            next->prev = NULL;
+            (*first) = next;
+            //printf("Now Address: %p\n", (*first));
             free((*block));
-            *block = NULL;
-            block = NULL;
-        }
-        else
-        {
-            struct dstr_block* nxt = (*block)->next;
-            free((*block));
-            (*block) = nxt;
-        }
-        if (next != NULL)
-        {
-            any = true;
-        }
-        if (!any)
-        {
             (*block) = NULL;
         }
-
+        else if (prev != NULL)
+        {
+            prev->next = next;
+            if (next != NULL) {
+                next->prev = prev;
+            }
+            free((*block));
+            (*block) = NULL;
+        }
         return true;
     }
     return false;
@@ -260,7 +323,7 @@ bool Block_Remove(struct dstr_block** block)
 unsigned int Bomb_count(struct BombList* first)
 {
     unsigned int count = 0;
-    printf("first: %p\n", first);
+    //printf("first: %p\n", first);
     if (first != NULL)
     {
         count = 1;
@@ -276,7 +339,7 @@ unsigned int Bomb_count(struct BombList* first)
 unsigned int Blocks_Count(struct dstr_block* first)
 {
     unsigned int count = 0;
-    printf("first: %p\n", first);
+    //printf("first: %p\n", first);
     if (first != NULL)
     {
         count = 1;
@@ -317,7 +380,7 @@ bool Bomb_Remove(struct BombList** bomb)
     {
         struct BombList* prev = (*bomb)->prev;
         struct BombList* next = (*bomb)->next;
-        printf("PREV ADDRESS: %p\n", prev);
+        //printf("PREV ADDRESS: %p\n", prev);
         bool any = false;
         if (prev != NULL)
         {
@@ -453,7 +516,7 @@ void drawAllFilledRectInView() {
             if ((i / gridSize + j / gridSize) % 2 == 1) {
                 rectX = i - cam_x_offset;
                 rectY = j - gridSize;
-                al_draw_filled_rectangle(rectX, rectY, rectX + gridSize, rectY + gridSize, al_map_rgb(150, 150, 150));
+                al_draw_filled_rectangle(rectX, rectY - cam_y_offset, rectX + gridSize, rectY - cam_y_offset + gridSize, al_map_rgb(150, 150, 150));
             }
         }
     }
@@ -471,12 +534,15 @@ void Blocks_draw(struct dstr_block* first)
             {
                 break;
             }
-            if (temp->gridX - cam_x_offset -gridSize/2 < width && temp->gridX - cam_x_offset + gridSize/2 > 0)
-            {
-                if (temp->gridY < height && temp->gridY > 0)
+            //printf("aaaa: %p\n", temp);
+            if (temp->exists) {
+                if (temp->gridX - cam_x_offset - gridSize / 2 < width && temp->gridX - cam_x_offset + gridSize / 2 > 0)
                 {
-                    al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY + gridSize / 2, al_map_rgb(120, 120, 120));
-                    //printf("Drawing.");
+                    if (temp->gridY < height && temp->gridY > 0)
+                    {
+                        al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(120, 120, 120));
+                        //printf("Drawing.");
+                    }
                 }
             }
             temp = temp->next;
@@ -561,7 +627,7 @@ void renderBombs(ALLEGRO_BITMAP* bombSprite)
         struct BombList* bomb = bombs;
         while (bombs != NULL && bomb != NULL)
         {
-            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x-cam_x_offset, bomb->Position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x-cam_x_offset, bomb->Position.y-cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
             if (bomb->next != NULL) {
                 bomb = bomb->next;
             }
@@ -569,33 +635,43 @@ void renderBombs(ALLEGRO_BITMAP* bombSprite)
         }
     }
 }
+
 void renderExplosions(struct Explosion* expl)
 {
     if (expl != NULL)
     {
         struct Explosion* exp = expl;
+        int i = 0;
         while (expl != NULL && exp != NULL)
         {
-            float size = (expl->timeLeft * 64) / (float)expl->i;
-           // printf("size: %lf\n", size);
-            al_draw_filled_circle(exp->gridX, exp->gridY, size, al_map_rgb(180, 140, 0));
-            //al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x - cam_x_offset, bomb->Position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-            if (exp->next != NULL) {
+            if (exp == NULL) {
+                break;
+            }
+            
+            //printf("Address Now: %p\n", exp);
+            //float fac = (1 - (exp->i / Player->bombRange));
+            //printf("FAC: %lf\n", fac);
+            float size = 128 * exp->timeLeft;
+            // printf("size: %lf\n", size);
+            al_draw_filled_circle(exp->gridX-cam_x_offset, exp->gridY-cam_y_offset, size, al_map_rgb(180, 140, 0));
+            if (exp != NULL) {
                 exp = exp->next;
+                
             }
             else break;
         }
     }
 }
-void explodeBomb(struct BombList** bomb, struct dstr_block* blocks)
+void explodeBomb(struct BombList** bomb, struct dstr_block** blocks)
 {
     if (bomb != NULL && (*bomb) != NULL)
     {
         (*bomb)->exploded = true;
-        (*bomb)->timeLeft = 0.3;
+        (*bomb)->timeLeft = 0.08;
         int gridSize = (int)(128 * Player->Transform.scale.x);
         int xdir = 0;
         int ydir = 0;
+        cam_y_offset += 30;
         for (int j = 0; j < 4; j++) {
             switch (j)
             {
@@ -630,18 +706,16 @@ void explodeBomb(struct BombList** bomb, struct dstr_block* blocks)
             }
             for (int i = 1; i <= Player->bombRange; i++)
             {
-                int X = (*bomb)->Position.x + (xdir*i*gridSize);
-                int Y = (*bomb)->Position.y + (ydir*i * gridSize);
-                bool destroyable = Block_Exists(blocks, X, Y, false);
+                int X = (*bomb)->Position.x + (xdir * i * gridSize);
+                int Y = (*bomb)->Position.y + (ydir * i * gridSize);
+                bool destroyable = Block_Exists((*blocks), X, Y, false);
                 bool test = false;
-                if (is_on_block(blocks, X, Y, 0, 0, &test))
+
+                struct dstr_block* mblock = (Block_Find((*blocks), X, Y));
+                if (is_on_block((*blocks), X, Y, 0, 0, &test) || mblock != NULL)
                 {
-                    if (destroyable)
-                    {
-                        struct dstr_block* block = (Block_Find(blocks, X, Y));
-                        if (block) {
-                            Block_Remove(&block);
-                        }
+                    if (mblock) {
+                        mblock->exists = false;
                     }
                     break;
                 }
@@ -650,7 +724,30 @@ void explodeBomb(struct BombList** bomb, struct dstr_block* blocks)
         }
     }
 }
-void loopBombs(struct dstr_block* blocks)
+void loopExplosions(struct Explosion** expl, bool* removed)
+{
+    if (expl != NULL)
+    {
+        struct Explosion* exp = (*expl);
+        while (exp != NULL)
+        {
+            exp->timeLeft -= deltaTime;
+            if (exp->timeLeft <= 0)
+            {
+                (*removed) = Explosion_Remove(&exp);
+                printf("Removed %p ??? - %d\n", exp, *removed);
+                (*expl) = exp; // update the value of exp
+
+                return;
+            }
+            if (exp->next != NULL) {
+                exp = exp->next;
+            }
+            else break;
+        }
+    }
+}
+void loopBombs(struct dstr_block** blocks)
 {
     if (bombs != NULL)
     {
@@ -676,6 +773,33 @@ void loopBombs(struct dstr_block* blocks)
             else break;
             i++;
         }
+    }
+}
+void loopBlocks(struct dstr_block** blocks)
+{
+    if (blocks != NULL)
+    {
+        struct dstr_block* bl = (*blocks);
+        int i = 0;
+        while (bl != NULL)
+        {
+            i++;
+            //printf("JA PIERDOLE! %p, %p, %p\n", bl, bl->prev, bl->prev);
+            //printf("BL - %p\n", bl);
+            if (!bl->exists)
+            {
+                if (Block_Remove(blocks, &bl))
+                {
+                    (*blocks) = (*blocks);
+                }
+                return;
+            }
+            if (bl ->next != NULL) {
+                bl = bl->next;
+            }
+            else break;
+        }
+        printf("BLOCKS: %d\n", i);
     }
 }
 void button(int key, bool down)
@@ -780,9 +904,16 @@ struct dstr_block* generate_blocks(int level)
         int X = 0;
         int Y = 0;
         Block_random(Blocks, level, &X, &Y, i);
-        struct dstr_block* bl = Block_Insert(&Blocks, X, Y);
+        struct dstr_block* bl = NULL;
+        if (Blocks == NULL)
+        {
+            bl = Block_createList(X, Y);
+        }
+        else
+        {
+            bl = Block_Insert(&Blocks, X, Y);
+        }
         printf("count: %d\n", Blocks_Count(Blocks));
-
         if (bl != NULL)
         {
             bl->next = NULL;
@@ -813,9 +944,9 @@ int main()
         Player->Transform.position.y = height / 2;
         Player->Speed = 3.0;
         Player->displayBombs = 0;
-        Player->maxBombs = 8;
+        Player->maxBombs = 2;
         Player->remoteBombs = false;
-        Player->bombRange = 4;
+        Player->bombRange = 1;
         Player->enabled = true;
 
         ALLEGRO_DISPLAY* display = NULL;
@@ -889,11 +1020,12 @@ int main()
         int maxx = (int)(width / (xsize ));
         int maxy = (int)(width / (ysize ));
         int level = 1;
-
+        cam_y_offset = 0;
         struct dstr_block* blocks = generate_blocks(level);
-
+        float dTest = 0;
         bool gridEnabled = false;
         while (!zamknij) {
+            //printf("======== New Frame ========\n");
             //ALLEGRO_TIMEOUT timeout;
             //al_init_timeout(&timeout, 0.06);
             //al_wait_for_vsync();
@@ -904,6 +1036,11 @@ int main()
             syncDeltaTime += deltaTime;
             oldTime = time;
             frames++;
+            if (cam_y_offset > 0)
+            {
+                cam_y_offset -= deltaTime*100;
+            }
+            if (cam_y_offset < 0) { cam_y_offset = 0; }
             switch (event.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
                 zamknij = true;
@@ -922,14 +1059,25 @@ int main()
             al_clear_to_color(al_map_rgb(10, 100, 10));
             ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
             drawAllFilledRectInView();
-            Blocks_draw(blocks);
+            bool check = false;
+            //dTest += deltaTime;
+            //if (dTest > 1) {
+                loopBlocks(&blocks);
+                //dTest = 0;
+            //}
+            if (!check) {
+                Blocks_draw(blocks);
+                //printf("BLOCKS ADDRESS: %p\n", blocks);
+            }
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
-                al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
-                playerMovement(blocks);
+                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
+                if (!check) {
+                    playerMovement(blocks);
+                }
             }
             if (gridEnabled)
             {
@@ -953,9 +1101,14 @@ int main()
                 al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, 10, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
                 al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
             }
+            check = false;
+            loopExplosions(&explosions, &check);
+            if (!check)
+            {
+                renderExplosions(explosions);
+            }
+            loopBombs(&blocks);
             renderBombs(BombSprite);
-            renderExplosions(explosions);
-            loopBombs(blocks);
             al_flip_display();
         }
         free(Player);
