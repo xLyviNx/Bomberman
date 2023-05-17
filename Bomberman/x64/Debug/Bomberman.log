@@ -1,5 +1,5 @@
 ﻿  main.c
-L:\LyviN_2\VS\Bomberman\Bomberman\main.c(960,33): warning C4013: 'al_init_image_addon' undefined; assuming extern returning int
-L:\LyviN_2\VS\Bomberman\Bomberman\main.c(1001,165): warning C4133: ':': incompatible types - from 'Character *' to 'ALLEGRO_BITMAP *'
-L:\LyviN_2\VS\Bomberman\Bomberman\main.c(1060,27): warning C4101: 'color_blue': unreferenced local variable
+L:\LyviN_2\VS\Bomberman\Bomberman\main.c(961,33): warning C4013: 'al_init_image_addon' undefined; assuming extern returning int
+L:\LyviN_2\VS\Bomberman\Bomberman\main.c(1003,165): warning C4133: ':': incompatible types - from 'Character *' to 'ALGIF_ANIMATION *'
+L:\LyviN_2\VS\Bomberman\Bomberman\main.c(1062,27): warning C4101: 'color_blue': unreferenced local variable
   Bomberman.vcxproj -> L:\LyviN_2\VS\Bomberman\x64\Debug\Bomberman.exe

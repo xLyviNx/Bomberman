@@ -1,3 +1,4 @@
+#include "algif5-master/src/algif.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -33,7 +34,7 @@ struct Character
 {
     struct Transform Transform;
     float Speed;
-    ALLEGRO_BITMAP* sprite;
+    ALGIF_ANIMATION* sprite;
     bool remoteBombs;
     unsigned short int bombRange;
     unsigned short int displayBombs;
@@ -995,11 +996,12 @@ int main()
             printf("Blad odczytu czcionki. \n");
             return -3;
         }
-        Player->sprite = al_load_bitmap("data/Player.bmp");
+        //Player->sprite = al_load_bitmap("data/Player.bmp");
+        Player->sprite = algif_load_animation("data/banana.gif");
         if (Player->sprite == NULL)
         {
             printf("Nie udalo sie wczytac pliku bmp gracza.\nAdres gracza: %p\nAdres sprite'a: %p\nKod bledu: %d\n", Player, Player != NULL? Player->sprite : Player, al_get_errno());
-            return -1;
+            //return -1;
         }
         ALLEGRO_BITMAP* BombSprite = al_load_bitmap("data/bomb.bmp");
         if (BombSprite == NULL)
@@ -1072,7 +1074,7 @@ int main()
             if (Player->enabled)
             {
                 //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
-                al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                al_draw_scaled_rotated_bitmap(algif_get_bitmap(Player->sprite, al_get_time()), 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                 al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
                 if (!check) {
