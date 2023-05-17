@@ -156,6 +156,10 @@
     <ClCompile Include="algif5-master\src\gif.c" />
     <ClCompile Include="algif5-master\src\lzw.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="saveSystem.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="saveSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

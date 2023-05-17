@@ -9,8 +9,18 @@
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
 #include <math.h>
-
+#include "saveSystem.h"
 #define exploTime 3.0;
+
+#define SIMPLE_CLAMP(V,MIN,MAX){\
+    if(V>MAX){\
+        V=MAX\
+    }\
+    else if (V<MIN){\
+        V=MIN\
+    }\
+}
+
 const int width = 832;
 const int height = 832;
 const bool debug = true;
@@ -34,12 +44,17 @@ struct Character
 {
     struct Transform Transform;
     float Speed;
-    ALGIF_ANIMATION* sprite;
+    ALGIF_ANIMATION* IdleAnim;
+    ALGIF_ANIMATION* RightWalkAnim;
+    ALGIF_ANIMATION* LeftWalkAnim;
+    ALGIF_ANIMATION* UpWalkAnim;
+    ALGIF_ANIMATION* DownWalkAnim;
     bool remoteBombs;
     unsigned short int bombRange;
     unsigned short int displayBombs;
     unsigned short int maxBombs;
     bool enabled;
+    unsigned short walking;
 };
 struct Character* Player = NULL;
 struct BombList
@@ -250,7 +265,7 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
             *first = nB;
         }
     }
-    printf("address: %p\n", nB);
+    //printf("address: %p\n", nB);
 
     return nB;
 }
@@ -562,19 +577,27 @@ void playerMovement(struct dstr_block* blocks)
     if (wasd[0] && !wasd[2])
     {
         dir.y = -1;
+        Player->walking = 2;
     }
     else if (!wasd[0] && wasd[2])
     {
         dir.y = 1;
+        Player->walking = 1;
     }
     if (wasd[1] && !wasd[3])
     {
         dir.x = -1;
+        Player->walking = 4;
+
     }
     else if (!wasd[1] && wasd[3])
     {
         dir.x = 1;
+        Player->walking = 3;
+
     }
+    if (!dir.x && !dir.y)
+        Player->walking=0;
     dir.x *= Player->Speed;
     dir.y *= Player->Speed;
     MovePlayer(dir, blocks);
@@ -621,14 +644,14 @@ void plantBomb()
         }
     }
 }
-void renderBombs(ALLEGRO_BITMAP* bombSprite)
+void renderBombs(ALGIF_ANIMATION* bombAnim)
 {
     if (bombs != NULL)
     {
         struct BombList* bomb = bombs;
         while (bombs != NULL && bomb != NULL)
         {
-            al_draw_scaled_rotated_bitmap(bombSprite, 64, 64, bomb->Position.x-cam_x_offset, bomb->Position.y-cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+            al_draw_scaled_rotated_bitmap(algif_get_bitmap(bombAnim, al_get_time()), 64, 64, bomb->Position.x - cam_x_offset, bomb->Position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
             if (bomb->next != NULL) {
                 bomb = bomb->next;
             }
@@ -800,16 +823,20 @@ void loopBlocks(struct dstr_block** blocks)
             }
             else break;
         }
-        printf("BLOCKS: %d\n", i);
+        //printf("BLOCKS: %d\n", i);
     }
 }
-void button(int key, bool down)
+void button(int key, bool down, unsigned short* menuChoiceValue)
 {
     switch (key)
     {
     case ALLEGRO_KEY_W:
     {
         wasd[0] = down;
+        if (*menuChoiceValue)
+        {
+            
+        }
         break;
     }
     case ALLEGRO_KEY_A:
@@ -894,7 +921,7 @@ void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i)
         //*Y += 1;
     } while (Block_Exists(first, *X, *Y, true));
 
-    printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
+    //printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
 }
 struct dstr_block* generate_blocks(int level)
 {
@@ -914,7 +941,7 @@ struct dstr_block* generate_blocks(int level)
         {
             bl = Block_Insert(&Blocks, X, Y);
         }
-        printf("count: %d\n", Blocks_Count(Blocks));
+        //printf("count: %d\n", Blocks_Count(Blocks));
         if (bl != NULL)
         {
             bl->next = NULL;
@@ -989,24 +1016,30 @@ int main()
 
         // Start the timer
         al_start_timer(timer);
-        ALLEGRO_FONT* debugFont = al_load_ttf_font("data/data-unifon.ttf", 12, 0);
-        ALLEGRO_FONT* uiFont = al_load_ttf_font("data/PlatNomor-WyVnn.ttf", 18, 0);
-        if (debugFont == NULL || uiFont == NULL)
+        ALLEGRO_FONT* debugFont = al_load_ttf_font("data/fonts/data-unifon.ttf", 12, 0);
+        ALLEGRO_FONT* uiFont = al_load_ttf_font("data/fonts/PlatNomor-WyVnn.ttf", 18, 0);
+        ALLEGRO_FONT* TitleFont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 100, 0);
+        ALLEGRO_FONT* MenuButton = al_load_ttf_font("data/fonts/Exo-Regular.ttf", 30, 0);
+        if (debugFont == NULL || uiFont == NULL || !TitleFont)
         {
             printf("Blad odczytu czcionki. \n");
             return -3;
         }
         //Player->sprite = al_load_bitmap("data/Player.bmp");
-        Player->sprite = algif_load_animation("data/banana.gif");
-        if (Player->sprite == NULL)
+        Player->IdleAnim = algif_load_animation("data/gifs/player/idle.gif");
+        Player->RightWalkAnim = algif_load_animation("data/gifs/player/right.gif");
+        Player->LeftWalkAnim = algif_load_animation("data/gifs/player/left.gif");
+        Player->UpWalkAnim = algif_load_animation("data/gifs/player/up.gif");
+        Player->DownWalkAnim = algif_load_animation("data/gifs/player/down.gif");
+        if (!Player->IdleAnim || !Player->RightWalkAnim || !Player->LeftWalkAnim || !Player->UpWalkAnim || !Player->DownWalkAnim)
         {
-            printf("Nie udalo sie wczytac pliku bmp gracza.\nAdres gracza: %p\nAdres sprite'a: %p\nKod bledu: %d\n", Player, Player != NULL? Player->sprite : Player, al_get_errno());
+            printf("Nie udalo sie wczytac animacji gracza.\n");
             //return -1;
         }
-        ALLEGRO_BITMAP* BombSprite = al_load_bitmap("data/bomb.bmp");
-        if (BombSprite == NULL)
+        ALGIF_ANIMATION* BombAnim = algif_load_animation("data/gifs/bomb.gif");
+        if (BombAnim == NULL)
         {
-            printf("Nie uda³o siê wczytaæ pliku bmp bomby\n%d\n", al_get_errno());
+            printf("Nie uda³o siê wczytaæ pliku gif bomby\n%d\n", al_get_errno());
             return -1;
         }
         double time = al_get_time();
@@ -1021,12 +1054,20 @@ int main()
         int ysize = (int)(128 * Player->Transform.scale.y);
         int maxx = (int)(width / (xsize ));
         int maxy = (int)(width / (ysize ));
-        int level = 1;
+        int level = 0;
         cam_y_offset = 0;
-        struct dstr_block* blocks = generate_blocks(level);
+        struct dstr_block* blocks = NULL;
         float dTest = 0;
         bool gridEnabled = false;
+        unsigned short MenuChoice = 0;
+        if (!saveSystem_init()) return -10;
+        int loadedLevel = saveSystem_LoadLevel();
+
         while (!zamknij) {
+            if (!blocks)
+            {
+                blocks = generate_blocks(level);
+            }
             //printf("======== New Frame ========\n");
             //ALLEGRO_TIMEOUT timeout;
             //al_init_timeout(&timeout, 0.06);
@@ -1038,82 +1079,132 @@ int main()
             syncDeltaTime += deltaTime;
             oldTime = time;
             frames++;
-            if (cam_y_offset > 0)
-            {
-                cam_y_offset -= deltaTime*100;
-            }
-            if (cam_y_offset < 0) { cam_y_offset = 0; }
+            
             switch (event.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
                 zamknij = true;
-                break;
+                return 0;
             case ALLEGRO_EVENT_KEY_DOWN:
             {
-                button(event.keyboard.keycode, true);
+                button(event.keyboard.keycode, true, &MenuChoice);
                 break;
             }
             case ALLEGRO_EVENT_KEY_UP:
             {
-                button(event.keyboard.keycode, false);
+                button(event.keyboard.keycode, false, &MenuChoice);
                 break;
             }
             }
-            al_clear_to_color(al_map_rgb(10, 100, 10));
-            ALLEGRO_COLOR color_blue = al_map_rgb(0, 0, 255);
-            drawAllFilledRectInView();
-            bool check = false;
-            //dTest += deltaTime;
-            //if (dTest > 1) {
+            if (level) {
+                if (cam_y_offset > 0)
+                {
+                    cam_y_offset -= deltaTime * 100;
+                }
+                if (cam_y_offset < 0) { cam_y_offset = 0; }
+
+                al_clear_to_color(al_map_rgb(10, 100, 10));
+                drawAllFilledRectInView();
+                bool check = false;
+                //dTest += deltaTime;
+                //if (dTest > 1) {
                 loopBlocks(&blocks);
                 //dTest = 0;
             //}
-            if (!check) {
-                Blocks_draw(blocks);
-                //printf("BLOCKS ADDRESS: %p\n", blocks);
-            }
-            if (Player->enabled)
-            {
-                //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
-                al_draw_scaled_rotated_bitmap(algif_get_bitmap(Player->sprite, al_get_time()), 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-                //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-                al_draw_filled_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(0, 100, 100, 10));
                 if (!check) {
-                    playerMovement(blocks);
+                    Blocks_draw(blocks);
+                    //printf("BLOCKS ADDRESS: %p\n", blocks);
                 }
-            }
-            if (gridEnabled)
-            {
-                drawGrid(maxx, maxy, xsize, ysize);
-            }
-            drawUI(&uiFont);
-            if (debug)
-            {
-                if (displayFpsDelay <= 0)
+                if (Player->enabled)
                 {
-                    //printf("Synced Delta Time: %lf. FRAMES: %d\n", syncDeltaTime, frames);
-                    displayFps = frames / syncDeltaTime;
-                    displayFpsDelay = 0.2;
-                    syncDeltaTime = 0;
-                    frames = 0;
+                    if (!check) {
+                        playerMovement(blocks);
+                    }
+                    ALGIF_ANIMATION* anim = NULL;
+                    switch (Player->walking)
+                    {
+                    case 1:
+                    {
+                        anim = Player->DownWalkAnim;
+                        break;
+                    }
+                    case 2:
+                    {
+                        anim = Player->UpWalkAnim;
+                        break;
+                    }
+                    case 3:
+                    {
+                        anim = Player->RightWalkAnim;
+                        break;
+                    }
+                    case 4:
+                    {
+                        anim = Player->LeftWalkAnim;
+                        break;
+                    }
+                    default:
+                    {
+                        anim = Player->IdleAnim;
+                        break;
+                    }
+                    }
+                    if (anim) {
+                        ALLEGRO_BITMAP* sprite = algif_get_bitmap(anim, al_get_time());
+                        //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
+                        al_draw_scaled_rotated_bitmap(sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                        //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+                        al_draw_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(150, 20, 20, 3), 2);
+                    }
                 }
-                else
+                if (gridEnabled)
                 {
-                    displayFpsDelay -= deltaTime;
+                    drawGrid(maxx, maxy, xsize, ysize);
                 }
-                al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, 10, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
-                al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+                drawUI(&uiFont);
+                if (debug)
+                {
+                    if (displayFpsDelay <= 0)
+                    {
+                        //printf("Synced Delta Time: %lf. FRAMES: %d\n", syncDeltaTime, frames);
+                        displayFps = frames / syncDeltaTime;
+                        displayFpsDelay = 0.2;
+                        syncDeltaTime = 0;
+                        frames = 0;
+                    }
+                    else
+                    {
+                        displayFpsDelay -= deltaTime;
+                    }
+                    al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, 10, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
+                    al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+                }
+                check = false;
+                loopExplosions(&explosions, &check);
+                if (!check)
+                {
+                    renderExplosions(explosions);
+                }
+                loopBombs(&blocks);
+                renderBombs(BombAnim);
             }
-            check = false;
-            loopExplosions(&explosions, &check);
-            if (!check)
+            else
             {
-                renderExplosions(explosions);
+                al_clear_to_color(al_map_rgb(10, 30, 20));
+                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), width/2, 30, ALLEGRO_ALIGN_CENTER, "Bomberman");
+                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-20, ALLEGRO_ALIGN_CENTER, "Sygut Grzegorz, Strzepek Piotr, Krzysztof Szylinski, Synowiec Adrian");
+                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-40, ALLEGRO_ALIGN_CENTER, "PP2 Projekt (1ID14B 2023)");
+
+                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
+                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
+                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
+
+
             }
-            loopBombs(&blocks);
-            renderBombs(BombSprite);
             al_flip_display();
         }
         free(Player);
+        
+        saveSystem_close();
         al_uninstall_keyboard();
         al_destroy_display(display);
         al_shutdown_primitives_addon();
