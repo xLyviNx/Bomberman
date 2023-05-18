@@ -1,6 +1,6 @@
 #pragma once
 #include <allegro5/allegro_audio.h>
-
+#define ISON false
 struct SampleStackElement
 {
 	float timePassed;

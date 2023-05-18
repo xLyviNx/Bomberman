@@ -14,8 +14,13 @@
 #include "soundstack.h"
 #include "saveSystem.h"
 #include "Enemies.h"
-#include "config.h"
-#include "types.h"
+
+#ifndef WIDTH
+    #define WIDTH 832
+    #define HEIGHT 832
+#endif // !WIDTH
+
+
 #define exploTime 3.0;
 const bool debug = true;
 bool wasd[4] = { false, false, false, false };
@@ -23,6 +28,34 @@ double deltaTime = 0;
 float cam_x_offset = 0;
 float cam_y_offset = 0;
 unsigned short GlobalAction = 0;
+struct Vector2
+{
+    double x;
+    double y;
+};
+struct Transform
+{
+    struct Vector2 position;
+    struct Vector2 gridPosition;
+    struct Vector2 scale;
+};
+struct Character
+{
+    struct Transform Transform;
+    float Speed;
+    ALGIF_ANIMATION* IdleAnim;
+    ALGIF_ANIMATION* RightWalkAnim;
+    ALGIF_ANIMATION* LeftWalkAnim;
+    ALGIF_ANIMATION* UpWalkAnim;
+    ALGIF_ANIMATION* DownWalkAnim;
+    bool remoteBombs;
+    unsigned short int bombRange;
+    unsigned short int displayBombs;
+    unsigned short int maxBombs;
+    bool enabled;
+    unsigned short walking;
+};
+
 struct Character* Player = NULL;
 struct BombList
 {
@@ -1215,12 +1248,13 @@ int main()
         Player->UpWalkAnim = algif_load_animation("data/gifs/player/up.gif");
         Player->DownWalkAnim = algif_load_animation("data/gifs/player/down.gif");
         ALGIF_ANIMATION* Enemy1_animation = algif_load_animation("data/gifs/enemies/enemy1.gif");
+        ALGIF_ANIMATION* Enemy2_animation = algif_load_animation("data/gifs/enemies/enemy2.gif");
         if (!Player->IdleAnim || !Player->RightWalkAnim || !Player->LeftWalkAnim || !Player->UpWalkAnim || !Player->DownWalkAnim)
         {
             printf("Nie udalo sie wczytac animacji gracza.\n");
             return -1;
         }
-        if (!Enemy1_animation)
+        if (!Enemy1_animation || !Enemy2_animation)
         {
             printf("Nie udalo sie wczytac animacji przeciwnikow.\n");
             return -1;
@@ -1266,7 +1300,7 @@ int main()
         al_attach_sample_instance_to_mixer(MMusicInstance, al_get_default_mixer());
         al_set_sample_instance_playmode(GMusicInstance, ALLEGRO_PLAYMODE_LOOP);
         al_attach_sample_instance_to_mixer(GMusicInstance, al_get_default_mixer());
-        Enemy* EnemyList = NULL;
+        struct Enemy* EnemyList = NULL;
         struct SampleStackElement* samples = NULL;
         //  int Lifes = 3;
         while (!zamknij)
@@ -1328,6 +1362,7 @@ int main()
                             Explosion_RemoveList(&explosions);
                             al_stop_sample_instance(GMusicInstance);
                             Enemies_Clear(&EnemyList);
+                            //EnemyList = NULL;
                             Pause = false;
                             level = 0;
                             GlobalAction = 0;
@@ -1511,6 +1546,7 @@ int main()
                         al_stop_sample_instance(MMusicInstance);
                         level = loadedLevel;
                         Enemy_Add(&EnemyList, WIDTH/2, HEIGHT/2, Enemy1_animation);
+                        Enemy_Add(&EnemyList, WIDTH/2+128, HEIGHT/2, Enemy2_animation);
                         Player->enabled = true;
                         GlobalAction = 0;
                         break;
@@ -1522,6 +1558,7 @@ int main()
             }
             SampleStack_Loop(&samples, deltaTime);
             al_flip_display();
+
         }
         free(Player);
         al_uninstall_audio();

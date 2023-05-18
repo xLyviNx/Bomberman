@@ -1,9 +1,12 @@
 #include "Enemies.h"
 #include <stdlib.h>
-#include "config.h"
-bool Enemy_Add(Enemy** list, float initX, float initY, ALGIF_ANIMATION* Animation)
+#ifndef WIDTH
+	#define WIDTH 832
+	#define HEIGHT 832
+#endif // !WIDTH
+bool Enemy_Add(struct Enemy** list, float initX, float initY, ALGIF_ANIMATION * Animation)
 {
-	Enemy* new = (Enemy*)malloc(sizeof(Enemy*));
+	struct Enemy* new = (struct Enemy*)malloc(sizeof(struct Enemy));
 	if (new) {
 		new->next = NULL;
 		new->prev = NULL;
@@ -12,7 +15,7 @@ bool Enemy_Add(Enemy** list, float initX, float initY, ALGIF_ANIMATION* Animatio
 		new->y = initY;
 		if (*list)
 		{
-			Enemy* end = *list;
+			struct Enemy* end = *list;
 			while (end->next)
 			{
 				end = end->next;
@@ -28,7 +31,7 @@ bool Enemy_Add(Enemy** list, float initX, float initY, ALGIF_ANIMATION* Animatio
 	}
 	return false;
 }
-bool Enemy_Remove(Enemy* element)
+bool Enemy_Remove(struct Enemy* element)
 {
 	if (element) {
 		if (element->prev)
@@ -44,24 +47,23 @@ bool Enemy_Remove(Enemy* element)
 	}
 	return false;
 }
-bool Enemies_Clear(Enemy** list)
+void Enemies_Clear(struct Enemy** list)
 {
 	if (list)
 	{
 		while (*list != NULL)
 		{
-			Enemy* next = (*list)->next;
-			//free(*list);
+			struct Enemy* next = (*list)->next;
+			free(*list);
 			*list = next;
 		}
-		return *list == NULL;
 	}
-	return false;
 }
 
-void Enemies_Draw(Enemy* list, double animationtime, float x_of, float y_of)
+
+void Enemies_Draw(struct Enemy* list, double animationtime, float x_of, float y_of)
 {
-	Enemy* curr = list;
+	struct Enemy* curr = list;
 	while (curr)
 	{
 		if (curr->x - x_of > -32 && curr->x - x_of < WIDTH + 32)
@@ -75,16 +77,16 @@ void Enemies_Draw(Enemy* list, double animationtime, float x_of, float y_of)
 	}
 
 }
-void Enemies_Loop(Enemy* list, double animationtime, float xof, float yof)
+void Enemies_Loop(struct Enemy* list, double animationtime, float xof, float yof)
 {
-	Enemy* curr = list;
+	struct Enemy* curr = list;
 	while (curr)
 	{
 		curr = curr->next;
 	}
 	Enemies_Draw(list, animationtime, xof, yof);
 }
-void Enemy_CollidesWithPlayer(Enemy* me, float X, float Y, float scale)
+void Enemy_CollidesWithPlayer(struct Enemy* me, float X, float Y, float scale)
 {
 	int gridSize = (int)(128 * scale);
 

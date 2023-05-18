@@ -173,14 +173,11 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="saveSystem.c" />
     <ClCompile Include="soundstack.c" />
-    <ClCompile Include="types.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemies.h" />
-    <ClInclude Include="config.h" />
     <ClInclude Include="soundstack.h" />
     <ClInclude Include="saveSystem.h" />
-    <ClInclude Include="types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
