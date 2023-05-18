@@ -12,15 +12,6 @@
 #include "saveSystem.h"
 #define exploTime 3.0;
 
-#define SIMPLE_CLAMP(V,MIN,MAX){\
-    if(V>MAX){\
-        V=MAX\
-    }\
-    else if (V<MIN){\
-        V=MIN\
-    }\
-}
-
 const int width = 832;
 const int height = 832;
 const bool debug = true;
@@ -28,6 +19,7 @@ bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
 float cam_x_offset = 0;
 float cam_y_offset = 0;
+unsigned short GlobalAction = 0;
 struct Vector2
 {
     double x;
@@ -80,6 +72,16 @@ struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
         nB->timeLeft = exploTime;
     }
     return nB;
+}
+bool Bomb_RemoveList(struct BombList** firstBomb)
+{
+    while (*firstBomb != NULL)
+    {
+        struct BombList* next = (*firstBomb)->next;
+        free(*firstBomb);
+        *firstBomb = next;
+    }
+    return *firstBomb == NULL;
 }
 struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, bool remote)
 {
@@ -193,6 +195,16 @@ bool Explosion_Remove(struct Explosion** exp)
     }
     return false;
 }
+bool Explosion_RemoveList(struct Explosion** explosions)
+{
+    while (*explosions != NULL)
+    {
+        struct Explosion* next = (*explosions)->next;
+        free(*explosions);
+        *explosions = next;
+    }
+    return *explosions == NULL;
+}
 struct dstr_block
 {
     int gridX;
@@ -281,6 +293,16 @@ struct dstr_block* Block_createList(int X, int Y)
         nB->exists = true;
     }
     return nB;
+}
+bool Block_RemoveList(struct dstr_block** block)
+{
+    while (*block != NULL)
+    {
+        struct dstr_block* next = (*block)->next;
+        free(*block);
+        *block = next;
+    }
+    return *block == NULL;
 }
 struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
 {
@@ -487,7 +509,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
             //printf("offset: %lf!\n", cam_x_offset);
         }
         if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y, &dstr)) {
-            if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height - (Player->Transform.scale.y / 2.0) * 128)
+            if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height + 1 - ((128 * Player->Transform.scale.y)/2.0))
             {
                 Player->Transform.position.y = npy;
             }
@@ -602,9 +624,9 @@ void playerMovement(struct dstr_block* blocks)
     dir.y *= Player->Speed;
     MovePlayer(dir, blocks);
 }
-void plantBomb()
+void plantBomb(bool isPaused)
 {
-    if (Player != NULL)
+    if (Player != NULL && !isPaused)
     {
         struct Vector2 pos;
         pos = Player->Transform.gridPosition;
@@ -644,14 +666,14 @@ void plantBomb()
         }
     }
 }
-void renderBombs(ALGIF_ANIMATION* bombAnim)
+void renderBombs(ALGIF_ANIMATION* bombAnim, double animtime)
 {
     if (bombs != NULL)
     {
         struct BombList* bomb = bombs;
         while (bombs != NULL && bomb != NULL)
         {
-            al_draw_scaled_rotated_bitmap(algif_get_bitmap(bombAnim, al_get_time()), 64, 64, bomb->Position.x - cam_x_offset, bomb->Position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
+            al_draw_scaled_rotated_bitmap(algif_get_bitmap(bombAnim, animtime), 64, 64, bomb->Position.x - cam_x_offset, bomb->Position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
             if (bomb->next != NULL) {
                 bomb = bomb->next;
             }
@@ -826,17 +848,36 @@ void loopBlocks(struct dstr_block** blocks)
         //printf("BLOCKS: %d\n", i);
     }
 }
-void button(int key, bool down, unsigned short* menuChoiceValue)
+void menuMove(bool down, unsigned short* val, int level, bool buttondown)
+{
+    if (buttondown)
+    {
+        if (level == 0)
+        {
+            *val += down ? 1 : -1;
+            if (*val < 1)
+            {
+                *val = 1;
+            }
+            else if (*val > 3)
+            {
+                *val = 3;
+            }
+        }
+        else
+        {
+            *val = 0;
+        }
+    }
+}
+void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceValue)
 {
     switch (key)
     {
     case ALLEGRO_KEY_W:
     {
         wasd[0] = down;
-        if (*menuChoiceValue)
-        {
-            
-        }
+        menuMove(false, menuChoiceValue, *currentLevel, down);
         break;
     }
     case ALLEGRO_KEY_A:
@@ -847,6 +888,7 @@ void button(int key, bool down, unsigned short* menuChoiceValue)
     case ALLEGRO_KEY_S:
     {
         wasd[2] = down;
+        menuMove(true, menuChoiceValue, *currentLevel, down);
         break;
     }
     case ALLEGRO_KEY_D:
@@ -858,11 +900,64 @@ void button(int key, bool down, unsigned short* menuChoiceValue)
     {
         if (down)
         {
-            plantBomb();
+            if (*currentLevel)
+            {
+                GlobalAction = 5;
+            }
         }
         break;
     }
+    case ALLEGRO_KEY_UP:
+    {
+        menuMove(false, menuChoiceValue, *currentLevel, down);
+        break;
+    }
+    case ALLEGRO_KEY_DOWN:
+    {
+        menuMove(true, menuChoiceValue, *currentLevel, down);
+        break;
+    }
+    case ALLEGRO_KEY_ENTER:
+    {
+        if (down)
+        {
+            if (!*currentLevel)
+            {
+                switch (*menuChoiceValue)
+                {
+                case 1:
+                {
+                    saveSystem_resetData();
+                    GlobalAction = 1;
+                    break;
+                }
+                case 2:
+                {
+                    GlobalAction = 1;
+                    break;
+                }
+                case 3:
+                {
+                    GlobalAction = 2;
+                    break;
+                }
+                }
+            }
+            else
+            {
 
+                GlobalAction = 4;
+            }
+        }
+        break;
+    }
+    case ALLEGRO_KEY_ESCAPE:
+    {
+        if (down) {
+            GlobalAction = 3;
+        }
+        break;
+    }
     default:
     {
         break;
@@ -908,27 +1003,33 @@ const int FPS = 30;
 
 void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i)
 {
-    srand(level * i);
+    unsigned int seed = (unsigned int)(level * 10000 + i * 100 + level * i);
+    srand(seed);
     int gridSize = (int)(128 * Player->Transform.scale.x);
     int rX = 0;
     int rY = 0;
     do
     {
         rX = (((rand() % (width / gridSize))* 2)+1);
-        rY = rand() % (height / gridSize);
+        rY = (((rand() % (height / gridSize)) +1));
         *X = (rX * gridSize) - gridSize / 2;
         *Y = (rY * gridSize) - gridSize / 2;
         //*Y += 1;
-    } while (Block_Exists(first, *X, *Y, true));
-
+    } while (Block_Exists(first, *X, *Y, true) || (*X==(int)Player->Transform.position.x && *Y == (int)Player->Transform.position.y));
+    
     //printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
 }
 struct dstr_block* generate_blocks(int level)
 {
     struct dstr_block* Blocks = NULL;
-    int limit = level * 50;
+    int limit = 20 + (level*11);
+    if (limit > 75)
+    {
+        limit = 75;
+    }
     for (int i = 0; i < limit; i++)
     {
+        
         int X = 0;
         int Y = 0;
         Block_random(Blocks, level, &X, &Y, i);
@@ -949,6 +1050,7 @@ struct dstr_block* generate_blocks(int level)
                 Blocks = bl;
             }
         }
+        printf("BL3: %d\n", i);
 
     }
     return Blocks;
@@ -1062,12 +1164,15 @@ int main()
         unsigned short MenuChoice = 0;
         if (!saveSystem_init()) return -10;
         int loadedLevel = saveSystem_LoadLevel();
-
+        bool Pause = false;
+        double AnimTime = al_get_time();
         while (!zamknij) {
-            if (!blocks)
+            if (GlobalAction == 2)
             {
-                blocks = generate_blocks(level);
+                zamknij = true;
+                return;
             }
+            //printf("LEVEL: %d\n", level);
             //printf("======== New Frame ========\n");
             //ALLEGRO_TIMEOUT timeout;
             //al_init_timeout(&timeout, 0.06);
@@ -1086,28 +1191,70 @@ int main()
                 return 0;
             case ALLEGRO_EVENT_KEY_DOWN:
             {
-                button(event.keyboard.keycode, true, &MenuChoice);
+                button(event.keyboard.keycode, true, &level, &MenuChoice);
                 break;
             }
             case ALLEGRO_EVENT_KEY_UP:
             {
-                button(event.keyboard.keycode, false, &MenuChoice);
+                button(event.keyboard.keycode, false, &level, &MenuChoice);
                 break;
             }
             }
-            if (level) {
-                if (cam_y_offset > 0)
+            if (level != 0) {
+                
+                switch (GlobalAction)
                 {
-                    cam_y_offset -= deltaTime * 100;
+                    case 3:
+                    {
+                        Pause = !Pause;
+                        GlobalAction = 0;
+                        break;
+                    }
+                    case 4:
+                    {
+                        Bomb_RemoveList(&bombs);
+                        Block_RemoveList(&blocks);
+                        Explosion_RemoveList(&explosions);
+                        Pause = false;
+                        level = 0;
+                        GlobalAction = 0;
+                        continue;
+                    }
+                    case 5:
+                    {
+                        plantBomb(Pause);
+                        GlobalAction = 0;
+                        break;
+                    }
+                    default:
+                    {
+                        GlobalAction = 0;
+                        break;
+                    }
+                }
+
+                if (!blocks)
+                {
+                    blocks = generate_blocks(level);
+                }
+                if (!Pause) 
+                {
+                    AnimTime = al_get_time();
+                    if (cam_y_offset > 0)
+                    {
+                        cam_y_offset -= deltaTime * 100;
+                    }
                 }
                 if (cam_y_offset < 0) { cam_y_offset = 0; }
-
                 al_clear_to_color(al_map_rgb(10, 100, 10));
                 drawAllFilledRectInView();
                 bool check = false;
                 //dTest += deltaTime;
                 //if (dTest > 1) {
-                loopBlocks(&blocks);
+                if (!Pause)
+                {
+                    loopBlocks(&blocks);
+                }
                 //dTest = 0;
             //}
                 if (!check) {
@@ -1116,8 +1263,11 @@ int main()
                 }
                 if (Player->enabled)
                 {
-                    if (!check) {
-                        playerMovement(blocks);
+                    if (!Pause)
+                    {
+                        if (!check) {
+                            playerMovement(blocks);
+                        }
                     }
                     ALGIF_ANIMATION* anim = NULL;
                     switch (Player->walking)
@@ -1149,7 +1299,7 @@ int main()
                     }
                     }
                     if (anim) {
-                        ALLEGRO_BITMAP* sprite = algif_get_bitmap(anim, al_get_time());
+                        ALLEGRO_BITMAP* sprite = algif_get_bitmap(anim, AnimTime);
                         //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
                         al_draw_scaled_rotated_bitmap(sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                         //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
@@ -1160,6 +1310,7 @@ int main()
                 {
                     drawGrid(maxx, maxy, xsize, ysize);
                 }
+
                 drawUI(&uiFont);
                 if (debug)
                 {
@@ -1179,25 +1330,61 @@ int main()
                     al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
                 }
                 check = false;
-                loopExplosions(&explosions, &check);
-                if (!check)
+                if (!Pause)
                 {
-                    renderExplosions(explosions);
+                    loopExplosions(&explosions, &check);
+
+                    if (!check)
+                    {
+                        renderExplosions(explosions);
+                    }
+                    loopBombs(&blocks);
                 }
-                loopBombs(&blocks);
-                renderBombs(BombAnim);
+                renderBombs(BombAnim, AnimTime);
+                if (Pause)
+                {
+                    al_draw_filled_rectangle(0, 0, width, height, al_map_rgba(0,0,0,180));
+                    al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), width / 2, height/2 - 150, ALLEGRO_ALIGN_CENTER, "PAUZA");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), width / 2, height/2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij ESC aby wrocic do gry.");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), width / 2, height/2 - 25, ALLEGRO_ALIGN_CENTER, "Kliknij ENTER aby wyjsc do menu.");
+                }
             }
             else
             {
+                if (MenuChoice == 0)
+                    MenuChoice = 1;
                 al_clear_to_color(al_map_rgb(10, 30, 20));
                 al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), width/2, 30, ALLEGRO_ALIGN_CENTER, "Bomberman");
                 al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-20, ALLEGRO_ALIGN_CENTER, "Sygut Grzegorz, Strzepek Piotr, Krzysztof Szylinski, Synowiec Adrian");
                 al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-40, ALLEGRO_ALIGN_CENTER, "PP2 Projekt (1ID14B 2023)");
+                ALLEGRO_COLOR butColor = al_map_rgb(80, 80, 80);
+                ALLEGRO_COLOR butColor2 = butColor;
+                ALLEGRO_COLOR butColor3 = butColor;
+                if (MenuChoice==1)
+                    butColor = al_map_rgb(255, 255, 255);
+                else if (MenuChoice==2)
+                    butColor2 = al_map_rgb(255, 255, 255);
+                else if (MenuChoice == 3)
+                    butColor3 = al_map_rgb(255, 255, 255);
+                al_draw_textf(MenuButton, butColor, width / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
+                al_draw_textf(MenuButton, butColor2, width / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
+                al_draw_textf(MenuButton, butColor3, width / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
 
-                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
-                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
-                al_draw_textf(MenuButton, al_map_rgb(200, 200, 200), width / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
+                switch (GlobalAction)
+                {
+                    case 1:
+                    {
+                        loadedLevel = saveSystem_LoadLevel();
 
+                        Player->Transform.position.x = width / 2;
+                        Player->Transform.position.y = height / 2;
+                        level = loadedLevel;
+                        GlobalAction = 0;
+                        break;
+                    }
+                    default:
+                        { break; }
+                }
 
             }
             al_flip_display();
