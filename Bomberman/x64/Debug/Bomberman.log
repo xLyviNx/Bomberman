@@ -1,3 +1,11 @@
-﻿  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(1101,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+﻿  Enemies.c
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(63,1): warning C4029: zadeklarowana formalna lista parametrów różniąca się od definicji
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(79,1): warning C4029: zadeklarowana formalna lista parametrów różniąca się od definicji
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(88,1): warning C4029: zadeklarowana formalna lista parametrów różniąca się od definicji
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(95,15): warning C4098: "Enemy_CollidesWithPlayer": funkcja "void" zwraca wartość
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(98,14): warning C4098: "Enemy_CollidesWithPlayer": funkcja "void" zwraca wartość
+  main.c
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(1160,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(1377,51): warning C4020: "Enemies_Loop": zbyt wiele parametrów rzeczywistych
+  Generowanie kodu...
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe

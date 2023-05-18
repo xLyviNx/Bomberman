@@ -42,12 +42,27 @@
     <ClCompile Include="soundstack.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Enemies.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="types.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="saveSystem.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
     <ClInclude Include="soundstack.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemies.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+    <ClInclude Include="config.h">
+      <Filter>Pliki źródłowe</Filter>
+    </ClInclude>
+    <ClInclude Include="types.h">
       <Filter>Pliki źródłowe</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,43 +13,16 @@
 #include <allegro5/allegro_acodec.h>
 #include "soundstack.h"
 #include "saveSystem.h"
+#include "Enemies.h"
+#include "config.h"
+#include "types.h"
 #define exploTime 3.0;
-
-const int width = 832;
-const int height = 832;
 const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
 float cam_x_offset = 0;
 float cam_y_offset = 0;
 unsigned short GlobalAction = 0;
-struct Vector2
-{
-    double x;
-    double y;
-};
-struct Transform
-{
-    struct Vector2 position;
-    struct Vector2 gridPosition;
-    struct Vector2 scale;
-};
-struct Character
-{
-    struct Transform Transform;
-    float Speed;
-    ALGIF_ANIMATION* IdleAnim;
-    ALGIF_ANIMATION* RightWalkAnim;
-    ALGIF_ANIMATION* LeftWalkAnim;
-    ALGIF_ANIMATION* UpWalkAnim;
-    ALGIF_ANIMATION* DownWalkAnim;
-    bool remoteBombs;
-    unsigned short int bombRange;
-    unsigned short int displayBombs;
-    unsigned short int maxBombs;
-    bool enabled;
-    unsigned short walking;
-};
 struct Character* Player = NULL;
 struct BombList
 {
@@ -57,6 +30,7 @@ struct BombList
     struct Vector2 Position;
     bool isRemote;
     bool exploded;
+    bool insidePlayer;
     struct BombList* next;
     struct BombList* prev;
 };
@@ -70,6 +44,7 @@ struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
         nB->isRemote = remote;
         nB->prev = NULL;
         nB->exploded = false;
+        nB->insidePlayer = true;
         nB->next = NULL;
         nB->timeLeft = exploTime;
     }
@@ -97,6 +72,7 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
             nB->isRemote = remote;
             nB->timeLeft = exploTime;
             nB->exploded = false;
+            nB->insidePlayer = true;
             struct BombList* end = first;
             while (end->next != NULL)
             {
@@ -309,7 +285,7 @@ bool Block_RemoveList(struct dstr_block** block)
     }
     return *block == NULL;
 }
-struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
+struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool gridMethod)
 {
     struct dstr_block* found = NULL;
     if (blocks != NULL)
@@ -317,10 +293,24 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y)
         struct dstr_block* block = blocks;
         while (block != NULL)
         {
-            if (block->gridX == X && block->gridY == Y && block->exists)
+            if (gridMethod) {
+                if (block->gridX == X && block->gridY == Y && block->exists)
+                {
+                    //printf("Returning.\n");
+                    return block;
+                }
+            }
+            else
             {
-                //printf("Returning.\n");
-                return block;
+                int gridSize = (int)(128 * Player->Transform.scale.x);
+
+                if (block->gridX < X + gridSize && block->gridX > X - gridSize) // here's the issue
+                {
+                    if (block->gridY < Y + gridSize && block->gridY > Y - gridSize)
+                    {
+                        return block;
+                    }
+                }
             }
             block = block->next;
         }
@@ -390,7 +380,9 @@ unsigned int Blocks_Count(struct dstr_block* first)
         while (end->next != NULL)
         {
             end = end->next;
-            count++;
+            if (end->destroyable) {
+                count++;
+            }
         }
     }
     return count;
@@ -412,7 +404,54 @@ bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
     }
     return false;
 }
+struct BombList* Bomb_Find(struct BombList* first, int X, int Y, bool gridMethod)
+{
+    struct BombList* found = NULL;
+    if (first != NULL)
+    {
+        struct BombList* bomb = bombs;
+        while (bomb != NULL)
+        {
+            if (gridMethod) {
+                if (bomb->Position.x == X && bomb->Position.y == Y)
+                {
+                    return bomb;
+                }
+            }
+            else
+            {
+                int gridSize = (int)(128 * Player->Transform.scale.x);
 
+                if (bomb->Position.x < X + gridSize && bomb->Position.x > X - gridSize)
+                {
+                    if (bomb->Position.y< Y + gridSize && bomb->Position.y> Y - gridSize)
+                    {
+                        return bomb;
+                    }
+                }
+            }
+            bomb = bomb->next;
+        }
+    }
+    return found;
+}
+bool Bomb_checkPlayer(struct BombList* bomb)
+{
+    if (bomb != NULL)
+    {
+
+        int gridSize = (int)(128 * Player->Transform.scale.x);
+
+        if (bomb->Position.x < Player->Transform.position.x + gridSize && bomb->Position.x > Player->Transform.position.x - gridSize)
+        {
+            if (bomb->Position.y< Player->Transform.position.y + gridSize && bomb->Position.y> Player->Transform.position.y - gridSize)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 bool Bomb_Remove(struct BombList** bomb)
 {
     if (debug)
@@ -452,35 +491,16 @@ bool Bomb_Remove(struct BombList** bomb)
     return false;
 }
 bool is_on_block(struct dstr_block* blocks, float x, float y, float dX, float dY, bool* destroyable) {
-    int gridSize = (int)(128 * Player->Transform.scale.x);
-    //float tarx = Player->Transform.position.x + (dX * ((float)gridSize/4));
-    //float tary = Player->Transform.position.y + (dY * ((float)gridSize/4));
-    int xdiv = (int)(x / gridSize);
-    int ydiv = (int)(y / gridSize);
-    int nX = x + (dX * (gridSize / 6));
-    int nY = y + (dY * (gridSize / 6));
-    int nX2 = x - (dX * (gridSize / 6));
-    int nY2 = y - (dY * (gridSize / 6));
-    bool con1 = ((int)xdiv & 1) && ((int)ydiv & 1);
-    //bool con2 = ((int)xdiv & 1) && (int)tary / gridSize & 1;
-    //bool con2 = (int)(nX / gridSize) & 1 && (int)(nY / gridSize) & 1;
-    //bool con3 = (int)(nX2 / gridSize) & 1 && (int)(nY2 / gridSize) & 1;
-    bool con2 = false;
-    bool con3 = false;
-    //bool con3 = ((int)tarx / gridSize & 1 && (int)ydiv & 1);
-    //int cx = (int)tarx / gridSize;
-    //int cy = (int)tary / gridSize;
-    //float xdiff = x/ gridSize - (floor(x / gridSize));
-    //float diff = y/ gridSize - (floor(y / gridSize));
-
-    //bool con4 = cx & 1 && cy & 1;
-    //bool con4 = false;
-    //printf(":%lf, %lf, %d, %d, %d\n", xdiff, diff, con4, cx, cy);
-    bool con5 = Block_Exists(blocks, x, y, false);
-    (*destroyable) = con5;
-    //al_draw_filled_circle(nX, nY, 10, al_map_rgb(100, 0, 0));
-    //printf("DIV: %d, %d\n", xdiv, ydiv);
-    return con1 || con2 || con3 || con5;
+  
+    struct dstr_block* blck = Block_Find(blocks, x, y, false);
+    struct BombList* atBomb = Bomb_Find(bombs, x, y, false);
+    bool bombCont = false;
+    if (atBomb)
+    {
+        bombCont = !atBomb->insidePlayer;
+    }
+    (*destroyable) = blck != NULL && blck->destroyable;
+    return blck != NULL || bombCont;
 }
 void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
 {
@@ -489,13 +509,13 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
         struct Vector2 nDir;
         nDir.x = (dir.x * deltaTime) * 40;
         nDir.y = (dir.y * deltaTime) * 40;
-        if (dir.x != 0 && dir.y != 0) { nDir.y *= 0.7; nDir.x *= 0.7; }
+        //if (dir.x != 0 && dir.y != 0) { nDir.y *= 0.7; nDir.x *= 0.7; }
         float npy = (Player->Transform.position.y + nDir.y);
         float npx = (Player->Transform.position.x + nDir.x);
         float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
         bool dstr = false;
         if (!is_on_block(blocks, npx, Player->Transform.position.y, dir.x, dir.y, &dstr)) {
-            if (npx >= halfplayer && npx <= ((width*2)-halfplayer))
+            if (npx >= halfplayer && npx <= ((WIDTH*2)-halfplayer)+1)
             {
                 if (npx < 0) npx = 0;
                 if (cam_x_offset >= 0)
@@ -503,7 +523,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
                     if ((npx - cam_x_offset - 50 < (Player->Transform.scale.x / 2.0) * 128
                         && nDir.x < 0)
                         ||
-                        (npx - cam_x_offset + 50 > width - ((Player->Transform.scale.x / 2.0) * 128)
+                        (npx - cam_x_offset + 50 > WIDTH - ((Player->Transform.scale.x / 2.0) * 128)
                             && nDir.x > 0))
                     {
                         cam_x_offset += nDir.x * 5;
@@ -514,7 +534,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
             //printf("offset: %lf!\n", cam_x_offset);
         }
         if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y, &dstr)) {
-            if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < height + 1 - ((128 * Player->Transform.scale.y)/2.0))
+            if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < HEIGHT + 1 - ((128 * Player->Transform.scale.y)/2.0))
             {
                 Player->Transform.position.y = npy;
             }
@@ -543,9 +563,9 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
             y -= cellsizey;
         }*/
         //printf("ydf: %lf, %lf\n", ydf, dir.y);
-        if (cam_x_offset > width)
+        if (cam_x_offset > WIDTH)
         {
-            cam_x_offset = width;
+            cam_x_offset = WIDTH;
         }
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
@@ -558,8 +578,8 @@ void drawAllFilledRectInView() {
     int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
     float rectX, rectY;
     int i, j;
-    for (i = gridSize; i < cam_x_offset + width + gridSize; i += gridSize * 2) {
-        for (j = 0; j < height; j += gridSize * 2) {
+    for (i = gridSize; i < cam_x_offset + WIDTH + gridSize; i += gridSize * 2) {
+        for (j = 0; j < HEIGHT; j += gridSize * 2) {
             if ((i / gridSize + j / gridSize) % 2 == 1) {
                 rectX = i - cam_x_offset;
                 rectY = j - gridSize;
@@ -568,8 +588,18 @@ void drawAllFilledRectInView() {
         }
     }
 }
-
-void Blocks_draw(struct dstr_block* first)
+void GenerateStaticBlocks(struct dstr_block** first)
+{
+    int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
+    for (int i = 2; i < (WIDTH*2 / gridSize)+1; i += 2)
+    {
+        for (int j = 2; j < (HEIGHT / gridSize); j += 2)
+        {
+            Block_Insert(first, (i * gridSize) - gridSize / 2, (j * gridSize) - gridSize / 2, true);
+        }
+    }
+}
+void Blocks_draw(struct dstr_block* first, ALLEGRO_BITMAP* dBS, ALLEGRO_BITMAP* sBS)
 {
     struct dstr_block* temp = first;
     int gridSize = (int)(128 * Player->Transform.scale.x); // rozmiar kratki
@@ -583,12 +613,20 @@ void Blocks_draw(struct dstr_block* first)
             }
             //printf("aaaa: %p\n", temp);
             if (temp->exists) {
-                if (temp->gridX - cam_x_offset - gridSize / 2 < width && temp->gridX - cam_x_offset + gridSize / 2 > 0)
+                if (temp->gridX - cam_x_offset - gridSize / 2 < WIDTH && temp->gridX - cam_x_offset + gridSize / 2 > 0)
                 {
-                    if (temp->gridY < height && temp->gridY > 0)
+                    if (temp->gridY < HEIGHT && temp->gridY > 0)
                     {
-                        al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(120, 120, 120));
-                        //printf("Drawing.");
+                        if (temp->destroyable) {
+                            //al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(100, 100, 100));
+                            al_draw_scaled_bitmap(dBS, 0, 0, 128, 128, temp->gridX - gridSize /2 - cam_x_offset, temp->gridY - cam_y_offset - gridSize / 2, gridSize, gridSize, 0);
+                        }
+                        else
+                        {
+                            //al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(160, 160, 160));
+                            al_draw_scaled_bitmap(sBS, 0, 0, 128, 128, temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, gridSize, gridSize, 0);
+
+                        }
                     }
                 }
             }
@@ -682,6 +720,10 @@ void renderBombs(ALGIF_ANIMATION* bombAnim, double animtime)
         struct BombList* bomb = bombs;
         while (bombs != NULL && bomb != NULL)
         {
+            if (bomb->insidePlayer)
+            {
+                //al_draw_filled_rectangle(bomb->Position.x - 32-cam_x_offset, bomb->Position.y - 32 - cam_y_offset, bomb->Position.x + 32 - cam_x_offset, bomb->Position.y + 32 - cam_y_offset, al_map_rgba(255, 0, 0, 50));
+            }
             al_draw_scaled_rotated_bitmap(algif_get_bitmap(bombAnim, animtime), 64, 64, bomb->Position.x - cam_x_offset, bomb->Position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
             if (bomb->next != NULL) {
                 bomb = bomb->next;
@@ -722,7 +764,7 @@ void explodeBomb(struct BombList** bomb, struct dstr_block** blocks, ALLEGRO_SAM
     if (bomb != NULL && (*bomb) != NULL)
     {
         (*bomb)->exploded = true;
-        (*bomb)->timeLeft = 0.08;
+        (*bomb)->timeLeft = 0.05;
         int gridSize = (int)(128 * Player->Transform.scale.x);
         int xdir = 0;
         int ydir = 0;
@@ -731,6 +773,10 @@ void explodeBomb(struct BombList** bomb, struct dstr_block** blocks, ALLEGRO_SAM
         al_attach_sample_instance_to_mixer(newExploSound, al_get_default_mixer());
         al_play_sample_instance(newExploSound);
         *samples = SampleStack_Push(*samples, newExploSound);
+        if ((*bomb)->Position.x == Player->Transform.gridPosition.x && (*bomb)->Position.y == Player->Transform.gridPosition.y)
+        {
+            Player->enabled = false;
+        }
         //al_destroy_sample_instance(newExploSound);  
         for (int j = 0; j < 4; j++) {
             switch (j)
@@ -768,18 +814,24 @@ void explodeBomb(struct BombList** bomb, struct dstr_block** blocks, ALLEGRO_SAM
             {
                 int X = (*bomb)->Position.x + (xdir * i * gridSize);
                 int Y = (*bomb)->Position.y + (ydir * i * gridSize);
-                bool destroyable = Block_Exists((*blocks), X, Y, false);
+                struct dstr_block* mblock = (Block_Find((*blocks), X, Y, true));
+
+                bool destroyable = mblock != NULL && mblock->destroyable;
                 bool test = false;
 
-                struct dstr_block* mblock = (Block_Find((*blocks), X, Y));
                 if (is_on_block((*blocks), X, Y, 0, 0, &test) || mblock != NULL)
                 {
-                    if (mblock) {
+                    if (mblock && destroyable) {
                         mblock->exists = false;
                     }
                     break;
                 }
                 Explosion_Insert(&explosions, X, Y, i);
+                if (Player->enabled && X == Player->Transform.gridPosition.x && Y == Player->Transform.gridPosition.y)
+                {
+                    Player->enabled = false;
+                }
+
             }
         }
     }
@@ -815,6 +867,10 @@ void loopBombs(struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct Sa
         int i = 0;
         while (bombs != NULL && bomb != NULL)
         {
+            if (bomb->insidePlayer)
+            {
+                bomb->insidePlayer = Bomb_checkPlayer(bomb);
+            }
             bomb->timeLeft -= deltaTime;
             if (bomb->timeLeft <= 0 && !bomb->exploded)
             {
@@ -959,7 +1015,6 @@ void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceVal
             }
             else
             {
-
                 GlobalAction = 4;
             }
         }
@@ -980,29 +1035,29 @@ void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceVal
 }
 void drawUI(ALLEGRO_FONT** uiFont)
 {
-    al_draw_filled_rectangle(5, 5, width - 5, 55, al_map_rgba(0, 0, 0, 150));
+    al_draw_filled_rectangle(5, 5, WIDTH - 5, 55, al_map_rgba(0, 0, 0, 150));
 
-    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), width - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBS: %d/%d", Player->displayBombs, Player->maxBombs);
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBS: %d/%d", Player->displayBombs, Player->maxBombs);
 }
 void drawGrid(int maxx, int maxy, int xsize, int ysize)
 {
     if (Player != NULL) {
         int i, j;
-        float x_offset = fmod(cam_x_offset, width);
-        int window_ext = (int)(cam_x_offset / width);
+        float x_offset = fmod(cam_x_offset, WIDTH);
+        int window_ext = (int)(cam_x_offset / WIDTH);
 
         for (i = -window_ext; i < maxx + 1; i++)
         {
             float x1 = (i * xsize) - xsize - x_offset;
             float x2 = (i * xsize) + xsize - x_offset;
 
-            if (x1 > width) {
-                x1 -= width;
-                x2 -= width;
+            if (x1 > WIDTH) {
+                x1 -= WIDTH;
+                x2 -= WIDTH;
             }
             else if (x2 < 0) {
-                x1 += width;
-                x2 += width;
+                x1 += WIDTH;
+                x2 += WIDTH;
             }
 
             for (j = 0; j < maxy; j++)
@@ -1024,8 +1079,8 @@ void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i)
     int rY = 0;
     do
     {
-        rX = (((rand() % (width / gridSize))* 2)+1);
-        rY = (((rand() % (height / gridSize)) +1));
+        rX = (((rand() % (WIDTH / gridSize))* 2)+1);
+        rY = (((rand() % (HEIGHT / gridSize)) +1));
         *X = (rX * gridSize) - gridSize / 2;
         *Y = (rY * gridSize) - gridSize / 2;
         //*Y += 1;
@@ -1050,11 +1105,11 @@ struct dstr_block* generate_blocks(int level)
         struct dstr_block* bl = NULL;
         if (Blocks == NULL)
         {
-            bl = Block_createList(X, Y);
+            bl = Block_createList(X, Y, false);
         }
         else
         {
-            bl = Block_Insert(&Blocks, X, Y);
+            bl = Block_Insert(&Blocks, X, Y, false);
         }
         //printf("count: %d\n", Blocks_Count(Blocks));
         if (bl != NULL)
@@ -1067,6 +1122,7 @@ struct dstr_block* generate_blocks(int level)
         //printf("BL3: %d\n", i);
 
     }
+    GenerateStaticBlocks(&Blocks);
     return Blocks;
 }
 int main()
@@ -1084,8 +1140,8 @@ int main()
         }
         Player->Transform.scale.x = 0.5;
         Player->Transform.scale.y = 0.5;
-        Player->Transform.position.x = width / 2;
-        Player->Transform.position.y = height / 2;
+        Player->Transform.position.x = WIDTH / 2;
+        Player->Transform.position.y = HEIGHT / 2;
         Player->Speed = 3.0;
         Player->displayBombs = 0;
         Player->maxBombs = 2;
@@ -1121,7 +1177,7 @@ int main()
         }
 
         // Create the display
-        display = al_create_display(width, height);
+        display = al_create_display(WIDTH, HEIGHT);
         if (!display) {
             fprintf(stderr, "Failed to create display.\n");
             return 1;
@@ -1158,10 +1214,16 @@ int main()
         Player->LeftWalkAnim = algif_load_animation("data/gifs/player/left.gif");
         Player->UpWalkAnim = algif_load_animation("data/gifs/player/up.gif");
         Player->DownWalkAnim = algif_load_animation("data/gifs/player/down.gif");
+        ALGIF_ANIMATION* Enemy1_animation = algif_load_animation("data/gifs/enemies/enemy1.gif");
         if (!Player->IdleAnim || !Player->RightWalkAnim || !Player->LeftWalkAnim || !Player->UpWalkAnim || !Player->DownWalkAnim)
         {
             printf("Nie udalo sie wczytac animacji gracza.\n");
-            //return -1;
+            return -1;
+        }
+        if (!Enemy1_animation)
+        {
+            printf("Nie udalo sie wczytac animacji przeciwnikow.\n");
+            return -1;
         }
         ALGIF_ANIMATION* BombAnim = algif_load_animation("data/gifs/bomb.gif");
         if (BombAnim == NULL)
@@ -1169,6 +1231,12 @@ int main()
             printf("Nie uda³o siê wczytaæ pliku gif bomby\n%d\n", al_get_errno());
             return -1;
         }
+
+        ALLEGRO_BITMAP* dBlockSprite = al_load_bitmap("data/dBlock.bmp");
+        ALLEGRO_BITMAP* sBlockSprite = al_load_bitmap("data/sBlock.bmp");
+        if (!dBlockSprite || !sBlockSprite)
+            return -15;
+
         double time = al_get_time();
         double oldTime = time;
         float displayFps = 0;
@@ -1179,8 +1247,8 @@ int main()
 
         int xsize = (int)(128 * Player->Transform.scale.x);
         int ysize = (int)(128 * Player->Transform.scale.y);
-        int maxx = (int)(width / (xsize ));
-        int maxy = (int)(width / (ysize ));
+        int maxx = (int)(WIDTH / (xsize ));
+        int maxy = (int)(WIDTH / (ysize ));
         int level = 0;
         cam_y_offset = 0;
         struct dstr_block* blocks = NULL;
@@ -1198,9 +1266,9 @@ int main()
         al_attach_sample_instance_to_mixer(MMusicInstance, al_get_default_mixer());
         al_set_sample_instance_playmode(GMusicInstance, ALLEGRO_PLAYMODE_LOOP);
         al_attach_sample_instance_to_mixer(GMusicInstance, al_get_default_mixer());
-        //al_attach_sample_instance_to_mixer(explosionsInstance, al_get_default_mixer());
-        bool gamemusic = false;
+        Enemy* EnemyList = NULL;
         struct SampleStackElement* samples = NULL;
+        //  int Lifes = 3;
         while (!zamknij)
         {
             if (GlobalAction == 2)
@@ -1253,14 +1321,21 @@ int main()
                     }
                     case 4:
                     {
-                        Bomb_RemoveList(&bombs);
-                        Block_RemoveList(&blocks);
-                        Explosion_RemoveList(&explosions);
-                        al_stop_sample_instance(GMusicInstance);
-                        Pause = false;
-                        level = 0;
+                        if (Pause || !Player->enabled)
+                        {
+                            Bomb_RemoveList(&bombs);
+                            Block_RemoveList(&blocks);
+                            Explosion_RemoveList(&explosions);
+                            al_stop_sample_instance(GMusicInstance);
+                            Enemies_Clear(&EnemyList);
+                            Pause = false;
+                            level = 0;
+                            GlobalAction = 0;
+                            continue;
+
+                        }
                         GlobalAction = 0;
-                        continue;
+                        break;
                     }
                     case 5:
                     {
@@ -1289,7 +1364,7 @@ int main()
                 }
                 if (cam_y_offset < 0) { cam_y_offset = 0; }
                 al_clear_to_color(al_map_rgb(10, 100, 10));
-                drawAllFilledRectInView();
+                //drawAllFilledRectInView();
                 bool check = false;
                 //dTest += deltaTime;
                 //if (dTest > 1) {
@@ -1299,8 +1374,9 @@ int main()
                 }
                 //dTest = 0;
             //}
+                Enemies_Loop(EnemyList, AnimTime, cam_x_offset, cam_y_offset);
                 if (!check) {
-                    Blocks_draw(blocks);
+                    Blocks_draw(blocks, dBlockSprite, sBlockSprite);
                     //printf("BLOCKS ADDRESS: %p\n", blocks);
                 }
                 if (Player->enabled)
@@ -1383,12 +1459,18 @@ int main()
                     loopBombs(&blocks, explosionSound, &samples);
                 }
                 renderBombs(BombAnim, AnimTime);
+                if (!Player->enabled)
+                {
+                    al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgba(0, 0, 0, 180));
+                    al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH / 2, HEIGHT / 2 - 150, ALLEGRO_ALIGN_CENTER, "GAME OVER");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT / 2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij aby wyjsc do menu...");
+                }
                 if (Pause)
                 {
-                    al_draw_filled_rectangle(0, 0, width, height, al_map_rgba(0,0,0,180));
-                    al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), width / 2, height/2 - 150, ALLEGRO_ALIGN_CENTER, "PAUZA");
-                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), width / 2, height/2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij ESC aby wrocic do gry.");
-                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), width / 2, height/2 - 25, ALLEGRO_ALIGN_CENTER, "Kliknij ENTER aby wyjsc do menu.");
+                    al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgba(0,0,0,180));
+                    al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH / 2, HEIGHT/2 - 150, ALLEGRO_ALIGN_CENTER, "PAUZA");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT/2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij ESC aby wrocic do gry.");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT/2 - 25, ALLEGRO_ALIGN_CENTER, "Kliknij ENTER aby wyjsc do menu.");
                 }
             }
             else
@@ -1402,9 +1484,9 @@ int main()
                 if (MenuChoice == 0)
                     MenuChoice = 1;
                 al_clear_to_color(al_map_rgb(10, 30, 20));
-                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), width/2, 30, ALLEGRO_ALIGN_CENTER, "Bomberman");
-                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-20, ALLEGRO_ALIGN_CENTER, "Sygut Grzegorz, Strzepek Piotr, Krzysztof Szylinski, Synowiec Adrian");
-                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), width/2, height-40, ALLEGRO_ALIGN_CENTER, "PP2 Projekt (1ID14B 2023)");
+                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, 30, ALLEGRO_ALIGN_CENTER, "Bomberman");
+                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, HEIGHT-20, ALLEGRO_ALIGN_CENTER, "Sygut Grzegorz, Strzepek Piotr, Szylinski Krzysztof, Synowiec Adrian");
+                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, HEIGHT-40, ALLEGRO_ALIGN_CENTER, "PP2 Projekt (1ID14B SEM2 2023)");
                 ALLEGRO_COLOR butColor = al_map_rgb(80, 80, 80);
                 ALLEGRO_COLOR butColor2 = butColor;
                 ALLEGRO_COLOR butColor3 = butColor;
@@ -1414,9 +1496,9 @@ int main()
                     butColor2 = al_map_rgb(255, 255, 255);
                 else if (MenuChoice == 3)
                     butColor3 = al_map_rgb(255, 255, 255);
-                al_draw_textf(MenuButton, butColor, width / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
-                al_draw_textf(MenuButton, butColor2, width / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
-                al_draw_textf(MenuButton, butColor3, width / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
+                al_draw_textf(MenuButton, butColor, WIDTH / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
+                al_draw_textf(MenuButton, butColor2, WIDTH / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
+                al_draw_textf(MenuButton, butColor3, WIDTH / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
 
                 switch (GlobalAction)
                 {
@@ -1424,10 +1506,12 @@ int main()
                     {
                         loadedLevel = saveSystem_LoadLevel();
 
-                        Player->Transform.position.x = width / 2;
-                        Player->Transform.position.y = height / 2;
+                        Player->Transform.position.x = WIDTH / 2;
+                        Player->Transform.position.y = HEIGHT / 2;
                         al_stop_sample_instance(MMusicInstance);
                         level = loadedLevel;
+                        Enemy_Add(&EnemyList, WIDTH/2, HEIGHT/2, Enemy1_animation);
+                        Player->enabled = true;
                         GlobalAction = 0;
                         break;
                     }
