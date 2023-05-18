@@ -8,7 +8,10 @@
 #include <allegro5/keycodes.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_audio.h>
 #include <math.h>
+#include <allegro5/allegro_acodec.h>
+#include "soundstack.h"
 #include "saveSystem.h"
 #define exploTime 3.0;
 
@@ -29,7 +32,6 @@ struct Transform
 {
     struct Vector2 position;
     struct Vector2 gridPosition;
-    struct Vector2 rotation;
     struct Vector2 scale;
 };
 struct Character
@@ -100,7 +102,7 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
             {
                 end = end->next;
             }
-            printf("Added at the end of %p\n", end);
+            //printf("Added at the end of %p\n", end);
             nB->prev = end;
             nB->next = NULL;
             end->next = nB;
@@ -148,7 +150,7 @@ struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i
         int i = 0;
         while (t != NULL)
         {
-            printf("- %d: prev: %p,  next: %p\n", i, t->prev, t->next);
+            //printf("- %d: prev: %p,  next: %p\n", i, t->prev, t->next);
             t = t->next;
             i++;
         }
@@ -160,17 +162,17 @@ bool Explosion_Remove(struct Explosion** exp)
 {
     if (debug)
     {
-        printf("Deleting EXPLOSIOON: %p\n", (*exp));
+        //printf("Deleting EXPLOSIOON: %p\n", (*exp));
     }
     if (exp != NULL && (*exp) != NULL)
     {
         struct Explosion* prev = (*exp)->prev;
         struct Explosion* next = (*exp)->next;
         if (next != NULL) {
-            printf("next: %d\n", next->gridX);
+            //printf("next: %d\n", next->gridX);
         }
         if (prev != NULL) {
-            printf("prev: %d\n", prev->gridX);
+            //printf("prev: %d\n", prev->gridX);
         }
         free((*exp));
         if (prev != NULL)
@@ -184,13 +186,13 @@ bool Explosion_Remove(struct Explosion** exp)
         else if (next != NULL)
         {
             next->prev = NULL;
-            printf("Swapping with %p\n", next);
+            //printf("Swapping with %p\n", next);
             (*exp) = next;
         }
         else {
             (*exp) = NULL;
         }
-        printf("Now: %p\n", (*exp));
+        //printf("Now: %p\n", (*exp));
         return true;
     }
     return false;
@@ -210,6 +212,7 @@ struct dstr_block
     int gridX;
     int gridY;
     bool exists;
+    bool destroyable;
     struct dstr_block* next;
     struct dstr_block* prev;
 };
@@ -252,7 +255,7 @@ bool Block_Exists(struct dstr_block* first, int X, int Y, bool around)
     }
     return false;
 }
-struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
+struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y, bool staticBlock)
 {
     struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
     if (nB != NULL)
@@ -262,6 +265,7 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
         nB->next = NULL;
         nB->prev = NULL;
         nB->exists = true;
+        nB->destroyable = !staticBlock;
         if (first != NULL && *first != NULL)
         {
             struct dstr_block* end = *first;
@@ -281,7 +285,7 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y)
 
     return nB;
 }
-struct dstr_block* Block_createList(int X, int Y)
+struct dstr_block* Block_createList(int X, int Y, bool staticBlock)
 {
     struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
     if (nB != NULL)
@@ -291,6 +295,7 @@ struct dstr_block* Block_createList(int X, int Y)
         nB->next = NULL;
         nB->prev = NULL;
         nB->exists = true;
+        nB->destroyable = !staticBlock;
     }
     return nB;
 }
@@ -326,7 +331,7 @@ bool Block_Remove(struct dstr_block** first, struct dstr_block** block)
 {
     if (debug)
     {
-        printf("Deleting BLOCK: %p (FIRST IS: %p)\n", (*block), (*first));
+        //printf("Deleting BLOCK: %p (FIRST IS: %p)\n", (*block), (*first));
     }
     if (block != NULL && (*block))
     {
@@ -338,7 +343,7 @@ bool Block_Remove(struct dstr_block** first, struct dstr_block** block)
         }
         if ((*block) == (*first))
         {
-            printf("Is first.\n");
+            //printf("Is first.\n");
             next->prev = NULL;
             (*first) = next;
             //printf("Now Address: %p\n", (*first));
@@ -538,6 +543,10 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
             y -= cellsizey;
         }*/
         //printf("ydf: %lf, %lf\n", ydf, dir.y);
+        if (cam_x_offset > width)
+        {
+            cam_x_offset = width;
+        }
         Player->Transform.gridPosition.x = x;
         Player->Transform.gridPosition.y = y;
         if (cam_x_offset < 0) cam_x_offset = 0;
@@ -708,7 +717,7 @@ void renderExplosions(struct Explosion* expl)
         }
     }
 }
-void explodeBomb(struct BombList** bomb, struct dstr_block** blocks)
+void explodeBomb(struct BombList** bomb, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples)
 {
     if (bomb != NULL && (*bomb) != NULL)
     {
@@ -718,6 +727,11 @@ void explodeBomb(struct BombList** bomb, struct dstr_block** blocks)
         int xdir = 0;
         int ydir = 0;
         cam_y_offset += 30;
+        ALLEGRO_SAMPLE_INSTANCE* newExploSound = al_create_sample_instance(exploSound);
+        al_attach_sample_instance_to_mixer(newExploSound, al_get_default_mixer());
+        al_play_sample_instance(newExploSound);
+        *samples = SampleStack_Push(*samples, newExploSound);
+        //al_destroy_sample_instance(newExploSound);  
         for (int j = 0; j < 4; j++) {
             switch (j)
             {
@@ -781,7 +795,7 @@ void loopExplosions(struct Explosion** expl, bool* removed)
             if (exp->timeLeft <= 0)
             {
                 (*removed) = Explosion_Remove(&exp);
-                printf("Removed %p ??? - %d\n", exp, *removed);
+                //printf("Removed %p ??? - %d\n", exp, *removed);
                 (*expl) = exp; // update the value of exp
 
                 return;
@@ -793,7 +807,7 @@ void loopExplosions(struct Explosion** expl, bool* removed)
         }
     }
 }
-void loopBombs(struct dstr_block** blocks)
+void loopBombs(struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples)
 {
     if (bombs != NULL)
     {
@@ -805,7 +819,7 @@ void loopBombs(struct dstr_block** blocks)
             if (bomb->timeLeft <= 0 && !bomb->exploded)
             {
                 printf("BOMB (ID: %d) SHOULD NOW EXPLODE!\n", i);
-                explodeBomb(&bomb, blocks);
+                explodeBomb(&bomb, blocks, exploSound, samples);
                 //Bomb_Remove(&bomb);
                 return;
             }
@@ -1050,7 +1064,7 @@ struct dstr_block* generate_blocks(int level)
                 Blocks = bl;
             }
         }
-        printf("BL3: %d\n", i);
+        //printf("BL3: %d\n", i);
 
     }
     return Blocks;
@@ -1088,6 +1102,17 @@ int main()
         if (!al_install_keyboard()) { return -1; }
         if (!al_init_ttf_addon()) { return -1; }
         if (!al_init_image_addon()) { return -1; }
+        if (!al_install_audio()) { return -12; }
+        al_init_acodec_addon();
+        if (!al_reserve_samples(3)) { return -13; }
+        ALLEGRO_SAMPLE* explosionSound = al_load_sample("data/sounds/explosion.ogg");
+        ALLEGRO_SAMPLE* MenuMusic = al_load_sample("data/sounds/bombermenu.ogg");
+        ALLEGRO_SAMPLE* GameMusic = al_load_sample("data/sounds/bombergameplay.ogg");
+        if (!MenuMusic || !GameMusic)
+        {
+            printf("MUSIC LOADING FAILED! %p and %p\n", MenuMusic, GameMusic);
+            return -11;
+        }
         // Initialize the timer
         timer = al_create_timer(1.0 / FPS);
         if (!timer) {
@@ -1166,7 +1191,18 @@ int main()
         int loadedLevel = saveSystem_LoadLevel();
         bool Pause = false;
         double AnimTime = al_get_time();
-        while (!zamknij) {
+        ALLEGRO_SAMPLE_INSTANCE* MMusicInstance = al_create_sample_instance(MenuMusic);
+        //ALLEGRO_SAMPLE_INSTANCE* explosionsInstance = al_create_sample_instance(explosionSound);
+        ALLEGRO_SAMPLE_INSTANCE* GMusicInstance = al_create_sample_instance(GameMusic);
+        al_set_sample_instance_playmode(MMusicInstance, ALLEGRO_PLAYMODE_LOOP);
+        al_attach_sample_instance_to_mixer(MMusicInstance, al_get_default_mixer());
+        al_set_sample_instance_playmode(GMusicInstance, ALLEGRO_PLAYMODE_LOOP);
+        al_attach_sample_instance_to_mixer(GMusicInstance, al_get_default_mixer());
+        //al_attach_sample_instance_to_mixer(explosionsInstance, al_get_default_mixer());
+        bool gamemusic = false;
+        struct SampleStackElement* samples = NULL;
+        while (!zamknij)
+        {
             if (GlobalAction == 2)
             {
                 zamknij = true;
@@ -1201,7 +1237,12 @@ int main()
             }
             }
             if (level != 0) {
-                
+
+                if (!al_get_sample_instance_playing(GMusicInstance))
+                {
+                    al_play_sample_instance(GMusicInstance);
+                    //printf("Play GAME MUSIC?\n");
+                }
                 switch (GlobalAction)
                 {
                     case 3:
@@ -1215,6 +1256,7 @@ int main()
                         Bomb_RemoveList(&bombs);
                         Block_RemoveList(&blocks);
                         Explosion_RemoveList(&explosions);
+                        al_stop_sample_instance(GMusicInstance);
                         Pause = false;
                         level = 0;
                         GlobalAction = 0;
@@ -1338,7 +1380,7 @@ int main()
                     {
                         renderExplosions(explosions);
                     }
-                    loopBombs(&blocks);
+                    loopBombs(&blocks, explosionSound, &samples);
                 }
                 renderBombs(BombAnim, AnimTime);
                 if (Pause)
@@ -1351,6 +1393,12 @@ int main()
             }
             else
             {
+
+                if (!al_get_sample_instance_playing(MMusicInstance))
+                {
+                    al_play_sample_instance(MMusicInstance);
+                    //printf("Play Menu?\n");
+                }
                 if (MenuChoice == 0)
                     MenuChoice = 1;
                 al_clear_to_color(al_map_rgb(10, 30, 20));
@@ -1378,6 +1426,7 @@ int main()
 
                         Player->Transform.position.x = width / 2;
                         Player->Transform.position.y = height / 2;
+                        al_stop_sample_instance(MMusicInstance);
                         level = loadedLevel;
                         GlobalAction = 0;
                         break;
@@ -1387,10 +1436,13 @@ int main()
                 }
 
             }
+            SampleStack_Loop(&samples, deltaTime);
             al_flip_display();
         }
         free(Player);
-        
+        al_uninstall_audio();
+        al_destroy_sample(MenuMusic);
+        al_destroy_sample(GameMusic);
         saveSystem_close();
         al_uninstall_keyboard();
         al_destroy_display(display);
