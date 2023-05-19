@@ -27,3 +27,4 @@ struct Character
     bool enabled;
     unsigned short walking;
 };
+bool is_on_block(struct dstr_block*, float, float, float, float, bool*, struct Character*, struct BombList*);

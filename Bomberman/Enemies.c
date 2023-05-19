@@ -1,5 +1,6 @@
 #include "Enemies.h"
 #include <stdlib.h>
+#include "types.h"
 #ifndef WIDTH
 	#define WIDTH 832
 	#define HEIGHT 832
@@ -86,13 +87,13 @@ void Enemies_Loop(struct Enemy* list, double animationtime, float xof, float yof
 	}
 	Enemies_Draw(list, animationtime, xof, yof);
 }
-void Enemy_CollidesWithPlayer(struct Enemy* me, float X, float Y, float scale)
+void Enemy_CollidesWithPlayer(struct Enemy* me, struct Character* player)
 {
-	int gridSize = (int)(128 * scale);
+	int gridSize = (int)(128 * player->Transform.scale.x);
 
-	if (me->x< X + gridSize && me->x > X - gridSize)
+	if (me->x< player->Transform.position.x + gridSize && me->x > player->Transform.position.x - gridSize)
 	{
-		if (me->y < Y + gridSize && me->y > Y - gridSize)
+		if (me->y < player->Transform.position.y + gridSize && me->y > player->Transform.position.y - gridSize)
 		{
 			return true;
 		}

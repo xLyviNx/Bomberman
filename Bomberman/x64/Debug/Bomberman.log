@@ -1,7 +1,5 @@
-﻿  Enemies.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(97,15): warning C4098: "Enemy_CollidesWithPlayer": funkcja "void" zwraca wartość
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Enemies.c(100,14): warning C4098: "Enemy_CollidesWithPlayer": funkcja "void" zwraca wartość
-  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(1193,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+﻿  Bombs.c
+  Explosions.c
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Explosions.c(13,27): warning C4305: "=": obcięcie z "double" do "float"
   Generowanie kodu...
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe

@@ -169,15 +169,23 @@
     <ClCompile Include="algif5-master\src\bitmap.c" />
     <ClCompile Include="algif5-master\src\gif.c" />
     <ClCompile Include="algif5-master\src\lzw.c" />
+    <ClCompile Include="Bombs.c" />
     <ClCompile Include="Enemies.c" />
+    <ClCompile Include="Explosions.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="saveSystem.c" />
     <ClCompile Include="soundstack.c" />
+    <ClCompile Include="types.c" />
+    <ClCompile Include="Blocks.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blocks.h" />
+    <ClInclude Include="Bombs.h" />
     <ClInclude Include="Enemies.h" />
+    <ClInclude Include="Explosions.h" />
     <ClInclude Include="soundstack.h" />
     <ClInclude Include="saveSystem.h" />
+    <ClInclude Include="types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
