@@ -1,5 +1,4 @@
-﻿  Bombs.c
-  Explosions.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\Explosions.c(13,27): warning C4305: "=": obcięcie z "double" do "float"
-  Generowanie kodu...
+﻿  main.c
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(361,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(394,48): warning C4133: "funkcja": niezgodne typy - od "ALLEGRO_DISPLAY *" do "ALLEGRO_EVENT_SOURCE *"
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe

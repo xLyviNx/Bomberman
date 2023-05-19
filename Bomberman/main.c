@@ -322,12 +322,12 @@ void drawGrid(int maxx, int maxy, int xsize, int ysize)
         }
     }
 }
-bool zamknij = false;
 const int FPS = 30;
 
 
 int main()
 {
+    bool zamknij = false;
     Player = (struct Character*)malloc(sizeof(struct Character));
     if (Player != NULL)
     {
@@ -391,6 +391,7 @@ int main()
             return 1;
         }
         // Register event sources
+        al_register_event_source(queue, display);
         al_register_event_source(queue, al_get_keyboard_event_source());
         al_register_event_source(queue, al_get_timer_event_source(timer));
 
@@ -493,8 +494,10 @@ int main()
             
             switch (event.type) {
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                zamknij = true;
-                return 0;
+            {
+                GlobalAction = 2;
+                continue;
+            }
             case ALLEGRO_EVENT_KEY_DOWN:
             {
                 button(event.keyboard.keycode, true, &level, &MenuChoice);
@@ -687,7 +690,7 @@ int main()
                 if (MenuChoice == 0)
                     MenuChoice = 1;
                 al_clear_to_color(al_map_rgb(10, 30, 20));
-                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, 30, ALLEGRO_ALIGN_CENTER, "Bomberman");
+                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, 30, ALLEGRO_ALIGN_CENTER, "BOOM-ba Man");
                 al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, HEIGHT-20, ALLEGRO_ALIGN_CENTER, "Sygut Grzegorz, Strzepek Piotr, Szylinski Krzysztof, Synowiec Adrian");
                 al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, HEIGHT-40, ALLEGRO_ALIGN_CENTER, "PP2 Projekt (1ID14B SEM2 2023)");
                 ALLEGRO_COLOR butColor = al_map_rgb(80, 80, 80);
