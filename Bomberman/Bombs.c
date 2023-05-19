@@ -3,6 +3,10 @@
 #include "Blocks.h"
 #include "Explosions.h"
 #include "soundstack.h"
+#include "Enemies.h"
+#include "saveSystem.h"
+#include "endDoor.h"
+#include "Blocks.h"
 #define exploTime 3.0;
 
 
@@ -67,7 +71,7 @@ unsigned int Bomb_count(struct BombList* first)
         struct BombList* end = first;
         while (end->next != NULL)
         {
-            printf("bomb: %p\n", end);
+            //printf("bomb: %p\n", end);
             end = end->next;
             count++;
         }
@@ -100,7 +104,7 @@ struct BombList* Bomb_Find(struct BombList* first, int X, int Y, bool gridMethod
         struct BombList* bomb = first;
         while (bomb != NULL)
         {
-            printf("\n%d: Bomb: %p, (%p - %p) exploded: %d\n", i, bomb, bomb->prev, bomb->next, bomb->exploded);
+            //printf("\n%d: Bomb: %p, (%p - %p) exploded: %d\n", i, bomb, bomb->prev, bomb->next, bomb->exploded);
             i++;
             if (gridMethod) {
                 if (bomb->Position.x == X && bomb->Position.y == Y)
@@ -172,7 +176,7 @@ bool Bomb_Remove(struct BombList** bomb, struct BombList** bombs, struct Charact
     }
     return false;
 }
-void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs)
+void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs, struct dstr_block* blocks)
 {
     if (Player != NULL && !isPaused)
     {
@@ -186,7 +190,8 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs)
             printf("Bombs BEFORE: %d\n", count);
             if (count > 0)
             {
-                if (count < Player->maxBombs && !Bomb_ExistsAt(*bombs, pos))
+                bool dst = false;
+                if (count < Player->maxBombs && !is_on_block(blocks, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, &dst, Player, *bombs, true))
                 {
 
                     canplant = true;
@@ -233,7 +238,7 @@ void renderBombs(ALGIF_ANIMATION* bombAnim, double animtime, float cam_x_offset,
         }
     }
 }
-void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, struct Character* Player, float* cam_y_offset, struct Explosion** explosions)
+void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, struct Character* Player, float* cam_y_offset, struct Explosion** explosions, struct Enemy** Enemies, struct Boost** Boosts)
 {
     if (bomb != NULL && (*bomb) != NULL)
     {
@@ -251,6 +256,10 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
         {
             Player->enabled = false;
         }
+        int EliminatedEnemies = 0;
+        int DestroyedBlocks = 0;
+        float lastx, lasty;
+        float blocklastx, blocklasty;
         //al_destroy_sample_instance(newExploSound);
         for (int j = 0; j < 4; j++) {
             switch (j)
@@ -292,11 +301,14 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
                 bool destroyable = mblock != NULL && mblock->destroyable;
                 bool test = false;
 
-                if (is_on_block((*blocks), X, Y, 0, 0, &test, Player, *bombs) || mblock != NULL)
+                if (is_on_block((*blocks), X, Y, 0, 0, &test, Player, *bombs, true) || mblock != NULL)
                 {
 
                     if (mblock && destroyable) {
                         mblock->exists = false;
+                        DestroyedBlocks++;
+                        blocklastx = X;
+                        blocklasty = Y;
                     }
                     break;
                 }
@@ -305,12 +317,70 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
                 {
                     Player->enabled = false;
                 }
+                struct Enemy* elim = NULL;
+                do {
+                    elim = Enemy_FindAt(*Enemies, Player, X, Y, NULL, 1);
+                    if (elim) {
+                        EliminatedEnemies++;
+                        Enemy_Remove(elim, Enemies);
+                        lastx = X;
+                        lasty = Y;
+                    }
+                } while (elim);
+               
+            }
+            if (EliminatedEnemies > 1)
+            {
+                saveSystem_printAtLine(2, "1");
+            }
+        }
+        if (EliminatedEnemies > 0)
+        {
+            if (Enemies_Count(*Enemies) <= 0)
+            {
+                int hmb = Blocks_Count(*blocks);
+                if (hmb <= 0)
+                {
+                    CreateDoor(lastx, lasty);
+                }
+                else
+                {
+                    srand(time(NULL));
+                    int random = rand() % (hmb);
+                    struct dstr_block* cb = *blocks;
+                    int i = 0;
+                    while (cb)
+                    {
 
+                        if (cb->destroyable)
+                        {
+                            if (i == random)
+                            {
+                                cb->hasDoor = true;
+                                break;
+                            }
+                            i++;
+                        }
+                        cb = cb->next;
+                    }
+                }
+            }
+        }
+        if (DestroyedBlocks >= 2)
+        {
+            srand(time(NULL));
+            int chance = rand() % 3;
+            printf("CHANCE: %d\n", chance);
+            if (chance)
+            {
+                unsigned short type = 1+ (rand() % 4);
+                printf("Type: %d\n", type);
+                Boost_Add(Boosts, type, blocklastx, blocklasty);
             }
         }
     }
 }
-void loopBombs(struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, float dT, struct Character* Player, float* cam_y_offset, struct Explosion** explosions)
+void loopBombs(struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, float dT, struct Character* Player, float* cam_y_offset, struct Explosion** explosions, struct Enemy** Enemies, struct Boost** Boosts)
 {
     if (bombs != NULL && *bombs)
     {
@@ -318,7 +388,7 @@ void loopBombs(struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMP
         int i = 0;
         while (*bombs != NULL && bomb != NULL)
         {
-            printf("LOOP: %p, %lf\n", bomb, bomb->timeLeft);
+            //printf("LOOP: %p, %lf\n", bomb, bomb->timeLeft);
             if (bomb->insidePlayer)
             {
                 bomb->insidePlayer = Bomb_checkPlayer(bomb, Player);
@@ -327,7 +397,7 @@ void loopBombs(struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMP
             if (bomb->timeLeft <= 0 && !bomb->exploded)
             {
                 printf("BOMB (ID: %d) SHOULD NOW EXPLODE!\n", i);
-                explodeBomb(&bomb, bombs, blocks, exploSound, samples, Player, cam_y_offset, explosions);
+                explodeBomb(&bomb, bombs, blocks, exploSound, samples, Player, cam_y_offset, explosions, Enemies, Boosts);
                 //Bomb_Remove(&bomb);
                 return;
             }

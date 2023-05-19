@@ -18,6 +18,9 @@
 #include "Bombs.h"
 #include "Blocks.h"
 #include "Explosions.h"
+#include <time.h>
+#include "endDoor.h"
+#include "boosts.h"
 #ifndef WIDTH
     #define WIDTH 832
     #define HEIGHT 832
@@ -47,7 +50,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
         float npx = (Player->Transform.position.x + nDir.x);
         float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
         bool dstr = false;
-        if (!is_on_block(blocks, npx, Player->Transform.position.y, dir.x, dir.y, &dstr, Player, bombs)) {
+        if (!is_on_block(blocks, npx, Player->Transform.position.y, dir.x, dir.y, &dstr, Player, bombs, false)) {
             if (npx >= halfplayer && npx <= ((WIDTH*2)-halfplayer)+1)
             {
                 if (npx < 0) npx = 0;
@@ -65,7 +68,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
                 Player->Transform.position.x = npx;
             }
         }
-        if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y, &dstr, Player, bombs)) {
+        if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y, &dstr, Player, bombs, false)) {
             if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < HEIGHT + 1 - ((128 * Player->Transform.scale.y)/2.0))
             {
                 Player->Transform.position.y = npy;
@@ -288,11 +291,14 @@ void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceVal
     }
     }
 }
-void drawUI(ALLEGRO_FONT** uiFont)
+void drawUI(ALLEGRO_FONT** uiFont, ALLEGRO_FONT** LevelFont, int level, struct Enemy* enemies, struct dstr_block* blocks)
 {
     al_draw_filled_rectangle(5, 5, WIDTH - 5, 55, al_map_rgba(0, 0, 0, 150));
 
-    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBS: %d/%d", Player->displayBombs, Player->maxBombs);
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), 10, 12, ALLEGRO_ALIGN_LEFT, "PRZECIWNIKOW: %d", Enemies_Count(enemies));
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), 10, 35, ALLEGRO_ALIGN_LEFT, "BLOKOW: %d", Blocks_Count(blocks));
+    al_draw_textf(*LevelFont, al_map_rgba(255, 255, 255, 80), WIDTH/2, 15, ALLEGRO_ALIGN_CENTER, "POZIOM: %d/5", level);
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBY: %d/%d", Player->displayBombs, Player->maxBombs);
 }
 void drawGrid(int maxx, int maxy, int xsize, int ysize)
 {
@@ -365,9 +371,10 @@ int main()
         ALLEGRO_SAMPLE* explosionSound = al_load_sample("data/sounds/explosion.ogg");
         ALLEGRO_SAMPLE* MenuMusic = al_load_sample("data/sounds/bombermenu.ogg");
         ALLEGRO_SAMPLE* GameMusic = al_load_sample("data/sounds/bombergameplay.ogg");
-        if (!MenuMusic || !GameMusic)
+        ALLEGRO_SAMPLE* deathSound = al_load_sample("data/sounds/bomberdeath.ogg");
+        if (!MenuMusic || !GameMusic || !deathSound || !explosionSound)
         {
-            printf("MUSIC LOADING FAILED! %p and %p\n", MenuMusic, GameMusic);
+            printf("SOUNDS LOADING FAILED! %p and %p\n", MenuMusic, GameMusic);
             return -11;
         }
         // Initialize the timer
@@ -391,7 +398,7 @@ int main()
             return 1;
         }
         // Register event sources
-        al_register_event_source(queue, display);
+        al_register_event_source(queue, al_get_display_event_source(display));
         al_register_event_source(queue, al_get_keyboard_event_source());
         al_register_event_source(queue, al_get_timer_event_source(timer));
 
@@ -404,6 +411,7 @@ int main()
         ALLEGRO_FONT* debugFont = al_load_ttf_font("data/fonts/data-unifon.ttf", 12, 0);
         ALLEGRO_FONT* uiFont = al_load_ttf_font("data/fonts/PlatNomor-WyVnn.ttf", 18, 0);
         ALLEGRO_FONT* TitleFont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 100, 0);
+        ALLEGRO_FONT* levelfont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 35, 0);
         ALLEGRO_FONT* MenuButton = al_load_ttf_font("data/fonts/Exo-Regular.ttf", 30, 0);
         if (debugFont == NULL || uiFont == NULL || !TitleFont)
         {
@@ -418,12 +426,13 @@ int main()
         Player->DownWalkAnim = algif_load_animation("data/gifs/player/down.gif");
         ALGIF_ANIMATION* Enemy1_animation = algif_load_animation("data/gifs/enemies/enemy1.gif");
         ALGIF_ANIMATION* Enemy2_animation = algif_load_animation("data/gifs/enemies/enemy2.gif");
+        ALGIF_ANIMATION* Enemy3_animation = algif_load_animation("data/gifs/enemies/enemy3.gif");
         if (!Player->IdleAnim || !Player->RightWalkAnim || !Player->LeftWalkAnim || !Player->UpWalkAnim || !Player->DownWalkAnim)
         {
             printf("Nie udalo sie wczytac animacji gracza.\n");
             return -1;
         }
-        if (!Enemy1_animation || !Enemy2_animation)
+        if (!Enemy1_animation || !Enemy2_animation || !Enemy3_animation)
         {
             printf("Nie udalo sie wczytac animacji przeciwnikow.\n");
             return -1;
@@ -437,11 +446,13 @@ int main()
 
         ALLEGRO_BITMAP* dBlockSprite = al_load_bitmap("data/dBlock.bmp");
         ALLEGRO_BITMAP* sBlockSprite = al_load_bitmap("data/sBlock.bmp");
-        if (!dBlockSprite || !sBlockSprite)
+        ALLEGRO_BITMAP* grass = al_load_bitmap("data/grass.bmp");
+        doorSprite = al_load_bitmap("data/door.bmp");
+        if (!dBlockSprite || !sBlockSprite || !grass || !doorSprite)
             return -15;
 
-        double time = al_get_time();
-        double oldTime = time;
+        double ctime = al_get_time();
+        double oldTime = ctime;
         float displayFps = 0;
         float displayFpsDelay = 0;
         int frames = 0;
@@ -462,6 +473,7 @@ int main()
         int loadedLevel = saveSystem_LoadLevel();
         bool Pause = false;
         double AnimTime = al_get_time();
+        ALLEGRO_SAMPLE_INSTANCE* DeathSoundInstance = al_create_sample_instance(deathSound);
         ALLEGRO_SAMPLE_INSTANCE* MMusicInstance = al_create_sample_instance(MenuMusic);
         //ALLEGRO_SAMPLE_INSTANCE* explosionsInstance = al_create_sample_instance(explosionSound);
         ALLEGRO_SAMPLE_INSTANCE* GMusicInstance = al_create_sample_instance(GameMusic);
@@ -469,9 +481,14 @@ int main()
         al_attach_sample_instance_to_mixer(MMusicInstance, al_get_default_mixer());
         al_set_sample_instance_playmode(GMusicInstance, ALLEGRO_PLAYMODE_LOOP);
         al_attach_sample_instance_to_mixer(GMusicInstance, al_get_default_mixer());
+        al_attach_sample_instance_to_mixer(DeathSoundInstance, al_get_default_mixer());
+
         struct Enemy* EnemyList = NULL;
         struct SampleStackElement* samples = NULL;
+        struct Boost* Boosts = NULL;
         //  int Lifes = 3;
+        bool diedsoundplayed = false;
+        bool gonext = false;
         while (!zamknij)
         {
             if (GlobalAction == 2)
@@ -486,10 +503,10 @@ int main()
             //al_wait_for_vsync();
             ALLEGRO_EVENT event;
             al_wait_for_event_timed(queue, &event, 0.00);
-            time = al_get_time();
-            deltaTime = time - oldTime;
+            ctime = al_get_time();
+            deltaTime = ctime - oldTime;
             syncDeltaTime += deltaTime;
-            oldTime = time;
+            oldTime = ctime;
             frames++;
             
             switch (event.type) {
@@ -510,8 +527,7 @@ int main()
             }
             }
             if (level != 0) {
-
-                if (!al_get_sample_instance_playing(GMusicInstance))
+                if (!al_get_sample_instance_playing(GMusicInstance) && Player->enabled)
                 {
                     al_play_sample_instance(GMusicInstance);
                     //printf("Play GAME MUSIC?\n");
@@ -526,16 +542,24 @@ int main()
                     }
                     case 4:
                     {
-                        if (Pause || !Player->enabled)
+                        if (Pause || !Player->enabled || gonext)
                         {
                             Bomb_RemoveList(&bombs);
                             Block_RemoveList(&blocks);
                             Explosion_RemoveList(&explosions);
                             al_stop_sample_instance(GMusicInstance);
                             Enemies_Clear(&EnemyList);
+                            DestroyDoor();
+                            cam_x_offset = 0;
+                            cam_y_offset = 0;
+                            diedsoundplayed = false;
+                            gonext = false;
                             //EnemyList = NULL;
                             Pause = false;
                             level = 0;
+                            loadedLevel = 0;
+                            Boosts_Clear(&Boosts);
+
                             GlobalAction = 0;
                             continue;
 
@@ -545,7 +569,7 @@ int main()
                     }
                     case 5:
                     {
-                        plantBomb(Pause, Player, &bombs);
+                        plantBomb(Pause, Player, &bombs, blocks);
                         GlobalAction = 0;
                         break;
                     }
@@ -554,11 +578,6 @@ int main()
                         GlobalAction = 0;
                         break;
                     }
-                }
-
-                if (!blocks)
-                {
-                    blocks = generate_blocks(level, Player);
                 }
                 if (!Pause) 
                 {
@@ -570,17 +589,46 @@ int main()
                 }
                 if (cam_y_offset < 0) { cam_y_offset = 0; }
                 al_clear_to_color(al_map_rgb(10, 100, 10));
+                al_draw_bitmap(grass, 0 - cam_x_offset, 0, 0);
+                //al_draw_scaled_bitmap(grass, 0, 0, 832, 416, 0 - cam_x_offset, 0, 1664, 832, 0);
+
                 //drawAllFilledRectInView();
                 bool check = false;
                 //dTest += deltaTime;
                 //if (dTest > 1) {
                 if (!Pause)
                 {
-                    loopBlocks(&blocks);
+                    loopBlocks(&blocks, EnemyList);
                 }
                 //dTest = 0;
             //}
-                Enemies_Loop(EnemyList, AnimTime, cam_x_offset, cam_y_offset);
+                if (endingDoor)
+                {
+                    al_draw_scaled_bitmap(doorSprite, 0, 0, 128, 128, endingDoor->x - 32 - cam_x_offset, endingDoor->y - cam_y_offset - 32, 64, 64, 0);
+                    if (Door_hasPlayerIn(Player))
+                    {
+                        if (level && level < 5) {
+                            int nextlevel = (level + 1);
+                            char lstr[32] = "";
+                            _itoa_s(nextlevel, lstr, LINE_LENGTH, 10);
+                            saveSystem_printAtLine(1, lstr);
+                            _itoa_s(Player->maxBombs, lstr, LINE_LENGTH, 10);
+                            saveSystem_printAtLine(3, lstr);
+                            _itoa_s(Player->bombRange, lstr, LINE_LENGTH, 10);
+                            saveSystem_printAtLine(4, lstr);
+                            snprintf(lstr, LINE_LENGTH*sizeof(char), "%f", Player->Speed);
+                            printf("Saving speed: %s", lstr);
+                            saveSystem_printAtLine(5, lstr);
+
+                            gonext = true;
+                            GlobalAction = 4;
+                            continue;
+                        }
+                    }
+                }
+                Boost_Loop(&Boosts, Player, cam_x_offset, cam_y_offset);
+                Enemies_Loop(EnemyList, AnimTime, cam_x_offset, cam_y_offset, Player, deltaTime, blocks, bombs, Pause);
+
                 if (!check) {
                     Blocks_draw(blocks, dBlockSprite, sBlockSprite, Player, cam_x_offset, cam_y_offset);
                     //printf("BLOCKS ADDRESS: %p\n", blocks);
@@ -634,8 +682,20 @@ int main()
                 {
                     drawGrid(maxx, maxy, xsize, ysize);
                 }
+                check = false;
+                if (!Pause)
+                {
+                    loopExplosions(&explosions, &check);
 
-                drawUI(&uiFont);
+                    if (!check)
+                    {
+                        renderExplosions(explosions);
+                    }
+                    loopBombs(&bombs, &blocks, explosionSound, &samples, deltaTime, Player, &cam_y_offset, &explosions, &EnemyList, &Boosts);
+                }
+                renderBombs(BombAnim, AnimTime, cam_x_offset, cam_y_offset, Player, bombs);
+
+                drawUI(&uiFont, &levelfont, level, EnemyList, blocks);
                 if (debug)
                 {
                     if (displayFpsDelay <= 0)
@@ -650,23 +710,18 @@ int main()
                     {
                         displayFpsDelay -= deltaTime;
                     }
-                    al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, 10, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
-                    al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, 30, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+                    al_draw_textf(debugFont, al_map_rgba(0, 255, 0, 150), 10, HEIGHT - 20, ALLEGRO_ALIGN_LEFT, "fps: %.2lf", displayFps);
+                    al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, HEIGHT - 40, ALLEGRO_ALIGN_LEFT, "/\\t: %lf", deltaTime);
+                    al_draw_textf(debugFont, al_map_rgba(100, 255, 0, 150), 10, HEIGHT - 60, ALLEGRO_ALIGN_LEFT, "X: %lf, %Y: %lf", Player->Transform.position.x, Player->Transform.position.y);
                 }
-                check = false;
-                if (!Pause)
-                {
-                    loopExplosions(&explosions, &check);
-
-                    if (!check)
-                    {
-                        renderExplosions(explosions);
-                    }
-                    loopBombs(&bombs, &blocks, explosionSound, &samples, deltaTime, Player, &cam_y_offset, &explosions);
-                }
-                renderBombs(BombAnim, AnimTime, cam_x_offset, cam_y_offset, Player, bombs);
                 if (!Player->enabled)
                 {
+                    if (!diedsoundplayed)
+                    {
+                        diedsoundplayed = true;
+                        al_play_sample_instance(DeathSoundInstance);
+                        al_stop_sample_instance(GMusicInstance);
+                    }
                     al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgba(0, 0, 0, 180));
                     al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH / 2, HEIGHT / 2 - 150, ALLEGRO_ALIGN_CENTER, "GAME OVER");
                     al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT / 2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij aby wyjsc do menu...");
@@ -705,7 +760,13 @@ int main()
                 al_draw_textf(MenuButton, butColor, WIDTH / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
                 al_draw_textf(MenuButton, butColor2, WIDTH / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
                 al_draw_textf(MenuButton, butColor3, WIDTH / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
-
+                if (loadedLevel == 0)
+                {
+                    loadedLevel = saveSystem_LoadLevel();
+                    Player->bombRange = saveSystem_LoadRange();
+                    Player->Speed = saveSystem_LoadSpeed();
+                    Player->maxBombs = saveSystem_LoadBombs();
+                }
                 switch (GlobalAction)
                 {
                     case 1:
@@ -715,9 +776,99 @@ int main()
                         Player->Transform.position.x = WIDTH / 2;
                         Player->Transform.position.y = HEIGHT / 2;
                         al_stop_sample_instance(MMusicInstance);
+                        Player->bombRange = saveSystem_LoadRange();
+                        Player->Speed = saveSystem_LoadSpeed();
+                        Player->maxBombs = saveSystem_LoadBombs();
                         level = loadedLevel;
-                        Enemy_Add(&EnemyList, WIDTH/2, HEIGHT/2, Enemy1_animation);
-                        Enemy_Add(&EnemyList, WIDTH/2+128, HEIGHT/2, Enemy2_animation);
+                        if (!blocks)
+                        {
+                            blocks = generate_blocks(level, Player);
+                        }
+                        switch (level)
+                        {
+                            case 1:
+                            {
+                                float X, Y;
+                                for (int i = 0; i <3; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 70, Enemy1_animation,false);
+                                }
+                                break;
+                            }
+                            case 2:
+                            {
+                                float X, Y;
+
+                                for (int i = 0; i < 3; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level,bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 120, Enemy2_animation,false);
+
+                                }
+                                for (int i = 0; i < 2; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level,bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 70, Enemy1_animation,false);
+                                }
+                                break;
+                            }
+                            case 3:
+                            {
+                                float X, Y;
+
+                                for (int i = 0; i < 2; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 120, Enemy2_animation,false);
+
+                                }
+                                for (int i = 0; i < 4; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 70, Enemy1_animation,false);
+                                }
+                                break;
+                            }
+                            case 4:
+                            {
+                                float X, Y;
+
+                                for (int i = 0; i < 2; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 120, Enemy2_animation,false);
+
+                                }
+                                for (int i = 0; i < 6; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 70, Enemy1_animation,false);
+                                }
+                                for (int i = 0; i < 2; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 150, Enemy3_animation, true);
+                                }
+                                break;
+                            }
+                            case 5:
+                            {
+                                float X, Y;
+
+                                for (int i = 0; i < 3; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 120, Enemy2_animation, false);
+
+                                }
+                                for (int i = 0; i < 5; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 70, Enemy1_animation, false);
+                                }
+                                for (int i = 0; i < 5; i++) {
+                                    Enemy_RandomPosition(EnemyList, &X, &Y, blocks, Player, level, bombs);
+                                    Enemy_Add(&EnemyList, X, Y, 150, Enemy3_animation, true);
+                                }
+                                break;
+                            }
+                            default:
+                            {
+                                break;
+                            }
+                        }
+                        //Enemy_Add(&EnemyList, WIDTH/2+256, HEIGHT/2, 0.1, Enemy2_animation);
                         Player->enabled = true;
                         GlobalAction = 0;
                         break;
@@ -731,6 +882,17 @@ int main()
             al_flip_display();
 
         }
+        Boosts_Clear(&Boosts);
+        DestroyDoor();
+        algif_destroy_animation(Player->IdleAnim);
+        algif_destroy_animation(Player->DownWalkAnim);
+        algif_destroy_animation(Player->LeftWalkAnim);
+        algif_destroy_animation(Player->RightWalkAnim);
+        algif_destroy_animation(Player->UpWalkAnim);
+        Bomb_RemoveList(&bombs);
+        Block_RemoveList(&blocks);
+        Explosion_RemoveList(&explosions);
+        Enemies_Clear(&EnemyList);
         free(Player);
         al_uninstall_audio();
         al_destroy_sample(MenuMusic);
@@ -739,6 +901,9 @@ int main()
         al_uninstall_keyboard();
         al_destroy_display(display);
         al_shutdown_primitives_addon();
+        algif_destroy_animation(Enemy1_animation);
+        algif_destroy_animation(Enemy2_animation);
+        algif_destroy_animation(Enemy3_animation);
     }
     return 0;
 }

@@ -1,4 +1,6 @@
 ﻿  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(361,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(394,48): warning C4133: "funkcja": niezgodne typy - od "ALLEGRO_DISPLAY *" do "ALLEGRO_EVENT_SOURCE *"
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(367,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
+  types.c
+  Blocks.c
+  Generowanie kodu...
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe

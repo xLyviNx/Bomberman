@@ -1,6 +1,7 @@
 #include "Blocks.h"
 #include <stdio.h>
 #include "types.h"
+#include "endDoor.h"
 bool Block_Exists(struct dstr_block* first, int X, int Y, bool around, struct Character* Player)
 {
     if (first != NULL) {
@@ -51,6 +52,7 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y, bool st
         nB->prev = NULL;
         nB->exists = true;
         nB->destroyable = !staticBlock;
+        nB->hasDoor = false;
         if (first != NULL && *first != NULL)
         {
             struct dstr_block* end = *first;
@@ -81,6 +83,7 @@ struct dstr_block* Block_createList(int X, int Y, bool staticBlock)
         nB->prev = NULL;
         nB->exists = true;
         nB->destroyable = !staticBlock;
+        nB->hasDoor = false;
     }
     return nB;
 }
@@ -109,7 +112,7 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool grid
                     return block;
                 }
             }
-            else
+            else if (block != NULL)
             {
                 int gridSize = (int)(128 * Player->Transform.scale.x);
 
@@ -126,42 +129,44 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool grid
     }
     return found;
 }
-bool Block_Remove(struct dstr_block** first, struct dstr_block** block)
+bool Block_Remove(struct dstr_block* element, struct dstr_block** first, struct Enemy* enemies)
 {
-    if (block != NULL && (*block))
-    {
-        struct dstr_block* prev = (*block)->prev;
-        struct dstr_block* next = (*block)->next;
-        if ((*block) == (*first))
+    if (element) {
+        srand(time(NULL));
+        int rng = rand() % 4;
+        if (!enemies && (!rng || element->hasDoor))
         {
-            //printf("Is first.\n");
-            next->prev = NULL;
-            (*first) = next;
-            //printf("Now Address: %p\n", (*first));
-            free((*block));
-            (*block) = NULL;
+            CreateDoor(element->gridX, element->gridY);
         }
-        else if (prev != NULL)
+        if (*first == element)
         {
-            prev->next = next;
-            if (next != NULL) {
-                next->prev = prev;
-            }
-            free((*block));
-            (*block) = NULL;
+            if (element->next)
+                *first = element->next;
+            else
+                *first = NULL;
         }
+        if (element->prev)
+        {
+            element->prev->next = element->next;
+        }
+        if (element->next)
+        {
+            element->next->prev = element->prev;
+        }
+        free(element);
         return true;
     }
     return false;
 }
-
 unsigned int Blocks_Count(struct dstr_block* first)
 {
     unsigned int count = 0;
     //printf("first: %p\n", first);
     if (first != NULL)
     {
-        count = 1;
+        if (first->destroyable) {
+            count = 1;
+        }
         struct dstr_block* end = first;
         while (end->next != NULL)
         {
@@ -213,7 +218,7 @@ void Blocks_draw(struct dstr_block* first, ALLEGRO_BITMAP* dBS, ALLEGRO_BITMAP* 
     }
 }
 
-void loopBlocks(struct dstr_block** blocks)
+void loopBlocks(struct dstr_block** blocks, struct Enemy* enemies)
 {
     if (blocks != NULL)
     {
@@ -226,9 +231,9 @@ void loopBlocks(struct dstr_block** blocks)
             //printf("BL - %p\n", bl);
             if (!bl->exists)
             {
-                if (Block_Remove(blocks, &bl))
+                if (Block_Remove(bl, blocks, enemies))
                 {
-                    (*blocks) = (*blocks);
+                    //(*blocks) = (*blocks);
                 }
                 return;
             }
@@ -254,7 +259,7 @@ void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i, st
         *X = (rX * gridSize) - gridSize / 2;
         *Y = (rY * gridSize) - gridSize / 2;
         //*Y += 1;
-    } while (Block_Exists(first, *X, *Y, true, Player) || (*X == (int)Player->Transform.position.x && *Y == (int)Player->Transform.position.y));
+    } while (Block_Exists(first, *X, *Y, true, Player) || (*X == (int)Player->Transform.position.x && *Y == (int)Player->Transform.position.y) || (*X == (int)Player->Transform.position.x && *Y == (int)Player->Transform.position.y + 64));
 
     //printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
 }
@@ -273,6 +278,7 @@ struct dstr_block* generate_blocks(int level, struct Character* Player)
 {
     struct dstr_block* Blocks = NULL;
     int limit = 20 + (level * 11);
+    //int limit = 1;
     if (limit > 75)
     {
         limit = 75;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -170,6 +170,8 @@
     <ClCompile Include="algif5-master\src\gif.c" />
     <ClCompile Include="algif5-master\src\lzw.c" />
     <ClCompile Include="Bombs.c" />
+    <ClCompile Include="boosts.c" />
+    <ClCompile Include="endDoor.c" />
     <ClCompile Include="Enemies.c" />
     <ClCompile Include="Explosions.c" />
     <ClCompile Include="main.c" />
@@ -181,6 +183,8 @@
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
     <ClInclude Include="Bombs.h" />
+    <ClInclude Include="boosts.h" />
+    <ClInclude Include="endDoor.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Explosions.h" />
     <ClInclude Include="soundstack.h" />

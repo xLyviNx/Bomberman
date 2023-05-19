@@ -86,6 +86,36 @@ int saveSystem_LoadLevel()
 	free(loadS);
 	return tret;
 }
+int saveSystem_LoadBombs()
+{
+	int tret = 2;
+	char* loadS = saveSystem_readLine(3);
+	printf("[SAVE SYSTEM] Attempting to convert '%s' to INT\n", loadS);
+	tret = atoi(loadS);
+	printf("[SAVE SYSTEM] Loading BOMB: %d\n", tret);
+	free(loadS);
+	return tret;
+}
+int saveSystem_LoadRange()
+{
+	int tret = 1;
+	char* loadS = saveSystem_readLine(4);
+	printf("[SAVE SYSTEM] Attempting to convert '%s' to INT\n", loadS);
+	tret = atoi(loadS);
+	printf("[SAVE SYSTEM] Loading RANGE: %d\n", tret);
+	free(loadS);
+	return tret;
+}
+float saveSystem_LoadSpeed()
+{
+	float tret = 3.0;
+	char* loadS = saveSystem_readLine(5);
+	printf("[SAVE SYSTEM] Attempting to convert '%s' to FLOAT SPEED\n", loadS);
+	tret = atof(loadS);
+	printf("[SAVE SYSTEM] Loading SPEED: %lf\n", tret);
+	free(loadS);
+	return tret;
+}
 
 void saveSystem_printAtLine(int lineNumber, const char* content)
 {
@@ -160,4 +190,8 @@ void saveSystem_resetData()
 void saveSystem_setStartData()
 {
 	saveSystem_printAtLine(1, "1");
+	saveSystem_printAtLine(2, "0");
+	saveSystem_printAtLine(3, "2");
+	saveSystem_printAtLine(4, "1");
+	saveSystem_printAtLine(5, "3.000000");
 }
