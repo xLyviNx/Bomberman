@@ -380,7 +380,7 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
                     saveSystem_printAtLine(6, "1");
                     GlobalAction = 7;
                 }
-                unsigned short type = 1+ (rand() % 4);
+                unsigned short type = 1+ (rand() % 3);
                 printf("Type: %d\n", type);
                 Boost_Add(Boosts, type, blocklastx, blocklasty);
             }

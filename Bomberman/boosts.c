@@ -49,12 +49,18 @@ bool Boost_Remove(struct Boost* element, struct Boost** first)
 	}
 	return false;
 }
-void Boost_Loop(struct Boost** list, struct Character* Player, float cxo, float cyo)
+void Boost_Loop(struct Boost** list, struct Character* Player, float cxo, float cyo, ALLEGRO_BITMAP* bmp1, ALLEGRO_BITMAP* bmp2, ALLEGRO_BITMAP* bmp3)
 {
 	struct Boost* curr = *list;
 	while (curr)
 	{
-		al_draw_rectangle(curr->x - 32 - cxo, curr->y - 32 - cyo, curr->x + 32 - cxo, curr->y + 32 - cyo, al_map_rgb(255, 255, 0), 10);
+		ALLEGRO_BITMAP* bmp = NULL;
+		if (curr->Type == 1) { bmp = bmp1; }
+		else if (curr->Type == 2) { bmp = bmp2; }
+		else if (curr->Type == 3) { bmp = bmp3; }
+		else { continue; }
+		//al_draw_rectangle(curr->x - 32 - cxo, curr->y - 32 - cyo, curr->x + 32 - cxo, curr->y + 32 - cyo, al_map_rgb(255, 255, 0), 10);
+		al_draw_scaled_bitmap(bmp, 0, 0, 128, 128, curr->x - 32 - cxo, curr->y - 32 - cyo, 128 * (Player->Transform.scale.x), 128 * (Player->Transform.scale.y), 0);
 		if (Boost_hasPlayerIn(curr, Player))
 		{
 			switch (curr->Type)

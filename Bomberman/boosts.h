@@ -1,5 +1,6 @@
 #pragma once
 #include <stdbool.h>
+#include <allegro5/allegro5.h>
 struct Boost
 {
 	float x;
@@ -12,7 +13,7 @@ struct Boost
 
 void Boost_Add(struct Boost**, unsigned short, float, float);
 bool Boost_Remove(struct Boost*, struct Boost**);
-void Boost_Loop(struct Boost**, struct Character*, float, float);
+void Boost_Loop(struct Boost**, struct Character*, float, float, ALLEGRO_BITMAP*, ALLEGRO_BITMAP*, ALLEGRO_BITMAP*);
 bool Boost_hasPlayerIn(struct Boost*, struct Character*);
 void Boosts_Clear(struct Boost**);
 

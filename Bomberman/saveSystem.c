@@ -78,7 +78,6 @@ bool trimText(char* text, int n)
 }
 bool hasAchievement(int achievementId)
 {
-	printf("AAAAAA\n");
 	int line = 1;
 	switch (achievementId)
 	{

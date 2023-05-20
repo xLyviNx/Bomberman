@@ -485,8 +485,11 @@ int main()
         ALLEGRO_BITMAP* dBlockSprite = al_load_bitmap("data/dBlock.bmp");
         ALLEGRO_BITMAP* sBlockSprite = al_load_bitmap("data/sBlock.bmp");
         ALLEGRO_BITMAP* grass = al_load_bitmap("data/grass.bmp");
+        ALLEGRO_BITMAP* boost1 = al_load_bitmap("data/boost1.bmp");
+        ALLEGRO_BITMAP* boost2 = al_load_bitmap("data/boost2.bmp");
+        ALLEGRO_BITMAP* boost3 = al_load_bitmap("data/boost3.bmp");
         doorSprite = al_load_bitmap("data/door.bmp");
-        if (!dBlockSprite || !sBlockSprite || !grass || !doorSprite)
+        if (!dBlockSprite || !sBlockSprite || !grass || !doorSprite || !boost1 || !boost2 || !boost3)
             return -15;
 
         double ctime = al_get_time();
@@ -682,7 +685,7 @@ int main()
                         }
                     }
                 }
-                Boost_Loop(&Boosts, Player, cam_x_offset, cam_y_offset);
+                Boost_Loop(&Boosts, Player, cam_x_offset, cam_y_offset, boost1, boost2, boost3);
                 Enemies_Loop(EnemyList, AnimTime, cam_x_offset, cam_y_offset, Player, deltaTime, blocks, bombs, Pause);
 
                 if (!check) {
