@@ -7,6 +7,7 @@
 #include "saveSystem.h"
 #include "endDoor.h"
 #include "Blocks.h"
+#include "main.h"
 #define exploTime 3.0;
 
 
@@ -168,10 +169,7 @@ bool Bomb_Remove(struct BombList** bomb, struct BombList** bombs, struct Charact
                 *bombs = NULL;
         }
         free(*bomb);
-        if (Player != NULL)
-        {
-            Player->displayBombs--;
-        }
+
         return true;
     }
     return false;
@@ -215,7 +213,6 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs,
         }
         else {
             printf("Bomb planted.\n");
-            Player->displayBombs++;
         }
     }
 }
@@ -242,6 +239,7 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
 {
     if (bomb != NULL && (*bomb) != NULL)
     {
+
         (*bomb)->exploded = true;
         (*bomb)->timeLeft = 0.05;
         int gridSize = (int)(128 * Player->Transform.scale.x);
@@ -331,7 +329,11 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
             }
             if (EliminatedEnemies > 1)
             {
-                saveSystem_printAtLine(2, "1");
+                if (!hasAchievement(1))
+                {
+                    saveSystem_printAtLine(2, "1");
+                    GlobalAction = 6;
+                }
             }
         }
         if (EliminatedEnemies > 0)
@@ -373,6 +375,11 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
             printf("CHANCE: %d\n", chance);
             if (chance)
             {
+                if (!hasAchievement(2))
+                {
+                    saveSystem_printAtLine(6, "1");
+                    GlobalAction = 7;
+                }
                 unsigned short type = 1+ (rand() % 4);
                 printf("Type: %d\n", type);
                 Boost_Add(Boosts, type, blocklastx, blocklasty);

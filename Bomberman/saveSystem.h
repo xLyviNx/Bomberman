@@ -19,3 +19,4 @@ bool trimText(char*, int);
 void saveSystem_printAtLine(int, const char*);
 void saveSystem_resetData();
 void saveSystem_setStartData();
+bool hasAchievement(int);

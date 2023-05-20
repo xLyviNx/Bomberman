@@ -161,7 +161,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="data\save.bmb" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +186,7 @@
     <ClInclude Include="endDoor.h" />
     <ClInclude Include="Enemies.h" />
     <ClInclude Include="Explosions.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="soundstack.h" />
     <ClInclude Include="saveSystem.h" />
     <ClInclude Include="types.h" />

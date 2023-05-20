@@ -22,7 +22,6 @@ struct Character
     ALGIF_ANIMATION* DownWalkAnim;
     bool remoteBombs;
     unsigned short int bombRange;
-    unsigned short int displayBombs;
     unsigned short int maxBombs;
     bool enabled;
     unsigned short walking;

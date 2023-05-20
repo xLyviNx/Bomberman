@@ -17,6 +17,7 @@
 #include "types.h"
 #include "Bombs.h"
 #include "Blocks.h"
+#include "main.h"
 #include "Explosions.h"
 #include <time.h>
 #include "endDoor.h"
@@ -88,7 +89,35 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
     }
 }
 
+void Achievement(float* timeleft, int id, ALLEGRO_FONT* font, ALLEGRO_FONT* font2)
+{
+    *timeleft -= deltaTime;
+    if (*timeleft > 0) {
+        al_draw_filled_rectangle(WIDTH / 2 - 200, HEIGHT - 150, WIDTH / 2 + 200, HEIGHT - 80, al_map_rgba_f(0, 0, 0, 0.5));
+        al_draw_textf(font, al_map_rgba_f(1, 1, 1, 1), WIDTH / 2, HEIGHT - 140, ALLEGRO_ALIGN_CENTER, "OSIAGNIECIE ODBLOKOWANE!");
 
+        switch (id)
+        {
+        case 1:
+        {
+            al_draw_textf(font2, al_map_rgba_f(1, 1, 1, 1), WIDTH / 2, HEIGHT - 110, ALLEGRO_ALIGN_CENTER, "Wyeliminuj 2 przeciwnikow na raz.");
+            break;
+        }
+        case 2:
+        {
+            al_draw_textf(font2, al_map_rgba_f(1, 1, 1, 1), WIDTH / 2, HEIGHT - 110, ALLEGRO_ALIGN_CENTER, "Znajdz ulepszenie.");
+            break;
+        }
+        default:
+        {break; }
+        }
+        
+    }
+    else
+    {
+        *timeleft = 0;
+    }
+}
 void playerMovement(struct dstr_block* blocks)
 {
     struct Vector2 dir;
@@ -187,9 +216,9 @@ void menuMove(bool down, unsigned short* val, int level, bool buttondown)
             {
                 *val = 1;
             }
-            else if (*val > 3)
+            else if (*val > 4)
             {
-                *val = 3;
+                *val = 4;
             }
         }
         else
@@ -266,14 +295,23 @@ void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceVal
                 }
                 case 3:
                 {
+                    GlobalAction = 8;
+                    break;
+                }
+                case 4:
+                {
                     GlobalAction = 2;
                     break;
                 }
                 }
             }
-            else
+            else if (*currentLevel<=5)
             {
                 GlobalAction = 4;
+            }
+            else if (*currentLevel == 6)
+            {
+                GlobalAction = 1;
             }
         }
         break;
@@ -298,7 +336,7 @@ void drawUI(ALLEGRO_FONT** uiFont, ALLEGRO_FONT** LevelFont, int level, struct E
     al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), 10, 12, ALLEGRO_ALIGN_LEFT, "PRZECIWNIKOW: %d", Enemies_Count(enemies));
     al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), 10, 35, ALLEGRO_ALIGN_LEFT, "BLOKOW: %d", Blocks_Count(blocks));
     al_draw_textf(*LevelFont, al_map_rgba(255, 255, 255, 80), WIDTH/2, 15, ALLEGRO_ALIGN_CENTER, "POZIOM: %d/5", level);
-    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBY: %d/%d", Player->displayBombs, Player->maxBombs);
+    al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBY: %d/%d", Bomb_count(bombs), Player->maxBombs);
 }
 void drawGrid(int maxx, int maxy, int xsize, int ysize)
 {
@@ -350,7 +388,6 @@ int main()
         Player->Transform.position.x = WIDTH / 2;
         Player->Transform.position.y = HEIGHT / 2;
         Player->Speed = 3.0;
-        Player->displayBombs = 0;
         Player->maxBombs = 2;
         Player->remoteBombs = false;
         Player->bombRange = 1;
@@ -412,8 +449,9 @@ int main()
         ALLEGRO_FONT* uiFont = al_load_ttf_font("data/fonts/PlatNomor-WyVnn.ttf", 18, 0);
         ALLEGRO_FONT* TitleFont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 100, 0);
         ALLEGRO_FONT* levelfont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 35, 0);
+        ALLEGRO_FONT* ach1font = al_load_ttf_font("data/fonts/AldotheApache.ttf", 25, 0);
         ALLEGRO_FONT* MenuButton = al_load_ttf_font("data/fonts/Exo-Regular.ttf", 30, 0);
-        if (debugFont == NULL || uiFont == NULL || !TitleFont)
+        if (debugFont == NULL || uiFont == NULL || !TitleFont || !ach1font)
         {
             printf("Blad odczytu czcionki. \n");
             return -3;
@@ -489,6 +527,10 @@ int main()
         //  int Lifes = 3;
         bool diedsoundplayed = false;
         bool gonext = false;
+        int currAch = 0;
+        float AchTime = 0;
+        bool hasAch1 = false;
+        bool hasAch2 = false;
         while (!zamknij)
         {
             if (GlobalAction == 2)
@@ -526,7 +568,7 @@ int main()
                 break;
             }
             }
-            if (level != 0) {
+            if (level != 0 && level<=5) {
                 if (!al_get_sample_instance_playing(GMusicInstance) && Player->enabled)
                 {
                     al_play_sample_instance(GMusicInstance);
@@ -570,6 +612,20 @@ int main()
                     case 5:
                     {
                         plantBomb(Pause, Player, &bombs, blocks);
+                        GlobalAction = 0;
+                        break;
+                    }
+                    case 6:
+                    {
+                        currAch = 1;
+                        AchTime = 3;
+                        GlobalAction = 0;
+                        break;
+                    }
+                    case 7:
+                    {
+                        currAch = 2;
+                        AchTime = 3;
                         GlobalAction = 0;
                         break;
                     }
@@ -696,6 +752,10 @@ int main()
                 renderBombs(BombAnim, AnimTime, cam_x_offset, cam_y_offset, Player, bombs);
 
                 drawUI(&uiFont, &levelfont, level, EnemyList, blocks);
+                if (AchTime > 0 && currAch)
+                {
+                    Achievement(&AchTime, currAch, ach1font, uiFont);
+                }
                 if (debug)
                 {
                     if (displayFpsDelay <= 0)
@@ -734,7 +794,7 @@ int main()
                     al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT/2 - 25, ALLEGRO_ALIGN_CENTER, "Kliknij ENTER aby wyjsc do menu.");
                 }
             }
-            else
+            else if (level==0)
             {
 
                 if (!al_get_sample_instance_playing(MMusicInstance))
@@ -751,15 +811,19 @@ int main()
                 ALLEGRO_COLOR butColor = al_map_rgb(80, 80, 80);
                 ALLEGRO_COLOR butColor2 = butColor;
                 ALLEGRO_COLOR butColor3 = butColor;
+                ALLEGRO_COLOR butColor4 = butColor;
                 if (MenuChoice==1)
                     butColor = al_map_rgb(255, 255, 255);
                 else if (MenuChoice==2)
                     butColor2 = al_map_rgb(255, 255, 255);
                 else if (MenuChoice == 3)
                     butColor3 = al_map_rgb(255, 255, 255);
+                else if (MenuChoice == 4)
+                    butColor4 = al_map_rgb(255, 255, 255);
                 al_draw_textf(MenuButton, butColor, WIDTH / 2, 300, ALLEGRO_ALIGN_CENTER, "Nowa Gra");
                 al_draw_textf(MenuButton, butColor2, WIDTH / 2, 350, ALLEGRO_ALIGN_CENTER, "Kontynuuj (Level %d)",loadedLevel);
-                al_draw_textf(MenuButton, butColor3, WIDTH / 2, 400, ALLEGRO_ALIGN_CENTER, "Wyjdz");
+                al_draw_textf(MenuButton, butColor3, WIDTH / 2, 400, ALLEGRO_ALIGN_CENTER, "Statystyki");
+                al_draw_textf(MenuButton, butColor4, WIDTH / 2, 450, ALLEGRO_ALIGN_CENTER, "Wyjdz");
                 if (loadedLevel == 0)
                 {
                     loadedLevel = saveSystem_LoadLevel();
@@ -873,10 +937,39 @@ int main()
                         GlobalAction = 0;
                         break;
                     }
+                    case 8:
+                    { 
+                        level = 6;
+                        hasAch1 = hasAchievement(1);
+                        hasAch2 = hasAchievement(2);
+                        Player->Speed = saveSystem_LoadSpeed();
+                        Player->maxBombs = saveSystem_LoadBombs();
+                        Player->bombRange = saveSystem_LoadRange();
+                        MenuChoice = 0;
+                        continue;
+                    }
                     default:
                         { break; }
                 }
 
+
+            }
+            else if (level == 6)
+            {
+                al_clear_to_color(al_map_rgb(10, 10, 50));
+                al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH / 2, 30, ALLEGRO_ALIGN_CENTER, "Statystyki");
+                al_draw_textf(MenuButton, al_map_rgba(255, 255, 255, 255), 30, 180, ALLEGRO_ALIGN_LEFT, "Eliminacja 2 przeciwnikow na raz: %s", hasAch1? "Tak" : "Nie");
+                al_draw_textf(MenuButton, al_map_rgba(255, 255, 255, 255), 30, 220, ALLEGRO_ALIGN_LEFT, "Znaleziono ulepszenie: %s", hasAch2? "Tak" : "Nie");
+                al_draw_textf(MenuButton, al_map_rgba(255, 255, 255, 255), 30, 300, ALLEGRO_ALIGN_LEFT, "Predkosc Gracza: %lf", Player->Speed);
+                al_draw_textf(MenuButton, al_map_rgba(255, 255, 255, 255), 30, 330, ALLEGRO_ALIGN_LEFT, "Maksymalnie Bomb: %d", Player->maxBombs);
+                al_draw_textf(MenuButton, al_map_rgba(255, 255, 255, 255), 30, 360, ALLEGRO_ALIGN_LEFT, "Zasieg bomb: %d", Player->bombRange);
+
+                al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 255), WIDTH/2, HEIGHT-30, ALLEGRO_ALIGN_CENTER, "Wcisnij ENTER by wyjsc do menu");
+                if (GlobalAction == 1)
+                {
+                    level = 0;
+                    GlobalAction = 0;
+                }
             }
             SampleStack_Loop(&samples, deltaTime);
             al_flip_display();
@@ -894,6 +987,12 @@ int main()
         Explosion_RemoveList(&explosions);
         Enemies_Clear(&EnemyList);
         free(Player);
+        al_destroy_font(debugFont);
+        al_destroy_font(uiFont);
+        al_destroy_font(TitleFont);
+        al_destroy_font(levelfont);
+        al_destroy_font(ach1font);
+        al_destroy_font(MenuButton);
         al_uninstall_audio();
         al_destroy_sample(MenuMusic);
         al_destroy_sample(GameMusic);

@@ -76,6 +76,35 @@ bool trimText(char* text, int n)
 	}
 	return false;
 }
+bool hasAchievement(int achievementId)
+{
+	printf("AAAAAA\n");
+	int line = 1;
+	switch (achievementId)
+	{
+	case 1:
+	{
+		line = 2;
+		break;
+	}
+	case 2:
+	{
+		line = 6;
+		break;
+	}
+	default:
+	{
+		return false;
+	}
+	}
+	int tret = 0;
+	char* loadS = saveSystem_readLine(line);
+	printf("[SAVE SYSTEM] Attempting to convert '%s' to (ACH) INT\n", loadS);
+	tret = atoi(loadS);
+	printf("[SAVE SYSTEM] Loading ACHIEVEMENT INT: %d\n", tret);
+	free(loadS);
+	return tret == 1;
+}
 int saveSystem_LoadLevel()
 {
 	int tret = 1;
@@ -194,4 +223,5 @@ void saveSystem_setStartData()
 	saveSystem_printAtLine(3, "2");
 	saveSystem_printAtLine(4, "1");
 	saveSystem_printAtLine(5, "3.000000");
+	saveSystem_printAtLine(6, "0");
 }

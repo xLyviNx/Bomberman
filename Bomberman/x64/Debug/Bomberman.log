@@ -1,6 +1,5 @@
-﻿  main.c
-C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\main.c(367,14): warning C4013: niezdefiniowany "al_init_image_addon"; przy założeniu, że extern zwraca int
-  types.c
-  Blocks.c
-  Generowanie kodu...
+﻿  saveSystem.c
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\saveSystem.c(143,9): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\saveSystem.c(173,28): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\Bomberman\saveSystem.c(191,28): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
   Bomberman.vcxproj -> C:\Users\LyviN\LyviN\Github Repo\vs\bomberman\Bomberman\x64\Debug\Bomberman.exe
