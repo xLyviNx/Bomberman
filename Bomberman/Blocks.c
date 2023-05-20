@@ -227,7 +227,6 @@ void loopBlocks(struct dstr_block** blocks, struct Enemy* enemies)
         while (bl != NULL)
         {
             i++;
-            //printf("JA PIERDOLE! %p, %p, %p\n", bl, bl->prev, bl->prev);
             //printf("BL - %p\n", bl);
             if (!bl->exists)
             {
