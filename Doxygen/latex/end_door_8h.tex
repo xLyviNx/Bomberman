@@ -1,0 +1,135 @@
+\doxysection{Dokumentacja pliku Bomberman/end\+Door.h}
+\hypertarget{end_door_8h}{}\label{end_door_8h}\index{Bomberman/endDoor.h@{Bomberman/endDoor.h}}
+{\ttfamily \#include $<$allegro5/allegro5.\+h$>$}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structend_door}{end\+Door}}
+\begin{DoxyCompactList}\small\item\em Struktura drzwi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Definicje typów}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structend_door}{end\+Door}} \mbox{\hyperlink{end_door_8h_ac744449f96e2eab7e5dbd3a8346cac2d}{end\+Door}}
+\begin{DoxyCompactList}\small\item\em Struktura drzwi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{end_door_8h_a67e6c339ae69c3e45139b9befb17f2f4}{Create\+Door}} (float, float)
+\begin{DoxyCompactList}\small\item\em Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{end_door_8h_abefb0cdac95273bc513fa3b0d278bd6f}{Destroy\+Door}} ()
+\begin{DoxyCompactList}\small\item\em Usuwa drzwi i zwalnia pamiec. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{end_door_8h_a861f1794f4b6c68732463b9f888c8efe}{Door\+\_\+has\+Player\+In}} (struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Sprawdza czy gracz wszedl w drzwi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structend_door}{end\+Door}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{end_door_8h_aa30c4de56d98e5fc8014ae5c9fa08535}{ending\+Door}}
+\begin{DoxyCompactList}\small\item\em Wskaznik na drzwi. \end{DoxyCompactList}\item 
+ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{end_door_8h_ad4772a7d007d862f16c3f5e7d4794fd0}{door\+Sprite}}
+\begin{DoxyCompactList}\small\item\em Wskaznik na grafike (sprite) drzwi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja definicji typów}
+\Hypertarget{end_door_8h_ac744449f96e2eab7e5dbd3a8346cac2d}\label{end_door_8h_ac744449f96e2eab7e5dbd3a8346cac2d} 
+\index{endDoor.h@{endDoor.h}!endDoor@{endDoor}}
+\index{endDoor@{endDoor}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{endDoor}{endDoor}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structend_door}{end\+Door}} \mbox{\hyperlink{structend_door}{end\+Door}}}
+
+
+
+Struktura drzwi. 
+
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{end_door_8h_a67e6c339ae69c3e45139b9befb17f2f4}\label{end_door_8h_a67e6c339ae69c3e45139b9befb17f2f4} 
+\index{endDoor.h@{endDoor.h}!CreateDoor@{CreateDoor}}
+\index{CreateDoor@{CreateDoor}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{CreateDoor()}{CreateDoor()}}
+{\footnotesize\ttfamily void Create\+Door (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em x} & Wspolrzedna X \\
+\hline
+{\em y} & Wspolrzedna Y. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00014}{14}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+\Hypertarget{end_door_8h_abefb0cdac95273bc513fa3b0d278bd6f}\label{end_door_8h_abefb0cdac95273bc513fa3b0d278bd6f} 
+\index{endDoor.h@{endDoor.h}!DestroyDoor@{DestroyDoor}}
+\index{DestroyDoor@{DestroyDoor}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{DestroyDoor()}{DestroyDoor()}}
+{\footnotesize\ttfamily void Destroy\+Door (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Usuwa drzwi i zwalnia pamiec. 
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00028}{28}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+\Hypertarget{end_door_8h_a861f1794f4b6c68732463b9f888c8efe}\label{end_door_8h_a861f1794f4b6c68732463b9f888c8efe} 
+\index{endDoor.h@{endDoor.h}!Door\_hasPlayerIn@{Door\_hasPlayerIn}}
+\index{Door\_hasPlayerIn@{Door\_hasPlayerIn}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{Door\_hasPlayerIn()}{Door\_hasPlayerIn()}}
+{\footnotesize\ttfamily bool Door\+\_\+has\+Player\+In (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy gracz wszedl w drzwi. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy gracz koliduje z drzwiami. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00042}{42}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+
+
+\doxysubsection{Dokumentacja zmiennych}
+\Hypertarget{end_door_8h_ad4772a7d007d862f16c3f5e7d4794fd0}\label{end_door_8h_ad4772a7d007d862f16c3f5e7d4794fd0} 
+\index{endDoor.h@{endDoor.h}!doorSprite@{doorSprite}}
+\index{doorSprite@{doorSprite}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{doorSprite}{doorSprite}}
+{\footnotesize\ttfamily ALLEGRO\+\_\+\+BITMAP\texorpdfstring{$\ast$}{*} door\+Sprite}
+
+
+
+Wskaznik na grafike (sprite) drzwi. 
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8h_source_l00021}{21}} pliku \mbox{\hyperlink{end_door_8h_source}{end\+Door.\+h}}.
+
+\Hypertarget{end_door_8h_aa30c4de56d98e5fc8014ae5c9fa08535}\label{end_door_8h_aa30c4de56d98e5fc8014ae5c9fa08535} 
+\index{endDoor.h@{endDoor.h}!endingDoor@{endingDoor}}
+\index{endingDoor@{endingDoor}!endDoor.h@{endDoor.h}}
+\doxysubsubsection{\texorpdfstring{endingDoor}{endingDoor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structend_door}{end\+Door}}\texorpdfstring{$\ast$}{*} ending\+Door}
+
+
+
+Wskaznik na drzwi. 
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8h_source_l00017}{17}} pliku \mbox{\hyperlink{end_door_8h_source}{end\+Door.\+h}}.
+

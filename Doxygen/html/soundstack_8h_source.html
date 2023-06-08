@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/soundstack.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">soundstack.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="soundstack_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;allegro5/allegro_audio.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno"><a class="line" href="soundstack_8h.html#a35f1743beab44d824c8f2cdebf8c8146">    3</a></span><span class="preprocessor">#define ISON false</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno"><a class="line" href="struct_sample_stack_element.html">    4</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span>{</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="struct_sample_stack_element.html#ae427413a1f99f4e89b0253bdd0d92865">    6</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_sample_stack_element.html#ae427413a1f99f4e89b0253bdd0d92865">timePassed</a>;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="struct_sample_stack_element.html#a44e46c35e8c3aa0a443f6358fd544dc5">    7</a></span>    ALLEGRO_SAMPLE_INSTANCE* <a class="code hl_variable" href="struct_sample_stack_element.html#a44e46c35e8c3aa0a443f6358fd544dc5">myInstance</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct_sample_stack_element.html#a6fb1496a82b5b75ef8ec9e6cc8112abf">    8</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>* <a class="code hl_variable" href="struct_sample_stack_element.html#a6fb1496a82b5b75ef8ec9e6cc8112abf">next</a>;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>};</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>* <a class="code hl_function" href="soundstack_8h.html#aa1cf8051e34d10fef87b72b4d9b61dcd">SampleStack_Push</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>*, ALLEGRO_SAMPLE_INSTANCE*);</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">void</span> <a class="code hl_function" href="soundstack_8h.html#afdbc63cec52a686cfe155fe9d26b7744">SampleStack_Loop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>**, <span class="keywordtype">float</span>);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>* <a class="code hl_function" href="soundstack_8h.html#ab12e3127069bbb4c179d6a6478bb0291">SampleStack_Pop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>*);</div>
+<div class="ttc" id="asoundstack_8h_html_aa1cf8051e34d10fef87b72b4d9b61dcd"><div class="ttname"><a href="soundstack_8h.html#aa1cf8051e34d10fef87b72b4d9b61dcd">SampleStack_Push</a></div><div class="ttdeci">struct SampleStackElement * SampleStack_Push(struct SampleStackElement *, ALLEGRO_SAMPLE_INSTANCE *)</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8c_source.html#l00003">soundstack.c:3</a></div></div>
+<div class="ttc" id="asoundstack_8h_html_ab12e3127069bbb4c179d6a6478bb0291"><div class="ttname"><a href="soundstack_8h.html#ab12e3127069bbb4c179d6a6478bb0291">SampleStack_Pop</a></div><div class="ttdeci">struct SampleStackElement * SampleStack_Pop(struct SampleStackElement *)</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8c_source.html#l00051">soundstack.c:51</a></div></div>
+<div class="ttc" id="asoundstack_8h_html_afdbc63cec52a686cfe155fe9d26b7744"><div class="ttname"><a href="soundstack_8h.html#afdbc63cec52a686cfe155fe9d26b7744">SampleStack_Loop</a></div><div class="ttdeci">void SampleStack_Loop(struct SampleStackElement **, float)</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8c_source.html#l00037">soundstack.c:37</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html"><div class="ttname"><a href="struct_sample_stack_element.html">SampleStackElement</a></div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00004">soundstack.h:5</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html_a44e46c35e8c3aa0a443f6358fd544dc5"><div class="ttname"><a href="struct_sample_stack_element.html#a44e46c35e8c3aa0a443f6358fd544dc5">SampleStackElement::myInstance</a></div><div class="ttdeci">ALLEGRO_SAMPLE_INSTANCE * myInstance</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00007">soundstack.h:7</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html_a6fb1496a82b5b75ef8ec9e6cc8112abf"><div class="ttname"><a href="struct_sample_stack_element.html#a6fb1496a82b5b75ef8ec9e6cc8112abf">SampleStackElement::next</a></div><div class="ttdeci">struct SampleStackElement * next</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00008">soundstack.h:8</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html_ae427413a1f99f4e89b0253bdd0d92865"><div class="ttname"><a href="struct_sample_stack_element.html#ae427413a1f99f4e89b0253bdd0d92865">SampleStackElement::timePassed</a></div><div class="ttdeci">float timePassed</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00006">soundstack.h:6</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

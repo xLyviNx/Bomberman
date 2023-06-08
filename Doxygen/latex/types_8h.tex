@@ -1,0 +1,51 @@
+\doxysection{Dokumentacja pliku Bomberman/types.h}
+\hypertarget{types_8h}{}\label{types_8h}\index{Bomberman/types.h@{Bomberman/types.h}}
+{\ttfamily \#include \"{}algif5-\/master/src/algif.\+h\"{}}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_vector2}{Vector2}}
+\begin{DoxyCompactList}\small\item\em Struktura posiadajaca dwie wspolrzedne X i Y. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_transform}{Transform}}
+\begin{DoxyCompactList}\small\item\em Struktura posiadajaca dane o pozycji, pozycji w siatce oraz skali. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_character}{Character}}
+\begin{DoxyCompactList}\small\item\em Struktura gracza. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{types_8h_a9a298aa67721117142dd0fee1c8c543c}{is\+\_\+on\+\_\+block}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}, float, float, bool \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}, bool)
+\begin{DoxyCompactList}\small\item\em Sprawdza, czy na danych koordynatach miesci sie blok lub bomba. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{types_8h_a9a298aa67721117142dd0fee1c8c543c}\label{types_8h_a9a298aa67721117142dd0fee1c8c543c} 
+\index{types.h@{types.h}!is\_on\_block@{is\_on\_block}}
+\index{is\_on\_block@{is\_on\_block}!types.h@{types.h}}
+\doxysubsubsection{\texorpdfstring{is\_on\_block()}{is\_on\_block()}}
+{\footnotesize\ttfamily bool is\+\_\+on\+\_\+block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{destroyable,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{bool}]{bombanyway }\end{DoxyParamCaption})}
+
+
+
+Sprawdza, czy na danych koordynatach miesci sie blok lub bomba. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em blocks} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em x} & Wspolrzedna x. \\
+\hline
+{\em y} & Wspolrzedna y. \\
+\hline
+{\em destroyable} & Wskaznik na bool\textquotesingle{}a mowiacego czy blok da sie zniszczyc. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em bombs} & Wskaznik na liste bomb. \\
+\hline
+{\em bombanyway} & Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby). \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{types_8c_source_l00016}{16}} pliku \mbox{\hyperlink{types_8c_source}{types.\+c}}.
+

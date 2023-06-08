@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Dokumentacja pliku Bomberman/saveSystem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Definicje</a> &#124;
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku saveSystem.h</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+</div>
+<p><a href="save_system_8h_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+Definicje</h2></td></tr>
+<tr class="memitem:ad5131de0b5004c64db5e79e8aac7471e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#ad5131de0b5004c64db5e79e8aac7471e">LINE_LENGTH</a>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:ad5131de0b5004c64db5e79e8aac7471e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a65bc2bfdd845f4843d68e58349684bcb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a65bc2bfdd845f4843d68e58349684bcb">saveSystem_init</a> ()</td></tr>
+<tr class="separator:a65bc2bfdd845f4843d68e58349684bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dba782e8e440ce1b2a164b5e5e42129"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a2dba782e8e440ce1b2a164b5e5e42129">saveSystem_close</a> ()</td></tr>
+<tr class="separator:a2dba782e8e440ce1b2a164b5e5e42129"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a466eaf1096a7ce5b76c95ea14de1312f"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a466eaf1096a7ce5b76c95ea14de1312f">saveSystem_readLine</a> (int)</td></tr>
+<tr class="separator:a466eaf1096a7ce5b76c95ea14de1312f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8629066b437fe98d77c456ae248a8500"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a8629066b437fe98d77c456ae248a8500">saveSystem_LoadLevel</a> ()</td></tr>
+<tr class="separator:a8629066b437fe98d77c456ae248a8500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad424455bd34d93697c04676898d98251"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#ad424455bd34d93697c04676898d98251">saveSystem_LoadSpeed</a> ()</td></tr>
+<tr class="separator:ad424455bd34d93697c04676898d98251"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af88a77ff799146acde4ba37bdccf9468"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#af88a77ff799146acde4ba37bdccf9468">saveSystem_LoadRange</a> ()</td></tr>
+<tr class="separator:af88a77ff799146acde4ba37bdccf9468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24120518da9bb3e4797d445b2daeaca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#af24120518da9bb3e4797d445b2daeaca">saveSystem_LoadBombs</a> ()</td></tr>
+<tr class="separator:af24120518da9bb3e4797d445b2daeaca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1eb10af02ac1ffa2af39dc5e07f47773"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a1eb10af02ac1ffa2af39dc5e07f47773">trimText</a> (char *, int)</td></tr>
+<tr class="separator:a1eb10af02ac1ffa2af39dc5e07f47773"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a5ad9c75b3c00dfd3f46e513087465d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a6a5ad9c75b3c00dfd3f46e513087465d">saveSystem_printAtLine</a> (int, const char *)</td></tr>
+<tr class="separator:a6a5ad9c75b3c00dfd3f46e513087465d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a778c8e92886fd11fa783e7b2df815622"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a778c8e92886fd11fa783e7b2df815622">saveSystem_resetData</a> ()</td></tr>
+<tr class="separator:a778c8e92886fd11fa783e7b2df815622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26cbc408b43a66b3b12704f702abfd75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a26cbc408b43a66b3b12704f702abfd75">saveSystem_setStartData</a> ()</td></tr>
+<tr class="separator:a26cbc408b43a66b3b12704f702abfd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5060ef8d34ce349b2c379706c3c98512"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a5060ef8d34ce349b2c379706c3c98512">hasAchievement</a> (int)</td></tr>
+<tr class="separator:a5060ef8d34ce349b2c379706c3c98512"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr class="memitem:a7fedcafb7925d05c44330e2e1edf3043"><td class="memItemLeft" align="right" valign="top">FILE *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="save_system_8h.html#a7fedcafb7925d05c44330e2e1edf3043">saveFile</a></td></tr>
+<tr class="separator:a7fedcafb7925d05c44330e2e1edf3043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja definicji</h2>
+<a id="ad5131de0b5004c64db5e79e8aac7471e" name="ad5131de0b5004c64db5e79e8aac7471e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5131de0b5004c64db5e79e8aac7471e">&#9670;&#160;</a></span>LINE_LENGTH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LINE_LENGTH&#160;&#160;&#160;32</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8h_source.html#l00005">5</a> pliku <a class="el" href="save_system_8h_source.html">saveSystem.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="a5060ef8d34ce349b2c379706c3c98512" name="a5060ef8d34ce349b2c379706c3c98512"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5060ef8d34ce349b2c379706c3c98512">&#9670;&#160;</a></span>hasAchievement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool hasAchievement </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>achievementId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00079">79</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a2dba782e8e440ce1b2a164b5e5e42129" name="a2dba782e8e440ce1b2a164b5e5e42129"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dba782e8e440ce1b2a164b5e5e42129">&#9670;&#160;</a></span>saveSystem_close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveSystem_close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00026">26</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a65bc2bfdd845f4843d68e58349684bcb" name="a65bc2bfdd845f4843d68e58349684bcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65bc2bfdd845f4843d68e58349684bcb">&#9670;&#160;</a></span>saveSystem_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool saveSystem_init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00005">5</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="af24120518da9bb3e4797d445b2daeaca" name="af24120518da9bb3e4797d445b2daeaca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24120518da9bb3e4797d445b2daeaca">&#9670;&#160;</a></span>saveSystem_LoadBombs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saveSystem_LoadBombs </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00117">117</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a8629066b437fe98d77c456ae248a8500" name="a8629066b437fe98d77c456ae248a8500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8629066b437fe98d77c456ae248a8500">&#9670;&#160;</a></span>saveSystem_LoadLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saveSystem_LoadLevel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00107">107</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="af88a77ff799146acde4ba37bdccf9468" name="af88a77ff799146acde4ba37bdccf9468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af88a77ff799146acde4ba37bdccf9468">&#9670;&#160;</a></span>saveSystem_LoadRange()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int saveSystem_LoadRange </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00127">127</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="ad424455bd34d93697c04676898d98251" name="ad424455bd34d93697c04676898d98251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad424455bd34d93697c04676898d98251">&#9670;&#160;</a></span>saveSystem_LoadSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float saveSystem_LoadSpeed </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00137">137</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a6a5ad9c75b3c00dfd3f46e513087465d" name="a6a5ad9c75b3c00dfd3f46e513087465d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a5ad9c75b3c00dfd3f46e513087465d">&#9670;&#160;</a></span>saveSystem_printAtLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveSystem_printAtLine </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lineNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>content</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00148">148</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a466eaf1096a7ce5b76c95ea14de1312f" name="a466eaf1096a7ce5b76c95ea14de1312f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a466eaf1096a7ce5b76c95ea14de1312f">&#9670;&#160;</a></span>saveSystem_readLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char * saveSystem_readLine </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>lineNumber</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00034">34</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a778c8e92886fd11fa783e7b2df815622" name="a778c8e92886fd11fa783e7b2df815622"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a778c8e92886fd11fa783e7b2df815622">&#9670;&#160;</a></span>saveSystem_resetData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveSystem_resetData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00210">210</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a26cbc408b43a66b3b12704f702abfd75" name="a26cbc408b43a66b3b12704f702abfd75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26cbc408b43a66b3b12704f702abfd75">&#9670;&#160;</a></span>saveSystem_setStartData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveSystem_setStartData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00218">218</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<a id="a1eb10af02ac1ffa2af39dc5e07f47773" name="a1eb10af02ac1ffa2af39dc5e07f47773"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eb10af02ac1ffa2af39dc5e07f47773">&#9670;&#160;</a></span>trimText()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool trimText </td>
+          <td>(</td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>text</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8c_source.html#l00067">67</a> pliku <a class="el" href="save_system_8c_source.html">saveSystem.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja zmiennych</h2>
+<a id="a7fedcafb7925d05c44330e2e1edf3043" name="a7fedcafb7925d05c44330e2e1edf3043"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fedcafb7925d05c44330e2e1edf3043">&#9670;&#160;</a></span>saveFile</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FILE* saveFile</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="save_system_8h_source.html#l00007">7</a> pliku <a class="el" href="save_system_8h_source.html">saveSystem.h</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

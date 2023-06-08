@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/types.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">types.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="types_8c.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_bombs_8h.html">Bombs.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_blocks_8h.html">Blocks.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">   16</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>* blocks, <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">bool</span>* destroyable, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keywordtype">bool</span> bombanyway) {</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">struct </span><a class="code hl_struct" href="structdstr__block.html">dstr_block</a>* blck = <a class="code hl_function" href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a>(blocks, x, y, <span class="keyword">false</span>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* atBomb = <a class="code hl_function" href="_bombs_8c.html#a27ec77d000fc464039a1eed18a5f40e3">Bomb_Find</a>(<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, x, y, <span class="keyword">false</span>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="keywordtype">bool</span> bombCont = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keywordflow">if</span> (atBomb)</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        bombCont = !atBomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    }</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <span class="keywordflow">if</span> (bombanyway &amp;&amp; atBomb)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        bombCont = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    (*destroyable) = blck != NULL &amp;&amp; blck-&gt;<a class="code hl_variable" href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">destroyable</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">return</span> blck != NULL || bombCont;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+<div class="ttc" id="a_blocks_8c_html_a4bc0f7f832b8f6eff367a64f5d66396d"><div class="ttname"><a href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a></div><div class="ttdeci">struct dstr_block * Block_Find(struct dstr_block *blocks, int X, int Y, bool gridMethod, struct Character *Player)</div><div class="ttdoc">Szuka bloku na danych koordynatach.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8c_source.html#l00144">Blocks.c:144</a></div></div>
+<div class="ttc" id="a_blocks_8h_html"><div class="ttname"><a href="_blocks_8h.html">Blocks.h</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a27ec77d000fc464039a1eed18a5f40e3"><div class="ttname"><a href="_bombs_8c.html#a27ec77d000fc464039a1eed18a5f40e3">Bomb_Find</a></div><div class="ttdeci">struct BombList * Bomb_Find(struct BombList *first, int X, int Y, bool gridMethod, struct Character *Player)</div><div class="ttdoc">Znajduje bombe na danych koordynatach.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00144">Bombs.c:144</a></div></div>
+<div class="ttc" id="a_bombs_8h_html"><div class="ttname"><a href="_bombs_8h.html">Bombs.h</a></div></div>
+<div class="ttc" id="amain_8c_html_a0c6b025e3d49adb23ede839eb339aaba"><div class="ttname"><a href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a></div><div class="ttdeci">struct BombList * bombs</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00030">main.c:30</a></div></div>
+<div class="ttc" id="amain_8c_html_a3980a30693d2af1a413698203929f1be"><div class="ttname"><a href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a></div><div class="ttdeci">struct Character * Player</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00037">main.c:37</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html"><div class="ttname"><a href="struct_bomb_list.html">BombList</a></div><div class="ttdoc">Struktura bomby.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00008">Bombs.h:9</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a3163c27dec2114cbef9841272758cebc"><div class="ttname"><a href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">BombList::insidePlayer</a></div><div class="ttdeci">bool insidePlayer</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00013">Bombs.h:13</a></div></div>
+<div class="ttc" id="astruct_character_html"><div class="ttname"><a href="struct_character.html">Character</a></div><div class="ttdoc">Struktura gracza.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00024">types.h:25</a></div></div>
+<div class="ttc" id="astructdstr__block_html"><div class="ttname"><a href="structdstr__block.html">dstr_block</a></div><div class="ttdoc">Struktura bloku.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00013">Blocks.h:14</a></div></div>
+<div class="ttc" id="astructdstr__block_html_aeeea14de0b2a94ed2e5fe4513a0f2dec"><div class="ttname"><a href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">dstr_block::destroyable</a></div><div class="ttdeci">bool destroyable</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00018">Blocks.h:18</a></div></div>
+<div class="ttc" id="atypes_8c_html_a78f4d5e1ae7ef7321353ab5c6d470f7d"><div class="ttname"><a href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a></div><div class="ttdeci">bool is_on_block(struct dstr_block *blocks, float x, float y, bool *destroyable, struct Character *Player, struct BombList *bombs, bool bombanyway)</div><div class="ttdoc">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.</div><div class="ttdef"><b>Definition</b> <a href="types_8c_source.html#l00016">types.c:16</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

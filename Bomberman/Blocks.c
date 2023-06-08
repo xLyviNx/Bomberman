@@ -2,6 +2,17 @@
 #include <stdio.h>
 #include "types.h"
 #include "endDoor.h"
+
+/**
+ * @brief Sprawdza, czy na danych koordynatach miesci sie blok.
+ *
+ * @param first Wskaznik na pierwszy element listy blokow.
+ * @param X Wspolrzedna x.
+ * @param Y Wspolrzedna y.
+ * @param around Czy ma sprawdzac rowniez obok o 1 blok.
+ * @param Player Wskaznik na gracza.
+ * @return Czy blok istnieje.
+ */
 bool Block_Exists(struct dstr_block* first, int X, int Y, bool around, struct Character* Player)
 {
     if (first != NULL) {
@@ -41,6 +52,15 @@ bool Block_Exists(struct dstr_block* first, int X, int Y, bool around, struct Ch
     }
     return false;
 }
+/**
+ * @brief Umieszcza nowy blok w liscie na danych koordynatach.
+ *
+ * @param first Podwojny wskaznik na pierwszy element listy blokow.
+ * @param X Wspolrzedna x.
+ * @param Y Wspolrzedna y.
+ * @param staticBlock Wartosc logiczna - czy blok jest statyczny (niezniszczalny).
+ * @return Wskaznik na nowy blok.
+ */
 struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y, bool staticBlock)
 {
     struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
@@ -72,6 +92,14 @@ struct dstr_block* Block_Insert(struct dstr_block** first, int X, int Y, bool st
 
     return nB;
 }
+/**
+ * @brief Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach.
+ *
+ * @param X Wspolrzedna x.
+ * @param Y Wspolrzedna y.
+ * @param staticBlock Wartosc logiczna - czy blok jest statyczny (niezniszczalny).
+ * @return Wskaznik na nowy blok.
+ */
 struct dstr_block* Block_createList(int X, int Y, bool staticBlock)
 {
     struct dstr_block* nB = (struct dstr_block*)malloc(sizeof(struct dstr_block));
@@ -87,6 +115,12 @@ struct dstr_block* Block_createList(int X, int Y, bool staticBlock)
     }
     return nB;
 }
+/**
+ * @brief Usuwa liste blokow.
+ *
+ * @param block Podwojny wskaznik na pierwszy element listy blokow.
+ * @return Wartosc logiczna - czy usunieto.
+ */
 bool Block_RemoveList(struct dstr_block** block)
 {
     while (*block != NULL)
@@ -97,6 +131,16 @@ bool Block_RemoveList(struct dstr_block** block)
     }
     return *block == NULL;
 }
+/**
+ * @brief Szuka bloku na danych koordynatach.
+ *
+ * @param blocks Wskaznik na pierwszy element listy blokow.
+ * @param X Wspolrzedna osi x.
+ * @param Y Wspolrzedna osi y.
+ * @param gridMethod Metoda szukania (czy tylko po konkretnych koordynatach siatki).
+ * @param Player Wskaznik na gracza.
+ * @return Blok, o ile znaleziono. (Inaczej NULL)
+ */
 struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool gridMethod, struct Character* Player)
 {
     struct dstr_block* found = NULL;
@@ -129,6 +173,14 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool grid
     }
     return found;
 }
+/**
+ * @brief Usuwa konkretny blok z listy.
+ *
+ * @param element Wskaznik na element listy blokow do usuniecia.
+ * @param first Podwojny wskaznik na pierwszy element listy blokow.
+ * @param enemies Wskaznik na liste przeciwnikow.
+ * @return Czy usunieto blok.
+ */
 bool Block_Remove(struct dstr_block* element, struct dstr_block** first, struct Enemy* enemies)
 {
     if (element) {
@@ -158,6 +210,12 @@ bool Block_Remove(struct dstr_block* element, struct dstr_block** first, struct 
     }
     return false;
 }
+/**
+ * @brief Zliczanie blokow.
+ *
+ * @param first Wskaznik na pierwszy element listy blokow.
+ * @return Ilosc blokow.
+ */
 unsigned int Blocks_Count(struct dstr_block* first)
 {
     unsigned int count = 0;
@@ -178,6 +236,16 @@ unsigned int Blocks_Count(struct dstr_block* first)
     }
     return count;
 }
+/**
+ * @brief Renderowanie (wyswietlanie) istniejacych blokow.
+ *
+ * @param first Wskaznik na pierwszy element listy blokow.
+ * @param dBS Sprite zniszczalnego bloku (wskaznik).
+ * @param sBS Sprite niezniszczalnego bloku (wskaznik).
+ * @param Player Wskaznik na gracza.
+ * @param cam_x_offset Offset kamery na osi X.
+ * @param cam_y_offset Offset kamery na osi Y.
+ */
 void Blocks_draw(struct dstr_block* first, ALLEGRO_BITMAP* dBS, ALLEGRO_BITMAP* sBS, struct Character* Player, float cam_x_offset, float cam_y_offset)
 {
     struct dstr_block* temp = first;
@@ -185,24 +253,20 @@ void Blocks_draw(struct dstr_block* first, ALLEGRO_BITMAP* dBS, ALLEGRO_BITMAP* 
     while (temp != NULL)
     {
         if (temp != NULL) {
-            //printf("NOT NULL %p\n", temp);
             if (temp == NULL)
             {
                 break;
             }
-            //printf("aaaa: %p\n", temp);
             if (temp->exists) {
                 if (temp->gridX - cam_x_offset - gridSize / 2 < WIDTH && temp->gridX - cam_x_offset + gridSize / 2 > 0)
                 {
                     if (temp->gridY < HEIGHT && temp->gridY > 0)
                     {
                         if (temp->destroyable) {
-                            //al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(100, 100, 100));
                             al_draw_scaled_bitmap(dBS, 0, 0, 128, 128, temp->gridX - gridSize / 2 - cam_x_offset, temp->gridY - cam_y_offset - gridSize / 2, gridSize, gridSize, 0);
                         }
                         else
                         {
-                            //al_draw_filled_rectangle(temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, temp->gridX - cam_x_offset + gridSize / 2, temp->gridY - cam_y_offset + gridSize / 2, al_map_rgb(160, 160, 160));
                             al_draw_scaled_bitmap(sBS, 0, 0, 128, 128, temp->gridX - cam_x_offset - gridSize / 2, temp->gridY - cam_y_offset - gridSize / 2, gridSize, gridSize, 0);
 
                         }
@@ -211,13 +275,14 @@ void Blocks_draw(struct dstr_block* first, ALLEGRO_BITMAP* dBS, ALLEGRO_BITMAP* 
             }
             temp = temp->next;
         }
-        else
-        {
-            printf("TEMP = NULL\n");
-        }
     }
 }
-
+/**
+ * @brief Petla blokow (wykonywana co klatke).
+ *
+ * @param blocks Podwojny wskaznik na pierwszy element listy blokow.
+ * @param enemies Wskaznik na pierwszy element listy przeciwnikow.
+ */
 void loopBlocks(struct dstr_block** blocks, struct Enemy* enemies)
 {
     if (blocks != NULL)
@@ -227,13 +292,9 @@ void loopBlocks(struct dstr_block** blocks, struct Enemy* enemies)
         while (bl != NULL)
         {
             i++;
-            //printf("BL - %p\n", bl);
             if (!bl->exists)
             {
-                if (Block_Remove(bl, blocks, enemies))
-                {
-                    //(*blocks) = (*blocks);
-                }
+                Block_Remove(bl, blocks, enemies);
                 return;
             }
             if (bl->next != NULL) {
@@ -241,9 +302,18 @@ void loopBlocks(struct dstr_block** blocks, struct Enemy* enemies)
             }
             else break;
         }
-        //printf("BLOCKS: %d\n", i);
     }
 }
+/**
+ * @brief Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu.
+ *
+ * @param first Wskaznik na pierwszy element listy blokow.
+ * @param level Poziom dla ktorego generuje koordynaty.
+ * @param X Wskaznik na koordynaty na osi X (zwracanie poprzez wskaznik).
+ * @param Y Wskaznik na koordynaty na osi Y (zwracanie poprzez wskaznik).
+ * @param i Ktory blok (z petli for)
+ * @param Player Wskaznik na gracza.
+ */
 void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i, struct Character* Player)
 {
     unsigned int seed = (unsigned int)(level * 10000 + i * 100 + level * i);
@@ -262,6 +332,12 @@ void Block_random(struct dstr_block* first, int level, int* X, int* Y, int i, st
 
     //printf("%d - %d, %d - %d\n", rX, *X, rY, *Y);
 }
+/**
+ * @brief Generuje niezniszczalne bloki.
+ *
+ * @param first Podwojny wskaznik na pierwszy element listy blokow.
+ * @param Player Wskaznik na gracza.
+ */
 void GenerateStaticBlocks(struct dstr_block** first, struct Character* Player)
 {
     int gridSize = (int)(128 * Player->Transform.scale.x);
@@ -273,11 +349,17 @@ void GenerateStaticBlocks(struct dstr_block** first, struct Character* Player)
         }
     }
 }
+/**
+ * @brief Generuje zniszczalne bloki.
+ *
+ * @param level Ktory poziom.
+ * @param Player Wskaznik na graczca.
+ * @return Lista blokow.
+ */
 struct dstr_block* generate_blocks(int level, struct Character* Player)
 {
     struct dstr_block* Blocks = NULL;
     int limit = 20 + (level * 11);
-    //int limit = 1;
     if (limit > 75)
     {
         limit = 75;
@@ -297,7 +379,6 @@ struct dstr_block* generate_blocks(int level, struct Character* Player)
         {
             bl = Block_Insert(&Blocks, X, Y, false);
         }
-        //printf("count: %d\n", Blocks_Count(Blocks));
         if (bl != NULL)
         {
             bl->next = NULL;
@@ -305,8 +386,6 @@ struct dstr_block* generate_blocks(int level, struct Character* Player)
                 Blocks = bl;
             }
         }
-        //printf("BL3: %d\n", i);
-
     }
     GenerateStaticBlocks(&Blocks, Player);
     return Blocks;

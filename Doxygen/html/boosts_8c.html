@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Dokumentacja pliku Bomberman/boosts.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkcje</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku boosts.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="boosts_8h_source.html">boosts.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &lt;allegro5/allegro_primitives.h&gt;</code><br />
+</div>
+<p><a href="boosts_8c_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a118461f42000ff6e63d810b0251437d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boosts_8c.html#a118461f42000ff6e63d810b0251437d3">Boost_Add</a> (struct <a class="el" href="struct_boost.html">Boost</a> **list, unsigned short typ, float x, float y)</td></tr>
+<tr class="memdesc:a118461f42000ff6e63d810b0251437d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dodaje nowy boost do listy.  <br /></td></tr>
+<tr class="separator:a118461f42000ff6e63d810b0251437d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d1b4502e92e2155e9d17f5ac0350e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boosts_8c.html#a60d1b4502e92e2155e9d17f5ac0350e5">Boost_Remove</a> (struct <a class="el" href="struct_boost.html">Boost</a> *element, struct <a class="el" href="struct_boost.html">Boost</a> **first)</td></tr>
+<tr class="memdesc:a60d1b4502e92e2155e9d17f5ac0350e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa boost (ulepszenie) z listy.  <br /></td></tr>
+<tr class="separator:a60d1b4502e92e2155e9d17f5ac0350e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1db8dbcbb80a2d2740bb6189765f1276"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boosts_8c.html#a1db8dbcbb80a2d2740bb6189765f1276">Boost_Loop</a> (struct <a class="el" href="struct_boost.html">Boost</a> **list, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, float cxo, float cyo, ALLEGRO_BITMAP *bmp1, ALLEGRO_BITMAP *bmp2, ALLEGRO_BITMAP *bmp3)</td></tr>
+<tr class="memdesc:a1db8dbcbb80a2d2740bb6189765f1276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja wywolywana co klatke - petla ulepszen.  <br /></td></tr>
+<tr class="separator:a1db8dbcbb80a2d2740bb6189765f1276"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9b9fa3ff632d6aa1b909dbe9de0854a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boosts_8c.html#aa9b9fa3ff632d6aa1b909dbe9de0854a">Boost_hasPlayerIn</a> (struct <a class="el" href="struct_boost.html">Boost</a> *me, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:aa9b9fa3ff632d6aa1b909dbe9de0854a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja sprawdzajaca czy gracz jest w srodku ulepszenia (kolizja)  <br /></td></tr>
+<tr class="separator:aa9b9fa3ff632d6aa1b909dbe9de0854a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02f9c4cc7cbd57165b30a1c2d65451da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="boosts_8c.html#a02f9c4cc7cbd57165b30a1c2d65451da">Boosts_Clear</a> (struct <a class="el" href="struct_boost.html">Boost</a> **list)</td></tr>
+<tr class="memdesc:a02f9c4cc7cbd57165b30a1c2d65451da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja ktora czysci/usuwa liste ulepszen.  <br /></td></tr>
+<tr class="separator:a02f9c4cc7cbd57165b30a1c2d65451da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="a118461f42000ff6e63d810b0251437d3" name="a118461f42000ff6e63d810b0251437d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a118461f42000ff6e63d810b0251437d3">&#9670;&#160;</a></span>Boost_Add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Boost_Add </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> **&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short&#160;</td>
+          <td class="paramname"><em>typ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dodaje nowy boost do listy. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Podwojny wskaznik na pierwszy element listy. </td></tr>
+    <tr><td class="paramname">typ</td><td>Typ boosta (rodzaj). </td></tr>
+    <tr><td class="paramname">x</td><td>Wspolrzedna x, gdzie ma byc umieszczone ulepszenie. </td></tr>
+    <tr><td class="paramname">y</td><td>Wspolrzedna y, gdzie ma byc umieszczone ulepszenie. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="boosts_8c_source.html#l00012">12</a> pliku <a class="el" href="boosts_8c_source.html">boosts.c</a>.</p>
+
+</div>
+</div>
+<a id="aa9b9fa3ff632d6aa1b909dbe9de0854a" name="aa9b9fa3ff632d6aa1b909dbe9de0854a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9b9fa3ff632d6aa1b909dbe9de0854a">&#9670;&#160;</a></span>Boost_hasPlayerIn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Boost_hasPlayerIn </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funkcja sprawdzajaca czy gracz jest w srodku ulepszenia (kolizja) </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">me</td><td>Wskaznik na element listy ulepszen. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>true jesli gracz koliduje z ulepszeniem, false jesli gracz nie koliduje. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="boosts_8c_source.html#l00126">126</a> pliku <a class="el" href="boosts_8c_source.html">boosts.c</a>.</p>
+
+</div>
+</div>
+<a id="a1db8dbcbb80a2d2740bb6189765f1276" name="a1db8dbcbb80a2d2740bb6189765f1276"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1db8dbcbb80a2d2740bb6189765f1276">&#9670;&#160;</a></span>Boost_Loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Boost_Loop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> **&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cxo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cyo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_BITMAP *&#160;</td>
+          <td class="paramname"><em>bmp1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_BITMAP *&#160;</td>
+          <td class="paramname"><em>bmp2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_BITMAP *&#160;</td>
+          <td class="paramname"><em>bmp3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funkcja wywolywana co klatke - petla ulepszen. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Podwojny wskaznik na liste ulepszen. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">cxo</td><td>Offset kamery (os X). </td></tr>
+    <tr><td class="paramname">cyo</td><td>Offset kamery (os Y). </td></tr>
+    <tr><td class="paramname">bmp1</td><td>Sprite jednego z ulepszen. </td></tr>
+    <tr><td class="paramname">bmp2</td><td>Sprite jednego z ulepszen. </td></tr>
+    <tr><td class="paramname">bmp3</td><td>Sprite jednego z ulepszen. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="boosts_8c_source.html#l00078">78</a> pliku <a class="el" href="boosts_8c_source.html">boosts.c</a>.</p>
+
+</div>
+</div>
+<a id="a60d1b4502e92e2155e9d17f5ac0350e5" name="a60d1b4502e92e2155e9d17f5ac0350e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60d1b4502e92e2155e9d17f5ac0350e5">&#9670;&#160;</a></span>Boost_Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Boost_Remove </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> *&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> **&#160;</td>
+          <td class="paramname"><em>first</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Usuwa boost (ulepszenie) z listy. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Wskaznik na element listy do usuniecia. </td></tr>
+    <tr><td class="paramname">first</td><td>Podwojny wskaznik na pierwszy element listy. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wynik usuniecia (bool). </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="boosts_8c_source.html#l00044">44</a> pliku <a class="el" href="boosts_8c_source.html">boosts.c</a>.</p>
+
+</div>
+</div>
+<a id="a02f9c4cc7cbd57165b30a1c2d65451da" name="a02f9c4cc7cbd57165b30a1c2d65451da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02f9c4cc7cbd57165b30a1c2d65451da">&#9670;&#160;</a></span>Boosts_Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Boosts_Clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_boost.html">Boost</a> **&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funkcja ktora czysci/usuwa liste ulepszen. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Podwojny wskaznik liste ulepszen. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="boosts_8c_source.html#l00146">146</a> pliku <a class="el" href="boosts_8c_source.html">boosts.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

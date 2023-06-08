@@ -1,14 +1,19 @@
 #pragma once
 #include <stdbool.h>
 #include <allegro5/allegro5.h>
+
+/**
+ * @brief Struktura reprezentujaca ulepszenie.
+ */
 struct Boost
 {
-	float x;
-	float y;
-	unsigned short Type;
-	struct Boost* next;
-	struct Boost* prev;
+    float x; /**< Wspolrzedna x ulepszenia. */
+    float y; /**< Wspolrzedna y ulepszenia. */
+    unsigned short Type; /**< Typ ulepszenia. */
+    struct Boost* next; /**< Wskaznik na nastepne ulepszenie. */
+    struct Boost* prev; /**< Wskaznik na poprzednie ulepszenie. */
 };
+
 
 
 void Boost_Add(struct Boost**, unsigned short, float, float);

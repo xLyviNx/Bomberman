@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/Bombs.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Bombs.c</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_bombs_8c.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;<a class="code" href="_bombs_8h.html">Bombs.h</a>&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="_blocks_8h.html">Blocks.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="_explosions_8h.html">Explosions.h</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="soundstack_8h.html">soundstack.h</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="_enemies_8h.html">Enemies.h</a>&quot;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="save_system_8h.html">saveSystem.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;<a class="code" href="end_door_8h.html">endDoor.h</a>&quot;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="_blocks_8h.html">Blocks.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="main_8h.html">main.h</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab">   17</a></span><span class="preprocessor">#define exploTime 3.0;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="_bombs_8c.html#afa9a13046e1f8b5ad86e9ebad5a2f04c">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8c.html#afa9a13046e1f8b5ad86e9ebad5a2f04c">Bomb_CreateList</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a> pos)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* nB = (<span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*)malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>));</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordflow">if</span> (nB != NULL)</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a> = pos;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a> = NULL;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">exploded</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = NULL;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a> = <a class="code hl_define" href="_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab">exploTime</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> nB;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a57394e1fe350760e39b82935a94e0f9a">   45</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8c.html#a57394e1fe350760e39b82935a94e0f9a">Bomb_RemoveList</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** firstBomb)</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">while</span> (*firstBomb != NULL)</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = (*firstBomb)-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        free(*firstBomb);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        *firstBomb = <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <span class="keywordflow">return</span> *firstBomb == NULL;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>}</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="_bombs_8c.html#af786571bf9caec00b7cc0781f65e6bae">   62</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8c.html#af786571bf9caec00b7cc0781f65e6bae">Bomb_InsertInto</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* first, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a> pos)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>{</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* nB = NULL;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (first != NULL)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        nB = (<span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*)malloc(<span class="keyword">sizeof</span>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>));</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        <span class="keywordflow">if</span> (nB != NULL)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a> = pos;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a> = <a class="code hl_define" href="_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab">exploTime</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">exploded</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* end = first;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">while</span> (end-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> != NULL)</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            {</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                end = end-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="comment">//printf(&quot;Added at the end of %p\n&quot;, end);</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a> = end;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            nB-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = NULL;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            end-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = nB;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">return</span> nB;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno"><a class="line" href="_bombs_8c.html#ad9b1e0ceda78139ffa54a5f4a5cd8287">   93</a></span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="_bombs_8c.html#ad9b1e0ceda78139ffa54a5f4a5cd8287">Bomb_count</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* first)</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>{</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> count = 0;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="comment">//printf(&quot;first: %p\n&quot;, first);</span></div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">if</span> (first != NULL)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        count = 1;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* end = first;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        <span class="keywordflow">while</span> (end-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> != NULL)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="comment">//printf(&quot;bomb: %p\n&quot;, end);</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            end = end-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            count++;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordflow">return</span> count;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a45f00c2bff97ded0327c0c531757144d">  117</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8c.html#a45f00c2bff97ded0327c0c531757144d">Bomb_ExistsAt</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* first, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a> pos)</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>{</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    <span class="keywordflow">if</span> (first != NULL)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* seek = first;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        <span class="keywordflow">do</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <span class="comment">//printf(&quot;%lf vs %lf\n%lf vs %lf&quot;, seek-&gt;Position.x, pos.x, seek-&gt;Position.y, pos.y);</span></div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            <span class="keywordflow">if</span> (seek-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> == pos.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &amp;&amp; seek-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a> == pos.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>)</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            seek = seek-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        } <span class="keywordflow">while</span> (seek != NULL ? seek-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> != NULL : <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    }</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a27ec77d000fc464039a1eed18a5f40e3">  144</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8c.html#a27ec77d000fc464039a1eed18a5f40e3">Bomb_Find</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* first, <span class="keywordtype">int</span> X, <span class="keywordtype">int</span> Y, <span class="keywordtype">bool</span> gridMethod, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>{</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* found = NULL;</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <span class="keywordflow">if</span> (first != NULL)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* bomb = first;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">while</span> (bomb != NULL)</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>            <span class="comment">//printf(&quot;\n%d: Bomb: %p, (%p - %p) exploded: %d\n&quot;, i, bomb, bomb-&gt;prev, bomb-&gt;next, bomb-&gt;exploded);</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            i++;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            <span class="keywordflow">if</span> (gridMethod) {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> == X &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a> == Y)</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                    <span class="keywordflow">return</span> bomb;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                <span class="keywordtype">int</span> gridSize = (int)(128 * <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">scale</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a>);</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &lt; X + gridSize &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &gt; X - gridSize)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                {</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                    <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>&lt; Y + gridSize &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>&gt; Y - gridSize)</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                    {</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                        <span class="keywordflow">return</span> bomb;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                    }</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                }</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            }</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            bomb = bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>    <span class="keywordflow">return</span> found;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>}</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno"><a class="line" href="_bombs_8c.html#ae8e1025bfb9688fa5a8522c6f9a19a25">  185</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8c.html#ae8e1025bfb9688fa5a8522c6f9a19a25">Bomb_checkPlayer</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* bomb, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>{</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <span class="keywordflow">if</span> (bomb != NULL)</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordtype">int</span> gridSize = (int)(128 * <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">scale</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a>);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &lt; <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a6f5f9ea5c0bddab99cbea122d71453a4">position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> + gridSize &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &gt; <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a6f5f9ea5c0bddab99cbea122d71453a4">position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> - gridSize)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        {</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>&lt; <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a6f5f9ea5c0bddab99cbea122d71453a4">position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a> + gridSize &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>&gt; <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a6f5f9ea5c0bddab99cbea122d71453a4">position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a> - gridSize)</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            {</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno"><a class="line" href="_bombs_8c.html#ae74f2f318aeb4756bbd25eace553e210">  210</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8c.html#ae74f2f318aeb4756bbd25eace553e210">Bomb_Remove</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** bomb, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>{</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> != NULL &amp;&amp; bomb != NULL &amp;&amp; (*bomb) != NULL)</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    {</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a> = (*bomb)-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>;</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = (*bomb)-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        {</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            <a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> = <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>)</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        {</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a> = <a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        }</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">if</span> (*<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> == *bomb)</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        {</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            <span class="keywordflow">if</span> (<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>)</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>                *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> = <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>                *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> = NULL;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        free(*bomb);</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    }</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>}</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a7328fa2ad98322eb7cb52182911361bf">  245</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8c.html#a7328fa2ad98322eb7cb52182911361bf">plantBomb</a>(<span class="keywordtype">bool</span> isPaused, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>* blocks)</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>{</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a> != NULL &amp;&amp; !isPaused)</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_vector2.html">Vector2</a> pos;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        pos = <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>;</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordtype">bool</span> canplant = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* planted = NULL;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a8740ba80e30dd75e71d09fa1dcf04f3d">enabled</a>)</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        {</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> count = <a class="code hl_function" href="_bombs_8c.html#ad9b1e0ceda78139ffa54a5f4a5cd8287">Bomb_count</a>(*<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            printf(<span class="stringliteral">&quot;Bombs BEFORE: %d\n&quot;</span>, count);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            <span class="keywordflow">if</span> (count &gt; 0)</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            {</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>                <span class="keywordtype">bool</span> dst = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                <span class="keywordflow">if</span> (count &lt; Player-&gt;maxBombs &amp;&amp; !<a class="code hl_function" href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a>(blocks, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>, &amp;dst, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">true</span>))</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>                {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>                    canplant = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>                }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            {</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>                planted = <a class="code hl_function" href="_bombs_8c.html#afa9a13046e1f8b5ad86e9ebad5a2f04c">Bomb_CreateList</a>(pos);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>                *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> = planted;</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>                printf(<span class="stringliteral">&quot;Bombs 0, creating a list. Address: %p\n   prev: %p\n   next: %p\n&quot;</span>, *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, (*bombs)-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>, (*bombs)-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>);</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        }</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        <span class="keywordflow">if</span> (canplant)</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>            planted = <a class="code hl_function" href="_bombs_8c.html#af786571bf9caec00b7cc0781f65e6bae">Bomb_InsertInto</a>(*<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, pos);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        }</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">if</span> (planted == NULL)</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            printf(<span class="stringliteral">&quot;Bomb NOT planted.\n&quot;</span>);</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        }</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            printf(<span class="stringliteral">&quot;Bomb planted.\n&quot;</span>);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    }</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>}</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno"><a class="line" href="_bombs_8c.html#ac605390915fe82ab92aaf0c9579913d8">  297</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8c.html#ac605390915fe82ab92aaf0c9579913d8">renderBombs</a>(ALGIF_ANIMATION* bombAnim, <span class="keywordtype">double</span> animtime, <span class="keywordtype">float</span> <a class="code hl_variable" href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a>, <span class="keywordtype">float</span> <a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>)</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>{</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> != NULL)</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    {</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* bomb = <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        <span class="keywordflow">while</span> (<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> != NULL &amp;&amp; bomb != NULL)</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        {</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a>)</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            {</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>                <span class="comment">//al_draw_filled_rectangle(bomb-&gt;Position.x - 32-cam_x_offset, bomb-&gt;Position.y - 32 - cam_y_offset, bomb-&gt;Position.x + 32 - cam_x_offset, bomb-&gt;Position.y + 32 - cam_y_offset, al_map_rgba(255, 0, 0, 50));</span></div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>            }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            al_draw_scaled_rotated_bitmap(algif_get_bitmap(bombAnim, animtime), 64, 64, bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> - <a class="code hl_variable" href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a>, bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a> - <a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">scale</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">scale</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>, 0, 0);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> != NULL) {</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                bomb = bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            <span class="keywordflow">else</span> <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        }</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    }</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>}</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a49e5b919666b1b47e9bdaa40fbdcd5de">  330</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8c.html#a49e5b919666b1b47e9bdaa40fbdcd5de">explodeBomb</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** bomb, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>** blocks, ALLEGRO_SAMPLE* exploSound, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>** samples, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <span class="keywordtype">float</span>* <a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_explosion.html">Explosion</a>** <a class="code hl_variable" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_enemy.html">Enemy</a>** Enemies, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>** Boosts)</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>{</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>    <span class="keywordflow">if</span> (bomb != NULL &amp;&amp; (*bomb) != NULL)</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    {</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        (*bomb)-&gt;exploded = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        (*bomb)-&gt;timeLeft = 0.05;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordtype">int</span> gridSize = (int)(128 * <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">scale</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a>);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        <span class="keywordtype">int</span> xdir = 0;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordtype">int</span> ydir = 0;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        *<a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a> += 30;</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        ALLEGRO_SAMPLE_INSTANCE* newExploSound = al_create_sample_instance(exploSound);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        al_attach_sample_instance_to_mixer(newExploSound, al_get_default_mixer());</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        al_play_sample_instance(newExploSound);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        *samples = <a class="code hl_function" href="soundstack_8c.html#a8daadf335fa00aa30d365e271572cb54">SampleStack_Push</a>(*samples, newExploSound);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordflow">if</span> ((*bomb)-&gt;Position.x == <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &amp;&amp; (*bomb)-&gt;Position.y == <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>)</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        {</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>            <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a8740ba80e30dd75e71d09fa1dcf04f3d">enabled</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        }</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordtype">int</span> EliminatedEnemies = 0;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        <span class="keywordtype">int</span> DestroyedBlocks = 0;</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keywordtype">float</span> lastx, lasty;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        <span class="keywordtype">float</span> blocklastx, blocklasty;</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 4; j++) {</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            <span class="keywordflow">switch</span> (j)</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                xdir = 0;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                ydir = 1;</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            }</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            {</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                xdir = 0;</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                ydir = -1;</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            }</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            {</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>                xdir = -1;</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>                ydir = 0;</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>            }</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            {</div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>                xdir = 1;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>                ydir = 0;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>            }</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>            <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>            {</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            }</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>            }</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 1; i &lt;= <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6742802e3d356e46ebab48d51c65b873">bombRange</a>; i++)</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>            {</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>                <span class="keywordtype">int</span> X = (*bomb)-&gt;Position.x + (xdir * i * gridSize);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>                <span class="keywordtype">int</span> Y = (*bomb)-&gt;Position.y + (ydir * i * gridSize);</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>                <span class="keyword">struct </span><a class="code hl_struct" href="structdstr__block.html">dstr_block</a>* mblock = (<a class="code hl_function" href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a>((*blocks), X, Y, <span class="keyword">true</span>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>));</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>                <span class="keywordtype">bool</span> <a class="code hl_variable" href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">destroyable</a> = mblock != NULL &amp;&amp; mblock-&gt;<a class="code hl_variable" href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">destroyable</a>;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>                <span class="keywordtype">bool</span> test = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span> </div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span>                <span class="keywordflow">if</span> (<a class="code hl_function" href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a>((*blocks), X, Y, &amp;test, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">true</span>) || mblock != NULL)</div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>                {</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>                    <span class="keywordflow">if</span> (mblock &amp;&amp; <a class="code hl_variable" href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">destroyable</a>) {</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>                        mblock-&gt;<a class="code hl_variable" href="structdstr__block.html#a6e480061dc5ecc1f85a71989a6352dfc">exists</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>                        DestroyedBlocks++;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>                        blocklastx = X;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>                        blocklasty = Y;</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>                    }</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>                }</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>                <a class="code hl_function" href="_explosions_8c.html#aa716f2c51fe8c12ff189a221515fe911">Explosion_Insert</a>(<a class="code hl_variable" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a>, X, Y, i);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>                <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a8740ba80e30dd75e71d09fa1dcf04f3d">enabled</a> &amp;&amp; X == <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">x</a> &amp;&amp; Y == <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Transform</a>.<a class="code hl_variable" href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">gridPosition</a>.<a class="code hl_variable" href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">y</a>)</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>                {</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>                    <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>-&gt;<a class="code hl_variable" href="struct_character.html#a8740ba80e30dd75e71d09fa1dcf04f3d">enabled</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>                }</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                <span class="keyword">struct </span><a class="code hl_struct" href="struct_enemy.html">Enemy</a>* elim = NULL;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                <span class="keywordflow">do</span> {</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>                    elim = <a class="code hl_function" href="_enemies_8c.html#a8653248b9d5aeaf57049348626c3a955">Enemy_FindAt</a>(*Enemies, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, X, Y, NULL, 1);</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>                    <span class="keywordflow">if</span> (elim) {</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>                        EliminatedEnemies++;</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>                        <a class="code hl_function" href="_enemies_8c.html#ab1b879e9b64c9be041ab3aa6a480608a">Enemy_Remove</a>(elim, Enemies);</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>                        lastx = X;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>                        lasty = Y;</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>                    }</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>                } <span class="keywordflow">while</span> (elim);</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>               </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>            }</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>            <span class="keywordflow">if</span> (EliminatedEnemies &gt; 1)</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>            {</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>                <span class="keywordflow">if</span> (!<a class="code hl_function" href="save_system_8c.html#a468a98a7be2e13678092133d5157e404">hasAchievement</a>(1))</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>                {</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>                    <a class="code hl_function" href="save_system_8c.html#a9fee469e473f1031fd15c443997ed4b3">saveSystem_printAtLine</a>(2, <span class="stringliteral">&quot;1&quot;</span>);</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>                    <a class="code hl_variable" href="main_8c.html#a23c39ea291d6ab3eedc01ede1fe795fd">GlobalAction</a> = 6;</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>                }</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>            }</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        }</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keywordflow">if</span> (EliminatedEnemies &gt; 0)</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>        {</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="_enemies_8c.html#a0fa5994d7bbc5de03055fb711dd7bbef">Enemies_Count</a>(*Enemies) &lt;= 0)</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>            {</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>                <span class="keywordtype">int</span> hmb = <a class="code hl_function" href="_blocks_8c.html#aceffbf35493f9e0a33a50c7be59727e1">Blocks_Count</a>(*blocks);</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>                <span class="keywordflow">if</span> (hmb &lt;= 0)</div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>                {</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>                    <a class="code hl_function" href="end_door_8c.html#ac93a83343fc2f81c6563c8ff6f30cd2d">CreateDoor</a>(lastx, lasty);</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>                }</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>                <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>                {</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>                    srand(time(NULL));</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>                    <span class="keywordtype">int</span> random = rand() % (hmb);</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>                    <span class="keyword">struct </span><a class="code hl_struct" href="structdstr__block.html">dstr_block</a>* cb = *blocks;</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>                    <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>                    <span class="keywordflow">while</span> (cb)</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>                    {</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span> </div>
+<div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>                        <span class="keywordflow">if</span> (cb-&gt;<a class="code hl_variable" href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">destroyable</a>)</div>
+<div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span>                        {</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>                            <span class="keywordflow">if</span> (i == random)</div>
+<div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span>                            {</div>
+<div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span>                                cb-&gt;<a class="code hl_variable" href="structdstr__block.html#a019edd2fdee4d283e07348cf21a9c9c3">hasDoor</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>                                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>                            }</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>                            i++;</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>                        }</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>                        cb = cb-&gt;<a class="code hl_variable" href="structdstr__block.html#ac20ce7c6ded7d7cb501a54fb3182921c">next</a>;</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>                    }</div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>                }</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>            }</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>        }</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>        <span class="keywordflow">if</span> (DestroyedBlocks &gt;= 2)</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>        {</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span>            srand(time(NULL));</div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>            <span class="keywordtype">int</span> chance = rand() % 3;</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>            <span class="keywordflow">if</span> (chance)</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>            {</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>                <span class="keywordflow">if</span> (!<a class="code hl_function" href="save_system_8c.html#a468a98a7be2e13678092133d5157e404">hasAchievement</a>(2))</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>                {</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span>                    <a class="code hl_function" href="save_system_8c.html#a9fee469e473f1031fd15c443997ed4b3">saveSystem_printAtLine</a>(6, <span class="stringliteral">&quot;1&quot;</span>);</div>
+<div class="line"><a id="l00471" name="l00471"></a><span class="lineno">  471</span>                    <a class="code hl_variable" href="main_8c.html#a23c39ea291d6ab3eedc01ede1fe795fd">GlobalAction</a> = 7;</div>
+<div class="line"><a id="l00472" name="l00472"></a><span class="lineno">  472</span>                }</div>
+<div class="line"><a id="l00473" name="l00473"></a><span class="lineno">  473</span>                <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> type = 1+ (rand() % 3);</div>
+<div class="line"><a id="l00474" name="l00474"></a><span class="lineno">  474</span>                printf(<span class="stringliteral">&quot;Spawning Boost Type: %d\n&quot;</span>, type);</div>
+<div class="line"><a id="l00475" name="l00475"></a><span class="lineno">  475</span>                <a class="code hl_function" href="boosts_8c.html#a118461f42000ff6e63d810b0251437d3">Boost_Add</a>(Boosts, type, blocklastx, blocklasty);</div>
+<div class="line"><a id="l00476" name="l00476"></a><span class="lineno">  476</span>            }</div>
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno">  477</span>        }</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>    }</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>}</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno"><a class="line" href="_bombs_8c.html#a73540f0470cf5bc26db614d50520e5db">  494</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8c.html#a73540f0470cf5bc26db614d50520e5db">loopBombs</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>** <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>** blocks, ALLEGRO_SAMPLE* exploSound, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>** samples, <span class="keywordtype">float</span> dT, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>* <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <span class="keywordtype">float</span>* <a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_explosion.html">Explosion</a>** <a class="code hl_variable" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_enemy.html">Enemy</a>** Enemies, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>** Boosts)</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>{</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> != NULL &amp;&amp; *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>)</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>    {</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span>        <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* bomb = *<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>;</div>
+<div class="line"><a id="l00499" name="l00499"></a><span class="lineno">  499</span>        <span class="keywordtype">int</span> i = 0;</div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span>        <span class="keywordflow">while</span> (*<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> != NULL &amp;&amp; bomb != NULL)</div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>        {</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span>            <span class="comment">//printf(&quot;LOOP: %p, %lf\n&quot;, bomb, bomb-&gt;timeLeft);</span></div>
+<div class="line"><a id="l00503" name="l00503"></a><span class="lineno">  503</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a>)</div>
+<div class="line"><a id="l00504" name="l00504"></a><span class="lineno">  504</span>            {</div>
+<div class="line"><a id="l00505" name="l00505"></a><span class="lineno">  505</span>                bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a> = <a class="code hl_function" href="_bombs_8c.html#ae8e1025bfb9688fa5a8522c6f9a19a25">Bomb_checkPlayer</a>(bomb, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>);</div>
+<div class="line"><a id="l00506" name="l00506"></a><span class="lineno">  506</span>            }</div>
+<div class="line"><a id="l00507" name="l00507"></a><span class="lineno">  507</span>            bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a> -= dT;</div>
+<div class="line"><a id="l00508" name="l00508"></a><span class="lineno">  508</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a> &lt;= 0 &amp;&amp; !bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">exploded</a>)</div>
+<div class="line"><a id="l00509" name="l00509"></a><span class="lineno">  509</span>            {</div>
+<div class="line"><a id="l00510" name="l00510"></a><span class="lineno">  510</span>                printf(<span class="stringliteral">&quot;BOMB (ID: %d) SHOULD NOW EXPLODE!\n&quot;</span>, i);</div>
+<div class="line"><a id="l00511" name="l00511"></a><span class="lineno">  511</span>                <a class="code hl_function" href="_bombs_8c.html#a49e5b919666b1b47e9bdaa40fbdcd5de">explodeBomb</a>(&amp;bomb, <a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, blocks, exploSound, samples, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, <a class="code hl_variable" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>, <a class="code hl_variable" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a>, Enemies, Boosts);</div>
+<div class="line"><a id="l00512" name="l00512"></a><span class="lineno">  512</span>                <span class="comment">//Bomb_Remove(&amp;bomb);</span></div>
+<div class="line"><a id="l00513" name="l00513"></a><span class="lineno">  513</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00514" name="l00514"></a><span class="lineno">  514</span>            }</div>
+<div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span>            <span class="keywordflow">else</span> <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a> &lt;= 0 &amp;&amp; bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">exploded</a>)</div>
+<div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>            {</div>
+<div class="line"><a id="l00517" name="l00517"></a><span class="lineno">  517</span>                <a class="code hl_function" href="_bombs_8c.html#ae74f2f318aeb4756bbd25eace553e210">Bomb_Remove</a>(&amp;bomb,<a class="code hl_variable" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, <a class="code hl_variable" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>);</div>
+<div class="line"><a id="l00518" name="l00518"></a><span class="lineno">  518</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00519" name="l00519"></a><span class="lineno">  519</span>            }</div>
+<div class="line"><a id="l00520" name="l00520"></a><span class="lineno">  520</span>            <span class="keywordflow">if</span> (bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a> != NULL) {</div>
+<div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>                bomb = bomb-&gt;<a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;</div>
+<div class="line"><a id="l00522" name="l00522"></a><span class="lineno">  522</span>            }</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>            <span class="keywordflow">else</span> <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>            i++;</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>        }</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>    }</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>}</div>
+<div class="ttc" id="a_blocks_8c_html_a4bc0f7f832b8f6eff367a64f5d66396d"><div class="ttname"><a href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a></div><div class="ttdeci">struct dstr_block * Block_Find(struct dstr_block *blocks, int X, int Y, bool gridMethod, struct Character *Player)</div><div class="ttdoc">Szuka bloku na danych koordynatach.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8c_source.html#l00144">Blocks.c:144</a></div></div>
+<div class="ttc" id="a_blocks_8c_html_aceffbf35493f9e0a33a50c7be59727e1"><div class="ttname"><a href="_blocks_8c.html#aceffbf35493f9e0a33a50c7be59727e1">Blocks_Count</a></div><div class="ttdeci">unsigned int Blocks_Count(struct dstr_block *first)</div><div class="ttdoc">Zliczanie blokow.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8c_source.html#l00219">Blocks.c:219</a></div></div>
+<div class="ttc" id="a_blocks_8h_html"><div class="ttname"><a href="_blocks_8h.html">Blocks.h</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a27ec77d000fc464039a1eed18a5f40e3"><div class="ttname"><a href="_bombs_8c.html#a27ec77d000fc464039a1eed18a5f40e3">Bomb_Find</a></div><div class="ttdeci">struct BombList * Bomb_Find(struct BombList *first, int X, int Y, bool gridMethod, struct Character *Player)</div><div class="ttdoc">Znajduje bombe na danych koordynatach.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00144">Bombs.c:144</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a45f00c2bff97ded0327c0c531757144d"><div class="ttname"><a href="_bombs_8c.html#a45f00c2bff97ded0327c0c531757144d">Bomb_ExistsAt</a></div><div class="ttdeci">bool Bomb_ExistsAt(struct BombList *first, struct Vector2 pos)</div><div class="ttdoc">Sprawdza czy na danych koordynatach istnieje jakas bomba.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00117">Bombs.c:117</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a49e5b919666b1b47e9bdaa40fbdcd5de"><div class="ttname"><a href="_bombs_8c.html#a49e5b919666b1b47e9bdaa40fbdcd5de">explodeBomb</a></div><div class="ttdeci">void explodeBomb(struct BombList **bomb, struct BombList **bombs, struct dstr_block **blocks, ALLEGRO_SAMPLE *exploSound, struct SampleStackElement **samples, struct Character *Player, float *cam_y_offset, struct Explosion **explosions, struct Enemy **Enemies, struct Boost **Boosts)</div><div class="ttdoc">Wysadza jedna z bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00330">Bombs.c:330</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a57394e1fe350760e39b82935a94e0f9a"><div class="ttname"><a href="_bombs_8c.html#a57394e1fe350760e39b82935a94e0f9a">Bomb_RemoveList</a></div><div class="ttdeci">bool Bomb_RemoveList(struct BombList **firstBomb)</div><div class="ttdoc">Usuwa liste bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00045">Bombs.c:45</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a69ddd433c747d36f771b9000799e96ab"><div class="ttname"><a href="_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab">exploTime</a></div><div class="ttdeci">#define exploTime</div><div class="ttdoc">Domyslny czas do eksplozji.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00017">Bombs.c:17</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a7328fa2ad98322eb7cb52182911361bf"><div class="ttname"><a href="_bombs_8c.html#a7328fa2ad98322eb7cb52182911361bf">plantBomb</a></div><div class="ttdeci">void plantBomb(bool isPaused, struct Character *Player, struct BombList **bombs, struct dstr_block *blocks)</div><div class="ttdoc">Podklada bombe.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00245">Bombs.c:245</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_a73540f0470cf5bc26db614d50520e5db"><div class="ttname"><a href="_bombs_8c.html#a73540f0470cf5bc26db614d50520e5db">loopBombs</a></div><div class="ttdeci">void loopBombs(struct BombList **bombs, struct dstr_block **blocks, ALLEGRO_SAMPLE *exploSound, struct SampleStackElement **samples, float dT, struct Character *Player, float *cam_y_offset, struct Explosion **explosions, struct Enemy **Enemies, struct Boost **Boosts)</div><div class="ttdoc">Funkcja wywolywana co klatke (petla) wykonujaca operacje dla wszystkich bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00494">Bombs.c:494</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_ac605390915fe82ab92aaf0c9579913d8"><div class="ttname"><a href="_bombs_8c.html#ac605390915fe82ab92aaf0c9579913d8">renderBombs</a></div><div class="ttdeci">void renderBombs(ALGIF_ANIMATION *bombAnim, double animtime, float cam_x_offset, float cam_y_offset, struct Character *Player, struct BombList *bombs)</div><div class="ttdoc">Renderowanie (wyswietlanie) istniejacych bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00297">Bombs.c:297</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_ad9b1e0ceda78139ffa54a5f4a5cd8287"><div class="ttname"><a href="_bombs_8c.html#ad9b1e0ceda78139ffa54a5f4a5cd8287">Bomb_count</a></div><div class="ttdeci">unsigned int Bomb_count(struct BombList *first)</div><div class="ttdoc">Liczy istniejace bomby.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00093">Bombs.c:93</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_ae74f2f318aeb4756bbd25eace553e210"><div class="ttname"><a href="_bombs_8c.html#ae74f2f318aeb4756bbd25eace553e210">Bomb_Remove</a></div><div class="ttdeci">bool Bomb_Remove(struct BombList **bomb, struct BombList **bombs, struct Character *Player)</div><div class="ttdoc">Usuwa bombe z listy.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00210">Bombs.c:210</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_ae8e1025bfb9688fa5a8522c6f9a19a25"><div class="ttname"><a href="_bombs_8c.html#ae8e1025bfb9688fa5a8522c6f9a19a25">Bomb_checkPlayer</a></div><div class="ttdeci">bool Bomb_checkPlayer(struct BombList *bomb, struct Character *Player)</div><div class="ttdoc">Sprawdza czy w srodku bomby jest gracz.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00185">Bombs.c:185</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_af786571bf9caec00b7cc0781f65e6bae"><div class="ttname"><a href="_bombs_8c.html#af786571bf9caec00b7cc0781f65e6bae">Bomb_InsertInto</a></div><div class="ttdeci">struct BombList * Bomb_InsertInto(struct BombList *first, struct Vector2 pos)</div><div class="ttdoc">Dodaje bombe do listy bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00062">Bombs.c:62</a></div></div>
+<div class="ttc" id="a_bombs_8c_html_afa9a13046e1f8b5ad86e9ebad5a2f04c"><div class="ttname"><a href="_bombs_8c.html#afa9a13046e1f8b5ad86e9ebad5a2f04c">Bomb_CreateList</a></div><div class="ttdeci">struct BombList * Bomb_CreateList(struct Vector2 pos)</div><div class="ttdoc">Tworzy liste bomb (oraz pierwsza bombe).</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00025">Bombs.c:25</a></div></div>
+<div class="ttc" id="a_bombs_8h_html"><div class="ttname"><a href="_bombs_8h.html">Bombs.h</a></div></div>
+<div class="ttc" id="a_enemies_8c_html_a0fa5994d7bbc5de03055fb711dd7bbef"><div class="ttname"><a href="_enemies_8c.html#a0fa5994d7bbc5de03055fb711dd7bbef">Enemies_Count</a></div><div class="ttdeci">int Enemies_Count(struct Enemy *list)</div><div class="ttdoc">Sprawdza ile przeciwnikow istnieje.</div><div class="ttdef"><b>Definition</b> <a href="_enemies_8c_source.html#l00320">Enemies.c:320</a></div></div>
+<div class="ttc" id="a_enemies_8c_html_a8653248b9d5aeaf57049348626c3a955"><div class="ttname"><a href="_enemies_8c.html#a8653248b9d5aeaf57049348626c3a955">Enemy_FindAt</a></div><div class="ttdeci">struct Enemy * Enemy_FindAt(struct Enemy *first, struct Character *player, float X, float Y, struct Enemy *skipThis, float hitboxSize)</div><div class="ttdoc">Sprawdza czy na danych koordynatach jest jakis przeciwnik.</div><div class="ttdef"><b>Definition</b> <a href="_enemies_8c_source.html#l00292">Enemies.c:292</a></div></div>
+<div class="ttc" id="a_enemies_8c_html_ab1b879e9b64c9be041ab3aa6a480608a"><div class="ttname"><a href="_enemies_8c.html#ab1b879e9b64c9be041ab3aa6a480608a">Enemy_Remove</a></div><div class="ttdeci">bool Enemy_Remove(struct Enemy *element, struct Enemy **first)</div><div class="ttdoc">Usuwa przeciwnika.</div><div class="ttdef"><b>Definition</b> <a href="_enemies_8c_source.html#l00061">Enemies.c:61</a></div></div>
+<div class="ttc" id="a_enemies_8h_html"><div class="ttname"><a href="_enemies_8h.html">Enemies.h</a></div></div>
+<div class="ttc" id="a_explosions_8c_html_aa716f2c51fe8c12ff189a221515fe911"><div class="ttname"><a href="_explosions_8c.html#aa716f2c51fe8c12ff189a221515fe911">Explosion_Insert</a></div><div class="ttdeci">struct Explosion * Explosion_Insert(struct Explosion **first, int X, int Y, int i)</div><div class="ttdoc">Tworzy i umieszcza nowy element na liscie eksplozji.</div><div class="ttdef"><b>Definition</b> <a href="_explosions_8c_source.html#l00013">Explosions.c:13</a></div></div>
+<div class="ttc" id="a_explosions_8h_html"><div class="ttname"><a href="_explosions_8h.html">Explosions.h</a></div></div>
+<div class="ttc" id="aboosts_8c_html_a118461f42000ff6e63d810b0251437d3"><div class="ttname"><a href="boosts_8c.html#a118461f42000ff6e63d810b0251437d3">Boost_Add</a></div><div class="ttdeci">void Boost_Add(struct Boost **list, unsigned short typ, float x, float y)</div><div class="ttdoc">Dodaje nowy boost do listy.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00012">boosts.c:12</a></div></div>
+<div class="ttc" id="aend_door_8c_html_ac93a83343fc2f81c6563c8ff6f30cd2d"><div class="ttname"><a href="end_door_8c.html#ac93a83343fc2f81c6563c8ff6f30cd2d">CreateDoor</a></div><div class="ttdeci">void CreateDoor(float x, float y)</div><div class="ttdoc">Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8c_source.html#l00014">endDoor.c:14</a></div></div>
+<div class="ttc" id="aend_door_8h_html"><div class="ttname"><a href="end_door_8h.html">endDoor.h</a></div></div>
+<div class="ttc" id="amain_8c_html_a0045c0d05a62c5e4e87ae58cfd3c05c6"><div class="ttname"><a href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a></div><div class="ttdeci">float cam_y_offset</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00034">main.c:34</a></div></div>
+<div class="ttc" id="amain_8c_html_a0c6b025e3d49adb23ede839eb339aaba"><div class="ttname"><a href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a></div><div class="ttdeci">struct BombList * bombs</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00030">main.c:30</a></div></div>
+<div class="ttc" id="amain_8c_html_a23c39ea291d6ab3eedc01ede1fe795fd"><div class="ttname"><a href="main_8c.html#a23c39ea291d6ab3eedc01ede1fe795fd">GlobalAction</a></div><div class="ttdeci">unsigned short GlobalAction</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00035">main.c:35</a></div></div>
+<div class="ttc" id="amain_8c_html_a3980a30693d2af1a413698203929f1be"><div class="ttname"><a href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a></div><div class="ttdeci">struct Character * Player</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00037">main.c:37</a></div></div>
+<div class="ttc" id="amain_8c_html_a552dc66db0005fc65d2da465f5b65bab"><div class="ttname"><a href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a></div><div class="ttdeci">struct Explosion * explosions</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00040">main.c:40</a></div></div>
+<div class="ttc" id="amain_8c_html_a8235c6e9e346e312c0452da60148bc21"><div class="ttname"><a href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a></div><div class="ttdeci">float cam_x_offset</div><div class="ttdef"><b>Definition</b> <a href="main_8c_source.html#l00033">main.c:33</a></div></div>
+<div class="ttc" id="amain_8h_html"><div class="ttname"><a href="main_8h.html">main.h</a></div></div>
+<div class="ttc" id="asave_system_8c_html_a468a98a7be2e13678092133d5157e404"><div class="ttname"><a href="save_system_8c.html#a468a98a7be2e13678092133d5157e404">hasAchievement</a></div><div class="ttdeci">bool hasAchievement(int achievementId)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00079">saveSystem.c:79</a></div></div>
+<div class="ttc" id="asave_system_8c_html_a9fee469e473f1031fd15c443997ed4b3"><div class="ttname"><a href="save_system_8c.html#a9fee469e473f1031fd15c443997ed4b3">saveSystem_printAtLine</a></div><div class="ttdeci">void saveSystem_printAtLine(int lineNumber, const char *content)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00148">saveSystem.c:148</a></div></div>
+<div class="ttc" id="asave_system_8h_html"><div class="ttname"><a href="save_system_8h.html">saveSystem.h</a></div></div>
+<div class="ttc" id="asoundstack_8c_html_a8daadf335fa00aa30d365e271572cb54"><div class="ttname"><a href="soundstack_8c.html#a8daadf335fa00aa30d365e271572cb54">SampleStack_Push</a></div><div class="ttdeci">struct SampleStackElement * SampleStack_Push(struct SampleStackElement *first, ALLEGRO_SAMPLE_INSTANCE *instance)</div><div class="ttdef"><b>Definition</b> <a href="soundstack_8c_source.html#l00003">soundstack.c:3</a></div></div>
+<div class="ttc" id="asoundstack_8h_html"><div class="ttname"><a href="soundstack_8h.html">soundstack.h</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html"><div class="ttname"><a href="struct_bomb_list.html">BombList</a></div><div class="ttdoc">Struktura bomby.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00008">Bombs.h:9</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a3163c27dec2114cbef9841272758cebc"><div class="ttname"><a href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">BombList::insidePlayer</a></div><div class="ttdeci">bool insidePlayer</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00013">Bombs.h:13</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a3c9c5a0d5f65549777eff350c67f5a1e"><div class="ttname"><a href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">BombList::next</a></div><div class="ttdeci">struct BombList * next</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00014">Bombs.h:14</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a8ed049737f25e4aa69b99511c2668f55"><div class="ttname"><a href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">BombList::timeLeft</a></div><div class="ttdeci">float timeLeft</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00010">Bombs.h:10</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a9533d0f356a934c15e2398129eb16223"><div class="ttname"><a href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">BombList::Position</a></div><div class="ttdeci">struct Vector2 Position</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00011">Bombs.h:11</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_af07db59b756cbb0e683881dd19539623"><div class="ttname"><a href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">BombList::exploded</a></div><div class="ttdeci">bool exploded</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00012">Bombs.h:12</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_af376782670de609e2d8d1e3eb0cbc358"><div class="ttname"><a href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">BombList::prev</a></div><div class="ttdeci">struct BombList * prev</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00015">Bombs.h:15</a></div></div>
+<div class="ttc" id="astruct_boost_html"><div class="ttname"><a href="struct_boost.html">Boost</a></div><div class="ttdoc">Struktura reprezentujaca ulepszenie.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00008">boosts.h:9</a></div></div>
+<div class="ttc" id="astruct_character_html"><div class="ttname"><a href="struct_character.html">Character</a></div><div class="ttdoc">Struktura gracza.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00024">types.h:25</a></div></div>
+<div class="ttc" id="astruct_character_html_a6742802e3d356e46ebab48d51c65b873"><div class="ttname"><a href="struct_character.html#a6742802e3d356e46ebab48d51c65b873">Character::bombRange</a></div><div class="ttdeci">unsigned short int bombRange</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00033">types.h:33</a></div></div>
+<div class="ttc" id="astruct_character_html_a6feaabeee8b4a705396fd4da3c1a86ce"><div class="ttname"><a href="struct_character.html#a6feaabeee8b4a705396fd4da3c1a86ce">Character::Transform</a></div><div class="ttdeci">struct Transform Transform</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00026">types.h:26</a></div></div>
+<div class="ttc" id="astruct_character_html_a8740ba80e30dd75e71d09fa1dcf04f3d"><div class="ttname"><a href="struct_character.html#a8740ba80e30dd75e71d09fa1dcf04f3d">Character::enabled</a></div><div class="ttdeci">bool enabled</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00035">types.h:35</a></div></div>
+<div class="ttc" id="astruct_enemy_html"><div class="ttname"><a href="struct_enemy.html">Enemy</a></div><div class="ttdoc">Struktura przeciwnika.</div><div class="ttdef"><b>Definition</b> <a href="_enemies_8h_source.html#l00008">Enemies.h:9</a></div></div>
+<div class="ttc" id="astruct_explosion_html"><div class="ttname"><a href="struct_explosion.html">Explosion</a></div><div class="ttdoc">Struktura eksplozji.</div><div class="ttdef"><b>Definition</b> <a href="_explosions_8h_source.html#l00008">Explosions.h:9</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html"><div class="ttname"><a href="struct_sample_stack_element.html">SampleStackElement</a></div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00004">soundstack.h:5</a></div></div>
+<div class="ttc" id="astruct_transform_html_a16f89e0f37feace2eb4e6992d51b39bf"><div class="ttname"><a href="struct_transform.html#a16f89e0f37feace2eb4e6992d51b39bf">Transform::gridPosition</a></div><div class="ttdeci">struct Vector2 gridPosition</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00018">types.h:18</a></div></div>
+<div class="ttc" id="astruct_transform_html_a6f5f9ea5c0bddab99cbea122d71453a4"><div class="ttname"><a href="struct_transform.html#a6f5f9ea5c0bddab99cbea122d71453a4">Transform::position</a></div><div class="ttdeci">struct Vector2 position</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00017">types.h:17</a></div></div>
+<div class="ttc" id="astruct_transform_html_adbbdd7ba8a73ae016968e88e90bcb46c"><div class="ttname"><a href="struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c">Transform::scale</a></div><div class="ttdeci">struct Vector2 scale</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00019">types.h:19</a></div></div>
+<div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">Struktura posiadajaca dwie wspolrzedne X i Y.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00007">types.h:8</a></div></div>
+<div class="ttc" id="astruct_vector2_html_ab927965981178aa1fba979a37168db2a"><div class="ttname"><a href="struct_vector2.html#ab927965981178aa1fba979a37168db2a">Vector2::y</a></div><div class="ttdeci">double y</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00010">types.h:10</a></div></div>
+<div class="ttc" id="astruct_vector2_html_af88b946fb90d5f08b5fb740c70e98c10"><div class="ttname"><a href="struct_vector2.html#af88b946fb90d5f08b5fb740c70e98c10">Vector2::x</a></div><div class="ttdeci">double x</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00009">types.h:9</a></div></div>
+<div class="ttc" id="astructdstr__block_html"><div class="ttname"><a href="structdstr__block.html">dstr_block</a></div><div class="ttdoc">Struktura bloku.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00013">Blocks.h:14</a></div></div>
+<div class="ttc" id="astructdstr__block_html_a019edd2fdee4d283e07348cf21a9c9c3"><div class="ttname"><a href="structdstr__block.html#a019edd2fdee4d283e07348cf21a9c9c3">dstr_block::hasDoor</a></div><div class="ttdeci">bool hasDoor</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00021">Blocks.h:21</a></div></div>
+<div class="ttc" id="astructdstr__block_html_a6e480061dc5ecc1f85a71989a6352dfc"><div class="ttname"><a href="structdstr__block.html#a6e480061dc5ecc1f85a71989a6352dfc">dstr_block::exists</a></div><div class="ttdeci">bool exists</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00017">Blocks.h:17</a></div></div>
+<div class="ttc" id="astructdstr__block_html_ac20ce7c6ded7d7cb501a54fb3182921c"><div class="ttname"><a href="structdstr__block.html#ac20ce7c6ded7d7cb501a54fb3182921c">dstr_block::next</a></div><div class="ttdeci">struct dstr_block * next</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00019">Blocks.h:19</a></div></div>
+<div class="ttc" id="astructdstr__block_html_aeeea14de0b2a94ed2e5fe4513a0f2dec"><div class="ttname"><a href="structdstr__block.html#aeeea14de0b2a94ed2e5fe4513a0f2dec">dstr_block::destroyable</a></div><div class="ttdeci">bool destroyable</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00018">Blocks.h:18</a></div></div>
+<div class="ttc" id="atypes_8c_html_a78f4d5e1ae7ef7321353ab5c6d470f7d"><div class="ttname"><a href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a></div><div class="ttdeci">bool is_on_block(struct dstr_block *blocks, float x, float y, bool *destroyable, struct Character *Player, struct BombList *bombs, bool bombanyway)</div><div class="ttdoc">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.</div><div class="ttdef"><b>Definition</b> <a href="types_8c_source.html#l00016">types.c:16</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

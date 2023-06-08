@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/Bombs.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">Bombs.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_bombs_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &quot;allegro5/allegro_audio.h&quot;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="boosts_8h.html">boosts.h</a>&quot;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct_bomb_list.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">   10</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">timeLeft</a>; </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">   11</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_vector2.html">Vector2</a> <a class="code hl_variable" href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">Position</a>; </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">   12</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">exploded</a>; </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">   13</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">insidePlayer</a>; </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">   14</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">next</a>;  </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">   15</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_variable" href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">prev</a>;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8h.html#a69dd4fc1f5741aabb8424f36c9397186">Bomb_CreateList</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8h.html#ac0c8c1a04b0a17cbace4dc04cf3dc31b">Bomb_RemoveList</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8h.html#a175046b3af680c972aa7244d47a708b4">Bomb_InsertInto</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a>);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code hl_function" href="_bombs_8h.html#a77c27220fe5deeb14275e0331b30391f">Bomb_count</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8h.html#ad91c690b5568b89fdf7e9b521aeb0938">Bomb_ExistsAt</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_vector2.html">Vector2</a>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8h.html#ac427b63375684cabe7fa6eef34886d90">Bomb_checkPlayer</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">bool</span> <a class="code hl_function" href="_bombs_8h.html#a32c8df26d395d9097eb9e30dd2de9391">Bomb_Remove</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*);</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8h.html#aa7fee8673edd3403e207509bb2f91715">plantBomb</a>(<span class="keywordtype">bool</span>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>*);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8h.html#a37a6008b6777aadcd484fa5f08cfd721">renderBombs</a>(ALGIF_ANIMATION*, <span class="keywordtype">double</span>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8h.html#ad56e2231ebc374ae3b435db457510225">explodeBomb</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>**, ALLEGRO_SAMPLE*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*, <span class="keywordtype">float</span>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_explosion.html">Explosion</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_enemy.html">Enemy</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keywordtype">void</span> <a class="code hl_function" href="_bombs_8h.html#adea736aec9c9696cd5a40dce48f027d6">loopBombs</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="structdstr__block.html">dstr_block</a>**, ALLEGRO_SAMPLE*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_sample_stack_element.html">SampleStackElement</a>**, <span class="keywordtype">float</span> dT, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*, <span class="keywordtype">float</span>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_explosion.html">Explosion</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_enemy.html">Enemy</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">struct </span><a class="code hl_struct" href="struct_bomb_list.html">BombList</a>* <a class="code hl_function" href="_bombs_8h.html#ad701043b064a70691ac7fc805ca15bd5">Bomb_Find</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_bomb_list.html">BombList</a>*, <span class="keywordtype">int</span>, <span class="keywordtype">int</span>, <span class="keywordtype">bool</span>, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*);</div>
+<div class="ttc" id="a_bombs_8h_html_a175046b3af680c972aa7244d47a708b4"><div class="ttname"><a href="_bombs_8h.html#a175046b3af680c972aa7244d47a708b4">Bomb_InsertInto</a></div><div class="ttdeci">struct BombList * Bomb_InsertInto(struct BombList *, struct Vector2)</div><div class="ttdoc">Dodaje bombe do listy bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00062">Bombs.c:62</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_a32c8df26d395d9097eb9e30dd2de9391"><div class="ttname"><a href="_bombs_8h.html#a32c8df26d395d9097eb9e30dd2de9391">Bomb_Remove</a></div><div class="ttdeci">bool Bomb_Remove(struct BombList **, struct BombList **, struct Character *)</div><div class="ttdoc">Usuwa bombe z listy.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00210">Bombs.c:210</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_a37a6008b6777aadcd484fa5f08cfd721"><div class="ttname"><a href="_bombs_8h.html#a37a6008b6777aadcd484fa5f08cfd721">renderBombs</a></div><div class="ttdeci">void renderBombs(ALGIF_ANIMATION *, double, float, float, struct Character *, struct BombList *)</div><div class="ttdoc">Renderowanie (wyswietlanie) istniejacych bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00297">Bombs.c:297</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_a69dd4fc1f5741aabb8424f36c9397186"><div class="ttname"><a href="_bombs_8h.html#a69dd4fc1f5741aabb8424f36c9397186">Bomb_CreateList</a></div><div class="ttdeci">struct BombList * Bomb_CreateList(struct Vector2)</div><div class="ttdoc">Tworzy liste bomb (oraz pierwsza bombe).</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00025">Bombs.c:25</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_a77c27220fe5deeb14275e0331b30391f"><div class="ttname"><a href="_bombs_8h.html#a77c27220fe5deeb14275e0331b30391f">Bomb_count</a></div><div class="ttdeci">unsigned int Bomb_count(struct BombList *)</div><div class="ttdoc">Liczy istniejace bomby.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00093">Bombs.c:93</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_aa7fee8673edd3403e207509bb2f91715"><div class="ttname"><a href="_bombs_8h.html#aa7fee8673edd3403e207509bb2f91715">plantBomb</a></div><div class="ttdeci">void plantBomb(bool, struct Character *, struct BombList **, struct dstr_block *)</div><div class="ttdoc">Podklada bombe.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00245">Bombs.c:245</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_ac0c8c1a04b0a17cbace4dc04cf3dc31b"><div class="ttname"><a href="_bombs_8h.html#ac0c8c1a04b0a17cbace4dc04cf3dc31b">Bomb_RemoveList</a></div><div class="ttdeci">bool Bomb_RemoveList(struct BombList **)</div><div class="ttdoc">Usuwa liste bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00045">Bombs.c:45</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_ac427b63375684cabe7fa6eef34886d90"><div class="ttname"><a href="_bombs_8h.html#ac427b63375684cabe7fa6eef34886d90">Bomb_checkPlayer</a></div><div class="ttdeci">bool Bomb_checkPlayer(struct BombList *, struct Character *)</div><div class="ttdoc">Sprawdza czy w srodku bomby jest gracz.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00185">Bombs.c:185</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_ad56e2231ebc374ae3b435db457510225"><div class="ttname"><a href="_bombs_8h.html#ad56e2231ebc374ae3b435db457510225">explodeBomb</a></div><div class="ttdeci">void explodeBomb(struct BombList **, struct BombList **, struct dstr_block **, ALLEGRO_SAMPLE *, struct SampleStackElement **, struct Character *, float *, struct Explosion **, struct Enemy **, struct Boost **)</div><div class="ttdoc">Wysadza jedna z bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00330">Bombs.c:330</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_ad701043b064a70691ac7fc805ca15bd5"><div class="ttname"><a href="_bombs_8h.html#ad701043b064a70691ac7fc805ca15bd5">Bomb_Find</a></div><div class="ttdeci">struct BombList * Bomb_Find(struct BombList *, int, int, bool, struct Character *)</div><div class="ttdoc">Znajduje bombe na danych koordynatach.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00144">Bombs.c:144</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_ad91c690b5568b89fdf7e9b521aeb0938"><div class="ttname"><a href="_bombs_8h.html#ad91c690b5568b89fdf7e9b521aeb0938">Bomb_ExistsAt</a></div><div class="ttdeci">bool Bomb_ExistsAt(struct BombList *, struct Vector2)</div><div class="ttdoc">Sprawdza czy na danych koordynatach istnieje jakas bomba.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00117">Bombs.c:117</a></div></div>
+<div class="ttc" id="a_bombs_8h_html_adea736aec9c9696cd5a40dce48f027d6"><div class="ttname"><a href="_bombs_8h.html#adea736aec9c9696cd5a40dce48f027d6">loopBombs</a></div><div class="ttdeci">void loopBombs(struct BombList **, struct dstr_block **, ALLEGRO_SAMPLE *, struct SampleStackElement **, float dT, struct Character *, float *, struct Explosion **, struct Enemy **, struct Boost **)</div><div class="ttdoc">Funkcja wywolywana co klatke (petla) wykonujaca operacje dla wszystkich bomb.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8c_source.html#l00494">Bombs.c:494</a></div></div>
+<div class="ttc" id="aboosts_8h_html"><div class="ttname"><a href="boosts_8h.html">boosts.h</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html"><div class="ttname"><a href="struct_bomb_list.html">BombList</a></div><div class="ttdoc">Struktura bomby.</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00008">Bombs.h:9</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a3163c27dec2114cbef9841272758cebc"><div class="ttname"><a href="struct_bomb_list.html#a3163c27dec2114cbef9841272758cebc">BombList::insidePlayer</a></div><div class="ttdeci">bool insidePlayer</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00013">Bombs.h:13</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a3c9c5a0d5f65549777eff350c67f5a1e"><div class="ttname"><a href="struct_bomb_list.html#a3c9c5a0d5f65549777eff350c67f5a1e">BombList::next</a></div><div class="ttdeci">struct BombList * next</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00014">Bombs.h:14</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a8ed049737f25e4aa69b99511c2668f55"><div class="ttname"><a href="struct_bomb_list.html#a8ed049737f25e4aa69b99511c2668f55">BombList::timeLeft</a></div><div class="ttdeci">float timeLeft</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00010">Bombs.h:10</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_a9533d0f356a934c15e2398129eb16223"><div class="ttname"><a href="struct_bomb_list.html#a9533d0f356a934c15e2398129eb16223">BombList::Position</a></div><div class="ttdeci">struct Vector2 Position</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00011">Bombs.h:11</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_af07db59b756cbb0e683881dd19539623"><div class="ttname"><a href="struct_bomb_list.html#af07db59b756cbb0e683881dd19539623">BombList::exploded</a></div><div class="ttdeci">bool exploded</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00012">Bombs.h:12</a></div></div>
+<div class="ttc" id="astruct_bomb_list_html_af376782670de609e2d8d1e3eb0cbc358"><div class="ttname"><a href="struct_bomb_list.html#af376782670de609e2d8d1e3eb0cbc358">BombList::prev</a></div><div class="ttdeci">struct BombList * prev</div><div class="ttdef"><b>Definition</b> <a href="_bombs_8h_source.html#l00015">Bombs.h:15</a></div></div>
+<div class="ttc" id="astruct_boost_html"><div class="ttname"><a href="struct_boost.html">Boost</a></div><div class="ttdoc">Struktura reprezentujaca ulepszenie.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00008">boosts.h:9</a></div></div>
+<div class="ttc" id="astruct_character_html"><div class="ttname"><a href="struct_character.html">Character</a></div><div class="ttdoc">Struktura gracza.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00024">types.h:25</a></div></div>
+<div class="ttc" id="astruct_enemy_html"><div class="ttname"><a href="struct_enemy.html">Enemy</a></div><div class="ttdoc">Struktura przeciwnika.</div><div class="ttdef"><b>Definition</b> <a href="_enemies_8h_source.html#l00008">Enemies.h:9</a></div></div>
+<div class="ttc" id="astruct_explosion_html"><div class="ttname"><a href="struct_explosion.html">Explosion</a></div><div class="ttdoc">Struktura eksplozji.</div><div class="ttdef"><b>Definition</b> <a href="_explosions_8h_source.html#l00008">Explosions.h:9</a></div></div>
+<div class="ttc" id="astruct_sample_stack_element_html"><div class="ttname"><a href="struct_sample_stack_element.html">SampleStackElement</a></div><div class="ttdef"><b>Definition</b> <a href="soundstack_8h_source.html#l00004">soundstack.h:5</a></div></div>
+<div class="ttc" id="astruct_vector2_html"><div class="ttname"><a href="struct_vector2.html">Vector2</a></div><div class="ttdoc">Struktura posiadajaca dwie wspolrzedne X i Y.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00007">types.h:8</a></div></div>
+<div class="ttc" id="astructdstr__block_html"><div class="ttname"><a href="structdstr__block.html">dstr_block</a></div><div class="ttdoc">Struktura bloku.</div><div class="ttdef"><b>Definition</b> <a href="_blocks_8h_source.html#l00013">Blocks.h:14</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

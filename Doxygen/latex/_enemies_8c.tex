@@ -1,0 +1,339 @@
+\doxysection{Dokumentacja pliku Bomberman/\+Enemies.c}
+\hypertarget{_enemies_8c}{}\label{_enemies_8c}\index{Bomberman/Enemies.c@{Bomberman/Enemies.c}}
+{\ttfamily \#include \"{}Enemies.\+h\"{}}\newline
+{\ttfamily \#include \"{}Blocks.\+h\"{}}\newline
+{\ttfamily \#include \"{}Bombs.\+h\"{}}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_enemies_8c_a8f91cbd74abb3a47b2971620a6f1f3da}{Enemy\+\_\+\+Add}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}list, float initX, float initY, float speed, ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*}Animation, bool through\+Walls)
+\begin{DoxyCompactList}\small\item\em Dodaje przeciwnika (tworzac przy tym ewentualnie nowa liste) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_enemies_8c_ab1b879e9b64c9be041ab3aa6a480608a}{Enemy\+\_\+\+Remove}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}element, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first)
+\begin{DoxyCompactList}\small\item\em Usuwa przeciwnika. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_enemies_8c_ae3cfa5df869f04a523a6bf5fd1ba13d6}{Enemies\+\_\+\+Clear}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}list)
+\begin{DoxyCompactList}\small\item\em Czysci i usuwa liste przeciwnikow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_enemies_8c_ad01c13bd8f971051a0d455d9ead98f2e}{Enemies\+\_\+\+Draw}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}list, double animationtime, float x\+\_\+of, float y\+\_\+of)
+\begin{DoxyCompactList}\small\item\em Renderuje (wyswietla) istniejacych przeciwnikow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_enemies_8c_af671ca7ff6e6485a8ec03c6685b375c4}{Enemy\+\_\+\+Move}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}list, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}me, float dT, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}}, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Porusza przeciwnikiem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_enemies_8c_a1dfc512c1f21dc75f8b4fa7d460cf07d}{Enemies\+\_\+\+Loop}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}list, double animationtime, float xof, float yof, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, float dT, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}}, bool Paused)
+\begin{DoxyCompactList}\small\item\em Petla przeciwnikow (funkcja dzialajaca na kazdym przeciwniku co klatke) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_enemies_8c_a56ec3564856046b8ab3a1e666e379cc9}{Enemy\+\_\+\+Collides\+With\+Player}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}me, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}player, float hitbox\+Scale)
+\begin{DoxyCompactList}\small\item\em Sprawdza czy przeciwnik koliduje z graczem. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_enemies_8c_a269c7328a7b0aa8549ac6ab040d37d81}{Collide\+With\+Player}} (float X, float Y, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}player, float hitbox\+Scale)
+\begin{DoxyCompactList}\small\item\em Sprawdza czy cos koliduje z graczem. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_enemies_8c_a8653248b9d5aeaf57049348626c3a955}{Enemy\+\_\+\+Find\+At}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}first, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}player, float X, float Y, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}skip\+This, float hitbox\+Size)
+\begin{DoxyCompactList}\small\item\em Sprawdza czy na danych koordynatach jest jakis przeciwnik. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{_enemies_8c_a0fa5994d7bbc5de03055fb711dd7bbef}{Enemies\+\_\+\+Count}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}list)
+\begin{DoxyCompactList}\small\item\em Sprawdza ile przeciwnikow istnieje. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_enemies_8c_a19d9fc6190c66d23965bc339222c7027}{Enemy\+\_\+\+Random\+Position}} (struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}list, float \texorpdfstring{$\ast$}{*}X, float \texorpdfstring{$\ast$}{*}Y, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, int level, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}})
+\begin{DoxyCompactList}\small\item\em Zwraca losowe koordynaty dla przeciwnika w zaleznosci od poziomu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{_enemies_8c_a269c7328a7b0aa8549ac6ab040d37d81}\label{_enemies_8c_a269c7328a7b0aa8549ac6ab040d37d81} 
+\index{Enemies.c@{Enemies.c}!CollideWithPlayer@{CollideWithPlayer}}
+\index{CollideWithPlayer@{CollideWithPlayer}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{CollideWithPlayer()}{CollideWithPlayer()}}
+{\footnotesize\ttfamily bool Collide\+With\+Player (\begin{DoxyParamCaption}\item[{float}]{X,  }\item[{float}]{Y,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{player,  }\item[{float}]{hitbox\+Scale }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy cos koliduje z graczem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em X} & Wspolrzedna na osi X. \\
+\hline
+{\em Y} & Wspolrzedna na osi Y. \\
+\hline
+{\em player} & Wskaznik na gracza. \\
+\hline
+{\em hitbox\+Scale} & Dostosowanie wielkosci wykrywania kolizji. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy cos koliduje z graczem. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00268}{268}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_ae3cfa5df869f04a523a6bf5fd1ba13d6}\label{_enemies_8c_ae3cfa5df869f04a523a6bf5fd1ba13d6} 
+\index{Enemies.c@{Enemies.c}!Enemies\_Clear@{Enemies\_Clear}}
+\index{Enemies\_Clear@{Enemies\_Clear}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemies\_Clear()}{Enemies\_Clear()}}
+{\footnotesize\ttfamily void Enemies\+\_\+\+Clear (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+
+
+Czysci i usuwa liste przeciwnikow. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Podwojny wskaznik na liste przeciwnikow. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00089}{89}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a0fa5994d7bbc5de03055fb711dd7bbef}\label{_enemies_8c_a0fa5994d7bbc5de03055fb711dd7bbef} 
+\index{Enemies.c@{Enemies.c}!Enemies\_Count@{Enemies\_Count}}
+\index{Enemies\_Count@{Enemies\_Count}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemies\_Count()}{Enemies\_Count()}}
+{\footnotesize\ttfamily int Enemies\+\_\+\+Count (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+
+
+Sprawdza ile przeciwnikow istnieje. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Wskaznik na liste przeciwnikow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Ilosc przeciwnikow. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00320}{320}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_ad01c13bd8f971051a0d455d9ead98f2e}\label{_enemies_8c_ad01c13bd8f971051a0d455d9ead98f2e} 
+\index{Enemies.c@{Enemies.c}!Enemies\_Draw@{Enemies\_Draw}}
+\index{Enemies\_Draw@{Enemies\_Draw}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemies\_Draw()}{Enemies\_Draw()}}
+{\footnotesize\ttfamily void Enemies\+\_\+\+Draw (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{double}]{animationtime,  }\item[{float}]{x\+\_\+of,  }\item[{float}]{y\+\_\+of }\end{DoxyParamCaption})}
+
+
+
+Renderuje (wyswietla) istniejacych przeciwnikow. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em animationtime} & Czas animacji. \\
+\hline
+{\em x\+\_\+of} & Offset kamery na osi X. \\
+\hline
+{\em y\+\_\+of} & Offset kamery na osi Y. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00110}{110}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a1dfc512c1f21dc75f8b4fa7d460cf07d}\label{_enemies_8c_a1dfc512c1f21dc75f8b4fa7d460cf07d} 
+\index{Enemies.c@{Enemies.c}!Enemies\_Loop@{Enemies\_Loop}}
+\index{Enemies\_Loop@{Enemies\_Loop}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemies\_Loop()}{Enemies\_Loop()}}
+{\footnotesize\ttfamily void Enemies\+\_\+\+Loop (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{double}]{animationtime,  }\item[{float}]{xof,  }\item[{float}]{yof,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{float}]{dT,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{bool}]{Paused }\end{DoxyParamCaption})}
+
+
+
+Petla przeciwnikow (funkcja dzialajaca na kazdym przeciwniku co klatke) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em animationtime} & Czas animacji. \\
+\hline
+{\em xof} & Offset kamery na osi X. \\
+\hline
+{\em yof} & Offset kamery na osi Y. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em dT} & delta\+Time (czas od ostatniej wyswietlonej klatki). \\
+\hline
+{\em blocks} & Wskaznik na liste blokow. \\
+\hline
+{\em bombs} & Wskaznik na liste bomb. \\
+\hline
+{\em Paused} & Czy pauza jest aktywna. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00231}{231}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a8f91cbd74abb3a47b2971620a6f1f3da}\label{_enemies_8c_a8f91cbd74abb3a47b2971620a6f1f3da} 
+\index{Enemies.c@{Enemies.c}!Enemy\_Add@{Enemy\_Add}}
+\index{Enemy\_Add@{Enemy\_Add}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_Add()}{Enemy\_Add()}}
+{\footnotesize\ttfamily bool Enemy\+\_\+\+Add (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{list,  }\item[{float}]{initX,  }\item[{float}]{initY,  }\item[{float}]{speed,  }\item[{ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*}}]{Animation,  }\item[{bool}]{through\+Walls }\end{DoxyParamCaption})}
+
+
+
+Dodaje przeciwnika (tworzac przy tym ewentualnie nowa liste) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Podwojny wskaznik na liste przeciwnikow. \\
+\hline
+{\em initX} & Pozycja startowa przeciwnika na osi X. \\
+\hline
+{\em initY} & Pozycja startowa przeciwnika na osi Y. \\
+\hline
+{\em speed} & Predkosc przeciwnika. \\
+\hline
+{\em Animation} & Animacja przeciwnika. \\
+\hline
+{\em through\+Walls} & Czy przeciwnik bedzie przechodzic przez sciany. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy przeciwnik zostal dodany 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00022}{22}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a56ec3564856046b8ab3a1e666e379cc9}\label{_enemies_8c_a56ec3564856046b8ab3a1e666e379cc9} 
+\index{Enemies.c@{Enemies.c}!Enemy\_CollidesWithPlayer@{Enemy\_CollidesWithPlayer}}
+\index{Enemy\_CollidesWithPlayer@{Enemy\_CollidesWithPlayer}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_CollidesWithPlayer()}{Enemy\_CollidesWithPlayer()}}
+{\footnotesize\ttfamily bool Enemy\+\_\+\+Collides\+With\+Player (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{me,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{player,  }\item[{float}]{hitbox\+Scale }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy przeciwnik koliduje z graczem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em me} & Wskaznik na przeciwnika. \\
+\hline
+{\em player} & Wskaznik na gracza. \\
+\hline
+{\em hitbox\+Scale} & Dostosowanie wielkosci wykrywania kolizji. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ Czy przeciwnik koliduje z graczem. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00255}{255}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a8653248b9d5aeaf57049348626c3a955}\label{_enemies_8c_a8653248b9d5aeaf57049348626c3a955} 
+\index{Enemies.c@{Enemies.c}!Enemy\_FindAt@{Enemy\_FindAt}}
+\index{Enemy\_FindAt@{Enemy\_FindAt}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_FindAt()}{Enemy\_FindAt()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*} Enemy\+\_\+\+Find\+At (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{player,  }\item[{float}]{X,  }\item[{float}]{Y,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{skip\+This,  }\item[{float}]{hitbox\+Size }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy na danych koordynatach jest jakis przeciwnik. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em player} & Wskaznik na gracza. \\
+\hline
+{\em X} & Wspolrzedna na osi X. \\
+\hline
+{\em Y} & Wspolrzedna na osi Y. \\
+\hline
+{\em skip\+This} & Wskaznik na przeciwnika ktorego ma nie brac pod uwage przy sprawdzaniu. \\
+\hline
+{\em hitbox\+Size} & Dostosowanie wielkosci wykrywania. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Znaleziony przeciwnik (lub NULL). 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00292}{292}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_af671ca7ff6e6485a8ec03c6685b375c4}\label{_enemies_8c_af671ca7ff6e6485a8ec03c6685b375c4} 
+\index{Enemies.c@{Enemies.c}!Enemy\_Move@{Enemy\_Move}}
+\index{Enemy\_Move@{Enemy\_Move}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_Move()}{Enemy\_Move()}}
+{\footnotesize\ttfamily void Enemy\+\_\+\+Move (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{me,  }\item[{float}]{dT,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Porusza przeciwnikiem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em me} & Wskaznik na przeciwnika. \\
+\hline
+{\em dT} & delta\+Time (czas od ostatniej wyswietlonej klatki). \\
+\hline
+{\em blocks} & Wskaznik na liste blokow. \\
+\hline
+{\em bombs} & Wskaznik na liste bomb. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00144}{144}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_a19d9fc6190c66d23965bc339222c7027}\label{_enemies_8c_a19d9fc6190c66d23965bc339222c7027} 
+\index{Enemies.c@{Enemies.c}!Enemy\_RandomPosition@{Enemy\_RandomPosition}}
+\index{Enemy\_RandomPosition@{Enemy\_RandomPosition}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_RandomPosition()}{Enemy\_RandomPosition()}}
+{\footnotesize\ttfamily void Enemy\+\_\+\+Random\+Position (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{list,  }\item[{float \texorpdfstring{$\ast$}{*}}]{X,  }\item[{float \texorpdfstring{$\ast$}{*}}]{Y,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{int}]{level,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs }\end{DoxyParamCaption})}
+
+
+
+Zwraca losowe koordynaty dla przeciwnika w zaleznosci od poziomu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em X} & Wskaznik na wspolrzedna osi X (zwracanie poprzez wskaznik). \\
+\hline
+{\em Y} & Wskaznik na wspolrzedna osi Y (zwracanie poprzez wskaznik). \\
+\hline
+{\em blocks} & Wskaznik na liste blokow. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em level} & Poziom. \\
+\hline
+{\em bombs} & Wskaznik na liste bomb. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00342}{342}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+
+\Hypertarget{_enemies_8c_ab1b879e9b64c9be041ab3aa6a480608a}\label{_enemies_8c_ab1b879e9b64c9be041ab3aa6a480608a} 
+\index{Enemies.c@{Enemies.c}!Enemy\_Remove@{Enemy\_Remove}}
+\index{Enemy\_Remove@{Enemy\_Remove}!Enemies.c@{Enemies.c}}
+\doxysubsubsection{\texorpdfstring{Enemy\_Remove()}{Enemy\_Remove()}}
+{\footnotesize\ttfamily bool Enemy\+\_\+\+Remove (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{element,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first }\end{DoxyParamCaption})}
+
+
+
+Usuwa przeciwnika. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em element} & Wskaznik na przeciwnika. \\
+\hline
+{\em first} & Podwojny wskaznik na liste przeciwnikow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy przeciwnik zostal usuniety 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_enemies_8c_source_l00061}{61}} pliku \mbox{\hyperlink{_enemies_8c_source}{Enemies.\+c}}.
+

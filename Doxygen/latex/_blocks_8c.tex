@@ -1,0 +1,344 @@
+\doxysection{Dokumentacja pliku Bomberman/\+Blocks.c}
+\hypertarget{_blocks_8c}{}\label{_blocks_8c}\index{Bomberman/Blocks.c@{Bomberman/Blocks.c}}
+{\ttfamily \#include \"{}Blocks.\+h\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include \"{}end\+Door.\+h\"{}}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{_blocks_8c_a6e9da8166b912699527b9a54f6d6dec4}{Block\+\_\+\+Exists}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}first, int X, int Y, bool around, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Sprawdza, czy na danych koordynatach miesci sie blok. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8c_a1b85ef7b573f22650e83044c791f8b76}{Block\+\_\+\+Insert}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first, int X, int Y, bool static\+Block)
+\begin{DoxyCompactList}\small\item\em Umieszcza nowy blok w liscie na danych koordynatach. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8c_ad92f0a94745aa3ebd809ccd1c9ffa305}{Block\+\_\+create\+List}} (int X, int Y, bool static\+Block)
+\begin{DoxyCompactList}\small\item\em Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_blocks_8c_a1b9a2086f824bd39e348a7f64ebe0e91}{Block\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}block)
+\begin{DoxyCompactList}\small\item\em Usuwa liste blokow. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8c_a4bc0f7f832b8f6eff367a64f5d66396d}{Block\+\_\+\+Find}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, int X, int Y, bool grid\+Method, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Szuka bloku na danych koordynatach. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_blocks_8c_aadaf5d30b885ab1730b5a383f8d29db3}{Block\+\_\+\+Remove}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}element, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemies)
+\begin{DoxyCompactList}\small\item\em Usuwa konkretny blok z listy. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{_blocks_8c_aceffbf35493f9e0a33a50c7be59727e1}{Blocks\+\_\+\+Count}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}first)
+\begin{DoxyCompactList}\small\item\em Zliczanie blokow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_blocks_8c_a3d6a0ff540c5e1436e84e3d76d001f0a}{Blocks\+\_\+draw}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}first, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}d\+BS, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}s\+BS, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, float \mbox{\hyperlink{main_8c_a8235c6e9e346e312c0452da60148bc21}{cam\+\_\+x\+\_\+offset}}, float \mbox{\hyperlink{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}{cam\+\_\+y\+\_\+offset}})
+\begin{DoxyCompactList}\small\item\em Renderowanie (wyswietlanie) istniejacych blokow. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_blocks_8c_aec0faef0f949f43ef6c280cd1a58d43b}{loop\+Blocks}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}blocks, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemies)
+\begin{DoxyCompactList}\small\item\em Petla blokow (wykonywana co klatke). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_blocks_8c_aa52c96fc4078a8e363c9054566f82399}{Block\+\_\+random}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}first, int level, int \texorpdfstring{$\ast$}{*}X, int \texorpdfstring{$\ast$}{*}Y, int i, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_blocks_8c_a24e7903a19cc38333024a15946200b1b}{Generate\+Static\+Blocks}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Generuje niezniszczalne bloki. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8c_aaa0d95808453c63b3b798f96121d183b}{generate\+\_\+blocks}} (int level, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Generuje zniszczalne bloki. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{_blocks_8c_ad92f0a94745aa3ebd809ccd1c9ffa305}\label{_blocks_8c_ad92f0a94745aa3ebd809ccd1c9ffa305} 
+\index{Blocks.c@{Blocks.c}!Block\_createList@{Block\_createList}}
+\index{Block\_createList@{Block\_createList}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_createList()}{Block\_createList()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} Block\+\_\+create\+List (\begin{DoxyParamCaption}\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{static\+Block }\end{DoxyParamCaption})}
+
+
+
+Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em X} & Wspolrzedna x. \\
+\hline
+{\em Y} & Wspolrzedna y. \\
+\hline
+{\em static\+Block} & Wartosc logiczna -\/ czy blok jest statyczny (niezniszczalny). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wskaznik na nowy blok. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00103}{103}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a6e9da8166b912699527b9a54f6d6dec4}\label{_blocks_8c_a6e9da8166b912699527b9a54f6d6dec4} 
+\index{Blocks.c@{Blocks.c}!Block\_Exists@{Block\_Exists}}
+\index{Block\_Exists@{Block\_Exists}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_Exists()}{Block\_Exists()}}
+{\footnotesize\ttfamily bool Block\+\_\+\+Exists (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{around,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Sprawdza, czy na danych koordynatach miesci sie blok. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em X} & Wspolrzedna x. \\
+\hline
+{\em Y} & Wspolrzedna y. \\
+\hline
+{\em around} & Czy ma sprawdzac rowniez obok o 1 blok. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy blok istnieje. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00016}{16}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a4bc0f7f832b8f6eff367a64f5d66396d}\label{_blocks_8c_a4bc0f7f832b8f6eff367a64f5d66396d} 
+\index{Blocks.c@{Blocks.c}!Block\_Find@{Block\_Find}}
+\index{Block\_Find@{Block\_Find}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_Find()}{Block\_Find()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} Block\+\_\+\+Find (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{grid\+Method,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Szuka bloku na danych koordynatach. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em blocks} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em X} & Wspolrzedna osi x. \\
+\hline
+{\em Y} & Wspolrzedna osi y. \\
+\hline
+{\em grid\+Method} & Metoda szukania (czy tylko po konkretnych koordynatach siatki). \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Blok, o ile znaleziono. (Inaczej NULL) 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00144}{144}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a1b85ef7b573f22650e83044c791f8b76}\label{_blocks_8c_a1b85ef7b573f22650e83044c791f8b76} 
+\index{Blocks.c@{Blocks.c}!Block\_Insert@{Block\_Insert}}
+\index{Block\_Insert@{Block\_Insert}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_Insert()}{Block\_Insert()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} Block\+\_\+\+Insert (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{static\+Block }\end{DoxyParamCaption})}
+
+
+
+Umieszcza nowy blok w liscie na danych koordynatach. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Podwojny wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em X} & Wspolrzedna x. \\
+\hline
+{\em Y} & Wspolrzedna y. \\
+\hline
+{\em static\+Block} & Wartosc logiczna -\/ czy blok jest statyczny (niezniszczalny). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wskaznik na nowy blok. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00064}{64}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_aa52c96fc4078a8e363c9054566f82399}\label{_blocks_8c_aa52c96fc4078a8e363c9054566f82399} 
+\index{Blocks.c@{Blocks.c}!Block\_random@{Block\_random}}
+\index{Block\_random@{Block\_random}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_random()}{Block\_random()}}
+{\footnotesize\ttfamily void Block\+\_\+random (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{int}]{level,  }\item[{int \texorpdfstring{$\ast$}{*}}]{X,  }\item[{int \texorpdfstring{$\ast$}{*}}]{Y,  }\item[{int}]{i,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em level} & Poziom dla ktorego generuje koordynaty. \\
+\hline
+{\em X} & Wskaznik na koordynaty na osi X (zwracanie poprzez wskaznik). \\
+\hline
+{\em Y} & Wskaznik na koordynaty na osi Y (zwracanie poprzez wskaznik). \\
+\hline
+{\em i} & Ktory blok (z petli for) \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00317}{317}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_aadaf5d30b885ab1730b5a383f8d29db3}\label{_blocks_8c_aadaf5d30b885ab1730b5a383f8d29db3} 
+\index{Blocks.c@{Blocks.c}!Block\_Remove@{Block\_Remove}}
+\index{Block\_Remove@{Block\_Remove}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_Remove()}{Block\_Remove()}}
+{\footnotesize\ttfamily bool Block\+\_\+\+Remove (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{element,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{enemies }\end{DoxyParamCaption})}
+
+
+
+Usuwa konkretny blok z listy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em element} & Wskaznik na element listy blokow do usuniecia. \\
+\hline
+{\em first} & Podwojny wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em enemies} & Wskaznik na liste przeciwnikow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy usunieto blok. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00184}{184}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a1b9a2086f824bd39e348a7f64ebe0e91}\label{_blocks_8c_a1b9a2086f824bd39e348a7f64ebe0e91} 
+\index{Blocks.c@{Blocks.c}!Block\_RemoveList@{Block\_RemoveList}}
+\index{Block\_RemoveList@{Block\_RemoveList}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Block\_RemoveList()}{Block\_RemoveList()}}
+{\footnotesize\ttfamily bool Block\+\_\+\+Remove\+List (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{block }\end{DoxyParamCaption})}
+
+
+
+Usuwa liste blokow. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em block} & Podwojny wskaznik na pierwszy element listy blokow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy usunieto. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00124}{124}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_aceffbf35493f9e0a33a50c7be59727e1}\label{_blocks_8c_aceffbf35493f9e0a33a50c7be59727e1} 
+\index{Blocks.c@{Blocks.c}!Blocks\_Count@{Blocks\_Count}}
+\index{Blocks\_Count@{Blocks\_Count}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Blocks\_Count()}{Blocks\_Count()}}
+{\footnotesize\ttfamily unsigned int Blocks\+\_\+\+Count (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{first }\end{DoxyParamCaption})}
+
+
+
+Zliczanie blokow. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Ilosc blokow. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00219}{219}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a3d6a0ff540c5e1436e84e3d76d001f0a}\label{_blocks_8c_a3d6a0ff540c5e1436e84e3d76d001f0a} 
+\index{Blocks.c@{Blocks.c}!Blocks\_draw@{Blocks\_draw}}
+\index{Blocks\_draw@{Blocks\_draw}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{Blocks\_draw()}{Blocks\_draw()}}
+{\footnotesize\ttfamily void Blocks\+\_\+draw (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{d\+BS,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{s\+BS,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{float}]{cam\+\_\+x\+\_\+offset,  }\item[{float}]{cam\+\_\+y\+\_\+offset }\end{DoxyParamCaption})}
+
+
+
+Renderowanie (wyswietlanie) istniejacych blokow. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em d\+BS} & Sprite zniszczalnego bloku (wskaznik). \\
+\hline
+{\em s\+BS} & Sprite niezniszczalnego bloku (wskaznik). \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em cam\+\_\+x\+\_\+offset} & Offset kamery na osi X. \\
+\hline
+{\em cam\+\_\+y\+\_\+offset} & Offset kamery na osi Y. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00249}{249}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_aaa0d95808453c63b3b798f96121d183b}\label{_blocks_8c_aaa0d95808453c63b3b798f96121d183b} 
+\index{Blocks.c@{Blocks.c}!generate\_blocks@{generate\_blocks}}
+\index{generate\_blocks@{generate\_blocks}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{generate\_blocks()}{generate\_blocks()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} generate\+\_\+blocks (\begin{DoxyParamCaption}\item[{int}]{level,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Generuje zniszczalne bloki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em level} & Ktory poziom. \\
+\hline
+{\em Player} & Wskaznik na graczca. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Lista blokow. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00359}{359}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_a24e7903a19cc38333024a15946200b1b}\label{_blocks_8c_a24e7903a19cc38333024a15946200b1b} 
+\index{Blocks.c@{Blocks.c}!GenerateStaticBlocks@{GenerateStaticBlocks}}
+\index{GenerateStaticBlocks@{GenerateStaticBlocks}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{GenerateStaticBlocks()}{GenerateStaticBlocks()}}
+{\footnotesize\ttfamily void Generate\+Static\+Blocks (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Generuje niezniszczalne bloki. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Podwojny wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00341}{341}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+
+\Hypertarget{_blocks_8c_aec0faef0f949f43ef6c280cd1a58d43b}\label{_blocks_8c_aec0faef0f949f43ef6c280cd1a58d43b} 
+\index{Blocks.c@{Blocks.c}!loopBlocks@{loopBlocks}}
+\index{loopBlocks@{loopBlocks}!Blocks.c@{Blocks.c}}
+\doxysubsubsection{\texorpdfstring{loopBlocks()}{loopBlocks()}}
+{\footnotesize\ttfamily void loop\+Blocks (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{enemies }\end{DoxyParamCaption})}
+
+
+
+Petla blokow (wykonywana co klatke). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em blocks} & Podwojny wskaznik na pierwszy element listy blokow. \\
+\hline
+{\em enemies} & Wskaznik na pierwszy element listy przeciwnikow. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00286}{286}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+

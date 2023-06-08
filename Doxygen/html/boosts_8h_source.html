@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/boosts.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">boosts.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="boosts_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;allegro5/allegro5.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="struct_boost.html">    8</a></span><span class="keyword">struct </span><a class="code hl_struct" href="struct_boost.html">Boost</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="struct_boost.html#ad0da36b2558901e21e7a30f6c227a45e">   10</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_boost.html#ad0da36b2558901e21e7a30f6c227a45e">x</a>; </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="struct_boost.html#aa4f0d3eebc3c443f9be81bf48561a217">   11</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="struct_boost.html#aa4f0d3eebc3c443f9be81bf48561a217">y</a>; </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="struct_boost.html#a2ea4f0fa1b972287e87c42df894a48eb">   12</a></span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> <a class="code hl_variable" href="struct_boost.html#a2ea4f0fa1b972287e87c42df894a48eb">Type</a>; </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="struct_boost.html#aff63e0ad32ab05867dbc00fd07b08d64">   13</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_boost.html">Boost</a>* <a class="code hl_variable" href="struct_boost.html#aff63e0ad32ab05867dbc00fd07b08d64">next</a>; </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="struct_boost.html#aced3368c14f664b9095bc2febb26f8f0">   14</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="struct_boost.html">Boost</a>* <a class="code hl_variable" href="struct_boost.html#aced3368c14f664b9095bc2febb26f8f0">prev</a>; </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>};</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="boosts_8h.html#a2851d67bc14f2b80059af5435448d869">Boost_Add</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**, <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span>, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">bool</span> <a class="code hl_function" href="boosts_8h.html#ab2364d5f0e230c17c315aed100ba82e3">Boost_Remove</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="boosts_8h.html#ae813d432acb7a1d0d300674de1014254">Boost_Loop</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*, <span class="keywordtype">float</span>, <span class="keywordtype">float</span>, ALLEGRO_BITMAP*, ALLEGRO_BITMAP*, ALLEGRO_BITMAP*);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">bool</span> <a class="code hl_function" href="boosts_8h.html#a46faa3f2988d797a0bb0cb1ad03c3c21">Boost_hasPlayerIn</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>*, <span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="boosts_8h.html#a37e6c5fff16f44d72e9c31b2b01f409b">Boosts_Clear</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_boost.html">Boost</a>**);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="ttc" id="aboosts_8h_html_a2851d67bc14f2b80059af5435448d869"><div class="ttname"><a href="boosts_8h.html#a2851d67bc14f2b80059af5435448d869">Boost_Add</a></div><div class="ttdeci">void Boost_Add(struct Boost **, unsigned short, float, float)</div><div class="ttdoc">Dodaje nowy boost do listy.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00012">boosts.c:12</a></div></div>
+<div class="ttc" id="aboosts_8h_html_a37e6c5fff16f44d72e9c31b2b01f409b"><div class="ttname"><a href="boosts_8h.html#a37e6c5fff16f44d72e9c31b2b01f409b">Boosts_Clear</a></div><div class="ttdeci">void Boosts_Clear(struct Boost **)</div><div class="ttdoc">Funkcja ktora czysci/usuwa liste ulepszen.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00146">boosts.c:146</a></div></div>
+<div class="ttc" id="aboosts_8h_html_a46faa3f2988d797a0bb0cb1ad03c3c21"><div class="ttname"><a href="boosts_8h.html#a46faa3f2988d797a0bb0cb1ad03c3c21">Boost_hasPlayerIn</a></div><div class="ttdeci">bool Boost_hasPlayerIn(struct Boost *, struct Character *)</div><div class="ttdoc">Funkcja sprawdzajaca czy gracz jest w srodku ulepszenia (kolizja)</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00126">boosts.c:126</a></div></div>
+<div class="ttc" id="aboosts_8h_html_ab2364d5f0e230c17c315aed100ba82e3"><div class="ttname"><a href="boosts_8h.html#ab2364d5f0e230c17c315aed100ba82e3">Boost_Remove</a></div><div class="ttdeci">bool Boost_Remove(struct Boost *, struct Boost **)</div><div class="ttdoc">Usuwa boost (ulepszenie) z listy.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00044">boosts.c:44</a></div></div>
+<div class="ttc" id="aboosts_8h_html_ae813d432acb7a1d0d300674de1014254"><div class="ttname"><a href="boosts_8h.html#ae813d432acb7a1d0d300674de1014254">Boost_Loop</a></div><div class="ttdeci">void Boost_Loop(struct Boost **, struct Character *, float, float, ALLEGRO_BITMAP *, ALLEGRO_BITMAP *, ALLEGRO_BITMAP *)</div><div class="ttdoc">Funkcja wywolywana co klatke - petla ulepszen.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8c_source.html#l00078">boosts.c:78</a></div></div>
+<div class="ttc" id="astruct_boost_html"><div class="ttname"><a href="struct_boost.html">Boost</a></div><div class="ttdoc">Struktura reprezentujaca ulepszenie.</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00008">boosts.h:9</a></div></div>
+<div class="ttc" id="astruct_boost_html_a2ea4f0fa1b972287e87c42df894a48eb"><div class="ttname"><a href="struct_boost.html#a2ea4f0fa1b972287e87c42df894a48eb">Boost::Type</a></div><div class="ttdeci">unsigned short Type</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00012">boosts.h:12</a></div></div>
+<div class="ttc" id="astruct_boost_html_aa4f0d3eebc3c443f9be81bf48561a217"><div class="ttname"><a href="struct_boost.html#aa4f0d3eebc3c443f9be81bf48561a217">Boost::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00011">boosts.h:11</a></div></div>
+<div class="ttc" id="astruct_boost_html_aced3368c14f664b9095bc2febb26f8f0"><div class="ttname"><a href="struct_boost.html#aced3368c14f664b9095bc2febb26f8f0">Boost::prev</a></div><div class="ttdeci">struct Boost * prev</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00014">boosts.h:14</a></div></div>
+<div class="ttc" id="astruct_boost_html_ad0da36b2558901e21e7a30f6c227a45e"><div class="ttname"><a href="struct_boost.html#ad0da36b2558901e21e7a30f6c227a45e">Boost::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00010">boosts.h:10</a></div></div>
+<div class="ttc" id="astruct_boost_html_aff63e0ad32ab05867dbc00fd07b08d64"><div class="ttname"><a href="struct_boost.html#aff63e0ad32ab05867dbc00fd07b08d64">Boost::next</a></div><div class="ttdeci">struct Boost * next</div><div class="ttdef"><b>Definition</b> <a href="boosts_8h_source.html#l00013">boosts.h:13</a></div></div>
+<div class="ttc" id="astruct_character_html"><div class="ttname"><a href="struct_character.html">Character</a></div><div class="ttdoc">Struktura gracza.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00024">types.h:25</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

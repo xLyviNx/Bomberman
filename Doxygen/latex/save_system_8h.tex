@@ -1,0 +1,191 @@
+\doxysection{Dokumentacja pliku Bomberman/save\+System.h}
+\hypertarget{save_system_8h}{}\label{save_system_8h}\index{Bomberman/saveSystem.h@{Bomberman/saveSystem.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{save_system_8h_ad5131de0b5004c64db5e79e8aac7471e}{LINE\+\_\+\+LENGTH}}~32
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{save_system_8h_a65bc2bfdd845f4843d68e58349684bcb}{save\+System\+\_\+init}} ()
+\item 
+void \mbox{\hyperlink{save_system_8h_a2dba782e8e440ce1b2a164b5e5e42129}{save\+System\+\_\+close}} ()
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{save_system_8h_a466eaf1096a7ce5b76c95ea14de1312f}{save\+System\+\_\+read\+Line}} (int)
+\item 
+int \mbox{\hyperlink{save_system_8h_a8629066b437fe98d77c456ae248a8500}{save\+System\+\_\+\+Load\+Level}} ()
+\item 
+float \mbox{\hyperlink{save_system_8h_ad424455bd34d93697c04676898d98251}{save\+System\+\_\+\+Load\+Speed}} ()
+\item 
+int \mbox{\hyperlink{save_system_8h_af88a77ff799146acde4ba37bdccf9468}{save\+System\+\_\+\+Load\+Range}} ()
+\item 
+int \mbox{\hyperlink{save_system_8h_af24120518da9bb3e4797d445b2daeaca}{save\+System\+\_\+\+Load\+Bombs}} ()
+\item 
+bool \mbox{\hyperlink{save_system_8h_a1eb10af02ac1ffa2af39dc5e07f47773}{trim\+Text}} (char \texorpdfstring{$\ast$}{*}, int)
+\item 
+void \mbox{\hyperlink{save_system_8h_a6a5ad9c75b3c00dfd3f46e513087465d}{save\+System\+\_\+print\+At\+Line}} (int, const char \texorpdfstring{$\ast$}{*})
+\item 
+void \mbox{\hyperlink{save_system_8h_a778c8e92886fd11fa783e7b2df815622}{save\+System\+\_\+reset\+Data}} ()
+\item 
+void \mbox{\hyperlink{save_system_8h_a26cbc408b43a66b3b12704f702abfd75}{save\+System\+\_\+set\+Start\+Data}} ()
+\item 
+bool \mbox{\hyperlink{save_system_8h_a5060ef8d34ce349b2c379706c3c98512}{has\+Achievement}} (int)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+FILE \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{save_system_8h_a7fedcafb7925d05c44330e2e1edf3043}{save\+File}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja definicji}
+\Hypertarget{save_system_8h_ad5131de0b5004c64db5e79e8aac7471e}\label{save_system_8h_ad5131de0b5004c64db5e79e8aac7471e} 
+\index{saveSystem.h@{saveSystem.h}!LINE\_LENGTH@{LINE\_LENGTH}}
+\index{LINE\_LENGTH@{LINE\_LENGTH}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{LINE\_LENGTH}{LINE\_LENGTH}}
+{\footnotesize\ttfamily \#define LINE\+\_\+\+LENGTH~32}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8h_source_l00005}{5}} pliku \mbox{\hyperlink{save_system_8h_source}{save\+System.\+h}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{save_system_8h_a5060ef8d34ce349b2c379706c3c98512}\label{save_system_8h_a5060ef8d34ce349b2c379706c3c98512} 
+\index{saveSystem.h@{saveSystem.h}!hasAchievement@{hasAchievement}}
+\index{hasAchievement@{hasAchievement}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{hasAchievement()}{hasAchievement()}}
+{\footnotesize\ttfamily bool has\+Achievement (\begin{DoxyParamCaption}\item[{int}]{achievement\+Id }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00079}{79}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a2dba782e8e440ce1b2a164b5e5e42129}\label{save_system_8h_a2dba782e8e440ce1b2a164b5e5e42129} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_close@{saveSystem\_close}}
+\index{saveSystem\_close@{saveSystem\_close}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_close()}{saveSystem\_close()}}
+{\footnotesize\ttfamily void save\+System\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00026}{26}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a65bc2bfdd845f4843d68e58349684bcb}\label{save_system_8h_a65bc2bfdd845f4843d68e58349684bcb} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_init@{saveSystem\_init}}
+\index{saveSystem\_init@{saveSystem\_init}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_init()}{saveSystem\_init()}}
+{\footnotesize\ttfamily bool save\+System\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00005}{5}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_af24120518da9bb3e4797d445b2daeaca}\label{save_system_8h_af24120518da9bb3e4797d445b2daeaca} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_LoadBombs@{saveSystem\_LoadBombs}}
+\index{saveSystem\_LoadBombs@{saveSystem\_LoadBombs}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_LoadBombs()}{saveSystem\_LoadBombs()}}
+{\footnotesize\ttfamily int save\+System\+\_\+\+Load\+Bombs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00117}{117}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a8629066b437fe98d77c456ae248a8500}\label{save_system_8h_a8629066b437fe98d77c456ae248a8500} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_LoadLevel@{saveSystem\_LoadLevel}}
+\index{saveSystem\_LoadLevel@{saveSystem\_LoadLevel}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_LoadLevel()}{saveSystem\_LoadLevel()}}
+{\footnotesize\ttfamily int save\+System\+\_\+\+Load\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00107}{107}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_af88a77ff799146acde4ba37bdccf9468}\label{save_system_8h_af88a77ff799146acde4ba37bdccf9468} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_LoadRange@{saveSystem\_LoadRange}}
+\index{saveSystem\_LoadRange@{saveSystem\_LoadRange}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_LoadRange()}{saveSystem\_LoadRange()}}
+{\footnotesize\ttfamily int save\+System\+\_\+\+Load\+Range (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00127}{127}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_ad424455bd34d93697c04676898d98251}\label{save_system_8h_ad424455bd34d93697c04676898d98251} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_LoadSpeed@{saveSystem\_LoadSpeed}}
+\index{saveSystem\_LoadSpeed@{saveSystem\_LoadSpeed}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_LoadSpeed()}{saveSystem\_LoadSpeed()}}
+{\footnotesize\ttfamily float save\+System\+\_\+\+Load\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00137}{137}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a6a5ad9c75b3c00dfd3f46e513087465d}\label{save_system_8h_a6a5ad9c75b3c00dfd3f46e513087465d} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_printAtLine@{saveSystem\_printAtLine}}
+\index{saveSystem\_printAtLine@{saveSystem\_printAtLine}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_printAtLine()}{saveSystem\_printAtLine()}}
+{\footnotesize\ttfamily void save\+System\+\_\+print\+At\+Line (\begin{DoxyParamCaption}\item[{int}]{line\+Number,  }\item[{const char \texorpdfstring{$\ast$}{*}}]{content }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00148}{148}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a466eaf1096a7ce5b76c95ea14de1312f}\label{save_system_8h_a466eaf1096a7ce5b76c95ea14de1312f} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_readLine@{saveSystem\_readLine}}
+\index{saveSystem\_readLine@{saveSystem\_readLine}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_readLine()}{saveSystem\_readLine()}}
+{\footnotesize\ttfamily char \texorpdfstring{$\ast$}{*} save\+System\+\_\+read\+Line (\begin{DoxyParamCaption}\item[{int}]{line\+Number }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00034}{34}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a778c8e92886fd11fa783e7b2df815622}\label{save_system_8h_a778c8e92886fd11fa783e7b2df815622} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_resetData@{saveSystem\_resetData}}
+\index{saveSystem\_resetData@{saveSystem\_resetData}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_resetData()}{saveSystem\_resetData()}}
+{\footnotesize\ttfamily void save\+System\+\_\+reset\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00210}{210}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a26cbc408b43a66b3b12704f702abfd75}\label{save_system_8h_a26cbc408b43a66b3b12704f702abfd75} 
+\index{saveSystem.h@{saveSystem.h}!saveSystem\_setStartData@{saveSystem\_setStartData}}
+\index{saveSystem\_setStartData@{saveSystem\_setStartData}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveSystem\_setStartData()}{saveSystem\_setStartData()}}
+{\footnotesize\ttfamily void save\+System\+\_\+set\+Start\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00218}{218}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+\Hypertarget{save_system_8h_a1eb10af02ac1ffa2af39dc5e07f47773}\label{save_system_8h_a1eb10af02ac1ffa2af39dc5e07f47773} 
+\index{saveSystem.h@{saveSystem.h}!trimText@{trimText}}
+\index{trimText@{trimText}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{trimText()}{trimText()}}
+{\footnotesize\ttfamily bool trim\+Text (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{text,  }\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00067}{67}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+
+
+
+\doxysubsection{Dokumentacja zmiennych}
+\Hypertarget{save_system_8h_a7fedcafb7925d05c44330e2e1edf3043}\label{save_system_8h_a7fedcafb7925d05c44330e2e1edf3043} 
+\index{saveSystem.h@{saveSystem.h}!saveFile@{saveFile}}
+\index{saveFile@{saveFile}!saveSystem.h@{saveSystem.h}}
+\doxysubsubsection{\texorpdfstring{saveFile}{saveFile}}
+{\footnotesize\ttfamily FILE\texorpdfstring{$\ast$}{*} save\+File}
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8h_source_l00007}{7}} pliku \mbox{\hyperlink{save_system_8h_source}{save\+System.\+h}}.
+

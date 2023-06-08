@@ -1,0 +1,93 @@
+\doxysection{Dokumentacja pliku Bomberman/\+Explosions.h}
+\hypertarget{_explosions_8h}{}\label{_explosions_8h}\index{Bomberman/Explosions.h@{Bomberman/Explosions.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_explosion}{Explosion}}
+\begin{DoxyCompactList}\small\item\em Struktura eksplozji. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_explosions_8h_ae782399ec19c3f61b7f8c67b1c401bee}{Explosion\+\_\+\+Insert}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, int, int, int)
+\begin{DoxyCompactList}\small\item\em Tworzy i umieszcza nowy element na liscie eksplozji. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_explosions_8h_ae091a808cd4a2dd7176ed6005f2b2f67}{Explosion\+\_\+\+Remove}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Usuwa eksplozje. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_explosions_8h_ae923ba3dc4765d401963f4456b69ee44}{Explosion\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Usuwa liste eksplozji. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{_explosions_8h_ae782399ec19c3f61b7f8c67b1c401bee}\label{_explosions_8h_ae782399ec19c3f61b7f8c67b1c401bee} 
+\index{Explosions.h@{Explosions.h}!Explosion\_Insert@{Explosion\_Insert}}
+\index{Explosion\_Insert@{Explosion\_Insert}!Explosions.h@{Explosions.h}}
+\doxysubsubsection{\texorpdfstring{Explosion\_Insert()}{Explosion\_Insert()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*} Explosion\+\_\+\+Insert (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+Tworzy i umieszcza nowy element na liscie eksplozji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Podwojny wskaznik na liste eksplozji. \\
+\hline
+{\em X} & Pozycja na osi X. \\
+\hline
+{\em Y} & Pozycja na osi Y. \\
+\hline
+{\em i} & Odleglosc od bomby. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Stworzona eksplozja. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00013}{13}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+
+\Hypertarget{_explosions_8h_ae091a808cd4a2dd7176ed6005f2b2f67}\label{_explosions_8h_ae091a808cd4a2dd7176ed6005f2b2f67} 
+\index{Explosions.h@{Explosions.h}!Explosion\_Remove@{Explosion\_Remove}}
+\index{Explosion\_Remove@{Explosion\_Remove}!Explosions.h@{Explosions.h}}
+\doxysubsubsection{\texorpdfstring{Explosion\_Remove()}{Explosion\_Remove()}}
+{\footnotesize\ttfamily bool Explosion\+\_\+\+Remove (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{exp }\end{DoxyParamCaption})}
+
+
+
+Usuwa eksplozje. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em exp} & Podwojny wskaznik na eksplozje \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy usunieto eksplozje. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00056}{56}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+
+\Hypertarget{_explosions_8h_ae923ba3dc4765d401963f4456b69ee44}\label{_explosions_8h_ae923ba3dc4765d401963f4456b69ee44} 
+\index{Explosions.h@{Explosions.h}!Explosion\_RemoveList@{Explosion\_RemoveList}}
+\index{Explosion\_RemoveList@{Explosion\_RemoveList}!Explosions.h@{Explosions.h}}
+\doxysubsubsection{\texorpdfstring{Explosion\_RemoveList()}{Explosion\_RemoveList()}}
+{\footnotesize\ttfamily bool Explosion\+\_\+\+Remove\+List (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{explosions }\end{DoxyParamCaption})}
+
+
+
+Usuwa liste eksplozji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em explosions} & Podwojny wskaznik na liste eksplozji \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy usunieto liste eksplozji. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00090}{90}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+

@@ -2,21 +2,22 @@
 #include "allegro5/allegro_audio.h"
 #include "types.h"
 #include "boosts.h"
-
+/**
+ * @brief Struktura bomby
+ */
 struct BombList
 {
-    float timeLeft;
-    struct Vector2 Position;
-    bool isRemote;
-    bool exploded;
-    bool insidePlayer;
-    struct BombList* next;
-    struct BombList* prev;
+    float timeLeft; /**< Czas pozostaly do eksplozji. */
+    struct Vector2 Position; /**< Pozycja. */
+    bool exploded; /**< Czy bomba wybuchla. */
+    bool insidePlayer; /**< Czy w bombie jest gracz (po podlozeniu). */
+    struct BombList* next;  /**< Nastepny element listy. */
+    struct BombList* prev;/**< Poprzedni element listy. */
 };
 
-struct BombList* Bomb_CreateList(struct Vector2, bool);
+struct BombList* Bomb_CreateList(struct Vector2);
 bool Bomb_RemoveList(struct BombList**);
-struct BombList* Bomb_InsertInto(struct BombList*, struct Vector2, bool);
+struct BombList* Bomb_InsertInto(struct BombList*, struct Vector2);
 unsigned int Bomb_count(struct BombList*);
 bool Bomb_ExistsAt(struct BombList*, struct Vector2);
 bool Bomb_checkPlayer(struct BombList*, struct Character*);

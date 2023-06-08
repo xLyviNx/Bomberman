@@ -1,0 +1,362 @@
+\doxysection{Dokumentacja pliku Bomberman/\+Bombs.h}
+\hypertarget{_bombs_8h}{}\label{_bombs_8h}\index{Bomberman/Bombs.h@{Bomberman/Bombs.h}}
+{\ttfamily \#include \"{}allegro5/allegro\+\_\+audio.\+h\"{}}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include \"{}boosts.\+h\"{}}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}}
+\begin{DoxyCompactList}\small\item\em Struktura bomby. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_bombs_8h_a69dd4fc1f5741aabb8424f36c9397186}{Bomb\+\_\+\+Create\+List}} (struct \mbox{\hyperlink{struct_vector2}{Vector2}})
+\begin{DoxyCompactList}\small\item\em Tworzy liste bomb (oraz pierwsza bombe). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_bombs_8h_ac0c8c1a04b0a17cbace4dc04cf3dc31b}{Bomb\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Usuwa liste bomb. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_bombs_8h_a175046b3af680c972aa7244d47a708b4}{Bomb\+\_\+\+Insert\+Into}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_vector2}{Vector2}})
+\begin{DoxyCompactList}\small\item\em Dodaje bombe do listy bomb. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{_bombs_8h_a77c27220fe5deeb14275e0331b30391f}{Bomb\+\_\+count}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Liczy istniejace bomby. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_bombs_8h_ad91c690b5568b89fdf7e9b521aeb0938}{Bomb\+\_\+\+Exists\+At}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_vector2}{Vector2}})
+\begin{DoxyCompactList}\small\item\em Sprawdza czy na danych koordynatach istnieje jakas bomba. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_bombs_8h_ac427b63375684cabe7fa6eef34886d90}{Bomb\+\_\+check\+Player}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Sprawdza czy w srodku bomby jest gracz. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_bombs_8h_a32c8df26d395d9097eb9e30dd2de9391}{Bomb\+\_\+\+Remove}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Usuwa bombe z listy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_bombs_8h_aa7fee8673edd3403e207509bb2f91715}{plant\+Bomb}} (bool, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Podklada bombe. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_bombs_8h_a37a6008b6777aadcd484fa5f08cfd721}{render\+Bombs}} (ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*}, double, float, float, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Renderowanie (wyswietlanie) istniejacych bomb. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_bombs_8h_ad56e2231ebc374ae3b435db457510225}{explode\+Bomb}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, ALLEGRO\+\_\+\+SAMPLE \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, float \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Wysadza jedna z bomb. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_bombs_8h_adea736aec9c9696cd5a40dce48f027d6}{loop\+Bombs}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, ALLEGRO\+\_\+\+SAMPLE \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float dT, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, float \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Funkcja wywolywana co klatke (petla) wykonujaca operacje dla wszystkich bomb. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_bombs_8h_ad701043b064a70691ac7fc805ca15bd5}{Bomb\+\_\+\+Find}} (struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}, int, int, bool, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*})
+\begin{DoxyCompactList}\small\item\em Znajduje bombe na danych koordynatach. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{_bombs_8h_ac427b63375684cabe7fa6eef34886d90}\label{_bombs_8h_ac427b63375684cabe7fa6eef34886d90} 
+\index{Bombs.h@{Bombs.h}!Bomb\_checkPlayer@{Bomb\_checkPlayer}}
+\index{Bomb\_checkPlayer@{Bomb\_checkPlayer}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_checkPlayer()}{Bomb\_checkPlayer()}}
+{\footnotesize\ttfamily bool Bomb\+\_\+check\+Player (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bomb,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy w srodku bomby jest gracz. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bomb} & Wskaznik na bombe. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy gracz jest w srodku bomby. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00185}{185}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_a77c27220fe5deeb14275e0331b30391f}\label{_bombs_8h_a77c27220fe5deeb14275e0331b30391f} 
+\index{Bombs.h@{Bombs.h}!Bomb\_count@{Bomb\_count}}
+\index{Bomb\_count@{Bomb\_count}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_count()}{Bomb\_count()}}
+{\footnotesize\ttfamily unsigned int Bomb\+\_\+count (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{first }\end{DoxyParamCaption})}
+
+
+
+Liczy istniejace bomby. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Pierwszy element listy bomb. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Liczba istniejacych bomb. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00093}{93}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_a69dd4fc1f5741aabb8424f36c9397186}\label{_bombs_8h_a69dd4fc1f5741aabb8424f36c9397186} 
+\index{Bombs.h@{Bombs.h}!Bomb\_CreateList@{Bomb\_CreateList}}
+\index{Bomb\_CreateList@{Bomb\_CreateList}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_CreateList()}{Bomb\_CreateList()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} Bomb\+\_\+\+Create\+List (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_vector2}{Vector2}}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Tworzy liste bomb (oraz pierwsza bombe). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em pos} & Pozycja bomby. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Pierwszy element nowej listy bomb. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00025}{25}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_ad91c690b5568b89fdf7e9b521aeb0938}\label{_bombs_8h_ad91c690b5568b89fdf7e9b521aeb0938} 
+\index{Bombs.h@{Bombs.h}!Bomb\_ExistsAt@{Bomb\_ExistsAt}}
+\index{Bomb\_ExistsAt@{Bomb\_ExistsAt}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_ExistsAt()}{Bomb\_ExistsAt()}}
+{\footnotesize\ttfamily bool Bomb\+\_\+\+Exists\+At (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{struct \mbox{\hyperlink{struct_vector2}{Vector2}}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy na danych koordynatach istnieje jakas bomba. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Pierwszy element listy bomb. \\
+\hline
+{\em pos} & Pozycja bomby. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy bomba istnieje 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00117}{117}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_ad701043b064a70691ac7fc805ca15bd5}\label{_bombs_8h_ad701043b064a70691ac7fc805ca15bd5} 
+\index{Bombs.h@{Bombs.h}!Bomb\_Find@{Bomb\_Find}}
+\index{Bomb\_Find@{Bomb\_Find}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_Find()}{Bomb\_Find()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} Bomb\+\_\+\+Find (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{grid\+Method,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Znajduje bombe na danych koordynatach. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Pierwszy element listy bomb. \\
+\hline
+{\em X} & Pozycja bomby (na osi X). \\
+\hline
+{\em Y} & Pozycja bomby (na osi Y). \\
+\hline
+{\em grid\+Method} & Metoda znajdywania (czy tylko na siatce i idealnych koordynatach, czy w srodku bomby, nie tylko idealne koordynaty na siatce). \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Znaleziona bomba lub NULL. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00144}{144}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_a175046b3af680c972aa7244d47a708b4}\label{_bombs_8h_a175046b3af680c972aa7244d47a708b4} 
+\index{Bombs.h@{Bombs.h}!Bomb\_InsertInto@{Bomb\_InsertInto}}
+\index{Bomb\_InsertInto@{Bomb\_InsertInto}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_InsertInto()}{Bomb\_InsertInto()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} Bomb\+\_\+\+Insert\+Into (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{struct \mbox{\hyperlink{struct_vector2}{Vector2}}}]{pos }\end{DoxyParamCaption})}
+
+
+
+Dodaje bombe do listy bomb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Wskaznik na pierwszy element listy bomb. \\
+\hline
+{\em pos} & Pozycja nowej bomby \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wskaznik na utworzona bombe. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00062}{62}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_a32c8df26d395d9097eb9e30dd2de9391}\label{_bombs_8h_a32c8df26d395d9097eb9e30dd2de9391} 
+\index{Bombs.h@{Bombs.h}!Bomb\_Remove@{Bomb\_Remove}}
+\index{Bomb\_Remove@{Bomb\_Remove}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_Remove()}{Bomb\_Remove()}}
+{\footnotesize\ttfamily bool Bomb\+\_\+\+Remove (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bomb,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Usuwa bombe z listy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bomb} & Podwojny wskaznik na bombe. \\
+\hline
+{\em bombs} & Podwojny wskaznik na liste bomb. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy usunieto. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00210}{210}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_ac0c8c1a04b0a17cbace4dc04cf3dc31b}\label{_bombs_8h_ac0c8c1a04b0a17cbace4dc04cf3dc31b} 
+\index{Bombs.h@{Bombs.h}!Bomb\_RemoveList@{Bomb\_RemoveList}}
+\index{Bomb\_RemoveList@{Bomb\_RemoveList}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{Bomb\_RemoveList()}{Bomb\_RemoveList()}}
+{\footnotesize\ttfamily bool Bomb\+\_\+\+Remove\+List (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first\+Bomb }\end{DoxyParamCaption})}
+
+
+
+Usuwa liste bomb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first\+Bomb} & Podwojny wskaznik na liste bomb (pierwszy element). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy usunieto liste. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00045}{45}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_ad56e2231ebc374ae3b435db457510225}\label{_bombs_8h_ad56e2231ebc374ae3b435db457510225} 
+\index{Bombs.h@{Bombs.h}!explodeBomb@{explodeBomb}}
+\index{explodeBomb@{explodeBomb}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{explodeBomb()}{explodeBomb()}}
+{\footnotesize\ttfamily void explode\+Bomb (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bomb,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{ALLEGRO\+\_\+\+SAMPLE \texorpdfstring{$\ast$}{*}}]{explo\+Sound,  }\item[{struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{samples,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{float \texorpdfstring{$\ast$}{*}}]{cam\+\_\+y\+\_\+offset,  }\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{explosions,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{Enemies,  }\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{Boosts }\end{DoxyParamCaption})}
+
+
+
+Wysadza jedna z bomb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bomb} & Podwojny wskaznik na bombe. \\
+\hline
+{\em bombs} & Podwojny wskaznik na liste bomb. \\
+\hline
+{\em blocks} & Podwojny wskaznik na liste blokow \\
+\hline
+{\em explo\+Sound} & Dzwiek eksplozji (wskaznik na sample). \\
+\hline
+{\em samples} & Podwojny wskaznik na stos dzwiekow eksplozji. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em cam\+\_\+y\+\_\+offset} & Offset kamery w osi Y. \\
+\hline
+{\em explosions} & Podwojny wskaznik na liste eksplozji. \\
+\hline
+{\em Enemies} & Podwojny wskaznik na liste przeciwnikow. \\
+\hline
+{\em Boosts} & Podwojny wskaznik na liste ulepszen. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00330}{330}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_adea736aec9c9696cd5a40dce48f027d6}\label{_bombs_8h_adea736aec9c9696cd5a40dce48f027d6} 
+\index{Bombs.h@{Bombs.h}!loopBombs@{loopBombs}}
+\index{loopBombs@{loopBombs}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{loopBombs()}{loopBombs()}}
+{\footnotesize\ttfamily void loop\+Bombs (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{ALLEGRO\+\_\+\+SAMPLE \texorpdfstring{$\ast$}{*}}]{explo\+Sound,  }\item[{struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{samples,  }\item[{float}]{dT,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{float \texorpdfstring{$\ast$}{*}}]{cam\+\_\+y\+\_\+offset,  }\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{explosions,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{Enemies,  }\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{Boosts }\end{DoxyParamCaption})}
+
+
+
+Funkcja wywolywana co klatke (petla) wykonujaca operacje dla wszystkich bomb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bombs} & Podwojny wskaznik na liste bomb. \\
+\hline
+{\em blocks} & Podwojny wskaznik na liste blokow. \\
+\hline
+{\em explo\+Sound} & Dzwiek eksplozji (Wskaznik na sample) \\
+\hline
+{\em samples} & Podwojny wskaznik na stos dzwiekow eksplozji. \\
+\hline
+{\em dT} & delta\+Time (czas miedzy klatkami). \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em cam\+\_\+y\+\_\+offset} & Wskaznik (float\texorpdfstring{$\ast$}{*}) na offset kamery w osi Y. \\
+\hline
+{\em explosions} & Podwojny wskaznik na liste eksplozji. \\
+\hline
+{\em Enemies} & Podwojny wskaznik na liste przeciwnikow. \\
+\hline
+{\em Boosts} & Podwojny wskaznik na liste ulepszen. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00494}{494}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_aa7fee8673edd3403e207509bb2f91715}\label{_bombs_8h_aa7fee8673edd3403e207509bb2f91715} 
+\index{Bombs.h@{Bombs.h}!plantBomb@{plantBomb}}
+\index{plantBomb@{plantBomb}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{plantBomb()}{plantBomb()}}
+{\footnotesize\ttfamily void plant\+Bomb (\begin{DoxyParamCaption}\item[{bool}]{is\+Paused,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks }\end{DoxyParamCaption})}
+
+
+
+Podklada bombe. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em is\+Paused} & Czy gra jest w trakcie pauzy (blokuje wtedy podkladanie bomby). \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em bombs} & Podwojny wskaznik na liste bomb. \\
+\hline
+{\em blocks} & Wskaznik na liste blokow. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00245}{245}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+
+\Hypertarget{_bombs_8h_a37a6008b6777aadcd484fa5f08cfd721}\label{_bombs_8h_a37a6008b6777aadcd484fa5f08cfd721} 
+\index{Bombs.h@{Bombs.h}!renderBombs@{renderBombs}}
+\index{renderBombs@{renderBombs}!Bombs.h@{Bombs.h}}
+\doxysubsubsection{\texorpdfstring{renderBombs()}{renderBombs()}}
+{\footnotesize\ttfamily void render\+Bombs (\begin{DoxyParamCaption}\item[{ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*}}]{bomb\+Anim,  }\item[{double}]{animtime,  }\item[{float}]{cam\+\_\+x\+\_\+offset,  }\item[{float}]{cam\+\_\+y\+\_\+offset,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs }\end{DoxyParamCaption})}
+
+
+
+Renderowanie (wyswietlanie) istniejacych bomb. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em bomb\+Anim} & Animacja bomby. \\
+\hline
+{\em animtime} & Czas animacji bomby. \\
+\hline
+{\em cam\+\_\+x\+\_\+offset} & Offset kamery w osi X. \\
+\hline
+{\em cam\+\_\+y\+\_\+offset} & Offset kamery w osi Y. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em bombs} & Wskaznik na liste bomb (pierwszy jej element). \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_bombs_8c_source_l00297}{297}} pliku \mbox{\hyperlink{_bombs_8c_source}{Bombs.\+c}}.
+

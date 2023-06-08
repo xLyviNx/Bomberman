@@ -1,0 +1,161 @@
+\doxysection{Dokumentacja struktury Character}
+\hypertarget{struct_character}{}\label{struct_character}\index{Character@{Character}}
+
+
+Struktura gracza.  
+
+
+
+
+{\ttfamily \#include $<$types.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_transform}{Transform}} \mbox{\hyperlink{struct_character_a6feaabeee8b4a705396fd4da3c1a86ce}{Transform}}
+\item 
+float \mbox{\hyperlink{struct_character_a61efabcca15cccefe7d85ea6da6af5e3}{Speed}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_character_a0c81f73b6fa8086020b2016003524c62}{Idle\+Anim}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_character_ae76eed9c88cf9da8af9a5023f0cd43ff}{Right\+Walk\+Anim}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_character_a6696e571bfa1a194ff7e8d2ff5b05d7e}{Left\+Walk\+Anim}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_character_abb2a9a1d896024f437b1f5e755eacaeb}{Up\+Walk\+Anim}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_character_a4a290098a654a0e17cd153b9f299e77c}{Down\+Walk\+Anim}}
+\item 
+unsigned short int \mbox{\hyperlink{struct_character_a6742802e3d356e46ebab48d51c65b873}{bomb\+Range}}
+\item 
+unsigned short int \mbox{\hyperlink{struct_character_a3989a886d26da7f329c66d60470ebd97}{max\+Bombs}}
+\item 
+bool \mbox{\hyperlink{struct_character_a8740ba80e30dd75e71d09fa1dcf04f3d}{enabled}}
+\item 
+unsigned short \mbox{\hyperlink{struct_character_a59a29421229596572ef109ab094dc738}{walking}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura gracza. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00024}{24}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+
+
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_character_a6742802e3d356e46ebab48d51c65b873}\label{struct_character_a6742802e3d356e46ebab48d51c65b873} 
+\index{Character@{Character}!bombRange@{bombRange}}
+\index{bombRange@{bombRange}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{bombRange}{bombRange}}
+{\footnotesize\ttfamily unsigned short int bomb\+Range}
+
+Zasieg bomb. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00033}{33}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a4a290098a654a0e17cd153b9f299e77c}\label{struct_character_a4a290098a654a0e17cd153b9f299e77c} 
+\index{Character@{Character}!DownWalkAnim@{DownWalkAnim}}
+\index{DownWalkAnim@{DownWalkAnim}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{DownWalkAnim}{DownWalkAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} Down\+Walk\+Anim}
+
+Animacja. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00032}{32}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a8740ba80e30dd75e71d09fa1dcf04f3d}\label{struct_character_a8740ba80e30dd75e71d09fa1dcf04f3d} 
+\index{Character@{Character}!enabled@{enabled}}
+\index{enabled@{enabled}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{enabled}{enabled}}
+{\footnotesize\ttfamily bool enabled}
+
+Zmienna mowiaca o tym, czy gracz jest aktywny. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00035}{35}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a0c81f73b6fa8086020b2016003524c62}\label{struct_character_a0c81f73b6fa8086020b2016003524c62} 
+\index{Character@{Character}!IdleAnim@{IdleAnim}}
+\index{IdleAnim@{IdleAnim}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{IdleAnim}{IdleAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} Idle\+Anim}
+
+Animacja. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00028}{28}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a6696e571bfa1a194ff7e8d2ff5b05d7e}\label{struct_character_a6696e571bfa1a194ff7e8d2ff5b05d7e} 
+\index{Character@{Character}!LeftWalkAnim@{LeftWalkAnim}}
+\index{LeftWalkAnim@{LeftWalkAnim}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{LeftWalkAnim}{LeftWalkAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} Left\+Walk\+Anim}
+
+Animacja. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00030}{30}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a3989a886d26da7f329c66d60470ebd97}\label{struct_character_a3989a886d26da7f329c66d60470ebd97} 
+\index{Character@{Character}!maxBombs@{maxBombs}}
+\index{maxBombs@{maxBombs}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{maxBombs}{maxBombs}}
+{\footnotesize\ttfamily unsigned short int max\+Bombs}
+
+Maksymalna ilosc bomb. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00034}{34}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_ae76eed9c88cf9da8af9a5023f0cd43ff}\label{struct_character_ae76eed9c88cf9da8af9a5023f0cd43ff} 
+\index{Character@{Character}!RightWalkAnim@{RightWalkAnim}}
+\index{RightWalkAnim@{RightWalkAnim}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{RightWalkAnim}{RightWalkAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} Right\+Walk\+Anim}
+
+Animacja. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00029}{29}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a61efabcca15cccefe7d85ea6da6af5e3}\label{struct_character_a61efabcca15cccefe7d85ea6da6af5e3} 
+\index{Character@{Character}!Speed@{Speed}}
+\index{Speed@{Speed}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{Speed}{Speed}}
+{\footnotesize\ttfamily float Speed}
+
+Predkosc gracza. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00027}{27}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a6feaabeee8b4a705396fd4da3c1a86ce}\label{struct_character_a6feaabeee8b4a705396fd4da3c1a86ce} 
+\index{Character@{Character}!Transform@{Transform}}
+\index{Transform@{Transform}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{Transform}{Transform}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_transform}{Transform}} \mbox{\hyperlink{struct_transform}{Transform}}}
+
+Informacje o pozycji oraz skali. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00026}{26}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_abb2a9a1d896024f437b1f5e755eacaeb}\label{struct_character_abb2a9a1d896024f437b1f5e755eacaeb} 
+\index{Character@{Character}!UpWalkAnim@{UpWalkAnim}}
+\index{UpWalkAnim@{UpWalkAnim}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{UpWalkAnim}{UpWalkAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} Up\+Walk\+Anim}
+
+Animacja. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00031}{31}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+\Hypertarget{struct_character_a59a29421229596572ef109ab094dc738}\label{struct_character_a59a29421229596572ef109ab094dc738} 
+\index{Character@{Character}!walking@{walking}}
+\index{walking@{walking}!Character@{Character}}
+\doxysubsubsection{\texorpdfstring{walking}{walking}}
+{\footnotesize\ttfamily unsigned short walking}
+
+Kierunek poruszania sie gracza. 
+
+Definicja w linii \mbox{\hyperlink{types_8h_source_l00036}{36}} pliku \mbox{\hyperlink{types_8h_source}{types.\+h}}.
+
+
+
+Dokumentacja dla tej struktury została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+Bomberman/\mbox{\hyperlink{types_8h}{types.\+h}}\end{DoxyCompactItemize}

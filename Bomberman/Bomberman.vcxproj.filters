@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki źródłowe\ALGIF">
+      <UniqueIdentifier>{e8f19fad-0890-4b0a-a83b-8f41ba88859f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -22,18 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="algif5-master\src\algif.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="algif5-master\src\bitmap.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="algif5-master\src\gif.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
-    <ClCompile Include="algif5-master\src\lzw.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="saveSystem.c">
@@ -62,6 +53,18 @@
     </ClCompile>
     <ClCompile Include="boosts.c">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="algif5-master\src\algif.c">
+      <Filter>Pliki źródłowe\ALGIF</Filter>
+    </ClCompile>
+    <ClCompile Include="algif5-master\src\bitmap.c">
+      <Filter>Pliki źródłowe\ALGIF</Filter>
+    </ClCompile>
+    <ClCompile Include="algif5-master\src\lzw.c">
+      <Filter>Pliki źródłowe\ALGIF</Filter>
+    </ClCompile>
+    <ClCompile Include="algif5-master\src\gif.c">
+      <Filter>Pliki źródłowe\ALGIF</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

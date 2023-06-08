@@ -1,7 +1,16 @@
 #include "endDoor.h"
 
+
 endDoor* endingDoor = NULL;
+
 ALLEGRO_BITMAP* doorSprite = NULL;
+
+/**
+ * @brief Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty
+ *
+ * @param x Wspolrzedna X
+ * @param y Wspolrzedna Y.
+ */
 void CreateDoor(float x, float y)
 {
 	if (!endingDoor) {
@@ -13,7 +22,9 @@ void CreateDoor(float x, float y)
 		endingDoor->y = y;
 	}
 }
-
+/**
+ * @brief Usuwa drzwi i zwalnia pamiec.
+ */
 void DestroyDoor()
 {
 	if (endingDoor)
@@ -22,7 +33,12 @@ void DestroyDoor()
 		endingDoor = NULL;
 	}
 }
-
+/**
+ * @brief Sprawdza czy gracz wszedl w drzwi.
+ *
+ * @param Player Wskaznik na gracza.
+ * @return Wartosc logiczna - czy gracz koliduje z drzwiami.
+ */
 bool Door_hasPlayerIn(struct Character* Player)
 {
 	if (endingDoor)

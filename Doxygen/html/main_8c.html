@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Dokumentacja pliku Bomberman/main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkcje</a> &#124;
+<a href="#var-members">Zmienne</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku main.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;algif5-master/src/algif.h&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_font.h&gt;</code><br />
+<code>#include &lt;allegro5/events.h&gt;</code><br />
+<code>#include &lt;allegro5/keycodes.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_primitives.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_ttf.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_audio.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_acodec.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="soundstack_8h_source.html">soundstack.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="save_system_8h_source.html">saveSystem.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_enemies_8h_source.html">Enemies.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_bombs_8h_source.html">Bombs.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_blocks_8h_source.html">Blocks.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="main_8h_source.html">main.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_explosions_8h_source.html">Explosions.h</a>&quot;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="end_door_8h_source.html">endDoor.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="boosts_8h_source.html">boosts.h</a>&quot;</code><br />
+</div>
+<p><a href="main_8c_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a2c8d9ac5db098d0fce6b24fbb28c7ccd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a2c8d9ac5db098d0fce6b24fbb28c7ccd">MovePlayer</a> (struct <a class="el" href="struct_vector2.html">Vector2</a> dir, struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks)</td></tr>
+<tr class="separator:a2c8d9ac5db098d0fce6b24fbb28c7ccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99c600c7ab794c26c3d142fe0c4b4ba6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a99c600c7ab794c26c3d142fe0c4b4ba6">Achievement</a> (float *timeleft, int id, ALLEGRO_FONT *font, ALLEGRO_FONT *font2)</td></tr>
+<tr class="separator:a99c600c7ab794c26c3d142fe0c4b4ba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a260156233ddc906c4545cedacebbd8d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a260156233ddc906c4545cedacebbd8d1">playerMovement</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks)</td></tr>
+<tr class="separator:a260156233ddc906c4545cedacebbd8d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13c95e670d96a5e351b602a833e42c99"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a13c95e670d96a5e351b602a833e42c99">renderExplosions</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> *expl)</td></tr>
+<tr class="separator:a13c95e670d96a5e351b602a833e42c99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9b972cc25c97319c531bd050a009bcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ab9b972cc25c97319c531bd050a009bcc">loopExplosions</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> **expl, bool *removed)</td></tr>
+<tr class="separator:ab9b972cc25c97319c531bd050a009bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad35b35cb31e825018ca4a66ac2ef4d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#aad35b35cb31e825018ca4a66ac2ef4d4">menuMove</a> (bool down, unsigned short *val, int level, bool buttondown)</td></tr>
+<tr class="separator:aad35b35cb31e825018ca4a66ac2ef4d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8d2c549db062face4a58e191844cdd8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ad8d2c549db062face4a58e191844cdd8">button</a> (int key, bool down, int *currentLevel, unsigned short *menuChoiceValue)</td></tr>
+<tr class="separator:ad8d2c549db062face4a58e191844cdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac55ee0a4b8070d80e00b83d067d91614"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ac55ee0a4b8070d80e00b83d067d91614">drawUI</a> (ALLEGRO_FONT **uiFont, ALLEGRO_FONT **LevelFont, int level, struct <a class="el" href="struct_enemy.html">Enemy</a> *enemies, struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks)</td></tr>
+<tr class="separator:ac55ee0a4b8070d80e00b83d067d91614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8b97f071c4711d5d652c2136dc0698b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ac8b97f071c4711d5d652c2136dc0698b">drawGrid</a> (int maxx, int maxy, int xsize, int ysize)</td></tr>
+<tr class="separator:ac8b97f071c4711d5d652c2136dc0698b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Zmienne</h2></td></tr>
+<tr class="memitem:a0c6b025e3d49adb23ede839eb339aaba"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_bomb_list.html">BombList</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a> = NULL</td></tr>
+<tr class="separator:a0c6b025e3d49adb23ede839eb339aaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67dd12859b2bef7eb52210aa47e88a7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a67dd12859b2bef7eb52210aa47e88a7d">wasd</a> [4] = { false, false, false, false }</td></tr>
+<tr class="separator:a67dd12859b2bef7eb52210aa47e88a7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afac460bb6131314e58628ebd514f53c7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#afac460bb6131314e58628ebd514f53c7">deltaTime</a> = 0</td></tr>
+<tr class="separator:afac460bb6131314e58628ebd514f53c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8235c6e9e346e312c0452da60148bc21"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a> = 0</td></tr>
+<tr class="separator:a8235c6e9e346e312c0452da60148bc21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0045c0d05a62c5e4e87ae58cfd3c05c6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a> = 0</td></tr>
+<tr class="separator:a0045c0d05a62c5e4e87ae58cfd3c05c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23c39ea291d6ab3eedc01ede1fe795fd"><td class="memItemLeft" align="right" valign="top">unsigned short&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a23c39ea291d6ab3eedc01ede1fe795fd">GlobalAction</a> = 0</td></tr>
+<tr class="separator:a23c39ea291d6ab3eedc01ede1fe795fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3980a30693d2af1a413698203929f1be"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a> = NULL</td></tr>
+<tr class="separator:a3980a30693d2af1a413698203929f1be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a552dc66db0005fc65d2da465f5b65bab"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_explosion.html">Explosion</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a> = NULL</td></tr>
+<tr class="separator:a552dc66db0005fc65d2da465f5b65bab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="a99c600c7ab794c26c3d142fe0c4b4ba6" name="a99c600c7ab794c26c3d142fe0c4b4ba6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99c600c7ab794c26c3d142fe0c4b4ba6">&#9670;&#160;</a></span>Achievement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Achievement </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>timeleft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_FONT *&#160;</td>
+          <td class="paramname"><em>font</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_FONT *&#160;</td>
+          <td class="paramname"><em>font2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00091">91</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ad8d2c549db062face4a58e191844cdd8" name="ad8d2c549db062face4a58e191844cdd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8d2c549db062face4a58e191844cdd8">&#9670;&#160;</a></span>button()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void button </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>down</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>currentLevel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short *&#160;</td>
+          <td class="paramname"><em>menuChoiceValue</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00229">229</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ac8b97f071c4711d5d652c2136dc0698b" name="ac8b97f071c4711d5d652c2136dc0698b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8b97f071c4711d5d652c2136dc0698b">&#9670;&#160;</a></span>drawGrid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void drawGrid </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ysize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00340">340</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ac55ee0a4b8070d80e00b83d067d91614" name="ac55ee0a4b8070d80e00b83d067d91614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac55ee0a4b8070d80e00b83d067d91614">&#9670;&#160;</a></span>drawUI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void drawUI </td>
+          <td>(</td>
+          <td class="paramtype">ALLEGRO_FONT **&#160;</td>
+          <td class="paramname"><em>uiFont</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_FONT **&#160;</td>
+          <td class="paramname"><em>LevelFont</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>enemies</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00331">331</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ab9b972cc25c97319c531bd050a009bcc" name="ab9b972cc25c97319c531bd050a009bcc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9b972cc25c97319c531bd050a009bcc">&#9670;&#160;</a></span>loopExplosions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loopExplosions </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_explosion.html">Explosion</a> **&#160;</td>
+          <td class="paramname"><em>expl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>removed</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00182">182</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4" name="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&#160;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00369">369</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="aad35b35cb31e825018ca4a66ac2ef4d4" name="aad35b35cb31e825018ca4a66ac2ef4d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad35b35cb31e825018ca4a66ac2ef4d4">&#9670;&#160;</a></span>menuMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void menuMove </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>down</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned short *&#160;</td>
+          <td class="paramname"><em>val</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>buttondown</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00207">207</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a2c8d9ac5db098d0fce6b24fbb28c7ccd" name="a2c8d9ac5db098d0fce6b24fbb28c7ccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c8d9ac5db098d0fce6b24fbb28c7ccd">&#9670;&#160;</a></span>MovePlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovePlayer </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_vector2.html">Vector2</a>&#160;</td>
+          <td class="paramname"><em>dir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00042">42</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a260156233ddc906c4545cedacebbd8d1" name="a260156233ddc906c4545cedacebbd8d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a260156233ddc906c4545cedacebbd8d1">&#9670;&#160;</a></span>playerMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void playerMovement </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00120">120</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a13c95e670d96a5e351b602a833e42c99" name="a13c95e670d96a5e351b602a833e42c99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c95e670d96a5e351b602a833e42c99">&#9670;&#160;</a></span>renderExplosions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderExplosions </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_explosion.html">Explosion</a> *&#160;</td>
+          <td class="paramname"><em>expl</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00155">155</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Dokumentacja zmiennych</h2>
+<a id="a0c6b025e3d49adb23ede839eb339aaba" name="a0c6b025e3d49adb23ede839eb339aaba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c6b025e3d49adb23ede839eb339aaba">&#9670;&#160;</a></span>bombs</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_bomb_list.html">BombList</a>* bombs = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00030">30</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a8235c6e9e346e312c0452da60148bc21" name="a8235c6e9e346e312c0452da60148bc21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8235c6e9e346e312c0452da60148bc21">&#9670;&#160;</a></span>cam_x_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float cam_x_offset = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00033">33</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a0045c0d05a62c5e4e87ae58cfd3c05c6" name="a0045c0d05a62c5e4e87ae58cfd3c05c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0045c0d05a62c5e4e87ae58cfd3c05c6">&#9670;&#160;</a></span>cam_y_offset</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float cam_y_offset = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00034">34</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="afac460bb6131314e58628ebd514f53c7" name="afac460bb6131314e58628ebd514f53c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afac460bb6131314e58628ebd514f53c7">&#9670;&#160;</a></span>deltaTime</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double deltaTime = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00032">32</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a552dc66db0005fc65d2da465f5b65bab" name="a552dc66db0005fc65d2da465f5b65bab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a552dc66db0005fc65d2da465f5b65bab">&#9670;&#160;</a></span>explosions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_explosion.html">Explosion</a>* explosions = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00040">40</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a23c39ea291d6ab3eedc01ede1fe795fd" name="a23c39ea291d6ab3eedc01ede1fe795fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23c39ea291d6ab3eedc01ede1fe795fd">&#9670;&#160;</a></span>GlobalAction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned short GlobalAction = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00035">35</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a3980a30693d2af1a413698203929f1be" name="a3980a30693d2af1a413698203929f1be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3980a30693d2af1a413698203929f1be">&#9670;&#160;</a></span>Player</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_character.html">Character</a>* Player = NULL</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00037">37</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+<a id="a67dd12859b2bef7eb52210aa47e88a7d" name="a67dd12859b2bef7eb52210aa47e88a7d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67dd12859b2bef7eb52210aa47e88a7d">&#9670;&#160;</a></span>wasd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool wasd[4] = { false, false, false, false }</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definicja w linii <a class="el" href="main_8c_source.html#l00031">31</a> pliku <a class="el" href="main_8c_source.html">main.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

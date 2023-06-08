@@ -8,16 +8,26 @@
 #include "endDoor.h"
 #include "Blocks.h"
 #include "main.h"
+
+/**
+ * @brief Domyslny czas do eksplozji.
+ *
+ * Stala preprocesora definiujaca domyslny czas do eksplozji w sekundach.
+ */
 #define exploTime 3.0;
 
-
-struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
+ /**
+  * @brief Tworzy liste bomb (oraz pierwsza bombe).
+  *
+  * @param pos Pozycja bomby.
+  * @return Pierwszy element nowej listy bomb.
+  */
+struct BombList* Bomb_CreateList(struct Vector2 pos)
 {
     struct BombList* nB = (struct BombList*)malloc(sizeof(struct BombList));
     if (nB != NULL)
     {
         nB->Position = pos;
-        nB->isRemote = remote;
         nB->prev = NULL;
         nB->exploded = false;
         nB->insidePlayer = true;
@@ -26,6 +36,12 @@ struct BombList* Bomb_CreateList(struct Vector2 pos, bool remote)
     }
     return nB;
 }
+/**
+ * @brief Usuwa liste bomb.
+ *
+ * @param firstBomb Podwojny wskaznik na liste bomb (pierwszy element).
+ * @return Wartosc logiczna - czy usunieto liste.
+ */
 bool Bomb_RemoveList(struct BombList** firstBomb)
 {
     while (*firstBomb != NULL)
@@ -36,7 +52,14 @@ bool Bomb_RemoveList(struct BombList** firstBomb)
     }
     return *firstBomb == NULL;
 }
-struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, bool remote)
+/**
+ * @brief Dodaje bombe do listy bomb.
+ *
+ * @param first Wskaznik na pierwszy element listy bomb.
+ * @param pos Pozycja nowej bomby
+ * @return Wskaznik na utworzona bombe.
+ */
+struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos)
 {
     struct BombList* nB = NULL;
     if (first != NULL)
@@ -45,7 +68,6 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
         if (nB != NULL)
         {
             nB->Position = pos;
-            nB->isRemote = remote;
             nB->timeLeft = exploTime;
             nB->exploded = false;
             nB->insidePlayer = true;
@@ -62,6 +84,12 @@ struct BombList* Bomb_InsertInto(struct BombList* first, struct Vector2 pos, boo
     }
     return nB;
 }
+/**
+ * @brief Liczy istniejace bomby.
+ *
+ * @param first Pierwszy element listy bomb.
+ * @return Liczba istniejacych bomb.
+ */
 unsigned int Bomb_count(struct BombList* first)
 {
     unsigned int count = 0;
@@ -79,6 +107,13 @@ unsigned int Bomb_count(struct BombList* first)
     }
     return count;
 }
+/**
+ * @brief Sprawdza czy na danych koordynatach istnieje jakas bomba.
+ *
+ * @param first Pierwszy element listy bomb.
+ * @param pos Pozycja bomby.
+ * @return Wartosc logiczna - czy bomba istnieje
+ */
 bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
 {
     if (first != NULL)
@@ -96,6 +131,16 @@ bool Bomb_ExistsAt(struct BombList* first, struct Vector2 pos)
     }
     return false;
 }
+/**
+ * @brief Znajduje bombe na danych koordynatach
+ *
+ * @param first Pierwszy element listy bomb.
+ * @param X Pozycja bomby (na osi X).
+ * @param Y Pozycja bomby (na osi Y).
+ * @param gridMethod Metoda znajdywania (czy tylko na siatce i idealnych koordynatach, czy w srodku bomby, nie tylko idealne koordynaty na siatce).
+ * @param Player Wskaznik na gracza.
+ * @return Znaleziona bomba lub NULL.
+ */
 struct BombList* Bomb_Find(struct BombList* first, int X, int Y, bool gridMethod, struct Character* Player)
 {
     struct BombList* found = NULL;
@@ -130,6 +175,13 @@ struct BombList* Bomb_Find(struct BombList* first, int X, int Y, bool gridMethod
     }
     return found;
 }
+/**
+ * @brief Sprawdza czy w srodku bomby jest gracz.
+ *
+ * @param bomb Wskaznik na bombe.
+ * @param Player Wskaznik na gracza.
+ * @return Czy gracz jest w srodku bomby.
+ */
 bool Bomb_checkPlayer(struct BombList* bomb, struct Character* Player)
 {
     if (bomb != NULL)
@@ -147,6 +199,14 @@ bool Bomb_checkPlayer(struct BombList* bomb, struct Character* Player)
     }
     return false;
 }
+/**
+ * @brief Usuwa bombe z listy.
+ *
+ * @param bomb Podwojny wskaznik na bombe.
+ * @param bombs Podwojny wskaznik na liste bomb.
+ * @param Player Wskaznik na gracza.
+ * @return Wartosc logiczna - czy usunieto.
+ */
 bool Bomb_Remove(struct BombList** bomb, struct BombList** bombs, struct Character* Player)
 {
     if (bombs != NULL && bomb != NULL && (*bomb) != NULL)
@@ -174,6 +234,14 @@ bool Bomb_Remove(struct BombList** bomb, struct BombList** bombs, struct Charact
     }
     return false;
 }
+/**
+ * @brief Podklada bombe.
+ *
+ * @param isPaused Czy gra jest w trakcie pauzy (blokuje wtedy podkladanie bomby).
+ * @param Player Wskaznik na gracza.
+ * @param bombs Podwojny wskaznik na liste bomb.
+ * @param blocks Wskaznik na liste blokow.
+ */
 void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs, struct dstr_block* blocks)
 {
     if (Player != NULL && !isPaused)
@@ -189,7 +257,7 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs,
             if (count > 0)
             {
                 bool dst = false;
-                if (count < Player->maxBombs && !is_on_block(blocks, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, &dst, Player, *bombs, true))
+                if (count < Player->maxBombs && !is_on_block(blocks, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, &dst, Player, *bombs, true))
                 {
 
                     canplant = true;
@@ -197,14 +265,14 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs,
             }
             else
             {
-                planted = Bomb_CreateList(pos, Player->remoteBombs);
+                planted = Bomb_CreateList(pos);
                 *bombs = planted;
                 printf("Bombs 0, creating a list. Address: %p\n   prev: %p\n   next: %p\n", *bombs, (*bombs)->prev, (*bombs)->next);
             }
         }
         if (canplant)
         {
-            planted = Bomb_InsertInto(*bombs, pos, Player->remoteBombs);
+            planted = Bomb_InsertInto(*bombs, pos);
         }
 
         if (planted == NULL)
@@ -216,6 +284,16 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs,
         }
     }
 }
+/**
+ * @brief Renderowanie (wyswietlanie) istniejacych bomb.
+ *
+ * @param bombAnim Animacja bomby.
+ * @param animtime Czas animacji bomby.
+ * @param cam_x_offset Offset kamery w osi X.
+ * @param cam_y_offset Offset kamery w osi Y.
+ * @param Player Wskaznik na gracza.
+ * @param bombs Wskaznik na liste bomb (pierwszy jej element).
+ */
 void renderBombs(ALGIF_ANIMATION* bombAnim, double animtime, float cam_x_offset, float cam_y_offset, struct Character* Player, struct BombList* bombs)
 {
     if (bombs != NULL)
@@ -235,6 +313,20 @@ void renderBombs(ALGIF_ANIMATION* bombAnim, double animtime, float cam_x_offset,
         }
     }
 }
+/**
+ * @brief Wysadza jedna z bomb.
+ *
+ * @param bomb Podwojny wskaznik na bombe.
+ * @param bombs Podwojny wskaznik na liste bomb.
+ * @param blocks Podwojny wskaznik na liste blokow
+ * @param exploSound Dzwiek eksplozji (wskaznik na sample).
+ * @param samples Podwojny wskaznik na stos dzwiekow eksplozji.
+ * @param Player Wskaznik na gracza.
+ * @param cam_y_offset Offset kamery w osi Y.
+ * @param explosions Podwojny wskaznik na liste eksplozji.
+ * @param Enemies Podwojny wskaznik na liste przeciwnikow.
+ * @param Boosts Podwojny wskaznik na liste ulepszen.
+ */
 void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, struct Character* Player, float* cam_y_offset, struct Explosion** explosions, struct Enemy** Enemies, struct Boost** Boosts)
 {
     if (bomb != NULL && (*bomb) != NULL)
@@ -258,7 +350,6 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
         int DestroyedBlocks = 0;
         float lastx, lasty;
         float blocklastx, blocklasty;
-        //al_destroy_sample_instance(newExploSound);
         for (int j = 0; j < 4; j++) {
             switch (j)
             {
@@ -299,7 +390,7 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
                 bool destroyable = mblock != NULL && mblock->destroyable;
                 bool test = false;
 
-                if (is_on_block((*blocks), X, Y, 0, 0, &test, Player, *bombs, true) || mblock != NULL)
+                if (is_on_block((*blocks), X, Y, &test, Player, *bombs, true) || mblock != NULL)
                 {
 
                     if (mblock && destroyable) {
@@ -372,7 +463,6 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
         {
             srand(time(NULL));
             int chance = rand() % 3;
-            printf("CHANCE: %d\n", chance);
             if (chance)
             {
                 if (!hasAchievement(2))
@@ -381,12 +471,26 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
                     GlobalAction = 7;
                 }
                 unsigned short type = 1+ (rand() % 3);
-                printf("Type: %d\n", type);
+                printf("Spawning Boost Type: %d\n", type);
                 Boost_Add(Boosts, type, blocklastx, blocklasty);
             }
         }
     }
 }
+/**
+ * @brief Funkcja wywolywana co klatke (petla) wykonujaca operacje dla wszystkich bomb.
+ *
+ * @param bombs Podwojny wskaznik na liste bomb.
+ * @param blocks Podwojny wskaznik na liste blokow.
+ * @param exploSound Dzwiek eksplozji (Wskaznik na sample)
+ * @param samples Podwojny wskaznik na stos dzwiekow eksplozji.
+ * @param dT deltaTime (czas miedzy klatkami).
+ * @param Player Wskaznik na gracza.
+ * @param cam_y_offset Wskaznik (float*) na offset kamery w osi Y.
+ * @param explosions Podwojny wskaznik na liste eksplozji.
+ * @param Enemies Podwojny wskaznik na liste przeciwnikow.
+ * @param Boosts Podwojny wskaznik na liste ulepszen.
+ */
 void loopBombs(struct BombList** bombs, struct dstr_block** blocks, ALLEGRO_SAMPLE* exploSound, struct SampleStackElement** samples, float dT, struct Character* Player, float* cam_y_offset, struct Explosion** explosions, struct Enemy** Enemies, struct Boost** Boosts)
 {
     if (bombs != NULL && *bombs)

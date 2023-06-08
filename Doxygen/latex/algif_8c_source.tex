@@ -1,0 +1,118 @@
+\doxysection{algif.\+c}
+\hypertarget{algif_8c_source}{}\label{algif_8c_source}\index{Bomberman/algif5-\/master/src/algif.c@{Bomberman/algif5-\/master/src/algif.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}algif.h"{}}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_primitives.h>}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <math.h>}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00005}00005\ \textcolor{comment}{/*\ Renders\ the\ next\ frame\ in\ a\ GIF\ animation\ to\ the\ given\ position.}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00006}00006\ \textcolor{comment}{\ *\ You\ need\ to\ call\ this\ in\ order\ on\ the\ same\ destination\ for\ frames}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00007}00007\ \textcolor{comment}{\ *\ [0..gif-\/>frames\_count\ -\/\ 1]\ to\ properly\ render\ all\ the\ frames\ in\ the\ GIF.}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00008}00008\ \textcolor{comment}{\ *\ The\ current\ target\ bitmap\ should\ have\ the\ same\ height\ as\ the\ animation,}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00009}00009\ \textcolor{comment}{\ *\ and\ blending\ should\ be\ set\ to\ fully\ copy\ RGBA.}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00010}00010\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00011}00011\ \textcolor{keywordtype}{void}\ algif\_render\_frame(\mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif,\ \textcolor{keywordtype}{int}\ frame,\ \textcolor{keywordtype}{int}\ xpos,\ \textcolor{keywordtype}{int}\ ypos)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00012}00012\ \ \ \ \ \textcolor{keywordtype}{int}\ x,\ y,\ w,\ h;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00013}00013\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME}}\ *f\ =\ \&gif-\/>frames[frame];}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00014}00014\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___p_a_l_e_t_t_e}{ALGIF\_PALETTE}}\ *pal;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00015}00015\ \ \ \ \ \textcolor{keywordflow}{if}\ (frame\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ al\_draw\_filled\_rectangle(xpos,\ ypos,\ xpos\ +\ gif-\/>width,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ypos\ +\ gif-\/>height,\ al\_map\_rgba\_f(0,\ 0,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00018}00018\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME}}\ *p\ =\ \&gif-\/>frames[frame\ -\/\ 1];}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p-\/>disposal\_method\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ al\_draw\_filled\_rectangle(xpos\ +\ p-\/>xoff,\ ypos\ +\ p-\/>yoff,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xpos\ +\ p-\/>xoff\ +\ p-\/>bitmap\_8\_bit-\/>w,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ypos\ +\ p-\/>yoff\ +\ p-\/>bitmap\_8\_bit-\/>h,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_map\_rgba\_f(0,\ 0,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (p-\/>disposal\_method\ ==\ 3\ \&\&\ gif-\/>store)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ al\_draw\_bitmap\_region(gif-\/>store,\ xpos\ +\ p-\/>xoff,\ ypos\ +\ p-\/>yoff,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p-\/>bitmap\_8\_bit-\/>w,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p-\/>bitmap\_8\_bit-\/>h,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ xpos\ +\ p-\/>xoff,\ ypos\ +\ p-\/>yoff,\ 0);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ al\_destroy\_bitmap(gif-\/>store);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>store\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00036}00036\ \ \ \ \ w\ =\ f-\/>bitmap\_8\_bit-\/>w;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00037}00037\ \ \ \ \ h\ =\ f-\/>bitmap\_8\_bit-\/>h;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{if}\ (f-\/>disposal\_method\ ==\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (gif-\/>store)}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ \ \ \ \ al\_destroy\_bitmap(gif-\/>store);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ gif-\/>store\ =\ al\_clone\_bitmap(al\_get\_target\_bitmap());}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00043}00043\ \ \ \ \ pal\ =\ \&gif-\/>frames[frame].palette;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (pal-\/>colors\_count\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ pal\ =\ \&gif-\/>palette;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 0;\ y\ <\ h;\ y++)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (x\ =\ 0;\ x\ <\ w;\ x++)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ c\ =\ f-\/>bitmap\_8\_bit-\/>data[x\ +\ y\ *\ f-\/>bitmap\_8\_bit-\/>w];}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c\ !=\ f-\/>transparent\_index)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_draw\_pixel(xpos\ +\ f-\/>xoff\ +\ x,\ ypos\ +\ f-\/>yoff\ +\ y,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_map\_rgb(pal-\/>colors[c].r,\ pal-\/>colors[c].g,}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pal-\/>colors[c].b));}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00059}00059\ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *algif\_load\_animation\_f(ALLEGRO\_FILE\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00060}00060\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif\ =\ algif\_load\_raw(file);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{if}\ (!gif)}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ gif;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00065}00065\ \ \ \ \ al\_init\_primitives\_addon();}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00067}00067\ \ \ \ \ gif-\/>duration\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00068}00068\ \ \ \ \ ALLEGRO\_STATE\ s;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00069}00069\ \ \ \ \ al\_store\_state(\&s,\ ALLEGRO\_STATE\_TARGET\_BITMAP\ |\ ALLEGRO\_STATE\_BLENDER);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00070}00070\ \ \ \ \ al\_set\_blender(ALLEGRO\_ADD,\ ALLEGRO\_ONE,\ ALLEGRO\_ZERO);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ gif-\/>frames\_count;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00072}00072\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME}}\ *f\ =\ \&gif-\/>frames[i];}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ f-\/>rendered\ =\ al\_create\_bitmap(gif-\/>width,\ gif-\/>height);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ f-\/>rendered\ =\ al\_clone\_bitmap(gif-\/>frames[i\ -\/\ 1].rendered);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ al\_set\_target\_bitmap(f-\/>rendered);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ algif\_render\_frame(gif,\ i,\ 0,\ 0);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ gif-\/>duration\ +=\ f-\/>duration;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00084}00084\ \ \ \ \ al\_restore\_state(\&s);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{return}\ gif;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00086}00086\ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00088}00088\ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *algif\_load\_animation(\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ *filename)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00089}00089\ \ \ \ \ ALLEGRO\_FILE\ *file\ =\ al\_fopen(filename,\ \textcolor{stringliteral}{"{}rb"{}});}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00090}00090\ \ \ \ \ \textcolor{keywordflow}{return}\ algif\_load\_animation\_f(file);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00091}00091\ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00093}00093\ ALLEGRO\_BITMAP\ *algif\_get\_bitmap(\mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif,\ \textcolor{keywordtype}{double}\ seconds)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordtype}{int}\ n\ =\ gif-\/>frames\_count;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00095}00095\ \ \ \ \ seconds\ =\ fmod(seconds,\ gif-\/>duration\ /\ 100.0);}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00096}00096\ \ \ \ \ \textcolor{keywordtype}{double}\ d\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ n;\ i++)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ d\ +=\ gif-\/>frames[i].duration\ /\ 100.0;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (seconds\ <\ d)}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ gif-\/>frames[i].rendered;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00102}00102\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00103}00103\ \ \ \ \ \textcolor{keywordflow}{return}\ gif-\/>frames[0].rendered;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00104}00104\ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00105}00105\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00106}00106\ ALLEGRO\_BITMAP\ *algif\_get\_frame\_bitmap(\mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif,\ \textcolor{keywordtype}{int}\ i)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{return}\ gif-\/>frames[i].rendered;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00108}00108\ \}}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00109}00109\ }
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00110}00110\ \textcolor{keywordtype}{double}\ algif\_get\_frame\_duration(\mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif,\ \textcolor{keywordtype}{int}\ i)\ \{}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00111}00111\ \ \ \ \ \textcolor{keywordflow}{return}\ gif-\/>frames[i].duration\ /\ 100.0;}
+\DoxyCodeLine{\Hypertarget{algif_8c_source_l00112}00112\ \}}
+
+\end{DoxyCode}

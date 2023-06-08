@@ -28,7 +28,6 @@
 #endif // !WIDTH
 
 struct BombList* bombs = NULL;
-const bool debug = true;
 bool wasd[4] = { false, false, false, false };
 double deltaTime = 0;
 float cam_x_offset = 0;
@@ -51,7 +50,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
         float npx = (Player->Transform.position.x + nDir.x);
         float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
         bool dstr = false;
-        if (!is_on_block(blocks, npx, Player->Transform.position.y, dir.x, dir.y, &dstr, Player, bombs, false)) {
+        if (!is_on_block(blocks, npx, Player->Transform.position.y, &dstr, Player, bombs, false)) {
             if (npx >= halfplayer && npx <= ((WIDTH*2)-halfplayer)+1)
             {
                 if (npx < 0) npx = 0;
@@ -69,7 +68,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
                 Player->Transform.position.x = npx;
             }
         }
-        if (!is_on_block(blocks, Player->Transform.position.x, npy, 0, dir.y, &dstr, Player, bombs, false)) {
+        if (!is_on_block(blocks, Player->Transform.position.x, npy, &dstr, Player, bombs, false)) {
             if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < HEIGHT + 1 - ((128 * Player->Transform.scale.y)/2.0))
             {
                 Player->Transform.position.y = npy;
@@ -366,11 +365,10 @@ void drawGrid(int maxx, int maxy, int xsize, int ysize)
         }
     }
 }
-const int FPS = 30;
-
 
 int main()
 {
+    const bool debug = false;
     bool zamknij = false;
     Player = (struct Character*)malloc(sizeof(struct Character));
     if (Player != NULL)
@@ -389,14 +387,11 @@ int main()
         Player->Transform.position.y = HEIGHT / 2;
         Player->Speed = 3.0;
         Player->maxBombs = 2;
-        Player->remoteBombs = false;
         Player->bombRange = 1;
         Player->enabled = true;
 
         ALLEGRO_DISPLAY* display = NULL;
         ALLEGRO_EVENT_QUEUE* queue = NULL;
-        ALLEGRO_TIMER* timer = NULL;
-        // Initialize allegro
 
         if (!al_init_primitives_addon()) { return -1; }
         if (!al_install_keyboard()) { return -1; }
@@ -414,13 +409,6 @@ int main()
             printf("SOUNDS LOADING FAILED! %p and %p\n", MenuMusic, GameMusic);
             return -11;
         }
-        // Initialize the timer
-        timer = al_create_timer(1.0 / FPS);
-        if (!timer) {
-            fprintf(stderr, "Failed to create timer.\n");
-            return 1;
-        }
-
         // Create the display
         display = al_create_display(WIDTH, HEIGHT);
         if (!display) {
@@ -437,14 +425,12 @@ int main()
         // Register event sources
         al_register_event_source(queue, al_get_display_event_source(display));
         al_register_event_source(queue, al_get_keyboard_event_source());
-        al_register_event_source(queue, al_get_timer_event_source(timer));
 
         // Display a black screen
         al_clear_to_color(al_map_rgb(0, 30, 0));
         al_flip_display();
 
         // Start the timer
-        al_start_timer(timer);
         ALLEGRO_FONT* debugFont = al_load_ttf_font("data/fonts/data-unifon.ttf", 12, 0);
         ALLEGRO_FONT* uiFont = al_load_ttf_font("data/fonts/PlatNomor-WyVnn.ttf", 18, 0);
         ALLEGRO_FONT* TitleFont = al_load_ttf_font("data/fonts/AldotheApache.ttf", 100, 0);
@@ -541,11 +527,7 @@ int main()
                 zamknij = true;
                 return;
             }
-            //printf("LEVEL: %d\n", level);
-            //printf("======== New Frame ========\n");
-            //ALLEGRO_TIMEOUT timeout;
-            //al_init_timeout(&timeout, 0.06);
-            //al_wait_for_vsync();
+            al_wait_for_vsync();
             ALLEGRO_EVENT event;
             al_wait_for_event_timed(queue, &event, 0.00);
             ctime = al_get_time();
@@ -575,7 +557,6 @@ int main()
                 if (!al_get_sample_instance_playing(GMusicInstance) && Player->enabled)
                 {
                     al_play_sample_instance(GMusicInstance);
-                    //printf("Play GAME MUSIC?\n");
                 }
                 switch (GlobalAction)
                 {
@@ -599,7 +580,6 @@ int main()
                             cam_y_offset = 0;
                             diedsoundplayed = false;
                             gonext = false;
-                            //EnemyList = NULL;
                             Pause = false;
                             level = 0;
                             loadedLevel = 0;
@@ -649,18 +629,11 @@ int main()
                 if (cam_y_offset < 0) { cam_y_offset = 0; }
                 al_clear_to_color(al_map_rgb(10, 100, 10));
                 al_draw_bitmap(grass, 0 - cam_x_offset, 0, 0);
-                //al_draw_scaled_bitmap(grass, 0, 0, 832, 416, 0 - cam_x_offset, 0, 1664, 832, 0);
-
-                //drawAllFilledRectInView();
                 bool check = false;
-                //dTest += deltaTime;
-                //if (dTest > 1) {
                 if (!Pause)
                 {
                     loopBlocks(&blocks, EnemyList);
                 }
-                //dTest = 0;
-            //}
                 if (endingDoor)
                 {
                     al_draw_scaled_bitmap(doorSprite, 0, 0, 128, 128, endingDoor->x - 32 - cam_x_offset, endingDoor->y - cam_y_offset - 32, 64, 64, 0);
@@ -676,7 +649,7 @@ int main()
                             _itoa_s(Player->bombRange, lstr, LINE_LENGTH, 10);
                             saveSystem_printAtLine(4, lstr);
                             snprintf(lstr, LINE_LENGTH*sizeof(char), "%f", Player->Speed);
-                            printf("Saving speed: %s", lstr);
+                            //printf("Saving speed: %s", lstr);
                             saveSystem_printAtLine(5, lstr);
 
                             gonext = true;
@@ -690,7 +663,6 @@ int main()
 
                 if (!check) {
                     Blocks_draw(blocks, dBlockSprite, sBlockSprite, Player, cam_x_offset, cam_y_offset);
-                    //printf("BLOCKS ADDRESS: %p\n", blocks);
                 }
                 if (Player->enabled)
                 {
@@ -731,9 +703,7 @@ int main()
                     }
                     if (anim) {
                         ALLEGRO_BITMAP* sprite = algif_get_bitmap(anim, AnimTime);
-                        //al_draw_filled_rectangle(Player->Transform.position.x - Player->Transform.scale.x / 2.0, Player->Transform.position.y - Player->Transform.scale.y / 2.0, Player->Transform.position.x + Player->Transform.scale.x, Player->Transform.position.y + Player->Transform.scale.y, color_blue);
                         al_draw_scaled_rotated_bitmap(sprite, 64, 64, Player->Transform.position.x - cam_x_offset, Player->Transform.position.y - cam_y_offset, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
-                        //al_draw_scaled_rotated_bitmap(Player->sprite, 64, 64, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, Player->Transform.scale.x, Player->Transform.scale.y, 0, 0);
                         al_draw_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(150, 20, 20, 3), 2);
                     }
                 }
@@ -763,7 +733,6 @@ int main()
                 {
                     if (displayFpsDelay <= 0)
                     {
-                        //printf("Synced Delta Time: %lf. FRAMES: %d\n", syncDeltaTime, frames);
                         displayFps = frames / syncDeltaTime;
                         displayFpsDelay = 0.2;
                         syncDeltaTime = 0;
@@ -803,7 +772,6 @@ int main()
                 if (!al_get_sample_instance_playing(MMusicInstance))
                 {
                     al_play_sample_instance(MMusicInstance);
-                    //printf("Play Menu?\n");
                 }
                 if (MenuChoice == 0)
                     MenuChoice = 1;

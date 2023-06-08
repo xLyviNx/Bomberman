@@ -1,0 +1,102 @@
+\doxysection{Dokumentacja pliku Bomberman/end\+Door.c}
+\hypertarget{end_door_8c}{}\label{end_door_8c}\index{Bomberman/endDoor.c@{Bomberman/endDoor.c}}
+{\ttfamily \#include \"{}end\+Door.\+h\"{}}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{end_door_8c_ac93a83343fc2f81c6563c8ff6f30cd2d}{Create\+Door}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{end_door_8c_abefb0cdac95273bc513fa3b0d278bd6f}{Destroy\+Door}} ()
+\begin{DoxyCompactList}\small\item\em Usuwa drzwi i zwalnia pamiec. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{end_door_8c_a4b1acc8620e211e16b17ccec08578f95}{Door\+\_\+has\+Player\+In}} (struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Sprawdza czy gracz wszedl w drzwi. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structend_door}{end\+Door}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{end_door_8c_aa30c4de56d98e5fc8014ae5c9fa08535}{ending\+Door}} = NULL
+\item 
+ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{end_door_8c_ad4772a7d007d862f16c3f5e7d4794fd0}{door\+Sprite}} = NULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{end_door_8c_ac93a83343fc2f81c6563c8ff6f30cd2d}\label{end_door_8c_ac93a83343fc2f81c6563c8ff6f30cd2d} 
+\index{endDoor.c@{endDoor.c}!CreateDoor@{CreateDoor}}
+\index{CreateDoor@{CreateDoor}!endDoor.c@{endDoor.c}}
+\doxysubsubsection{\texorpdfstring{CreateDoor()}{CreateDoor()}}
+{\footnotesize\ttfamily void Create\+Door (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em x} & Wspolrzedna X \\
+\hline
+{\em y} & Wspolrzedna Y. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00014}{14}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+\Hypertarget{end_door_8c_abefb0cdac95273bc513fa3b0d278bd6f}\label{end_door_8c_abefb0cdac95273bc513fa3b0d278bd6f} 
+\index{endDoor.c@{endDoor.c}!DestroyDoor@{DestroyDoor}}
+\index{DestroyDoor@{DestroyDoor}!endDoor.c@{endDoor.c}}
+\doxysubsubsection{\texorpdfstring{DestroyDoor()}{DestroyDoor()}}
+{\footnotesize\ttfamily void Destroy\+Door (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Usuwa drzwi i zwalnia pamiec. 
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00028}{28}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+\Hypertarget{end_door_8c_a4b1acc8620e211e16b17ccec08578f95}\label{end_door_8c_a4b1acc8620e211e16b17ccec08578f95} 
+\index{endDoor.c@{endDoor.c}!Door\_hasPlayerIn@{Door\_hasPlayerIn}}
+\index{Door\_hasPlayerIn@{Door\_hasPlayerIn}!endDoor.c@{endDoor.c}}
+\doxysubsubsection{\texorpdfstring{Door\_hasPlayerIn()}{Door\_hasPlayerIn()}}
+{\footnotesize\ttfamily bool Door\+\_\+has\+Player\+In (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Sprawdza czy gracz wszedl w drzwi. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ czy gracz koliduje z drzwiami. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00042}{42}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+
+
+\doxysubsection{Dokumentacja zmiennych}
+\Hypertarget{end_door_8c_ad4772a7d007d862f16c3f5e7d4794fd0}\label{end_door_8c_ad4772a7d007d862f16c3f5e7d4794fd0} 
+\index{endDoor.c@{endDoor.c}!doorSprite@{doorSprite}}
+\index{doorSprite@{doorSprite}!endDoor.c@{endDoor.c}}
+\doxysubsubsection{\texorpdfstring{doorSprite}{doorSprite}}
+{\footnotesize\ttfamily ALLEGRO\+\_\+\+BITMAP\texorpdfstring{$\ast$}{*} door\+Sprite = NULL}
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00006}{6}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+
+\Hypertarget{end_door_8c_aa30c4de56d98e5fc8014ae5c9fa08535}\label{end_door_8c_aa30c4de56d98e5fc8014ae5c9fa08535} 
+\index{endDoor.c@{endDoor.c}!endingDoor@{endingDoor}}
+\index{endingDoor@{endingDoor}!endDoor.c@{endDoor.c}}
+\doxysubsubsection{\texorpdfstring{endingDoor}{endingDoor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structend_door}{end\+Door}}\texorpdfstring{$\ast$}{*} ending\+Door = NULL}
+
+
+
+Definicja w linii \mbox{\hyperlink{end_door_8c_source_l00004}{4}} pliku \mbox{\hyperlink{end_door_8c_source}{end\+Door.\+c}}.
+

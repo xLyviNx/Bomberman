@@ -1,7 +1,19 @@
 #include "types.h"
 #include "Bombs.h"
 #include "Blocks.h"
-bool is_on_block(struct dstr_block* blocks, float x, float y, float dX, float dY, bool* destroyable, struct Character* Player, struct BombList* bombs, bool bombanyway) {
+
+/**
+ * @brief Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.
+ *
+ * @param blocks Wskaznik na pierwszy element listy blokow.
+ * @param x Wspolrzedna x.
+ * @param y Wspolrzedna y.
+ * @param destroyable Wskaznik na bool'a mowiacego czy blok da sie zniszczyc.
+ * @param Player Wskaznik na gracza.
+ * @param bombs Wskaznik na liste bomb.
+ * @param bombanyway Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby).
+ */
+bool is_on_block(struct dstr_block* blocks, float x, float y, bool* destroyable, struct Character* Player, struct BombList* bombs, bool bombanyway) {
 
     struct dstr_block* blck = Block_Find(blocks, x, y, false, Player);
     struct BombList* atBomb = Bomb_Find(bombs, x, y, false, Player);

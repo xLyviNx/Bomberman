@@ -1,0 +1,68 @@
+\doxysection{Dokumentacja pliku Bomberman/soundstack.h}
+\hypertarget{soundstack_8h}{}\label{soundstack_8h}\index{Bomberman/soundstack.h@{Bomberman/soundstack.h}}
+{\ttfamily \#include $<$allegro5/allegro\+\_\+audio.\+h$>$}\newline
+\doxysubsubsection*{Struktury danych}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Definicje}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146}{ISON}}~false
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{soundstack_8h_aa1cf8051e34d10fef87b72b4d9b61dcd}{Sample\+Stack\+\_\+\+Push}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}, ALLEGRO\+\_\+\+SAMPLE\+\_\+\+INSTANCE \texorpdfstring{$\ast$}{*})
+\item 
+void \mbox{\hyperlink{soundstack_8h_afdbc63cec52a686cfe155fe9d26b7744}{Sample\+Stack\+\_\+\+Loop}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, float)
+\item 
+struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{soundstack_8h_ab12e3127069bbb4c179d6a6478bb0291}{Sample\+Stack\+\_\+\+Pop}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja definicji}
+\Hypertarget{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146}\label{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146} 
+\index{soundstack.h@{soundstack.h}!ISON@{ISON}}
+\index{ISON@{ISON}!soundstack.h@{soundstack.h}}
+\doxysubsubsection{\texorpdfstring{ISON}{ISON}}
+{\footnotesize\ttfamily \#define ISON~false}
+
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8h_source_l00003}{3}} pliku \mbox{\hyperlink{soundstack_8h_source}{soundstack.\+h}}.
+
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{soundstack_8h_afdbc63cec52a686cfe155fe9d26b7744}\label{soundstack_8h_afdbc63cec52a686cfe155fe9d26b7744} 
+\index{soundstack.h@{soundstack.h}!SampleStack\_Loop@{SampleStack\_Loop}}
+\index{SampleStack\_Loop@{SampleStack\_Loop}!soundstack.h@{soundstack.h}}
+\doxysubsubsection{\texorpdfstring{SampleStack\_Loop()}{SampleStack\_Loop()}}
+{\footnotesize\ttfamily void Sample\+Stack\+\_\+\+Loop (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first,  }\item[{float}]{dT }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00037}{37}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+
+\Hypertarget{soundstack_8h_ab12e3127069bbb4c179d6a6478bb0291}\label{soundstack_8h_ab12e3127069bbb4c179d6a6478bb0291} 
+\index{soundstack.h@{soundstack.h}!SampleStack\_Pop@{SampleStack\_Pop}}
+\index{SampleStack\_Pop@{SampleStack\_Pop}!soundstack.h@{soundstack.h}}
+\doxysubsubsection{\texorpdfstring{SampleStack\_Pop()}{SampleStack\_Pop()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} Sample\+Stack\+\_\+\+Pop (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}}]{first }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00051}{51}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+
+\Hypertarget{soundstack_8h_aa1cf8051e34d10fef87b72b4d9b61dcd}\label{soundstack_8h_aa1cf8051e34d10fef87b72b4d9b61dcd} 
+\index{soundstack.h@{soundstack.h}!SampleStack\_Push@{SampleStack\_Push}}
+\index{SampleStack\_Push@{SampleStack\_Push}!soundstack.h@{soundstack.h}}
+\doxysubsubsection{\texorpdfstring{SampleStack\_Push()}{SampleStack\_Push()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} Sample\+Stack\+\_\+\+Push (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}}]{first,  }\item[{ALLEGRO\+\_\+\+SAMPLE\+\_\+\+INSTANCE \texorpdfstring{$\ast$}{*}}]{instance }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00003}{3}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+

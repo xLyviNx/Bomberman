@@ -2,14 +2,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+/**
+ * @brief Struktura eksplozji
+ */
 struct Explosion
 {
-    float timeLeft;
-    int gridX;
-    int gridY;
-    int i;
-    struct Explosion* next;
-    struct Explosion* prev;
+    float timeLeft; /**< Czas pozostaly do znikniecia. */
+    int gridX; /**< Pozycja na osi X. */
+    int gridY; /**< Pozycja na osi Y. */
+    int i; /**< Odleglosc od bomby. */
+    struct Explosion* next; /**< Nastepny element listy. */
+    struct Explosion* prev; /**< Poprzedni element listy. */
 };
 
 struct Explosion* Explosion_Insert(struct Explosion**, int, int, int);

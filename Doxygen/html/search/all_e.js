@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['samplestack_5floop_0',['SampleStack_Loop',['../soundstack_8c.html#a6953d18a0813fc25e901f2d50d6fbac5',1,'SampleStack_Loop(struct SampleStackElement **first, float dT):&#160;soundstack.c'],['../soundstack_8h.html#afdbc63cec52a686cfe155fe9d26b7744',1,'SampleStack_Loop(struct SampleStackElement **, float):&#160;soundstack.c']]],
+  ['samplestack_5fpop_1',['SampleStack_Pop',['../soundstack_8c.html#ab305c09a5e37058d545deac7fd2a5b10',1,'SampleStack_Pop(struct SampleStackElement *first):&#160;soundstack.c'],['../soundstack_8h.html#ab12e3127069bbb4c179d6a6478bb0291',1,'SampleStack_Pop(struct SampleStackElement *):&#160;soundstack.c']]],
+  ['samplestack_5fpush_2',['SampleStack_Push',['../soundstack_8h.html#aa1cf8051e34d10fef87b72b4d9b61dcd',1,'SampleStack_Push(struct SampleStackElement *, ALLEGRO_SAMPLE_INSTANCE *):&#160;soundstack.c'],['../soundstack_8c.html#a8daadf335fa00aa30d365e271572cb54',1,'SampleStack_Push(struct SampleStackElement *first, ALLEGRO_SAMPLE_INSTANCE *instance):&#160;soundstack.c']]],
+  ['samplestackelement_3',['SampleStackElement',['../struct_sample_stack_element.html',1,'']]],
+  ['savefile_4',['saveFile',['../save_system_8h.html#a7fedcafb7925d05c44330e2e1edf3043',1,'saveSystem.h']]],
+  ['savefile_5flocation_5',['SAVEFILE_LOCATION',['../save_system_8c.html#a53c83a66e461adf57ea7f7b94ac51568',1,'saveSystem.c']]],
+  ['savesystem_2ec_6',['saveSystem.c',['../save_system_8c.html',1,'']]],
+  ['savesystem_2eh_7',['saveSystem.h',['../save_system_8h.html',1,'']]],
+  ['savesystem_5fclose_8',['saveSystem_close',['../save_system_8c.html#a2dba782e8e440ce1b2a164b5e5e42129',1,'saveSystem_close():&#160;saveSystem.c'],['../save_system_8h.html#a2dba782e8e440ce1b2a164b5e5e42129',1,'saveSystem_close():&#160;saveSystem.c']]],
+  ['savesystem_5finit_9',['saveSystem_init',['../save_system_8h.html#a65bc2bfdd845f4843d68e58349684bcb',1,'saveSystem_init():&#160;saveSystem.c'],['../save_system_8c.html#a65bc2bfdd845f4843d68e58349684bcb',1,'saveSystem_init():&#160;saveSystem.c']]],
+  ['savesystem_5floadbombs_10',['saveSystem_LoadBombs',['../save_system_8c.html#af24120518da9bb3e4797d445b2daeaca',1,'saveSystem_LoadBombs():&#160;saveSystem.c'],['../save_system_8h.html#af24120518da9bb3e4797d445b2daeaca',1,'saveSystem_LoadBombs():&#160;saveSystem.c']]],
+  ['savesystem_5floadlevel_11',['saveSystem_LoadLevel',['../save_system_8c.html#a8629066b437fe98d77c456ae248a8500',1,'saveSystem_LoadLevel():&#160;saveSystem.c'],['../save_system_8h.html#a8629066b437fe98d77c456ae248a8500',1,'saveSystem_LoadLevel():&#160;saveSystem.c']]],
+  ['savesystem_5floadrange_12',['saveSystem_LoadRange',['../save_system_8c.html#af88a77ff799146acde4ba37bdccf9468',1,'saveSystem_LoadRange():&#160;saveSystem.c'],['../save_system_8h.html#af88a77ff799146acde4ba37bdccf9468',1,'saveSystem_LoadRange():&#160;saveSystem.c']]],
+  ['savesystem_5floadspeed_13',['saveSystem_LoadSpeed',['../save_system_8c.html#ad424455bd34d93697c04676898d98251',1,'saveSystem_LoadSpeed():&#160;saveSystem.c'],['../save_system_8h.html#ad424455bd34d93697c04676898d98251',1,'saveSystem_LoadSpeed():&#160;saveSystem.c']]],
+  ['savesystem_5fprintatline_14',['saveSystem_printAtLine',['../save_system_8c.html#a9fee469e473f1031fd15c443997ed4b3',1,'saveSystem_printAtLine(int lineNumber, const char *content):&#160;saveSystem.c'],['../save_system_8h.html#a6a5ad9c75b3c00dfd3f46e513087465d',1,'saveSystem_printAtLine(int, const char *):&#160;saveSystem.c']]],
+  ['savesystem_5freadline_15',['saveSystem_readLine',['../save_system_8c.html#a3728a9658374383ae83ad77db77b344c',1,'saveSystem_readLine(int lineNumber):&#160;saveSystem.c'],['../save_system_8h.html#a466eaf1096a7ce5b76c95ea14de1312f',1,'saveSystem_readLine(int):&#160;saveSystem.c']]],
+  ['savesystem_5fresetdata_16',['saveSystem_resetData',['../save_system_8c.html#a778c8e92886fd11fa783e7b2df815622',1,'saveSystem_resetData():&#160;saveSystem.c'],['../save_system_8h.html#a778c8e92886fd11fa783e7b2df815622',1,'saveSystem_resetData():&#160;saveSystem.c']]],
+  ['savesystem_5fsetstartdata_17',['saveSystem_setStartData',['../save_system_8c.html#a26cbc408b43a66b3b12704f702abfd75',1,'saveSystem_setStartData():&#160;saveSystem.c'],['../save_system_8h.html#a26cbc408b43a66b3b12704f702abfd75',1,'saveSystem_setStartData():&#160;saveSystem.c']]],
+  ['scale_18',['scale',['../struct_transform.html#adbbdd7ba8a73ae016968e88e90bcb46c',1,'Transform']]],
+  ['soundstack_2ec_19',['soundstack.c',['../soundstack_8c.html',1,'']]],
+  ['soundstack_2eh_20',['soundstack.h',['../soundstack_8h.html',1,'']]],
+  ['speed_21',['speed',['../struct_enemy.html#a7f7e4724cf57d59513b39c5ecc81adc8',1,'Enemy']]],
+  ['speed_22',['Speed',['../struct_character.html#a61efabcca15cccefe7d85ea6da6af5e3',1,'Character']]]
+];

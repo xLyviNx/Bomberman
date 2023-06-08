@@ -1,0 +1,254 @@
+\doxysection{Dokumentacja pliku Bomberman/main.c}
+\hypertarget{main_8c}{}\label{main_8c}\index{Bomberman/main.c@{Bomberman/main.c}}
+{\ttfamily \#include \"{}algif5-\/master/src/algif.\+h\"{}}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+font.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/events.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/keycodes.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+primitives.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+audio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+acodec.\+h$>$}\newline
+{\ttfamily \#include \"{}soundstack.\+h\"{}}\newline
+{\ttfamily \#include \"{}save\+System.\+h\"{}}\newline
+{\ttfamily \#include \"{}Enemies.\+h\"{}}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include \"{}Bombs.\+h\"{}}\newline
+{\ttfamily \#include \"{}Blocks.\+h\"{}}\newline
+{\ttfamily \#include \"{}main.\+h\"{}}\newline
+{\ttfamily \#include \"{}Explosions.\+h\"{}}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \"{}end\+Door.\+h\"{}}\newline
+{\ttfamily \#include \"{}boosts.\+h\"{}}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd}{Move\+Player}} (struct \mbox{\hyperlink{struct_vector2}{Vector2}} dir, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
+\item 
+void \mbox{\hyperlink{main_8c_a99c600c7ab794c26c3d142fe0c4b4ba6}{Achievement}} (float \texorpdfstring{$\ast$}{*}timeleft, int id, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font2)
+\item 
+void \mbox{\hyperlink{main_8c_a260156233ddc906c4545cedacebbd8d1}{player\+Movement}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
+\item 
+void \mbox{\hyperlink{main_8c_a13c95e670d96a5e351b602a833e42c99}{render\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}expl)
+\item 
+void \mbox{\hyperlink{main_8c_ab9b972cc25c97319c531bd050a009bcc}{loop\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}expl, bool \texorpdfstring{$\ast$}{*}removed)
+\item 
+void \mbox{\hyperlink{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4}{menu\+Move}} (bool down, unsigned short \texorpdfstring{$\ast$}{*}val, int level, bool buttondown)
+\item 
+void \mbox{\hyperlink{main_8c_ad8d2c549db062face4a58e191844cdd8}{button}} (int key, bool down, int \texorpdfstring{$\ast$}{*}current\+Level, unsigned short \texorpdfstring{$\ast$}{*}menu\+Choice\+Value)
+\item 
+void \mbox{\hyperlink{main_8c_ac55ee0a4b8070d80e00b83d067d91614}{draw\+UI}} (ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}ui\+Font, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Level\+Font, int level, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemies, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
+\item 
+void \mbox{\hyperlink{main_8c_ac8b97f071c4711d5d652c2136dc0698b}{draw\+Grid}} (int maxx, int maxy, int xsize, int ysize)
+\item 
+int \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Zmienne}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}} = NULL
+\item 
+bool \mbox{\hyperlink{main_8c_a67dd12859b2bef7eb52210aa47e88a7d}{wasd}} \mbox{[}4\mbox{]} = \{ false, false, false, false \}
+\item 
+double \mbox{\hyperlink{main_8c_afac460bb6131314e58628ebd514f53c7}{delta\+Time}} = 0
+\item 
+float \mbox{\hyperlink{main_8c_a8235c6e9e346e312c0452da60148bc21}{cam\+\_\+x\+\_\+offset}} = 0
+\item 
+float \mbox{\hyperlink{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}{cam\+\_\+y\+\_\+offset}} = 0
+\item 
+unsigned short \mbox{\hyperlink{main_8c_a23c39ea291d6ab3eedc01ede1fe795fd}{Global\+Action}} = 0
+\item 
+struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}} = NULL
+\item 
+struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}} = NULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{main_8c_a99c600c7ab794c26c3d142fe0c4b4ba6}\label{main_8c_a99c600c7ab794c26c3d142fe0c4b4ba6} 
+\index{main.c@{main.c}!Achievement@{Achievement}}
+\index{Achievement@{Achievement}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Achievement()}{Achievement()}}
+{\footnotesize\ttfamily void Achievement (\begin{DoxyParamCaption}\item[{float \texorpdfstring{$\ast$}{*}}]{timeleft,  }\item[{int}]{id,  }\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}}]{font,  }\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}}]{font2 }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00091}{91}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_ad8d2c549db062face4a58e191844cdd8}\label{main_8c_ad8d2c549db062face4a58e191844cdd8} 
+\index{main.c@{main.c}!button@{button}}
+\index{button@{button}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{button()}{button()}}
+{\footnotesize\ttfamily void button (\begin{DoxyParamCaption}\item[{int}]{key,  }\item[{bool}]{down,  }\item[{int \texorpdfstring{$\ast$}{*}}]{current\+Level,  }\item[{unsigned short \texorpdfstring{$\ast$}{*}}]{menu\+Choice\+Value }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00229}{229}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_ac8b97f071c4711d5d652c2136dc0698b}\label{main_8c_ac8b97f071c4711d5d652c2136dc0698b} 
+\index{main.c@{main.c}!drawGrid@{drawGrid}}
+\index{drawGrid@{drawGrid}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{drawGrid()}{drawGrid()}}
+{\footnotesize\ttfamily void draw\+Grid (\begin{DoxyParamCaption}\item[{int}]{maxx,  }\item[{int}]{maxy,  }\item[{int}]{xsize,  }\item[{int}]{ysize }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00340}{340}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_ac55ee0a4b8070d80e00b83d067d91614}\label{main_8c_ac55ee0a4b8070d80e00b83d067d91614} 
+\index{main.c@{main.c}!drawUI@{drawUI}}
+\index{drawUI@{drawUI}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{drawUI()}{drawUI()}}
+{\footnotesize\ttfamily void draw\+UI (\begin{DoxyParamCaption}\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{ui\+Font,  }\item[{ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{Level\+Font,  }\item[{int}]{level,  }\item[{struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}}]{enemies,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00331}{331}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_ab9b972cc25c97319c531bd050a009bcc}\label{main_8c_ab9b972cc25c97319c531bd050a009bcc} 
+\index{main.c@{main.c}!loopExplosions@{loopExplosions}}
+\index{loopExplosions@{loopExplosions}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{loopExplosions()}{loopExplosions()}}
+{\footnotesize\ttfamily void loop\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{expl,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{removed }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00182}{182}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00369}{369}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4}\label{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4} 
+\index{main.c@{main.c}!menuMove@{menuMove}}
+\index{menuMove@{menuMove}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{menuMove()}{menuMove()}}
+{\footnotesize\ttfamily void menu\+Move (\begin{DoxyParamCaption}\item[{bool}]{down,  }\item[{unsigned short \texorpdfstring{$\ast$}{*}}]{val,  }\item[{int}]{level,  }\item[{bool}]{buttondown }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00207}{207}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd}\label{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd} 
+\index{main.c@{main.c}!MovePlayer@{MovePlayer}}
+\index{MovePlayer@{MovePlayer}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MovePlayer()}{MovePlayer()}}
+{\footnotesize\ttfamily void Move\+Player (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_vector2}{Vector2}}}]{dir,  }\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00042}{42}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a260156233ddc906c4545cedacebbd8d1}\label{main_8c_a260156233ddc906c4545cedacebbd8d1} 
+\index{main.c@{main.c}!playerMovement@{playerMovement}}
+\index{playerMovement@{playerMovement}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{playerMovement()}{playerMovement()}}
+{\footnotesize\ttfamily void player\+Movement (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00120}{120}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a13c95e670d96a5e351b602a833e42c99}\label{main_8c_a13c95e670d96a5e351b602a833e42c99} 
+\index{main.c@{main.c}!renderExplosions@{renderExplosions}}
+\index{renderExplosions@{renderExplosions}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{renderExplosions()}{renderExplosions()}}
+{\footnotesize\ttfamily void render\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}}]{expl }\end{DoxyParamCaption})}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00155}{155}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+
+
+\doxysubsection{Dokumentacja zmiennych}
+\Hypertarget{main_8c_a0c6b025e3d49adb23ede839eb339aaba}\label{main_8c_a0c6b025e3d49adb23ede839eb339aaba} 
+\index{main.c@{main.c}!bombs@{bombs}}
+\index{bombs@{bombs}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{bombs}{bombs}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}}\texorpdfstring{$\ast$}{*} bombs = NULL}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00030}{30}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a8235c6e9e346e312c0452da60148bc21}\label{main_8c_a8235c6e9e346e312c0452da60148bc21} 
+\index{main.c@{main.c}!cam\_x\_offset@{cam\_x\_offset}}
+\index{cam\_x\_offset@{cam\_x\_offset}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{cam\_x\_offset}{cam\_x\_offset}}
+{\footnotesize\ttfamily float cam\+\_\+x\+\_\+offset = 0}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00033}{33}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}\label{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6} 
+\index{main.c@{main.c}!cam\_y\_offset@{cam\_y\_offset}}
+\index{cam\_y\_offset@{cam\_y\_offset}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{cam\_y\_offset}{cam\_y\_offset}}
+{\footnotesize\ttfamily float cam\+\_\+y\+\_\+offset = 0}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00034}{34}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_afac460bb6131314e58628ebd514f53c7}\label{main_8c_afac460bb6131314e58628ebd514f53c7} 
+\index{main.c@{main.c}!deltaTime@{deltaTime}}
+\index{deltaTime@{deltaTime}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{deltaTime}{deltaTime}}
+{\footnotesize\ttfamily double delta\+Time = 0}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00032}{32}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a552dc66db0005fc65d2da465f5b65bab}\label{main_8c_a552dc66db0005fc65d2da465f5b65bab} 
+\index{main.c@{main.c}!explosions@{explosions}}
+\index{explosions@{explosions}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{explosions}{explosions}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_explosion}{Explosion}}\texorpdfstring{$\ast$}{*} explosions = NULL}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00040}{40}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a23c39ea291d6ab3eedc01ede1fe795fd}\label{main_8c_a23c39ea291d6ab3eedc01ede1fe795fd} 
+\index{main.c@{main.c}!GlobalAction@{GlobalAction}}
+\index{GlobalAction@{GlobalAction}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{GlobalAction}{GlobalAction}}
+{\footnotesize\ttfamily unsigned short Global\+Action = 0}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00035}{35}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a3980a30693d2af1a413698203929f1be}\label{main_8c_a3980a30693d2af1a413698203929f1be} 
+\index{main.c@{main.c}!Player@{Player}}
+\index{Player@{Player}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Player}{Player}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_character}{Character}}\texorpdfstring{$\ast$}{*} Player = NULL}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00037}{37}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+\Hypertarget{main_8c_a67dd12859b2bef7eb52210aa47e88a7d}\label{main_8c_a67dd12859b2bef7eb52210aa47e88a7d} 
+\index{main.c@{main.c}!wasd@{wasd}}
+\index{wasd@{wasd}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{wasd}{wasd}}
+{\footnotesize\ttfamily bool wasd\mbox{[}4\mbox{]} = \{ false, false, false, false \}}
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00031}{31}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+

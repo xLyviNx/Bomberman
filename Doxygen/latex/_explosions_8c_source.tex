@@ -1,0 +1,84 @@
+\doxysection{Explosions.\+c}
+\hypertarget{_explosions_8c_source}{}\label{_explosions_8c_source}\index{Bomberman/Explosions.c@{Bomberman/Explosions.c}}
+\mbox{\hyperlink{_explosions_8c}{Idź do dokumentacji tego pliku.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_explosions_8h}{Explosions.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00013}\mbox{\hyperlink{_explosions_8c_aa716f2c51fe8c12ff189a221515fe911}{00013}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ \mbox{\hyperlink{_explosions_8c_aa716f2c51fe8c12ff189a221515fe911}{Explosion\_Insert}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_explosion}{Explosion}}**\ first,\ \textcolor{keywordtype}{int}\ X,\ \textcolor{keywordtype}{int}\ Y,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_explosion_acb559820d9ca11295b4500f179ef6392}{i}})}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00015}00015\ \ \ \ \ printf(\textcolor{stringliteral}{"{}Inserting\ Explosion\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00016}00016\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ nE\ =\ (\textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_explosion}{Explosion}}));}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (nE\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_a677dcac25ea1ea075389d4617987d24a}{gridX}}\ =\ X;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_ab5212fb9aab1c6fc1fb904b86b6e51ff}{gridY}}\ =\ Y;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_a8ed049737f25e4aa69b99511c2668f55}{timeLeft}}\ =\ 0.2;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_acb559820d9ca11295b4500f179ef6392}{i}}\ =\ \mbox{\hyperlink{struct_explosion_acb559820d9ca11295b4500f179ef6392}{i}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((*first)\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ end\ =\ *first;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (end-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ end\ =\ end-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ end-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ =\ nE;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ nE-\/>\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ =\ end;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00036}00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ (*first)\ =\ nE;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00038}00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00039}00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ t\ =\ (*first);}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_explosion_acb559820d9ca11295b4500f179ef6392}{i}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (t\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ t\ =\ t-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_explosion_acb559820d9ca11295b4500f179ef6392}{i}}++;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{return}\ nE;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00056}\mbox{\hyperlink{_explosions_8c_a9c4771b8dd88d973a32598e250b5f116}{00056}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_explosions_8c_a9c4771b8dd88d973a32598e250b5f116}{Explosion\_Remove}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_explosion}{Explosion}}**\ exp)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (exp\ !=\ NULL\ \&\&\ (*exp)\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ \mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ =\ (*exp)-\/>\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ =\ (*exp)-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00062}00062\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00063}00063\ \ \ \ \ \ \ \ \ free((*exp));}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ =\ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}-\/>\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ =\ \mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ (*exp)\ =\ \mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}-\/>\mbox{\hyperlink{struct_explosion_a03bb64ea6c47afede2c8b5a78131d4e0}{prev}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ (*exp)\ =\ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ (*exp)\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00079}00079\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00090}\mbox{\hyperlink{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759}{00090}}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759}{Explosion\_RemoveList}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_explosion}{Explosion}}**\ \mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}})}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00091}00091\ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00092}00092\ \ \ \ \ \textcolor{keywordflow}{while}\ (*\mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00093}00093\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00094}00094\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_explosion}{Explosion}}*\ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}}\ =\ (*explosions)-\/>\mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ free(*\mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}});}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00096}00096\ \ \ \ \ \ \ \ \ *\mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}}\ =\ \mbox{\hyperlink{struct_explosion_ac573b11df933687f40f560e3a0dff8a5}{next}};}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00097}00097\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}}\ ==\ NULL;}
+\DoxyCodeLine{\Hypertarget{_explosions_8c_source_l00099}00099\ \}}
+
+\end{DoxyCode}

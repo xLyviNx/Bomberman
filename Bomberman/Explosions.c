@@ -1,5 +1,15 @@
 #include "Explosions.h"
 #include <stdlib.h>
+
+/**
+ * @brief Tworzy i umieszcza nowy element na liscie eksplozji.
+ *
+ * @param first Podwojny wskaznik na liste eksplozji.
+ * @param X Pozycja na osi X.
+ * @param Y Pozycja na osi Y.
+ * @param i Odleglosc od bomby.
+ * @return Stworzona eksplozja.
+ */
 struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i)
 {
     printf("Inserting Explosion\n");
@@ -30,7 +40,6 @@ struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i
         int i = 0;
         while (t != NULL)
         {
-            //printf("- %d: prev: %p,  next: %p\n", i, t->prev, t->next);
             t = t->next;
             i++;
         }
@@ -38,18 +47,19 @@ struct Explosion* Explosion_Insert(struct Explosion** first, int X, int Y, int i
     }
     return nE;
 }
+/**
+ * @brief Usuwa eksplozje
+ *
+ * @param exp Podwojny wskaznik na eksplozje
+ * @return Czy usunieto eksplozje.
+ */
 bool Explosion_Remove(struct Explosion** exp)
 {
     if (exp != NULL && (*exp) != NULL)
     {
         struct Explosion* prev = (*exp)->prev;
         struct Explosion* next = (*exp)->next;
-        if (next != NULL) {
-            //printf("next: %d\n", next->gridX);
-        }
-        if (prev != NULL) {
-            //printf("prev: %d\n", prev->gridX);
-        }
+       
         free((*exp));
         if (prev != NULL)
         {
@@ -62,17 +72,21 @@ bool Explosion_Remove(struct Explosion** exp)
         else if (next != NULL)
         {
             next->prev = NULL;
-            //printf("Swapping with %p\n", next);
             (*exp) = next;
         }
         else {
             (*exp) = NULL;
         }
-        //printf("Now: %p\n", (*exp));
         return true;
     }
     return false;
 }
+/**
+ * @brief Usuwa liste eksplozji
+ *
+ * @param explosions Podwojny wskaznik na liste eksplozji
+ * @return Czy usunieto liste eksplozji.
+ */
 bool Explosion_RemoveList(struct Explosion** explosions)
 {
     while (*explosions != NULL)

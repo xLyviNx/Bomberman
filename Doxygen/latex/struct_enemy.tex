@@ -1,0 +1,137 @@
+\doxysection{Dokumentacja struktury Enemy}
+\hypertarget{struct_enemy}{}\label{struct_enemy}\index{Enemy@{Enemy}}
+
+
+Struktura przeciwnika.  
+
+
+
+
+{\ttfamily \#include $<$Enemies.\+h$>$}
+
+\doxysubsubsection*{Pola danych}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{struct_enemy_ad0da36b2558901e21e7a30f6c227a45e}{x}}
+\item 
+float \mbox{\hyperlink{struct_enemy_aa4f0d3eebc3c443f9be81bf48561a217}{y}}
+\item 
+ALGIF\+\_\+\+ANIMATION \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_enemy_a688f9490a03fd5ea2493799431a5f530}{my\+Anim}}
+\item 
+struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_enemy_a0103dbdc754844e6e5ec12ee2ca22952}{next}}
+\item 
+struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{struct_enemy_a438619cf3e442c578dc42db43bd8cb21}{prev}}
+\item 
+float \mbox{\hyperlink{struct_enemy_a7f7e4724cf57d59513b39c5ecc81adc8}{speed}}
+\item 
+int \mbox{\hyperlink{struct_enemy_a84afbb48b1531bf1fb487d4c5a433e7a}{movedir}}
+\item 
+float \mbox{\hyperlink{struct_enemy_abf24738a11c4c18e8894284bccf7246f}{random\+Turn}}
+\item 
+bool \mbox{\hyperlink{struct_enemy_a2d8784ea503f5529007d64dbee7035fd}{through\+Walls}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Struktura przeciwnika. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00008}{8}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+
+
+\doxysubsection{Dokumentacja pól}
+\Hypertarget{struct_enemy_a84afbb48b1531bf1fb487d4c5a433e7a}\label{struct_enemy_a84afbb48b1531bf1fb487d4c5a433e7a} 
+\index{Enemy@{Enemy}!movedir@{movedir}}
+\index{movedir@{movedir}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{movedir}{movedir}}
+{\footnotesize\ttfamily int movedir}
+
+Kierunek poruszania sie przeciwnika. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00016}{16}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_a688f9490a03fd5ea2493799431a5f530}\label{struct_enemy_a688f9490a03fd5ea2493799431a5f530} 
+\index{Enemy@{Enemy}!myAnim@{myAnim}}
+\index{myAnim@{myAnim}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{myAnim}{myAnim}}
+{\footnotesize\ttfamily ALGIF\+\_\+\+ANIMATION\texorpdfstring{$\ast$}{*} my\+Anim}
+
+Animacja przeciwnika (GIF/sprite). 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00012}{12}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_a0103dbdc754844e6e5ec12ee2ca22952}\label{struct_enemy_a0103dbdc754844e6e5ec12ee2ca22952} 
+\index{Enemy@{Enemy}!next@{next}}
+\index{next@{next}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_enemy}{Enemy}}\texorpdfstring{$\ast$}{*} next}
+
+Nastepny element listy przeciwnikow. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00013}{13}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_a438619cf3e442c578dc42db43bd8cb21}\label{struct_enemy_a438619cf3e442c578dc42db43bd8cb21} 
+\index{Enemy@{Enemy}!prev@{prev}}
+\index{prev@{prev}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{prev}{prev}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_enemy}{Enemy}}\texorpdfstring{$\ast$}{*} prev}
+
+Poprzedni element listy przeciwnikow. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00014}{14}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_abf24738a11c4c18e8894284bccf7246f}\label{struct_enemy_abf24738a11c4c18e8894284bccf7246f} 
+\index{Enemy@{Enemy}!randomTurn@{randomTurn}}
+\index{randomTurn@{randomTurn}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{randomTurn}{randomTurn}}
+{\footnotesize\ttfamily float random\+Turn}
+
+Czas do nastepnego wylosowania kierunku poruszania sie przeciwnika. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00017}{17}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_a7f7e4724cf57d59513b39c5ecc81adc8}\label{struct_enemy_a7f7e4724cf57d59513b39c5ecc81adc8} 
+\index{Enemy@{Enemy}!speed@{speed}}
+\index{speed@{speed}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily float speed}
+
+Predkosc przeciwnika. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00015}{15}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_a2d8784ea503f5529007d64dbee7035fd}\label{struct_enemy_a2d8784ea503f5529007d64dbee7035fd} 
+\index{Enemy@{Enemy}!throughWalls@{throughWalls}}
+\index{throughWalls@{throughWalls}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{throughWalls}{throughWalls}}
+{\footnotesize\ttfamily bool through\+Walls}
+
+Czy przeciwnik moze poruszac sie przez sciany. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00018}{18}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_ad0da36b2558901e21e7a30f6c227a45e}\label{struct_enemy_ad0da36b2558901e21e7a30f6c227a45e} 
+\index{Enemy@{Enemy}!x@{x}}
+\index{x@{x}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily float x}
+
+Pozycja na osi X. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00010}{10}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+\Hypertarget{struct_enemy_aa4f0d3eebc3c443f9be81bf48561a217}\label{struct_enemy_aa4f0d3eebc3c443f9be81bf48561a217} 
+\index{Enemy@{Enemy}!y@{y}}
+\index{y@{y}!Enemy@{Enemy}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily float y}
+
+Pozycja na osi Y. 
+
+Definicja w linii \mbox{\hyperlink{_enemies_8h_source_l00011}{11}} pliku \mbox{\hyperlink{_enemies_8h_source}{Enemies.\+h}}.
+
+
+
+Dokumentacja dla tej struktury została wygenerowana z pliku\+:\begin{DoxyCompactItemize}
+\item 
+Bomberman/\mbox{\hyperlink{_enemies_8h}{Enemies.\+h}}\end{DoxyCompactItemize}

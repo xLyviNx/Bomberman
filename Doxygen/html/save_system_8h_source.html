@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/saveSystem.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">saveSystem.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="save_system_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno"><a class="line" href="save_system_8h.html#ad5131de0b5004c64db5e79e8aac7471e">    5</a></span><span class="preprocessor">#define LINE_LENGTH 32</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="save_system_8h.html#a7fedcafb7925d05c44330e2e1edf3043">    7</a></span>FILE* <a class="code hl_variable" href="save_system_8h.html#a7fedcafb7925d05c44330e2e1edf3043">saveFile</a>;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keywordtype">bool</span> <a class="code hl_function" href="save_system_8h.html#a65bc2bfdd845f4843d68e58349684bcb">saveSystem_init</a>();</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> <a class="code hl_function" href="save_system_8h.html#a2dba782e8e440ce1b2a164b5e5e42129">saveSystem_close</a>();</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">char</span>* <a class="code hl_function" href="save_system_8h.html#a466eaf1096a7ce5b76c95ea14de1312f">saveSystem_readLine</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">int</span> <a class="code hl_function" href="save_system_8h.html#a8629066b437fe98d77c456ae248a8500">saveSystem_LoadLevel</a>();</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keywordtype">float</span> <a class="code hl_function" href="save_system_8h.html#ad424455bd34d93697c04676898d98251">saveSystem_LoadSpeed</a>();</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">int</span> <a class="code hl_function" href="save_system_8h.html#af88a77ff799146acde4ba37bdccf9468">saveSystem_LoadRange</a>();</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">int</span> <a class="code hl_function" href="save_system_8h.html#af24120518da9bb3e4797d445b2daeaca">saveSystem_LoadBombs</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">bool</span> <a class="code hl_function" href="save_system_8h.html#a1eb10af02ac1ffa2af39dc5e07f47773">trimText</a>(<span class="keywordtype">char</span>*, <span class="keywordtype">int</span>);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keywordtype">void</span> <a class="code hl_function" href="save_system_8h.html#a6a5ad9c75b3c00dfd3f46e513087465d">saveSystem_printAtLine</a>(<span class="keywordtype">int</span>, <span class="keyword">const</span> <span class="keywordtype">char</span>*);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">void</span> <a class="code hl_function" href="save_system_8h.html#a778c8e92886fd11fa783e7b2df815622">saveSystem_resetData</a>();</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keywordtype">void</span> <a class="code hl_function" href="save_system_8h.html#a26cbc408b43a66b3b12704f702abfd75">saveSystem_setStartData</a>();</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">bool</span> <a class="code hl_function" href="save_system_8h.html#a5060ef8d34ce349b2c379706c3c98512">hasAchievement</a>(<span class="keywordtype">int</span>);</div>
+<div class="ttc" id="asave_system_8h_html_a1eb10af02ac1ffa2af39dc5e07f47773"><div class="ttname"><a href="save_system_8h.html#a1eb10af02ac1ffa2af39dc5e07f47773">trimText</a></div><div class="ttdeci">bool trimText(char *, int)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00067">saveSystem.c:67</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a26cbc408b43a66b3b12704f702abfd75"><div class="ttname"><a href="save_system_8h.html#a26cbc408b43a66b3b12704f702abfd75">saveSystem_setStartData</a></div><div class="ttdeci">void saveSystem_setStartData()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00218">saveSystem.c:218</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a2dba782e8e440ce1b2a164b5e5e42129"><div class="ttname"><a href="save_system_8h.html#a2dba782e8e440ce1b2a164b5e5e42129">saveSystem_close</a></div><div class="ttdeci">void saveSystem_close()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00026">saveSystem.c:26</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a466eaf1096a7ce5b76c95ea14de1312f"><div class="ttname"><a href="save_system_8h.html#a466eaf1096a7ce5b76c95ea14de1312f">saveSystem_readLine</a></div><div class="ttdeci">char * saveSystem_readLine(int)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00034">saveSystem.c:34</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a5060ef8d34ce349b2c379706c3c98512"><div class="ttname"><a href="save_system_8h.html#a5060ef8d34ce349b2c379706c3c98512">hasAchievement</a></div><div class="ttdeci">bool hasAchievement(int)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00079">saveSystem.c:79</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a65bc2bfdd845f4843d68e58349684bcb"><div class="ttname"><a href="save_system_8h.html#a65bc2bfdd845f4843d68e58349684bcb">saveSystem_init</a></div><div class="ttdeci">bool saveSystem_init()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00005">saveSystem.c:5</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a6a5ad9c75b3c00dfd3f46e513087465d"><div class="ttname"><a href="save_system_8h.html#a6a5ad9c75b3c00dfd3f46e513087465d">saveSystem_printAtLine</a></div><div class="ttdeci">void saveSystem_printAtLine(int, const char *)</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00148">saveSystem.c:148</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a778c8e92886fd11fa783e7b2df815622"><div class="ttname"><a href="save_system_8h.html#a778c8e92886fd11fa783e7b2df815622">saveSystem_resetData</a></div><div class="ttdeci">void saveSystem_resetData()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00210">saveSystem.c:210</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a7fedcafb7925d05c44330e2e1edf3043"><div class="ttname"><a href="save_system_8h.html#a7fedcafb7925d05c44330e2e1edf3043">saveFile</a></div><div class="ttdeci">FILE * saveFile</div><div class="ttdef"><b>Definition</b> <a href="save_system_8h_source.html#l00007">saveSystem.h:7</a></div></div>
+<div class="ttc" id="asave_system_8h_html_a8629066b437fe98d77c456ae248a8500"><div class="ttname"><a href="save_system_8h.html#a8629066b437fe98d77c456ae248a8500">saveSystem_LoadLevel</a></div><div class="ttdeci">int saveSystem_LoadLevel()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00107">saveSystem.c:107</a></div></div>
+<div class="ttc" id="asave_system_8h_html_ad424455bd34d93697c04676898d98251"><div class="ttname"><a href="save_system_8h.html#ad424455bd34d93697c04676898d98251">saveSystem_LoadSpeed</a></div><div class="ttdeci">float saveSystem_LoadSpeed()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00137">saveSystem.c:137</a></div></div>
+<div class="ttc" id="asave_system_8h_html_af24120518da9bb3e4797d445b2daeaca"><div class="ttname"><a href="save_system_8h.html#af24120518da9bb3e4797d445b2daeaca">saveSystem_LoadBombs</a></div><div class="ttdeci">int saveSystem_LoadBombs()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00117">saveSystem.c:117</a></div></div>
+<div class="ttc" id="asave_system_8h_html_af88a77ff799146acde4ba37bdccf9468"><div class="ttname"><a href="save_system_8h.html#af88a77ff799146acde4ba37bdccf9468">saveSystem_LoadRange</a></div><div class="ttdeci">int saveSystem_LoadRange()</div><div class="ttdef"><b>Definition</b> <a href="save_system_8c_source.html#l00127">saveSystem.c:127</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

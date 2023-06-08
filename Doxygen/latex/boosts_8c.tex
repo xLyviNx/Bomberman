@@ -1,0 +1,144 @@
+\doxysection{Dokumentacja pliku Bomberman/boosts.c}
+\hypertarget{boosts_8c}{}\label{boosts_8c}\index{Bomberman/boosts.c@{Bomberman/boosts.c}}
+{\ttfamily \#include \"{}boosts.\+h\"{}}\newline
+{\ttfamily \#include \"{}types.\+h\"{}}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+primitives.\+h$>$}\newline
+\doxysubsubsection*{Funkcje}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{boosts_8c_a118461f42000ff6e63d810b0251437d3}{Boost\+\_\+\+Add}} (struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}list, unsigned short typ, float x, float y)
+\begin{DoxyCompactList}\small\item\em Dodaje nowy boost do listy. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{boosts_8c_a60d1b4502e92e2155e9d17f5ac0350e5}{Boost\+\_\+\+Remove}} (struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}element, struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first)
+\begin{DoxyCompactList}\small\item\em Usuwa boost (ulepszenie) z listy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{boosts_8c_a1db8dbcbb80a2d2740bb6189765f1276}{Boost\+\_\+\+Loop}} (struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}list, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, float cxo, float cyo, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}bmp1, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}bmp2, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}bmp3)
+\begin{DoxyCompactList}\small\item\em Funkcja wywolywana co klatke -\/ petla ulepszen. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{boosts_8c_aa9b9fa3ff632d6aa1b909dbe9de0854a}{Boost\+\_\+has\+Player\+In}} (struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}me, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}})
+\begin{DoxyCompactList}\small\item\em Funkcja sprawdzajaca czy gracz jest w srodku ulepszenia (kolizja) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{boosts_8c_a02f9c4cc7cbd57165b30a1c2d65451da}{Boosts\+\_\+\+Clear}} (struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}list)
+\begin{DoxyCompactList}\small\item\em Funkcja ktora czysci/usuwa liste ulepszen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Dokumentacja funkcji}
+\Hypertarget{boosts_8c_a118461f42000ff6e63d810b0251437d3}\label{boosts_8c_a118461f42000ff6e63d810b0251437d3} 
+\index{boosts.c@{boosts.c}!Boost\_Add@{Boost\_Add}}
+\index{Boost\_Add@{Boost\_Add}!boosts.c@{boosts.c}}
+\doxysubsubsection{\texorpdfstring{Boost\_Add()}{Boost\_Add()}}
+{\footnotesize\ttfamily void Boost\+\_\+\+Add (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{list,  }\item[{unsigned short}]{typ,  }\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+Dodaje nowy boost do listy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Podwojny wskaznik na pierwszy element listy. \\
+\hline
+{\em typ} & Typ boosta (rodzaj). \\
+\hline
+{\em x} & Wspolrzedna x, gdzie ma byc umieszczone ulepszenie. \\
+\hline
+{\em y} & Wspolrzedna y, gdzie ma byc umieszczone ulepszenie. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{boosts_8c_source_l00012}{12}} pliku \mbox{\hyperlink{boosts_8c_source}{boosts.\+c}}.
+
+\Hypertarget{boosts_8c_aa9b9fa3ff632d6aa1b909dbe9de0854a}\label{boosts_8c_aa9b9fa3ff632d6aa1b909dbe9de0854a} 
+\index{boosts.c@{boosts.c}!Boost\_hasPlayerIn@{Boost\_hasPlayerIn}}
+\index{Boost\_hasPlayerIn@{Boost\_hasPlayerIn}!boosts.c@{boosts.c}}
+\doxysubsubsection{\texorpdfstring{Boost\_hasPlayerIn()}{Boost\_hasPlayerIn()}}
+{\footnotesize\ttfamily bool Boost\+\_\+has\+Player\+In (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}}]{me,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+
+
+
+Funkcja sprawdzajaca czy gracz jest w srodku ulepszenia (kolizja) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em me} & Wskaznik na element listy ulepszen. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+true jesli gracz koliduje z ulepszeniem, false jesli gracz nie koliduje. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{boosts_8c_source_l00126}{126}} pliku \mbox{\hyperlink{boosts_8c_source}{boosts.\+c}}.
+
+\Hypertarget{boosts_8c_a1db8dbcbb80a2d2740bb6189765f1276}\label{boosts_8c_a1db8dbcbb80a2d2740bb6189765f1276} 
+\index{boosts.c@{boosts.c}!Boost\_Loop@{Boost\_Loop}}
+\index{Boost\_Loop@{Boost\_Loop}!boosts.c@{boosts.c}}
+\doxysubsubsection{\texorpdfstring{Boost\_Loop()}{Boost\_Loop()}}
+{\footnotesize\ttfamily void Boost\+\_\+\+Loop (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{list,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{float}]{cxo,  }\item[{float}]{cyo,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{bmp1,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{bmp2,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{bmp3 }\end{DoxyParamCaption})}
+
+
+
+Funkcja wywolywana co klatke -\/ petla ulepszen. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Podwojny wskaznik na liste ulepszen. \\
+\hline
+{\em Player} & Wskaznik na gracza. \\
+\hline
+{\em cxo} & Offset kamery (os X). \\
+\hline
+{\em cyo} & Offset kamery (os Y). \\
+\hline
+{\em bmp1} & Sprite jednego z ulepszen. \\
+\hline
+{\em bmp2} & Sprite jednego z ulepszen. \\
+\hline
+{\em bmp3} & Sprite jednego z ulepszen. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{boosts_8c_source_l00078}{78}} pliku \mbox{\hyperlink{boosts_8c_source}{boosts.\+c}}.
+
+\Hypertarget{boosts_8c_a60d1b4502e92e2155e9d17f5ac0350e5}\label{boosts_8c_a60d1b4502e92e2155e9d17f5ac0350e5} 
+\index{boosts.c@{boosts.c}!Boost\_Remove@{Boost\_Remove}}
+\index{Boost\_Remove@{Boost\_Remove}!boosts.c@{boosts.c}}
+\doxysubsubsection{\texorpdfstring{Boost\_Remove()}{Boost\_Remove()}}
+{\footnotesize\ttfamily bool Boost\+\_\+\+Remove (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}}]{element,  }\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{first }\end{DoxyParamCaption})}
+
+
+
+Usuwa boost (ulepszenie) z listy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em element} & Wskaznik na element listy do usuniecia. \\
+\hline
+{\em first} & Podwojny wskaznik na pierwszy element listy. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wynik usuniecia (bool). 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{boosts_8c_source_l00044}{44}} pliku \mbox{\hyperlink{boosts_8c_source}{boosts.\+c}}.
+
+\Hypertarget{boosts_8c_a02f9c4cc7cbd57165b30a1c2d65451da}\label{boosts_8c_a02f9c4cc7cbd57165b30a1c2d65451da} 
+\index{boosts.c@{boosts.c}!Boosts\_Clear@{Boosts\_Clear}}
+\index{Boosts\_Clear@{Boosts\_Clear}!boosts.c@{boosts.c}}
+\doxysubsubsection{\texorpdfstring{Boosts\_Clear()}{Boosts\_Clear()}}
+{\footnotesize\ttfamily void Boosts\+\_\+\+Clear (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_boost}{Boost}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{list }\end{DoxyParamCaption})}
+
+
+
+Funkcja ktora czysci/usuwa liste ulepszen. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em list} & Podwojny wskaznik liste ulepszen. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{boosts_8c_source_l00146}{146}} pliku \mbox{\hyperlink{boosts_8c_source}{boosts.\+c}}.
+

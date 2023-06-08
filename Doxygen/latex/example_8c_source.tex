@@ -1,0 +1,143 @@
+\doxysection{example.\+c}
+\hypertarget{example_8c_source}{}\label{example_8c_source}\index{Bomberman/algif5-\/master/examples/example.c@{Bomberman/algif5-\/master/examples/example.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ <allegro5/allegro5.h>}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00002}00002\ \textcolor{preprocessor}{\#include\ "{}algif.h"{}}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00005}\mbox{\hyperlink{struct_game}{00005}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00006}00006\ \ \ \ \ \textcolor{keywordtype}{bool}\ key[ALLEGRO\_KEY\_MAX];}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00007}00007\ \ \ \ \ \textcolor{keywordtype}{bool}\ quit;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00009}00009\ \ \ \ \ \textcolor{keywordtype}{double}\ player\_x,\ player\_y;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00010}00010\ \ \ \ \ \textcolor{keywordtype}{int}\ dir;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00012}00012\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *skeleton[4];}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00013}00013\ \}\ \mbox{\hyperlink{struct_game}{Game}};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00015}00015\ \textcolor{keyword}{static}\ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *load(\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ *name)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00016}00016\ \ \ \ \ ALLEGRO\_PATH\ *examples\ =\ al\_create\_path\_for\_directory(\textcolor{stringliteral}{"{}examples"{}});}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00017}00017\ \ \ \ \ ALLEGRO\_PATH\ *path\ =\ al\_create\_path(name);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00018}00018\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif\ =\ algif\_load\_animation(al\_path\_cstr(path,\ \textcolor{charliteral}{'/'}));}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00019}00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (!gif)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ al\_rebase\_path(examples,\ path);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ gif\ =\ algif\_load\_animation(al\_path\_cstr(path,\ \textcolor{charliteral}{'/'}));}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00023}00023\ \ \ \ \ al\_destroy\_path(examples);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00024}00024\ \ \ \ \ al\_destroy\_path(path);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00025}00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (!gif)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Could\ not\ load\ \%s.\(\backslash\)n"{}},\ name);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ exit(1);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{return}\ gif;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00030}00030\ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00032}00032\ \mbox{\hyperlink{struct_game}{Game}}\ *game\_new(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00033}00033\ \ \ \ \ \mbox{\hyperlink{struct_game}{Game}}\ *game\ =\ calloc(1,\ \textcolor{keyword}{sizeof}\ *game);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00034}00034\ \ \ \ \ game-\/>skeleton[0]\ =\ load(\textcolor{stringliteral}{"{}skeleton\_left.gif"{}});}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00035}00035\ \ \ \ \ game-\/>skeleton[1]\ =\ load(\textcolor{stringliteral}{"{}skeleton\_right.gif"{}});}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00036}00036\ \ \ \ \ game-\/>skeleton[2]\ =\ load(\textcolor{stringliteral}{"{}skeleton\_up.gif"{}});}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00037}00037\ \ \ \ \ game-\/>skeleton[3]\ =\ load(\textcolor{stringliteral}{"{}skeleton\_down.gif"{}});}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{return}\ game;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00039}00039\ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00041}00041\ \textcolor{keywordtype}{void}\ game\_logic(\mbox{\hyperlink{struct_game}{Game}}\ *game)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>key[ALLEGRO\_KEY\_ESCAPE])\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ game-\/>quit\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>key[ALLEGRO\_KEY\_LEFT])\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ game-\/>dir\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00048}00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>key[ALLEGRO\_KEY\_RIGHT])\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ game-\/>dir\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>key[ALLEGRO\_KEY\_UP])\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ game-\/>dir\ =\ 2;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>key[ALLEGRO\_KEY\_DOWN])\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ game-\/>dir\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>dir\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ game-\/>player\_x\ -\/=\ 1;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>dir\ ==\ 1)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00062}00062\ \ \ \ \ \ \ \ \ game-\/>player\_x\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00063}00063\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>dir\ ==\ 2)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ game-\/>player\_y\ -\/=\ 1;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00066}00066\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>dir\ ==\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ game-\/>player\_y\ +=\ 1;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00069}00069\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>player\_x\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00072}00072\ \ \ \ \ \ \ \ \ game-\/>player\_x\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00073}00073\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00074}00074\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>player\_x\ >\ 640\ -\/\ game-\/>skeleton[0]-\/>width)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00075}00075\ \ \ \ \ \ \ \ \ game-\/>player\_x\ =\ 640\ -\/\ game-\/>skeleton[0]-\/>width;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00076}00076\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>player\_y\ <\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ game-\/>player\_y\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00079}00079\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{if}\ (game-\/>player\_y\ >\ 480\ -\/\ game-\/>skeleton[0]-\/>height)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00081}00081\ \ \ \ \ \ \ \ \ game-\/>player\_y\ =\ 480\ -\/\ game-\/>skeleton[0]-\/>height;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00082}00082\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00083}00083\ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00085}00085\ \textcolor{keywordtype}{void}\ game\_render(\mbox{\hyperlink{struct_game}{Game}}\ *game)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00086}00086\ \ \ \ \ al\_clear\_to\_color(al\_map\_rgb\_f(0,\ 0,\ 0));}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00087}00087\ \ \ \ \ al\_draw\_bitmap(algif\_get\_bitmap(game-\/>skeleton[game-\/>dir],}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ al\_get\_time()),\ game-\/>player\_x,\ game-\/>player\_y,\ 0);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00089}00089\ \ \ \ \ al\_flip\_display();}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00090}00090\ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00092}00092\ \textcolor{keywordtype}{int}\ main(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00093}00093\ \ \ \ \ al\_init();}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00094}00094\ \ \ \ \ al\_install\_keyboard();}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00095}00095\ \ \ \ \ ALLEGRO\_DISPLAY\ *display\ =\ al\_create\_display(640,\ 480);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00096}00096\ \ \ \ \ ALLEGRO\_EVENT\_QUEUE\ *event\_queue\ =\ al\_create\_event\_queue();}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00097}00097\ \ \ \ \ ALLEGRO\_TIMER\ *timer\ =\ al\_create\_timer(1\ /\ 60.0);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00099}00099\ \ \ \ \ al\_register\_event\_source(event\_queue,\ al\_get\_display\_event\_source(display));}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00100}00100\ \ \ \ \ al\_register\_event\_source(event\_queue,\ al\_get\_timer\_event\_source(timer));}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00101}00101\ \ \ \ \ al\_register\_event\_source(event\_queue,\ al\_get\_keyboard\_event\_source());}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00102}00102\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00103}00103\ \ \ \ \ \mbox{\hyperlink{struct_game}{Game}}\ *game\ =\ game\_new();}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00105}00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ redraw\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00106}00106\ \ \ \ \ al\_start\_timer(timer);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00107}00107\ \ \ \ \ \textcolor{keywordflow}{while}\ (!game-\/>quit)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (redraw)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ game\_render(game);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ redraw\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00112}00112\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!al\_is\_event\_queue\_empty(event\_queue))\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ ALLEGRO\_EVENT\ event;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ al\_wait\_for\_event(event\_queue,\ \&event);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ ALLEGRO\_EVENT\_DISPLAY\_CLOSE)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game-\/>quit\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ ALLEGRO\_EVENT\_TIMER)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game\_logic(game);}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ redraw\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ ALLEGRO\_EVENT\_KEY\_DOWN)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game-\/>key[\textcolor{keyword}{event}.keyboard.keycode]\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00129}00129\ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (event.type\ ==\ ALLEGRO\_EVENT\_KEY\_UP)\ \{}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00131}00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ game-\/>key[\textcolor{keyword}{event}.keyboard.keycode]\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00134}00134\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00135}00135\ \ }
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00136}00136\ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\Hypertarget{example_8c_source_l00137}00137\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,239 @@
+\doxysection{gif.\+c}
+\hypertarget{gif_8c_source}{}\label{gif_8c_source}\index{Bomberman/algif5-\/master/src/gif.c@{Bomberman/algif5-\/master/src/gif.c}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}algif.h"{}}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00003}00003\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00006}00006\ \textcolor{keywordtype}{int}\ LZW\_decode\ (ALLEGRO\_FILE\ *\ file,\ \mbox{\hyperlink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP}}\ *bmp);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00008}00008\ \textcolor{comment}{/*\ Destroy\ a\ complete\ gif,\ including\ all\ frames.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00009}00009\ \textcolor{keywordtype}{void}\ algif\_destroy\_animation(\mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif)\ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00010}00010\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00012}00012\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ gif-\/>frames\_count;\ i++)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00013}00013\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00014}00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME}}\ *frame\ =\ gif-\/>frames\ +\ i;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (frame-\/>bitmap\_8\_bit)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ algif\_destroy\_bitmap\ (frame-\/>bitmap\_8\_bit);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (frame-\/>rendered)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ al\_destroy\_bitmap(frame-\/>rendered);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00021}00021\ \ \ \ \ \textcolor{keywordflow}{if}\ (gif-\/>store)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ al\_destroy\_bitmap(gif-\/>store);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00023}00023\ \ \ \ \ free\ (gif-\/>frames);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00024}00024\ \ \ \ \ free\ (gif);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00025}00025\ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00027}00027\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ read\_palette\ (ALLEGRO\_FILE\ *\ file,\ \mbox{\hyperlink{struct_a_l_g_i_f___p_a_l_e_t_t_e}{ALGIF\_PALETTE}}\ *palette)\ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00028}00028\ \ \ \ \ \textcolor{keywordtype}{int}\ i;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00030}00030\ \ \ \ \ \textcolor{keywordflow}{for}\ (i\ =\ 0;\ i\ <\ palette-\/>colors\_count;\ i++)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00031}00031\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ palette-\/>colors[i].r\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ palette-\/>colors[i].g\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00034}00034\ \ \ \ \ \ \ \ \ palette-\/>colors[i].b\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00035}00035\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00036}00036\ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00038}00038\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ deinterlace\ (\mbox{\hyperlink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP}}\ *bmp)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00040}00040\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP}}\ *n\ =\ algif\_create\_bitmap\ (bmp-\/>w,\ bmp-\/>h);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00041}00041\ \ \ \ \ \textcolor{keywordtype}{int}\ y,\ i\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 0;\ y\ <\ n-\/>h;\ y\ +=\ 8)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00043}00043\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ algif\_blit\ (bmp,\ n,\ 0,\ i++,\ 0,\ y,\ n-\/>w,\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00045}00045\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 4;\ y\ <\ n-\/>h;\ y\ +=\ 8)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ algif\_blit\ (bmp,\ n,\ 0,\ i++,\ 0,\ y,\ n-\/>w,\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00049}00049\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 2;\ y\ <\ n-\/>h;\ y\ +=\ 4)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00051}00051\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00052}00052\ \ \ \ \ \ \ \ \ algif\_blit\ (bmp,\ n,\ 0,\ i++,\ 0,\ y,\ n-\/>w,\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00053}00053\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00054}00054\ \ \ \ \ \textcolor{keywordflow}{for}\ (y\ =\ 1;\ y\ <\ n-\/>h;\ y\ +=\ 2)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ algif\_blit\ (bmp,\ n,\ 0,\ i++,\ 0,\ y,\ n-\/>w,\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00057}00057\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00058}00058\ \ \ \ \ algif\_blit\ (n,\ bmp,\ 0,\ 0,\ 0,\ 0,\ n-\/>w,\ n-\/>h);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00059}00059\ \ \ \ \ algif\_destroy\_bitmap\ (n);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00060}00060\ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00062}00062\ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *algif\_load\_raw(ALLEGRO\_FILE\ *file)\ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00066}00066\ \ \ \ \ \textcolor{keywordtype}{int}\ version;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00067}00067\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP}}\ *bmp\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00068}00068\ \ \ \ \ \textcolor{keywordtype}{int}\ i,\ j;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00069}00069\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION}}\ *gif\ =\ calloc\ (1,\ \textcolor{keyword}{sizeof}\ *gif);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00070}00070\ \ \ \ \ \mbox{\hyperlink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME}}\ frame;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00072}00072\ \ \ \ \ gif-\/>frames\_count\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00074}00074\ \ \ \ \ \textcolor{comment}{/*\ is\ it\ really\ a\ GIF?\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{if}\ (al\_fgetc\ (file)\ !=\ \textcolor{charliteral}{'G'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00077}00077\ \ \ \ \ \textcolor{keywordflow}{if}\ (al\_fgetc\ (file)\ !=\ \textcolor{charliteral}{'I'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{if}\ (al\_fgetc\ (file)\ !=\ \textcolor{charliteral}{'F'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00081}00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (al\_fgetc\ (file)\ !=\ \textcolor{charliteral}{'8'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00083}00083\ \ \ \ \ \textcolor{comment}{/*\ '7'\ or\ '9',\ for\ 87a\ or\ 89a.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00084}00084\ \ \ \ \ version\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00085}00085\ \ \ \ \ \textcolor{keywordflow}{if}\ (version\ !=\ \textcolor{charliteral}{'7'}\ \&\&\ version\ !=\ \textcolor{charliteral}{'9'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{if}\ (al\_fgetc\ (file)\ !=\ \textcolor{charliteral}{'a'})}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00090}00090\ \ \ \ \ gif-\/>width\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00091}00091\ \ \ \ \ gif-\/>height\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00092}00092\ \ \ \ \ i\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00093}00093\ \ \ \ \ \textcolor{comment}{/*\ Global\ color\ table?\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \&\ 128)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00095}00095\ \ \ \ \ \ \ \ \ gif-\/>palette.colors\_count\ =\ 1\ <<\ ((i\ \&\ 7)\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00096}00096\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00097}00097\ \ \ \ \ \ \ \ \ gif-\/>palette.colors\_count\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00098}00098\ \ \ \ \ \textcolor{comment}{/*\ Background\ color\ is\ only\ valid\ with\ a\ global\ palette.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00099}00099\ \ \ \ \ gif-\/>background\_index\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00101}00101\ \ \ \ \ \textcolor{comment}{/*\ Skip\ aspect\ ratio.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00102}00102\ \ \ \ \ al\_fseek\ (file,\ 1,\ ALLEGRO\_SEEK\_CUR);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00104}00104\ \ \ \ \ \textcolor{keywordflow}{if}\ (gif-\/>palette.colors\_count)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00105}00105\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ read\_palette\ (file,\ \&gif-\/>palette);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00107}00107\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00109}00109\ \ \ \ \ memset(\&frame,\ 0,\ \textcolor{keyword}{sizeof}\ frame);\ \textcolor{comment}{/*\ For\ first\ frame.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00110}00110\ \ \ \ \ frame.transparent\_index\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00112}00112\ \ \ \ \ \textcolor{keywordflow}{do}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00113}00113\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00114}00114\ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00115}00115\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00116}00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (i)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x2c:\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Image\ Descriptor\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ w,\ h;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ interlaced\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.xoff\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.yoff\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ w\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ h\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bmp\ =\ algif\_create\_bitmap\ (w,\ h);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!bmp)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00129}00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Local\ palette.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00133}00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \&\ 128)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00134}00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.palette.colors\_count\ =\ 1\ <<\ ((i\ \&\ 7)\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00136}00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ read\_palette\ (file,\ \&frame.palette);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00137}00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.palette.colors\_count\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00142}00142\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \&\ 64)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interlaced\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00145}00145\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00146}00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (LZW\_decode\ (file,\ bmp))}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00147}00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (interlaced)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ deinterlace\ (bmp);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.bitmap\_8\_bit\ =\ bmp;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ bmp\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00155}00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>frames\_count++;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>frames\ =}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ realloc\ (gif-\/>frames,}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>frames\_count\ *\ \textcolor{keyword}{sizeof}\ *gif-\/>frames);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>frames[gif-\/>frames\_count\ -\/\ 1]\ =\ frame;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00161}00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ memset(\&frame,\ 0,\ \textcolor{keyword}{sizeof}\ frame);\ \textcolor{comment}{/*\ For\ next\ frame.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.transparent\_index\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00164}00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x21:\ \textcolor{comment}{/*\ Extension\ Introducer.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j\ =\ al\_fgetc\ (file);\ \textcolor{comment}{/*\ Extension\ Type.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);\ \textcolor{comment}{/*\ Size.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ ==\ 0xf9)\ \textcolor{comment}{/*\ Graphic\ Control\ Extension.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ size\ must\ be\ 4\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ 4)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ error;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.disposal\_method\ =\ (i\ >>\ 2)\ \&\ 7;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.duration\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ \&\ 1)\ \ \textcolor{comment}{/*\ Transparency?\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.transparent\_index\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_fseek\ (file,\ 1,\ ALLEGRO\_SEEK\_CUR);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ frame.transparent\_index\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);\ \textcolor{comment}{/*\ Size.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Application\ Extension.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (j\ ==\ 0xff)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 11)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ name[12];}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_fread\ (file,\ name,\ 11);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);\ \textcolor{comment}{/*\ Size.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name[11]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!strcmp\ (name,\ \textcolor{stringliteral}{"{}NETSCAPE2.0"{}}))}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ ==\ 3)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ j\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>loop\ =\ al\_fread16le\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (j\ !=\ 1)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ gif-\/>loop\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);\ \textcolor{comment}{/*\ Size.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00208}00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Possibly\ more\ blocks\ until\ terminator\ block\ (0).\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (i)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00214}00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_fseek\ (file,\ i,\ ALLEGRO\_SEEK\_CUR);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ i\ =\ al\_fgetc\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x3b:}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ GIF\ Trailer.\ */}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ al\_fclose\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ gif;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00222}00222\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00223}00223\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00224}00224\ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00225}00225\ \ \ error:}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00226}00226\ \ \ \ \ \textcolor{keywordflow}{if}\ (file)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ al\_fclose\ (file);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00228}00228\ \ \ \ \ \textcolor{keywordflow}{if}\ (gif)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00229}00229\ \ \ \ \ \ \ \ \ algif\_destroy\_animation\ (gif);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{if}\ (bmp)}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ algif\_destroy\_bitmap\ (bmp);}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00232}00232\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{\Hypertarget{gif_8c_source_l00233}00233\ \}}
+
+\end{DoxyCode}

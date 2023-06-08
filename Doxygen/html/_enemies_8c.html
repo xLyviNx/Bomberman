@@ -1,0 +1,751 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Dokumentacja pliku Bomberman/Enemies.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkcje</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku Enemies.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_enemies_8h_source.html">Enemies.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_blocks_8h_source.html">Blocks.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_bombs_8h_source.html">Bombs.h</a>&quot;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+</div>
+<p><a href="_enemies_8c_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a8f91cbd74abb3a47b2971620a6f1f3da"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a8f91cbd74abb3a47b2971620a6f1f3da">Enemy_Add</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> **list, float initX, float initY, float speed, ALGIF_ANIMATION *Animation, bool throughWalls)</td></tr>
+<tr class="memdesc:a8f91cbd74abb3a47b2971620a6f1f3da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dodaje przeciwnika (tworzac przy tym ewentualnie nowa liste)  <br /></td></tr>
+<tr class="separator:a8f91cbd74abb3a47b2971620a6f1f3da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1b879e9b64c9be041ab3aa6a480608a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#ab1b879e9b64c9be041ab3aa6a480608a">Enemy_Remove</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *element, struct <a class="el" href="struct_enemy.html">Enemy</a> **first)</td></tr>
+<tr class="memdesc:ab1b879e9b64c9be041ab3aa6a480608a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa przeciwnika.  <br /></td></tr>
+<tr class="separator:ab1b879e9b64c9be041ab3aa6a480608a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3cfa5df869f04a523a6bf5fd1ba13d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#ae3cfa5df869f04a523a6bf5fd1ba13d6">Enemies_Clear</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> **list)</td></tr>
+<tr class="memdesc:ae3cfa5df869f04a523a6bf5fd1ba13d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Czysci i usuwa liste przeciwnikow.  <br /></td></tr>
+<tr class="separator:ae3cfa5df869f04a523a6bf5fd1ba13d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01c13bd8f971051a0d455d9ead98f2e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#ad01c13bd8f971051a0d455d9ead98f2e">Enemies_Draw</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *list, double animationtime, float x_of, float y_of)</td></tr>
+<tr class="memdesc:ad01c13bd8f971051a0d455d9ead98f2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderuje (wyswietla) istniejacych przeciwnikow.  <br /></td></tr>
+<tr class="separator:ad01c13bd8f971051a0d455d9ead98f2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af671ca7ff6e6485a8ec03c6685b375c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#af671ca7ff6e6485a8ec03c6685b375c4">Enemy_Move</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *list, struct <a class="el" href="struct_enemy.html">Enemy</a> *me, float dT, struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, struct <a class="el" href="struct_bomb_list.html">BombList</a> *<a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:af671ca7ff6e6485a8ec03c6685b375c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Porusza przeciwnikiem.  <br /></td></tr>
+<tr class="separator:af671ca7ff6e6485a8ec03c6685b375c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1dfc512c1f21dc75f8b4fa7d460cf07d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a1dfc512c1f21dc75f8b4fa7d460cf07d">Enemies_Loop</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *list, double animationtime, float xof, float yof, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, float dT, struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, struct <a class="el" href="struct_bomb_list.html">BombList</a> *<a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, bool Paused)</td></tr>
+<tr class="memdesc:a1dfc512c1f21dc75f8b4fa7d460cf07d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Petla przeciwnikow (funkcja dzialajaca na kazdym przeciwniku co klatke)  <br /></td></tr>
+<tr class="separator:a1dfc512c1f21dc75f8b4fa7d460cf07d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56ec3564856046b8ab3a1e666e379cc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a56ec3564856046b8ab3a1e666e379cc9">Enemy_CollidesWithPlayer</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *me, struct <a class="el" href="struct_character.html">Character</a> *player, float hitboxScale)</td></tr>
+<tr class="memdesc:a56ec3564856046b8ab3a1e666e379cc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza czy przeciwnik koliduje z graczem.  <br /></td></tr>
+<tr class="separator:a56ec3564856046b8ab3a1e666e379cc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a269c7328a7b0aa8549ac6ab040d37d81"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a269c7328a7b0aa8549ac6ab040d37d81">CollideWithPlayer</a> (float X, float Y, struct <a class="el" href="struct_character.html">Character</a> *player, float hitboxScale)</td></tr>
+<tr class="memdesc:a269c7328a7b0aa8549ac6ab040d37d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza czy cos koliduje z graczem.  <br /></td></tr>
+<tr class="separator:a269c7328a7b0aa8549ac6ab040d37d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8653248b9d5aeaf57049348626c3a955"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a8653248b9d5aeaf57049348626c3a955">Enemy_FindAt</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *first, struct <a class="el" href="struct_character.html">Character</a> *player, float X, float Y, struct <a class="el" href="struct_enemy.html">Enemy</a> *skipThis, float hitboxSize)</td></tr>
+<tr class="memdesc:a8653248b9d5aeaf57049348626c3a955"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza czy na danych koordynatach jest jakis przeciwnik.  <br /></td></tr>
+<tr class="separator:a8653248b9d5aeaf57049348626c3a955"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0fa5994d7bbc5de03055fb711dd7bbef"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a0fa5994d7bbc5de03055fb711dd7bbef">Enemies_Count</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *list)</td></tr>
+<tr class="memdesc:a0fa5994d7bbc5de03055fb711dd7bbef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza ile przeciwnikow istnieje.  <br /></td></tr>
+<tr class="separator:a0fa5994d7bbc5de03055fb711dd7bbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19d9fc6190c66d23965bc339222c7027"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_enemies_8c.html#a19d9fc6190c66d23965bc339222c7027">Enemy_RandomPosition</a> (struct <a class="el" href="struct_enemy.html">Enemy</a> *list, float *X, float *Y, struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, int level, struct <a class="el" href="struct_bomb_list.html">BombList</a> *<a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>)</td></tr>
+<tr class="memdesc:a19d9fc6190c66d23965bc339222c7027"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zwraca losowe koordynaty dla przeciwnika w zaleznosci od poziomu.  <br /></td></tr>
+<tr class="separator:a19d9fc6190c66d23965bc339222c7027"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="a269c7328a7b0aa8549ac6ab040d37d81" name="a269c7328a7b0aa8549ac6ab040d37d81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a269c7328a7b0aa8549ac6ab040d37d81">&#9670;&#160;</a></span>CollideWithPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool CollideWithPlayer </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hitboxScale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sprawdza czy cos koliduje z graczem. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Wspolrzedna na osi X. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna na osi Y. </td></tr>
+    <tr><td class="paramname">player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">hitboxScale</td><td>Dostosowanie wielkosci wykrywania kolizji. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wartosc logiczna - czy cos koliduje z graczem. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00268">268</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="ae3cfa5df869f04a523a6bf5fd1ba13d6" name="ae3cfa5df869f04a523a6bf5fd1ba13d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3cfa5df869f04a523a6bf5fd1ba13d6">&#9670;&#160;</a></span>Enemies_Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Enemies_Clear </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> **&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Czysci i usuwa liste przeciwnikow. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Podwojny wskaznik na liste przeciwnikow. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00089">89</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a0fa5994d7bbc5de03055fb711dd7bbef" name="a0fa5994d7bbc5de03055fb711dd7bbef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fa5994d7bbc5de03055fb711dd7bbef">&#9670;&#160;</a></span>Enemies_Count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Enemies_Count </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sprawdza ile przeciwnikow istnieje. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Ilosc przeciwnikow. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00320">320</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="ad01c13bd8f971051a0d455d9ead98f2e" name="ad01c13bd8f971051a0d455d9ead98f2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad01c13bd8f971051a0d455d9ead98f2e">&#9670;&#160;</a></span>Enemies_Draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Enemies_Draw </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>animationtime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x_of</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y_of</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renderuje (wyswietla) istniejacych przeciwnikow. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">animationtime</td><td>Czas animacji. </td></tr>
+    <tr><td class="paramname">x_of</td><td>Offset kamery na osi X. </td></tr>
+    <tr><td class="paramname">y_of</td><td>Offset kamery na osi Y. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00110">110</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a1dfc512c1f21dc75f8b4fa7d460cf07d" name="a1dfc512c1f21dc75f8b4fa7d460cf07d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1dfc512c1f21dc75f8b4fa7d460cf07d">&#9670;&#160;</a></span>Enemies_Loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Enemies_Loop </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>animationtime</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>xof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yof</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_bomb_list.html">BombList</a> *&#160;</td>
+          <td class="paramname"><em>bombs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>Paused</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Petla przeciwnikow (funkcja dzialajaca na kazdym przeciwniku co klatke) </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">animationtime</td><td>Czas animacji. </td></tr>
+    <tr><td class="paramname">xof</td><td>Offset kamery na osi X. </td></tr>
+    <tr><td class="paramname">yof</td><td>Offset kamery na osi Y. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">dT</td><td>deltaTime (czas od ostatniej wyswietlonej klatki). </td></tr>
+    <tr><td class="paramname">blocks</td><td>Wskaznik na liste blokow. </td></tr>
+    <tr><td class="paramname">bombs</td><td>Wskaznik na liste bomb. </td></tr>
+    <tr><td class="paramname">Paused</td><td>Czy pauza jest aktywna. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00231">231</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a8f91cbd74abb3a47b2971620a6f1f3da" name="a8f91cbd74abb3a47b2971620a6f1f3da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f91cbd74abb3a47b2971620a6f1f3da">&#9670;&#160;</a></span>Enemy_Add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Enemy_Add </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> **&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>initX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>initY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALGIF_ANIMATION *&#160;</td>
+          <td class="paramname"><em>Animation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>throughWalls</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Dodaje przeciwnika (tworzac przy tym ewentualnie nowa liste) </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Podwojny wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">initX</td><td>Pozycja startowa przeciwnika na osi X. </td></tr>
+    <tr><td class="paramname">initY</td><td>Pozycja startowa przeciwnika na osi Y. </td></tr>
+    <tr><td class="paramname">speed</td><td>Predkosc przeciwnika. </td></tr>
+    <tr><td class="paramname">Animation</td><td>Animacja przeciwnika. </td></tr>
+    <tr><td class="paramname">throughWalls</td><td>Czy przeciwnik bedzie przechodzic przez sciany. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Czy przeciwnik zostal dodany </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00022">22</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a56ec3564856046b8ab3a1e666e379cc9" name="a56ec3564856046b8ab3a1e666e379cc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56ec3564856046b8ab3a1e666e379cc9">&#9670;&#160;</a></span>Enemy_CollidesWithPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Enemy_CollidesWithPlayer </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hitboxScale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sprawdza czy przeciwnik koliduje z graczem. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">me</td><td>Wskaznik na przeciwnika. </td></tr>
+    <tr><td class="paramname">player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">hitboxScale</td><td>Dostosowanie wielkosci wykrywania kolizji. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wartosc logiczna - Czy przeciwnik koliduje z graczem. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00255">255</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a8653248b9d5aeaf57049348626c3a955" name="a8653248b9d5aeaf57049348626c3a955"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8653248b9d5aeaf57049348626c3a955">&#9670;&#160;</a></span>Enemy_FindAt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct_enemy.html">Enemy</a> * Enemy_FindAt </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>skipThis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>hitboxSize</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sprawdza czy na danych koordynatach jest jakis przeciwnik. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">X</td><td>Wspolrzedna na osi X. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna na osi Y. </td></tr>
+    <tr><td class="paramname">skipThis</td><td>Wskaznik na przeciwnika ktorego ma nie brac pod uwage przy sprawdzaniu. </td></tr>
+    <tr><td class="paramname">hitboxSize</td><td>Dostosowanie wielkosci wykrywania. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Znaleziony przeciwnik (lub NULL). </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00292">292</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="af671ca7ff6e6485a8ec03c6685b375c4" name="af671ca7ff6e6485a8ec03c6685b375c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af671ca7ff6e6485a8ec03c6685b375c4">&#9670;&#160;</a></span>Enemy_Move()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Enemy_Move </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>me</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>dT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_bomb_list.html">BombList</a> *&#160;</td>
+          <td class="paramname"><em>bombs</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Porusza przeciwnikiem. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">me</td><td>Wskaznik na przeciwnika. </td></tr>
+    <tr><td class="paramname">dT</td><td>deltaTime (czas od ostatniej wyswietlonej klatki). </td></tr>
+    <tr><td class="paramname">blocks</td><td>Wskaznik na liste blokow. </td></tr>
+    <tr><td class="paramname">bombs</td><td>Wskaznik na liste bomb. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00144">144</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="a19d9fc6190c66d23965bc339222c7027" name="a19d9fc6190c66d23965bc339222c7027"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d9fc6190c66d23965bc339222c7027">&#9670;&#160;</a></span>Enemy_RandomPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Enemy_RandomPosition </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>list</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_bomb_list.html">BombList</a> *&#160;</td>
+          <td class="paramname"><em>bombs</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zwraca losowe koordynaty dla przeciwnika w zaleznosci od poziomu. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">list</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+    <tr><td class="paramname">X</td><td>Wskaznik na wspolrzedna osi X (zwracanie poprzez wskaznik). </td></tr>
+    <tr><td class="paramname">Y</td><td>Wskaznik na wspolrzedna osi Y (zwracanie poprzez wskaznik). </td></tr>
+    <tr><td class="paramname">blocks</td><td>Wskaznik na liste blokow. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">level</td><td>Poziom. </td></tr>
+    <tr><td class="paramname">bombs</td><td>Wskaznik na liste bomb. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00342">342</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+<a id="ab1b879e9b64c9be041ab3aa6a480608a" name="ab1b879e9b64c9be041ab3aa6a480608a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1b879e9b64c9be041ab3aa6a480608a">&#9670;&#160;</a></span>Enemy_Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Enemy_Remove </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> **&#160;</td>
+          <td class="paramname"><em>first</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Usuwa przeciwnika. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Wskaznik na przeciwnika. </td></tr>
+    <tr><td class="paramname">first</td><td>Podwojny wskaznik na liste przeciwnikow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Czy przeciwnik zostal usuniety </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_enemies_8c_source.html#l00061">61</a> pliku <a class="el" href="_enemies_8c_source.html">Enemies.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

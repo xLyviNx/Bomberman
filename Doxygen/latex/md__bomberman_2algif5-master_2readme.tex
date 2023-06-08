@@ -1,0 +1,101 @@
+\chapter{readme}
+\hypertarget{md__bomberman_2algif5-master_2readme}{}\label{md__bomberman_2algif5-master_2readme}\index{readme@{readme}}
+$<$html$>$ $<$head$>$ $<$/head$>$ $<$body$>$ \doxysection*{algif5}
+
+\doxysubsection*{About}
+
+{\bfseries{algif5}} is a gif loading library for Allegro 5. \href{http://allegro5.org/algif5}{\texttt{ Homepage}}, \href{http://github.com/allefant/algif5}{\texttt{ Github}}. \doxysubsection*{Download}
+
+\href{http://allegro5.org/algif5/algif5.zip}{\texttt{ algif5.\+zip}}  
+\begin{DoxyPre}
+struct \doxylink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION} \{
+    int width, height;
+    int frames\_count;
+    int background\_index;
+    /* -\/1 = no, 0 = forever,
+     * 1..65535 = that many times
+     */
+    int loop;
+    \doxylink{struct_a_l_g_i_f___p_a_l_e_t_t_e}{ALGIF\_PALETTE} palette;
+    \doxylink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME} *frames;
+    int duration;
+\};
+struct \doxylink{struct_a_l_g_i_f___f_r_a_m_e}{ALGIF\_FRAME} \{
+    \doxylink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP} *bitmap\_8\_bit;
+    \doxylink{struct_a_l_g_i_f___p_a_l_e_t_t_e}{ALGIF\_PALETTE} palette;
+    int xoff, yoff;
+    /* in 1/100th seconds */
+    int duration;
+    /* 0 = don't care, 1 = keep,
+     * 2 = background, 3 = previous
+     */        
+    int disposal\_method;
+    int transparent\_index;
+\};
+struct \doxylink{struct_a_l_g_i_f___b_i_t_m_a_p}{ALGIF\_BITMAP} \{
+    int w, h;
+    uint8\_t *data;
+\};
+struct \doxylink{struct_a_l_g_i_f___p_a_l_e_t_t_e}{ALGIF\_PALETTE} \{
+    int colors\_count;
+    \doxylink{struct_a_l_g_i_f___r_g_b}{ALGIF\_RGB} colors[256];
+\};
+struct \doxylink{struct_a_l_g_i_f___r_g_b}{ALGIF\_RGB} \{
+    uint8\_t r, g, b;
+\};
+\end{DoxyPre}
+  \doxysubsection*{Documentation}
+
+\doxysubsubsection*{algif\+\_\+load\+\_\+animation}
+
+
+\begin{DoxyPre}\doxylink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION} *gif = algif\_load\_animation(char const *filename);
+\doxylink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION} *gif = algif\_load\_animation\_f(ALLEGRO\_FILE *file);
+\end{DoxyPre}
+ 
+
+Load a gif. Either by specifying the filename or by passing an ALLEGRO\+\_\+\+FILE opened for reading.
+
+\doxysubsubsection*{algif\+\_\+get\+\_\+bitmap}
+
+
+\begin{DoxyPre}al\_draw\_bitmap(algif\_get\_bitmap(gif, al\_get\_time()), x, y, 0);\end{DoxyPre}
+ 
+
+Get a bitmap for the current frame.
+
+\doxysubsubsection*{algif\+\_\+destroy\+\_\+animation}
+
+
+\begin{DoxyPre}algif\_destroy\_animation(gif);\end{DoxyPre}
+ 
+
+Destroy the gif again.
+
+\doxysubsubsection*{algif\+\_\+get\+\_\+frame\+\_\+bitmap}
+
+
+\begin{DoxyPre}ALLEGRO\_BITMAP *algif\_get\_frame\_bitmap(\doxylink{struct_a_l_g_i_f___a_n_i_m_a_t_i_o_n}{ALGIF\_ANIMATION} *gif, int i);\end{DoxyPre}
+ 
+
+Get the n-\/th frame of the gif. The parameter {\bfseries{i}} can be any value from 0 to gif-\/\texorpdfstring{$>$}{>}frames\+\_\+count -\/ 1.
+
+\doxysubsubsection*{algif\+\_\+get\+\_\+frame\+\_\+duration}
+
+
+\begin{DoxyPre}double algif\_get\_frame\_duration(ALGIF\_ANIMATION *gif, int i);\end{DoxyPre}
+ 
+
+Get the duration of the n-\/th frame of the gif, in seconds. The parameter {\bfseries{i}} can be any value from 0 to gif-\/\texorpdfstring{$>$}{>}frames\+\_\+count -\/ 1.
+
+\doxysubsection*{Installation}
+
+Unfortunately I\textquotesingle{}m bad with build systems and makefiles and so on, so instead just do this\+: 
+\begin{DoxyItemize}
+\item Place \doxylink{algif_8h_source}{algif.\+h} somewhere where your compiler will find it. 
+\item When compiling your code, make sure \doxylink{algif_8c_source}{algif.\+c}, \doxylink{bitmap_8c_source}{bitmap.\+c}, \doxylink{gif_8c_source}{gif.\+c} and \doxylink{lzw_8c_source}{lzw.\+c} are compiled along. 
+\end{DoxyItemize}I also included a makefile in the .zip to create the example program but it probably only works in Linux. Allegro 5 (including the primitives addon) is required. \doxysubsection*{Examples}
+
+The download comes with an example program.
+
+    $<$/body$>$ $<$/html$>$ 

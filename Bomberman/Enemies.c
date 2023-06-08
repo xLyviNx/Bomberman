@@ -8,6 +8,17 @@
 	#define WIDTH 832
 	#define HEIGHT 832
 #endif // !WIDTH
+/**
+ * @brief Dodaje przeciwnika (tworzac przy tym ewentualnie nowa liste)
+ *
+ * @param list Podwojny wskaznik na liste przeciwnikow.
+ * @param initX Pozycja startowa przeciwnika na osi X.
+ * @param initY Pozycja startowa przeciwnika na osi Y.
+ * @param speed Predkosc przeciwnika.
+ * @param Animation Animacja przeciwnika.
+ * @param throughWalls Czy przeciwnik bedzie przechodzic przez sciany.
+ * @return Czy przeciwnik zostal dodany
+ */
 bool Enemy_Add(struct Enemy** list, float initX, float initY, float speed, ALGIF_ANIMATION * Animation, bool throughWalls)
 {
 	struct Enemy* new = (struct Enemy*)malloc(sizeof(struct Enemy));
@@ -40,6 +51,13 @@ bool Enemy_Add(struct Enemy** list, float initX, float initY, float speed, ALGIF
 	}
 	return false;
 }
+/**
+ * @brief Usuwa przeciwnika
+ *
+ * @param element Wskaznik na przeciwnika.
+ * @param first Podwojny wskaznik na liste przeciwnikow.
+ * @return Czy przeciwnik zostal usuniety
+ */
 bool Enemy_Remove(struct Enemy* element, struct Enemy** first)
 {
 	if (element) {
@@ -63,6 +81,11 @@ bool Enemy_Remove(struct Enemy* element, struct Enemy** first)
 	}
 	return false;
 }
+/**
+ * @brief Czysci i usuwa liste przeciwnikow
+ *
+ * @param list Podwojny wskaznik na liste przeciwnikow.
+ */
 void Enemies_Clear(struct Enemy** list)
 {
 	if (list)
@@ -76,7 +99,14 @@ void Enemies_Clear(struct Enemy** list)
 	}
 }
 
-
+/**
+ * @brief Renderuje (wyswietla) istniejacych przeciwnikow
+ *
+ * @param list Wskaznik na liste przeciwnikow.
+ * @param animationtime Czas animacji.
+ * @param x_of Offset kamery na osi X.
+ * @param y_of Offset kamery na osi Y.
+ */
 void Enemies_Draw(struct Enemy* list, double animationtime, float x_of, float y_of)
 {
 	struct Enemy* curr = list;
@@ -101,6 +131,16 @@ void Enemies_Draw(struct Enemy* list, double animationtime, float x_of, float y_
 	}
 
 }
+/**
+ * @brief Porusza przeciwnikiem.
+ *
+ * @param list Wskaznik na liste przeciwnikow.
+ * @param me Wskaznik na przeciwnika.
+ * @param dT deltaTime (czas od ostatniej wyswietlonej klatki).
+ * @param blocks Wskaznik na liste blokow.
+ * @param bombs Wskaznik na liste bomb.
+ * @param Player Wskaznik na gracza.
+ */
 void Enemy_Move(struct Enemy* list, struct Enemy* me, float dT, struct dstr_block* blocks, struct BombList* bombs, struct Character* Player)
 {
 	if (me && list)
@@ -139,7 +179,7 @@ void Enemy_Move(struct Enemy* list, struct Enemy* me, float dT, struct dstr_bloc
 		float npx = (me->x + nDir.y);
 		float npy = (me->y + nDir.x);
 		bool dstr = false;
-		bool onBlock = is_on_block(blocks, npx, npy, dir.x, dir.y, &dstr, Player, bombs, true);
+		bool onBlock = is_on_block(blocks, npx, npy, &dstr, Player, bombs, true);
 		if (!onBlock) { dstr = false; }
 		bool moved = false;
 		if (!onBlock || (onBlock && dstr && me->throughWalls)) {
@@ -175,6 +215,19 @@ void Enemy_Move(struct Enemy* list, struct Enemy* me, float dT, struct dstr_bloc
 		}
 	}
 }
+/**
+ * @brief Petla przeciwnikow (funkcja dzialajaca na kazdym przeciwniku co klatke)
+ *
+ * @param list Wskaznik na liste przeciwnikow.
+ * @param animationtime Czas animacji.
+ * @param xof Offset kamery na osi X.
+ * @param yof Offset kamery na osi Y.
+ * @param Player Wskaznik na gracza.
+ * @param dT deltaTime (czas od ostatniej wyswietlonej klatki).
+ * @param blocks Wskaznik na liste blokow.
+ * @param bombs Wskaznik na liste bomb.
+ * @param Paused Czy pauza jest aktywna.
+ */
 void Enemies_Loop(struct Enemy* list, double animationtime, float xof, float yof, struct Character* Player, float dT, struct dstr_block* blocks, struct BombList* bombs, bool Paused)
 {
 	struct Enemy* curr = list;
@@ -191,10 +244,27 @@ void Enemies_Loop(struct Enemy* list, double animationtime, float xof, float yof
 	}
 	Enemies_Draw(list, animationtime, xof, yof);
 }
+/**
+ * @brief Sprawdza czy przeciwnik koliduje z graczem.
+ *
+ * @param me Wskaznik na przeciwnika.
+ * @param player Wskaznik na gracza.
+ * @param hitboxScale Dostosowanie wielkosci wykrywania kolizji.
+ * @return Wartosc logiczna - Czy przeciwnik koliduje z graczem.
+ */
 bool Enemy_CollidesWithPlayer(struct Enemy* me, struct Character* player, float hitboxScale)
 {
 	return CollideWithPlayer(me->x, me->y, player, 0.5);
 }
+/**
+ * @brief Sprawdza czy cos koliduje z graczem.
+ *
+ * @param X Wspolrzedna na osi X.
+ * @param Y Wspolrzedna na osi Y.
+ * @param player Wskaznik na gracza.
+ * @param hitboxScale Dostosowanie wielkosci wykrywania kolizji.
+ * @return Wartosc logiczna - czy cos koliduje z graczem.
+ */
 bool CollideWithPlayer(float X, float Y, struct Character* player, float hitboxScale)
 {
 	int gridSize = (int)(128 * player->Transform.scale.x);
@@ -208,6 +278,17 @@ bool CollideWithPlayer(float X, float Y, struct Character* player, float hitboxS
 	}
 	return false;
 }
+/**
+ * @brief Sprawdza czy na danych koordynatach jest jakis przeciwnik.
+ *
+ * @param first Wskaznik na liste przeciwnikow.
+ * @param player Wskaznik na gracza.
+ * @param X Wspolrzedna na osi X.
+ * @param Y Wspolrzedna na osi Y.
+ * @param skipThis Wskaznik na przeciwnika ktorego ma nie brac pod uwage przy sprawdzaniu.
+ * @param hitboxSize Dostosowanie wielkosci wykrywania.
+ * @return Znaleziony przeciwnik (lub NULL).
+ */
 struct Enemy* Enemy_FindAt(struct Enemy* first, struct Character* player, float X, float Y, struct Enemy* skipThis, float hitboxSize)
 {
 	int gridSize = (int)(128 * player->Transform.scale.x);
@@ -230,6 +311,12 @@ struct Enemy* Enemy_FindAt(struct Enemy* first, struct Character* player, float 
 
 	return NULL;
 }
+/**
+ * @brief Sprawdza ile przeciwnikow istnieje.
+ *
+ * @param list Wskaznik na liste przeciwnikow.
+ * @return Ilosc przeciwnikow.
+ */
 int Enemies_Count(struct Enemy* list)
 {
 	struct Enemy* curr = list;
@@ -241,6 +328,17 @@ int Enemies_Count(struct Enemy* list)
 	}
 	return count;
 }
+/**
+ * @brief Zwraca losowe koordynaty dla przeciwnika w zaleznosci od poziomu
+ *
+ * @param list Wskaznik na liste przeciwnikow.
+ * @param X Wskaznik na wspolrzedna osi X (zwracanie poprzez wskaznik).
+ * @param Y Wskaznik na wspolrzedna osi Y (zwracanie poprzez wskaznik).
+ * @param blocks Wskaznik na liste blokow.
+ * @param Player Wskaznik na gracza.
+ * @param level Poziom.
+ * @param bombs Wskaznik na liste bomb.
+ */
 void Enemy_RandomPosition(struct Enemy* list, float* X, float* Y, struct dstr_block* blocks, struct Character* Player, int level, struct BombList* bombs)
 {
 	int i = Enemies_Count(list);
@@ -259,6 +357,6 @@ void Enemy_RandomPosition(struct Enemy* list, float* X, float* Y, struct dstr_bl
 		*X = (rX * gridSize) - (gridSize / 2);
 		*Y = (rY * gridSize) - (gridSize / 2);
 
-	} while (is_on_block(blocks, *X, *Y, *X, *Y, &dstr, Player, bombs, true) || CollideWithPlayer(*X, *Y, Player, 2) || Enemy_FindAt(list, Player, *X, *Y, NULL, 1));
+	} while (is_on_block(blocks, *X, *Y, &dstr, Player, bombs, true) || CollideWithPlayer(*X, *Y, Player, 2) || Enemy_FindAt(list, Player, *X, *Y, NULL, 1));
 	printf("Spawning at: %lf, %lf\n", *X, *Y);
 }

@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Dokumentacja pliku Bomberman/Blocks.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#func-members">Funkcje</a>  </div>
+  <div class="headertitle"><div class="title">Dokumentacja pliku Blocks.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_blocks_8h_source.html">Blocks.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="types_8h_source.html">types.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="end_door_8h_source.html">endDoor.h</a>&quot;</code><br />
+</div>
+<p><a href="_blocks_8c_source.html">Idź do kodu źródłowego tego pliku.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funkcje</h2></td></tr>
+<tr class="memitem:a6e9da8166b912699527b9a54f6d6dec4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a6e9da8166b912699527b9a54f6d6dec4">Block_Exists</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *first, int X, int Y, bool around, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:a6e9da8166b912699527b9a54f6d6dec4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza, czy na danych koordynatach miesci sie blok.  <br /></td></tr>
+<tr class="separator:a6e9da8166b912699527b9a54f6d6dec4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b85ef7b573f22650e83044c791f8b76"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a1b85ef7b573f22650e83044c791f8b76">Block_Insert</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **first, int X, int Y, bool staticBlock)</td></tr>
+<tr class="memdesc:a1b85ef7b573f22650e83044c791f8b76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Umieszcza nowy blok w liscie na danych koordynatach.  <br /></td></tr>
+<tr class="separator:a1b85ef7b573f22650e83044c791f8b76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad92f0a94745aa3ebd809ccd1c9ffa305"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#ad92f0a94745aa3ebd809ccd1c9ffa305">Block_createList</a> (int X, int Y, bool staticBlock)</td></tr>
+<tr class="memdesc:ad92f0a94745aa3ebd809ccd1c9ffa305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach.  <br /></td></tr>
+<tr class="separator:ad92f0a94745aa3ebd809ccd1c9ffa305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a1b9a2086f824bd39e348a7f64ebe0e91">Block_RemoveList</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **block)</td></tr>
+<tr class="memdesc:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa liste blokow.  <br /></td></tr>
+<tr class="separator:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, int X, int Y, bool gridMethod, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Szuka bloku na danych koordynatach.  <br /></td></tr>
+<tr class="separator:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadaf5d30b885ab1730b5a383f8d29db3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aadaf5d30b885ab1730b5a383f8d29db3">Block_Remove</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *element, struct <a class="el" href="structdstr__block.html">dstr_block</a> **first, struct <a class="el" href="struct_enemy.html">Enemy</a> *enemies)</td></tr>
+<tr class="memdesc:aadaf5d30b885ab1730b5a383f8d29db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa konkretny blok z listy.  <br /></td></tr>
+<tr class="separator:aadaf5d30b885ab1730b5a383f8d29db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceffbf35493f9e0a33a50c7be59727e1"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aceffbf35493f9e0a33a50c7be59727e1">Blocks_Count</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *first)</td></tr>
+<tr class="memdesc:aceffbf35493f9e0a33a50c7be59727e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zliczanie blokow.  <br /></td></tr>
+<tr class="separator:aceffbf35493f9e0a33a50c7be59727e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d6a0ff540c5e1436e84e3d76d001f0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a3d6a0ff540c5e1436e84e3d76d001f0a">Blocks_draw</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *first, ALLEGRO_BITMAP *dBS, ALLEGRO_BITMAP *sBS, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, float <a class="el" href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a>, float <a class="el" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>)</td></tr>
+<tr class="memdesc:a3d6a0ff540c5e1436e84e3d76d001f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderowanie (wyswietlanie) istniejacych blokow.  <br /></td></tr>
+<tr class="separator:a3d6a0ff540c5e1436e84e3d76d001f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec0faef0f949f43ef6c280cd1a58d43b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aec0faef0f949f43ef6c280cd1a58d43b">loopBlocks</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **blocks, struct <a class="el" href="struct_enemy.html">Enemy</a> *enemies)</td></tr>
+<tr class="memdesc:aec0faef0f949f43ef6c280cd1a58d43b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Petla blokow (wykonywana co klatke).  <br /></td></tr>
+<tr class="separator:aec0faef0f949f43ef6c280cd1a58d43b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52c96fc4078a8e363c9054566f82399"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aa52c96fc4078a8e363c9054566f82399">Block_random</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *first, int level, int *X, int *Y, int i, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:aa52c96fc4078a8e363c9054566f82399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu.  <br /></td></tr>
+<tr class="separator:aa52c96fc4078a8e363c9054566f82399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24e7903a19cc38333024a15946200b1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a24e7903a19cc38333024a15946200b1b">GenerateStaticBlocks</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **first, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:a24e7903a19cc38333024a15946200b1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generuje niezniszczalne bloki.  <br /></td></tr>
+<tr class="separator:a24e7903a19cc38333024a15946200b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa0d95808453c63b3b798f96121d183b"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aaa0d95808453c63b3b798f96121d183b">generate_blocks</a> (int level, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
+<tr class="memdesc:aaa0d95808453c63b3b798f96121d183b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generuje zniszczalne bloki.  <br /></td></tr>
+<tr class="separator:aaa0d95808453c63b3b798f96121d183b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Dokumentacja funkcji</h2>
+<a id="ad92f0a94745aa3ebd809ccd1c9ffa305" name="ad92f0a94745aa3ebd809ccd1c9ffa305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad92f0a94745aa3ebd809ccd1c9ffa305">&#9670;&#160;</a></span>Block_createList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structdstr__block.html">dstr_block</a> * Block_createList </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>staticBlock</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">X</td><td>Wspolrzedna x. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna y. </td></tr>
+    <tr><td class="paramname">staticBlock</td><td>Wartosc logiczna - czy blok jest statyczny (niezniszczalny). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wskaznik na nowy blok. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00103">103</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a6e9da8166b912699527b9a54f6d6dec4" name="a6e9da8166b912699527b9a54f6d6dec4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e9da8166b912699527b9a54f6d6dec4">&#9670;&#160;</a></span>Block_Exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Block_Exists </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>around</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sprawdza, czy na danych koordynatach miesci sie blok. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">X</td><td>Wspolrzedna x. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna y. </td></tr>
+    <tr><td class="paramname">around</td><td>Czy ma sprawdzac rowniez obok o 1 blok. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Czy blok istnieje. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00016">16</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a4bc0f7f832b8f6eff367a64f5d66396d" name="a4bc0f7f832b8f6eff367a64f5d66396d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc0f7f832b8f6eff367a64f5d66396d">&#9670;&#160;</a></span>Block_Find()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structdstr__block.html">dstr_block</a> * Block_Find </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>gridMethod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Szuka bloku na danych koordynatach. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">blocks</td><td>Wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">X</td><td>Wspolrzedna osi x. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna osi y. </td></tr>
+    <tr><td class="paramname">gridMethod</td><td>Metoda szukania (czy tylko po konkretnych koordynatach siatki). </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Blok, o ile znaleziono. (Inaczej NULL) </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00144">144</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1b85ef7b573f22650e83044c791f8b76" name="a1b85ef7b573f22650e83044c791f8b76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b85ef7b573f22650e83044c791f8b76">&#9670;&#160;</a></span>Block_Insert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structdstr__block.html">dstr_block</a> * Block_Insert </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> **&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>staticBlock</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Umieszcza nowy blok w liscie na danych koordynatach. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Podwojny wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">X</td><td>Wspolrzedna x. </td></tr>
+    <tr><td class="paramname">Y</td><td>Wspolrzedna y. </td></tr>
+    <tr><td class="paramname">staticBlock</td><td>Wartosc logiczna - czy blok jest statyczny (niezniszczalny). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wskaznik na nowy blok. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00064">64</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="aa52c96fc4078a8e363c9054566f82399" name="aa52c96fc4078a8e363c9054566f82399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa52c96fc4078a8e363c9054566f82399">&#9670;&#160;</a></span>Block_random()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Block_random </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>X</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>Y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>i</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">level</td><td>Poziom dla ktorego generuje koordynaty. </td></tr>
+    <tr><td class="paramname">X</td><td>Wskaznik na koordynaty na osi X (zwracanie poprzez wskaznik). </td></tr>
+    <tr><td class="paramname">Y</td><td>Wskaznik na koordynaty na osi Y (zwracanie poprzez wskaznik). </td></tr>
+    <tr><td class="paramname">i</td><td>Ktory blok (z petli for) </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00317">317</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="aadaf5d30b885ab1730b5a383f8d29db3" name="aadaf5d30b885ab1730b5a383f8d29db3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadaf5d30b885ab1730b5a383f8d29db3">&#9670;&#160;</a></span>Block_Remove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Block_Remove </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>element</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> **&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>enemies</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Usuwa konkretny blok z listy. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">element</td><td>Wskaznik na element listy blokow do usuniecia. </td></tr>
+    <tr><td class="paramname">first</td><td>Podwojny wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">enemies</td><td>Wskaznik na liste przeciwnikow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Czy usunieto blok. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00184">184</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a1b9a2086f824bd39e348a7f64ebe0e91" name="a1b9a2086f824bd39e348a7f64ebe0e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b9a2086f824bd39e348a7f64ebe0e91">&#9670;&#160;</a></span>Block_RemoveList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Block_RemoveList </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> **&#160;</td>
+          <td class="paramname"><em>block</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Usuwa liste blokow. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">block</td><td>Podwojny wskaznik na pierwszy element listy blokow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wartosc logiczna - czy usunieto. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00124">124</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="aceffbf35493f9e0a33a50c7be59727e1" name="aceffbf35493f9e0a33a50c7be59727e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceffbf35493f9e0a33a50c7be59727e1">&#9670;&#160;</a></span>Blocks_Count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Blocks_Count </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>first</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Zliczanie blokow. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Wskaznik na pierwszy element listy blokow. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Ilosc blokow. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00219">219</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a3d6a0ff540c5e1436e84e3d76d001f0a" name="a3d6a0ff540c5e1436e84e3d76d001f0a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d6a0ff540c5e1436e84e3d76d001f0a">&#9670;&#160;</a></span>Blocks_draw()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Blocks_draw </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_BITMAP *&#160;</td>
+          <td class="paramname"><em>dBS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ALLEGRO_BITMAP *&#160;</td>
+          <td class="paramname"><em>sBS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cam_x_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cam_y_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renderowanie (wyswietlanie) istniejacych blokow. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">dBS</td><td>Sprite zniszczalnego bloku (wskaznik). </td></tr>
+    <tr><td class="paramname">sBS</td><td>Sprite niezniszczalnego bloku (wskaznik). </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">cam_x_offset</td><td>Offset kamery na osi X. </td></tr>
+    <tr><td class="paramname">cam_y_offset</td><td>Offset kamery na osi Y. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00249">249</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="aaa0d95808453c63b3b798f96121d183b" name="aaa0d95808453c63b3b798f96121d183b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa0d95808453c63b3b798f96121d183b">&#9670;&#160;</a></span>generate_blocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="structdstr__block.html">dstr_block</a> * generate_blocks </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generuje zniszczalne bloki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>Ktory poziom. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na graczca. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Lista blokow. </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00359">359</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="a24e7903a19cc38333024a15946200b1b" name="a24e7903a19cc38333024a15946200b1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24e7903a19cc38333024a15946200b1b">&#9670;&#160;</a></span>GenerateStaticBlocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GenerateStaticBlocks </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> **&#160;</td>
+          <td class="paramname"><em>first</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
+          <td class="paramname"><em>Player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generuje niezniszczalne bloki. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Podwojny wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00341">341</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+<a id="aec0faef0f949f43ef6c280cd1a58d43b" name="aec0faef0f949f43ef6c280cd1a58d43b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec0faef0f949f43ef6c280cd1a58d43b">&#9670;&#160;</a></span>loopBlocks()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loopBlocks </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="structdstr__block.html">dstr_block</a> **&#160;</td>
+          <td class="paramname"><em>blocks</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">struct <a class="el" href="struct_enemy.html">Enemy</a> *&#160;</td>
+          <td class="paramname"><em>enemies</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Petla blokow (wykonywana co klatke). </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">blocks</td><td>Podwojny wskaznik na pierwszy element listy blokow. </td></tr>
+    <tr><td class="paramname">enemies</td><td>Wskaznik na pierwszy element listy przeciwnikow. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00286">286</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>

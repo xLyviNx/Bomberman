@@ -6,15 +6,19 @@
     #define WIDTH 832
     #define HEIGHT 832
 #endif // !WIDTH
+
+/**
+ * @brief Struktura bloku
+ */
 struct dstr_block
 {
-    int gridX;
-    int gridY;
-    bool exists;
-    bool destroyable;
-    struct dstr_block* next;
-    struct dstr_block* prev;
-    bool hasDoor;
+    int gridX; /**< Pozycja w osi X. */
+    int gridY; /**< Pozycja w osi Y. */
+    bool exists; /**< Wartosc logiczna - czy blok istnieje (uzywane do usuwania blokow). */
+    bool destroyable; /**< Wartosc logiczna - czy blok moze byc zniszczony.*/
+    struct dstr_block* next; /**< Kolejny element listy blokow. */
+    struct dstr_block* prev; /**< Poprzedni element listy blokow. */
+    bool hasDoor; /**< Wartosc logiczna - czy w bloku ukryte sa drzwi. */
 };
 
 bool Block_Exists(struct dstr_block*, int, int, bool, struct Character*);

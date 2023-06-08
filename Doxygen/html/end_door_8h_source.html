@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.7"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Bomberman: Plik źródłowy Bomberman/endDoor.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="bomb.gif"/></td>
+  <td id="projectalign">
+   <div id="projectname">Bomberman<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Projekt 1ID14B (2023) PP2 - Bomberman (Grzegorz Sygut, Piotr Strzepek, Krzysztof Szylinski, Adrian Synowiec)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Wygenerowano przez Doxygen 1.9.7 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Szukaj');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Wczytywanie...</div>
+<div class="SRStatus" id="Searching">Szukanie...</div>
+<div class="SRStatus" id="NoMatches">Brak dopasowań</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_f373ae5f1228bccfe03907c71d64e54c.html">Bomberman</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle"><div class="title">endDoor.h</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="end_door_8h.html">Idź do dokumentacji tego pliku.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#include &lt;allegro5/allegro5.h&gt;</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="types_8h.html">types.h</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="structend_door.html">    8</a></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code hl_struct" href="structend_door.html">endDoor</a></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="structend_door.html#ad0da36b2558901e21e7a30f6c227a45e">   10</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structend_door.html#ad0da36b2558901e21e7a30f6c227a45e">x</a>; </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno"><a class="line" href="structend_door.html#aa4f0d3eebc3c443f9be81bf48561a217">   11</a></span>    <span class="keywordtype">float</span> <a class="code hl_variable" href="structend_door.html#aa4f0d3eebc3c443f9be81bf48561a217">y</a>; </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="end_door_8h.html#ac744449f96e2eab7e5dbd3a8346cac2d">   12</a></span>}<a class="code hl_struct" href="structend_door.html">endDoor</a>;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="end_door_8h.html#aa30c4de56d98e5fc8014ae5c9fa08535">   17</a></span><a class="code hl_struct" href="structend_door.html">endDoor</a>* <a class="code hl_variable" href="end_door_8h.html#aa30c4de56d98e5fc8014ae5c9fa08535">endingDoor</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="end_door_8h.html#ad4772a7d007d862f16c3f5e7d4794fd0">   21</a></span>ALLEGRO_BITMAP* <a class="code hl_variable" href="end_door_8h.html#ad4772a7d007d862f16c3f5e7d4794fd0">doorSprite</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="end_door_8h.html#a67e6c339ae69c3e45139b9befb17f2f4">CreateDoor</a>(<span class="keywordtype">float</span>, <span class="keywordtype">float</span>);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keywordtype">void</span> <a class="code hl_function" href="end_door_8h.html#abefb0cdac95273bc513fa3b0d278bd6f">DestroyDoor</a>();</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">bool</span> <a class="code hl_function" href="end_door_8h.html#a861f1794f4b6c68732463b9f888c8efe">Door_hasPlayerIn</a>(<span class="keyword">struct</span> <a class="code hl_struct" href="struct_character.html">Character</a>*);</div>
+<div class="ttc" id="aend_door_8h_html_a67e6c339ae69c3e45139b9befb17f2f4"><div class="ttname"><a href="end_door_8h.html#a67e6c339ae69c3e45139b9befb17f2f4">CreateDoor</a></div><div class="ttdeci">void CreateDoor(float, float)</div><div class="ttdoc">Tworzy drzwi do nastepnego poziomu lub zmienia ich koordynaty.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8c_source.html#l00014">endDoor.c:14</a></div></div>
+<div class="ttc" id="aend_door_8h_html_a861f1794f4b6c68732463b9f888c8efe"><div class="ttname"><a href="end_door_8h.html#a861f1794f4b6c68732463b9f888c8efe">Door_hasPlayerIn</a></div><div class="ttdeci">bool Door_hasPlayerIn(struct Character *)</div><div class="ttdoc">Sprawdza czy gracz wszedl w drzwi.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8c_source.html#l00042">endDoor.c:42</a></div></div>
+<div class="ttc" id="aend_door_8h_html_aa30c4de56d98e5fc8014ae5c9fa08535"><div class="ttname"><a href="end_door_8h.html#aa30c4de56d98e5fc8014ae5c9fa08535">endingDoor</a></div><div class="ttdeci">endDoor * endingDoor</div><div class="ttdoc">Wskaznik na drzwi.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8h_source.html#l00017">endDoor.h:17</a></div></div>
+<div class="ttc" id="aend_door_8h_html_abefb0cdac95273bc513fa3b0d278bd6f"><div class="ttname"><a href="end_door_8h.html#abefb0cdac95273bc513fa3b0d278bd6f">DestroyDoor</a></div><div class="ttdeci">void DestroyDoor()</div><div class="ttdoc">Usuwa drzwi i zwalnia pamiec.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8c_source.html#l00028">endDoor.c:28</a></div></div>
+<div class="ttc" id="aend_door_8h_html_ad4772a7d007d862f16c3f5e7d4794fd0"><div class="ttname"><a href="end_door_8h.html#ad4772a7d007d862f16c3f5e7d4794fd0">doorSprite</a></div><div class="ttdeci">ALLEGRO_BITMAP * doorSprite</div><div class="ttdoc">Wskaznik na grafike (sprite) drzwi.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8h_source.html#l00021">endDoor.h:21</a></div></div>
+<div class="ttc" id="astruct_character_html"><div class="ttname"><a href="struct_character.html">Character</a></div><div class="ttdoc">Struktura gracza.</div><div class="ttdef"><b>Definition</b> <a href="types_8h_source.html#l00024">types.h:25</a></div></div>
+<div class="ttc" id="astructend_door_html"><div class="ttname"><a href="structend_door.html">endDoor</a></div><div class="ttdoc">Struktura drzwi.</div><div class="ttdef"><b>Definition</b> <a href="end_door_8h_source.html#l00008">endDoor.h:9</a></div></div>
+<div class="ttc" id="astructend_door_html_aa4f0d3eebc3c443f9be81bf48561a217"><div class="ttname"><a href="structend_door.html#aa4f0d3eebc3c443f9be81bf48561a217">endDoor::y</a></div><div class="ttdeci">float y</div><div class="ttdef"><b>Definition</b> <a href="end_door_8h_source.html#l00011">endDoor.h:11</a></div></div>
+<div class="ttc" id="astructend_door_html_ad0da36b2558901e21e7a30f6c227a45e"><div class="ttname"><a href="structend_door.html#ad0da36b2558901e21e7a30f6c227a45e">endDoor::x</a></div><div class="ttdeci">float x</div><div class="ttdef"><b>Definition</b> <a href="end_door_8h_source.html#l00010">endDoor.h:10</a></div></div>
+<div class="ttc" id="atypes_8h_html"><div class="ttname"><a href="types_8h.html">types.h</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Wygenerowano przez&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
+</small></address>
+</body>
+</html>
