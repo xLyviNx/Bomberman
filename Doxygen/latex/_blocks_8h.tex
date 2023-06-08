@@ -26,7 +26,7 @@ struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\a
 \begin{DoxyCompactList}\small\item\em Umieszcza nowy blok w nowej liscie (tworzy go bez istniejacej listy) na danych koordynatach. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{_blocks_8h_a82939e1ed58889031b197c00358df92b}{Block\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*})
 \begin{DoxyCompactList}\small\item\em Usuwa liste blokow. \end{DoxyCompactList}\item 
-struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8h_a95d4f321561bf4ac332199068f43ae41}{Block\+\_\+\+Find}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}, int, int, bool, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*})
+struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{_blocks_8h_a61af9f9dfb33cab74d6974f47fa1fedc}{Block\+\_\+\+Find}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}, int, int, bool, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}, int)
 \begin{DoxyCompactList}\small\item\em Szuka bloku na danych koordynatach. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{_blocks_8h_a39d0009c133ff1ed234bb433de7c996d}{Block\+\_\+\+Remove}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*})
 \begin{DoxyCompactList}\small\item\em Usuwa konkretny blok z listy. \end{DoxyCompactList}\item 
@@ -124,11 +124,11 @@ Czy blok istnieje.
 
 Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00016}{16}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
-\Hypertarget{_blocks_8h_a95d4f321561bf4ac332199068f43ae41}\label{_blocks_8h_a95d4f321561bf4ac332199068f43ae41} 
+\Hypertarget{_blocks_8h_a61af9f9dfb33cab74d6974f47fa1fedc}\label{_blocks_8h_a61af9f9dfb33cab74d6974f47fa1fedc} 
 \index{Blocks.h@{Blocks.h}!Block\_Find@{Block\_Find}}
 \index{Block\_Find@{Block\_Find}!Blocks.h@{Blocks.h}}
 \doxysubsubsection{\texorpdfstring{Block\_Find()}{Block\_Find()}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} Block\+\_\+\+Find (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{grid\+Method,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*} Block\+\_\+\+Find (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{int}]{X,  }\item[{int}]{Y,  }\item[{bool}]{grid\+Method,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{int}]{sub\+Pixels }\end{DoxyParamCaption})}
 
 
 
@@ -146,13 +146,15 @@ Szuka bloku na danych koordynatach.
 \hline
 {\em Player} & Wskaznik na gracza. \\
 \hline
+{\em sub\+Pixels} & Zmiana wielkosci wykrywania kolizji (w pikselach). \\
+\hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Zwraca}
 Blok, o ile znaleziono. (Inaczej NULL) 
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00144}{144}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00145}{145}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a47843ce8387db98f1804207718ad6508}\label{_blocks_8h_a47843ce8387db98f1804207718ad6508} 
 \index{Blocks.h@{Blocks.h}!Block\_Insert@{Block\_Insert}}
@@ -209,7 +211,7 @@ Generuje (pseudo) losowe koordynaty dla bloku w zaleznosci od aktualnego poziomu
 \end{DoxyParams}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00317}{317}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00318}{318}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a39d0009c133ff1ed234bb433de7c996d}\label{_blocks_8h_a39d0009c133ff1ed234bb433de7c996d} 
 \index{Blocks.h@{Blocks.h}!Block\_Remove@{Block\_Remove}}
@@ -235,7 +237,7 @@ Czy usunieto blok.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00184}{184}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00185}{185}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a82939e1ed58889031b197c00358df92b}\label{_blocks_8h_a82939e1ed58889031b197c00358df92b} 
 \index{Blocks.h@{Blocks.h}!Block\_RemoveList@{Block\_RemoveList}}
@@ -279,7 +281,7 @@ Ilosc blokow.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00219}{219}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00220}{220}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a83b235a63ebf6bed58b8f38257df0a81}\label{_blocks_8h_a83b235a63ebf6bed58b8f38257df0a81} 
 \index{Blocks.h@{Blocks.h}!Blocks\_draw@{Blocks\_draw}}
@@ -308,7 +310,7 @@ Renderowanie (wyswietlanie) istniejacych blokow.
 \end{DoxyParams}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00249}{249}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00250}{250}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a7c95a79b0b026bed48e5b5d235f08776}\label{_blocks_8h_a7c95a79b0b026bed48e5b5d235f08776} 
 \index{Blocks.h@{Blocks.h}!generate\_blocks@{generate\_blocks}}
@@ -332,7 +334,7 @@ Lista blokow.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00359}{359}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00360}{360}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a157b308c312619ccc5df12ba4af05ce9}\label{_blocks_8h_a157b308c312619ccc5df12ba4af05ce9} 
 \index{Blocks.h@{Blocks.h}!GenerateStaticBlocks@{GenerateStaticBlocks}}
@@ -353,7 +355,7 @@ Generuje niezniszczalne bloki.
 \end{DoxyParams}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00341}{341}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00342}{342}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 
 \Hypertarget{_blocks_8h_a266a27aee7af4d70481e4f4412b4f17a}\label{_blocks_8h_a266a27aee7af4d70481e4f4412b4f17a} 
 \index{Blocks.h@{Blocks.h}!loopBlocks@{loopBlocks}}
@@ -374,5 +376,5 @@ Petla blokow (wykonywana co klatke).
 \end{DoxyParams}
 
 
-Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00286}{286}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
+Definicja w linii \mbox{\hyperlink{_blocks_8c_source_l00287}{287}} pliku \mbox{\hyperlink{_blocks_8c_source}{Blocks.\+c}}.
 

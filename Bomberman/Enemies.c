@@ -179,7 +179,7 @@ void Enemy_Move(struct Enemy* list, struct Enemy* me, float dT, struct dstr_bloc
 		float npx = (me->x + nDir.y);
 		float npy = (me->y + nDir.x);
 		bool dstr = false;
-		bool onBlock = is_on_block(blocks, npx, npy, &dstr, Player, bombs, true);
+		bool onBlock = is_on_block(blocks, npx, npy, &dstr, Player, bombs, true, 0);
 		if (!onBlock) { dstr = false; }
 		bool moved = false;
 		if (!onBlock || (onBlock && dstr && me->throughWalls)) {
@@ -357,6 +357,6 @@ void Enemy_RandomPosition(struct Enemy* list, float* X, float* Y, struct dstr_bl
 		*X = (rX * gridSize) - (gridSize / 2);
 		*Y = (rY * gridSize) - (gridSize / 2);
 
-	} while (is_on_block(blocks, *X, *Y, &dstr, Player, bombs, true) || CollideWithPlayer(*X, *Y, Player, 2) || Enemy_FindAt(list, Player, *X, *Y, NULL, 1));
+	} while (is_on_block(blocks, *X, *Y, &dstr, Player, bombs, true,0) || CollideWithPlayer(*X, *Y, Player, 2) || Enemy_FindAt(list, Player, *X, *Y, NULL, 1));
 	printf("Spawning at: %lf, %lf\n", *X, *Y);
 }

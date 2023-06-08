@@ -99,13 +99,13 @@ Struktury danych</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funkcje</h2></td></tr>
-<tr class="memitem:a9a298aa67721117142dd0fee1c8c543c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a9a298aa67721117142dd0fee1c8c543c">is_on_block</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *, float, float, bool *, struct <a class="el" href="struct_character.html">Character</a> *, struct <a class="el" href="struct_bomb_list.html">BombList</a> *, bool)</td></tr>
-<tr class="memdesc:a9a298aa67721117142dd0fee1c8c543c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.  <br /></td></tr>
-<tr class="separator:a9a298aa67721117142dd0fee1c8c543c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261d31451c81799a8bb55e7737a5ffc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8h.html#a261d31451c81799a8bb55e7737a5ffc8">is_on_block</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *, float, float, bool *, struct <a class="el" href="struct_character.html">Character</a> *, struct <a class="el" href="struct_bomb_list.html">BombList</a> *, bool, int)</td></tr>
+<tr class="memdesc:a261d31451c81799a8bb55e7737a5ffc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.  <br /></td></tr>
+<tr class="separator:a261d31451c81799a8bb55e7737a5ffc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
-<a id="a9a298aa67721117142dd0fee1c8c543c" name="a9a298aa67721117142dd0fee1c8c543c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9a298aa67721117142dd0fee1c8c543c">&#9670;&#160;</a></span>is_on_block()</h2>
+<a id="a261d31451c81799a8bb55e7737a5ffc8" name="a261d31451c81799a8bb55e7737a5ffc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a261d31451c81799a8bb55e7737a5ffc8">&#9670;&#160;</a></span>is_on_block()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +150,13 @@ Funkcje</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bombanyway</em>&#160;</td>
+          <td class="paramname"><em>bombanyway</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subPixels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -170,11 +176,12 @@ Funkcje</h2></td></tr>
     <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
     <tr><td class="paramname">bombs</td><td>Wskaznik na liste bomb. </td></tr>
     <tr><td class="paramname">bombanyway</td><td>Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby). </td></tr>
+    <tr><td class="paramname">subPixels</td><td>Zmiana wielkosci wykrywania kolizji (w pikselach). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="types_8c_source.html#l00016">16</a> pliku <a class="el" href="types_8c_source.html">types.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="types_8c_source.html#l00017">17</a> pliku <a class="el" href="types_8c_source.html">types.c</a>.</p>
 
 </div>
 </div>

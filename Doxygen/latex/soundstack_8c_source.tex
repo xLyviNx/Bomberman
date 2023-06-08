@@ -3,67 +3,58 @@
 \mbox{\hyperlink{soundstack_8c}{Idź do dokumentacji tego pliku.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00001}00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{soundstack_8h}{soundstack.h}}"{}}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00002}00002\ }
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00003}\mbox{\hyperlink{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}{00003}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}{SampleStack\_Push}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ first,\ ALLEGRO\_SAMPLE\_INSTANCE*\ instance)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00004}00004\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00005}00005\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146}{ISON}})\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00006}00006\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \textcolor{keyword}{new}\ =\ (\textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}));}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00007}00007\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{new})}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00008}00008\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00009}00009\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>\mbox{\hyperlink{struct_sample_stack_element_a44e46c35e8c3aa0a443f6358fd544dc5}{myInstance}}\ =\ instance;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00010}00010\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>timePassed\ =\ 0.0;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>next\ =\ NULL;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00012}00012\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00014}00014\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ puts(\textcolor{stringliteral}{"{}1"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ last\ =\ first;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00017}00017\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (last\ !=\ NULL\ \&\&\ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ !=\ NULL)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ puts(\textcolor{stringliteral}{"{}2"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}})}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\ =\ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ puts(\textcolor{stringliteral}{"{}4"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ =\ \textcolor{keyword}{new};}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00028}00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00029}00029\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00030}00030\ \ \ \ \ \ \ \ \ \ \ \ \ puts(\textcolor{stringliteral}{"{}5"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00031}00031\ }
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ first\ =\ \textcolor{keyword}{new};}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00033}00033\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00034}00034\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00035}00035\ \ \ \ \ \textcolor{keywordflow}{return}\ first;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00036}00036\ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00037}\mbox{\hyperlink{soundstack_8c_a6953d18a0813fc25e901f2d50d6fbac5}{00037}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{soundstack_8c_a6953d18a0813fc25e901f2d50d6fbac5}{SampleStack\_Loop}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}**\ first,\ \textcolor{keywordtype}{float}\ dT)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00038}00038\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00039}00039\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146}{ISON}})\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first\ \&\&\ *first)\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ (*first)-\/>timePassed\ +=\ dT;}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00042}00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}Sound:\ \%lf\(\backslash\)n"{},\ (*first)-\/>timePassed);}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00043}00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((*first)-\/>timePassed\ >\ 0.8)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SHOULD\ POP\ SOUND\(\backslash\)n"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *first\ =\ \mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{SampleStack\_Pop}}(*first);}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00049}00049\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00050}00050\ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00051}\mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{00051}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{SampleStack\_Pop}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ first)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00052}00052\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00053}00053\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{soundstack_8h_a35f1743beab44d824c8f2cdebf8c8146}{ISON}})\ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first)}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00055}00055\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \ \ \ \ al\_destroy\_sample\_instance(first-\/>\mbox{\hyperlink{struct_sample_stack_element_a44e46c35e8c3aa0a443f6358fd544dc5}{myInstance}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ =\ first-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ free(first);}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}POPPING\ SOUND\ INSTANCE"{}});}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00061}00061\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00062}00062\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00063}00063\ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00008}\mbox{\hyperlink{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}{00008}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}{SampleStack\_Push}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ first,\ ALLEGRO\_SAMPLE\_INSTANCE*\ instance)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00010}00010\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \textcolor{keyword}{new}\ =\ (\textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*)malloc(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}));}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00011}00011\ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{new})}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00012}00012\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00013}00013\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>\mbox{\hyperlink{struct_sample_stack_element_a44e46c35e8c3aa0a443f6358fd544dc5}{myInstance}}\ =\ instance;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00014}00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>timePassed\ =\ 0.0;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00015}00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{new}-\/>next\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00016}00016\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{if}\ (first)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ last\ =\ first;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00020}00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (last\ !=\ NULL\ \&\&\ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ !=\ NULL)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00021}00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00022}00022\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}})}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00023}00023\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00024}00024\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\ =\ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00026}00026\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00027}00027\ \ \ \ \ \ \ \ \ last-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ =\ \textcolor{keyword}{new};}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00028}00028\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00029}00029\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00030}00030\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00031}00031\ \ \ \ \ \ \ \ \ first\ =\ \textcolor{keyword}{new};}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00034}00034\ \ \ \ \ \textcolor{keywordflow}{return}\ first;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00035}00035\ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00042}\mbox{\hyperlink{soundstack_8c_a6953d18a0813fc25e901f2d50d6fbac5}{00042}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{soundstack_8c_a6953d18a0813fc25e901f2d50d6fbac5}{SampleStack\_Loop}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}**\ first,\ \textcolor{keywordtype}{float}\ dT)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00043}00043\ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (first\ \&\&\ *first)\ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00045}00045\ \ \ \ \ \ \ \ \ (*first)-\/>timePassed\ +=\ dT;}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{comment}{//printf("{}Sound:\ \%lf\(\backslash\)n"{},\ (*first)-\/>timePassed);}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((*first)-\/>timePassed\ >\ 0.8)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00048}00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}SHOULD\ POP\ SOUND\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ *first\ =\ \mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{SampleStack\_Pop}}(*first);}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00051}00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00052}00052\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00054}00054\ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00061}\mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{00061}}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{SampleStack\_Pop}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ first)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00062}00062\ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{if}\ (first)}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00064}00064\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ al\_destroy\_sample\_instance(first-\/>\mbox{\hyperlink{struct_sample_stack_element_a44e46c35e8c3aa0a443f6358fd544dc5}{myInstance}});}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_sample_stack_element}{SampleStackElement}}*\ \mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}}\ =\ first-\/>\mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ free(first);}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}POPPING\ SOUND\ INSTANCE"{}});}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{struct_sample_stack_element_a6fb1496a82b5b75ef8ec9e6cc8112abf}{next}};}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{soundstack_8c_source_l00072}00072\ \}}
 
 \end{DoxyCode}

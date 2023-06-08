@@ -5,11 +5,11 @@
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}{Sample\+Stack\+\_\+\+Push}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}first, ALLEGRO\+\_\+\+SAMPLE\+\_\+\+INSTANCE \texorpdfstring{$\ast$}{*}instance)
-\item 
+\begin{DoxyCompactList}\small\item\em Dodanie dzwieku do stosu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{soundstack_8c_a6953d18a0813fc25e901f2d50d6fbac5}{Sample\+Stack\+\_\+\+Loop}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}first, float dT)
-\item 
+\begin{DoxyCompactList}\small\item\em Wykrywanie kiedy wyrzucic element ze stosu (swego rodzaju PEEK z odczytaniem czasu) \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}{Sample\+Stack\+\_\+\+Pop}} (struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \texorpdfstring{$\ast$}{*}first)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Zdjecie elementu ze stosu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Dokumentacja funkcji}
@@ -21,7 +21,18 @@ struct \mbox{\hyperlink{struct_sample_stack_element}{Sample\+Stack\+Element}} \t
 
 
 
-Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00037}{37}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+Wykrywanie kiedy wyrzucic element ze stosu (swego rodzaju PEEK z odczytaniem czasu) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Stos (podwojny wskaznik) \\
+\hline
+{\em dT} & delta\+Time (czas od ostatniej klatki) \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00042}{42}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
 
 \Hypertarget{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10}\label{soundstack_8c_ab305c09a5e37058d545deac7fd2a5b10} 
 \index{soundstack.c@{soundstack.c}!SampleStack\_Pop@{SampleStack\_Pop}}
@@ -31,7 +42,19 @@ Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00037}{37}} pliku \mbox
 
 
 
-Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00051}{51}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+Zdjecie elementu ze stosu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Stos (wskaznik) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wskaznik na stos 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00061}{61}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
 
 \Hypertarget{soundstack_8c_a8daadf335fa00aa30d365e271572cb54}\label{soundstack_8c_a8daadf335fa00aa30d365e271572cb54} 
 \index{soundstack.c@{soundstack.c}!SampleStack\_Push@{SampleStack\_Push}}
@@ -41,5 +64,16 @@ Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00051}{51}} pliku \mbox
 
 
 
-Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00003}{3}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
+Dodanie dzwieku do stosu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em first} & Stos (wskaznik) \\
+\hline
+{\em instance} & Allegro Sample Instance (wskaznik) \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{soundstack_8c_source_l00008}{8}} pliku \mbox{\hyperlink{soundstack_8c_source}{soundstack.\+c}}.
 

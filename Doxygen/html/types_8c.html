@@ -88,13 +88,13 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funkcje</h2></td></tr>
-<tr class="memitem:a78f4d5e1ae7ef7321353ab5c6d470f7d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8c.html#a78f4d5e1ae7ef7321353ab5c6d470f7d">is_on_block</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, float x, float y, bool *destroyable, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, struct <a class="el" href="struct_bomb_list.html">BombList</a> *<a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, bool bombanyway)</td></tr>
-<tr class="memdesc:a78f4d5e1ae7ef7321353ab5c6d470f7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.  <br /></td></tr>
-<tr class="separator:a78f4d5e1ae7ef7321353ab5c6d470f7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92a05dfa1e9fb3903c841af327ee0990"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="types_8c.html#a92a05dfa1e9fb3903c841af327ee0990">is_on_block</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, float x, float y, bool *destroyable, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, struct <a class="el" href="struct_bomb_list.html">BombList</a> *<a class="el" href="main_8c.html#a0c6b025e3d49adb23ede839eb339aaba">bombs</a>, bool bombanyway, int subPixels)</td></tr>
+<tr class="memdesc:a92a05dfa1e9fb3903c841af327ee0990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.  <br /></td></tr>
+<tr class="separator:a92a05dfa1e9fb3903c841af327ee0990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
-<a id="a78f4d5e1ae7ef7321353ab5c6d470f7d" name="a78f4d5e1ae7ef7321353ab5c6d470f7d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78f4d5e1ae7ef7321353ab5c6d470f7d">&#9670;&#160;</a></span>is_on_block()</h2>
+<a id="a92a05dfa1e9fb3903c841af327ee0990" name="a92a05dfa1e9fb3903c841af327ee0990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92a05dfa1e9fb3903c841af327ee0990">&#9670;&#160;</a></span>is_on_block()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -139,7 +139,13 @@ Funkcje</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>bombanyway</em>&#160;</td>
+          <td class="paramname"><em>bombanyway</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subPixels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -159,11 +165,12 @@ Funkcje</h2></td></tr>
     <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
     <tr><td class="paramname">bombs</td><td>Wskaznik na liste bomb. </td></tr>
     <tr><td class="paramname">bombanyway</td><td>Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby). </td></tr>
+    <tr><td class="paramname">subPixels</td><td>Zmiana wielkosci wykrywania kolizji (w pikselach). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="types_8c_source.html#l00016">16</a> pliku <a class="el" href="types_8c_source.html">types.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="types_8c_source.html#l00017">17</a> pliku <a class="el" href="types_8c_source.html">types.c</a>.</p>
 
 </div>
 </div>

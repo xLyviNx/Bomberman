@@ -139,9 +139,10 @@ bool Block_RemoveList(struct dstr_block** block)
  * @param Y Wspolrzedna osi y.
  * @param gridMethod Metoda szukania (czy tylko po konkretnych koordynatach siatki).
  * @param Player Wskaznik na gracza.
+ * @param subPixels Zmiana wielkosci wykrywania kolizji (w pikselach).
  * @return Blok, o ile znaleziono. (Inaczej NULL)
  */
-struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool gridMethod, struct Character* Player)
+struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool gridMethod, struct Character* Player, int subPixels)
 {
     struct dstr_block* found = NULL;
     if (blocks != NULL)
@@ -160,9 +161,9 @@ struct dstr_block* Block_Find(struct dstr_block* blocks, int X, int Y, bool grid
             {
                 int gridSize = (int)(128 * Player->Transform.scale.x);
 
-                if (block->gridX < X + gridSize && block->gridX > X - gridSize) // here's the issue
+                if (block->gridX < X + gridSize - subPixels && block->gridX > X - gridSize + subPixels) // here's the issue
                 {
-                    if (block->gridY < Y + gridSize && block->gridY > Y - gridSize)
+                    if (block->gridY < Y + gridSize - subPixels && block->gridY > Y - gridSize + subPixels)
                     {
                         return block;
                     }

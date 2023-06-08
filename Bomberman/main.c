@@ -26,31 +26,63 @@
     #define WIDTH 832
     #define HEIGHT 832
 #endif // !WIDTH
-
+/**
+* @brief Wskaznik na liste bomb (jej pierwszy element) 
+*/
 struct BombList* bombs = NULL;
+/**
+* @brief Tablica wcisnietych przyciskow (do poruszania sie gracza)
+*/
 bool wasd[4] = { false, false, false, false };
+/**
+* @brief Czas miedzy klatkami.
+*/
 double deltaTime = 0;
+/**
+* @brief Offset kamery na osi X.
+*/
 float cam_x_offset = 0;
+/**
+* @brief Offset kamery na osi Y.
+*/
 float cam_y_offset = 0;
+/**
+ * @brief Zmienna globalna odpowiadajaca za "zdalne akcje" z kazdego poziomu kodu.
+ */
 unsigned short GlobalAction = 0;
-
+/**
+* @brief Wskaznik na gracza.
+*/
 struct Character* Player = NULL;
 
-
-struct Explosion* explosions = NULL;
-
+/**
+ * @brief Finalne poruszanie sie gracza wraz z sprawdzaniem kolizji
+ *
+ * @param dir Kierunek poruszania sie gracza
+ * @param blocks Wskaznik na liste blokow
+ */
 void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
 {
     if (Player != NULL)
     {
+        //printf("Before Normalize: %lf, %lf\n", dir.x, dir.y);
+        if (dir.x != 0 && dir.y != 0)
+        {
+            float length = sqrt(dir.x * dir.x + dir.y * dir.y);
+            dir.x /= length;
+            dir.y /= length;
+            //dir.x *= 1.3;
+            //dir.y *= 1.3;
+            //printf("After Normalize: %lf, %lf\n", dir.x, dir.y);
+        }
         struct Vector2 nDir;
-        nDir.x = (dir.x * deltaTime) * 40;
-        nDir.y = (dir.y * deltaTime) * 40;
+        nDir.x = (dir.x * Player->Speed * deltaTime) * 40;
+        nDir.y = (dir.y * Player->Speed * deltaTime) * 40;
         float npy = (Player->Transform.position.y + nDir.y);
         float npx = (Player->Transform.position.x + nDir.x);
         float halfplayer = ((Player->Transform.scale.x / 2.0) * 128);
         bool dstr = false;
-        if (!is_on_block(blocks, npx, Player->Transform.position.y, &dstr, Player, bombs, false)) {
+        if (!is_on_block(blocks, npx, Player->Transform.position.y, &dstr, Player, bombs, false, 10)) {
             if (npx >= halfplayer && npx <= ((WIDTH*2)-halfplayer)+1)
             {
                 if (npx < 0) npx = 0;
@@ -68,7 +100,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
                 Player->Transform.position.x = npx;
             }
         }
-        if (!is_on_block(blocks, Player->Transform.position.x, npy, &dstr, Player, bombs, false)) {
+        if (!is_on_block(blocks, Player->Transform.position.x, npy, &dstr, Player, bombs, false, 10)) {
             if (npy > (Player->Transform.scale.y / 2.0) * 128 && npy < HEIGHT + 1 - ((128 * Player->Transform.scale.y)/2.0))
             {
                 Player->Transform.position.y = npy;
@@ -87,7 +119,14 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
         if (cam_x_offset < 0) cam_x_offset = 0;
     }
 }
-
+/**
+ * @brief Wyswietlanie osiagniecia
+ *
+ * @param timeleft Wskaznik na wartosc pozostalego czasu (float*)
+ * @param id ID osiagniecia
+ * @param font Jedna z czcionek
+ * @param font2 Jedna z czcionek
+ */
 void Achievement(float* timeleft, int id, ALLEGRO_FONT* font, ALLEGRO_FONT* font2)
 {
     *timeleft -= deltaTime;
@@ -117,6 +156,11 @@ void Achievement(float* timeleft, int id, ALLEGRO_FONT* font, ALLEGRO_FONT* font
         *timeleft = 0;
     }
 }
+/**
+ * @brief Zarzadzanie poruszaniem sie gracza
+ *
+ * @param blocks Wskaznik na liste blokow
+ */
 void playerMovement(struct dstr_block* blocks)
 {
     struct Vector2 dir;
@@ -146,64 +190,16 @@ void playerMovement(struct dstr_block* blocks)
     }
     if (!dir.x && !dir.y)
         Player->walking=0;
-    dir.x *= Player->Speed;
-    dir.y *= Player->Speed;
     MovePlayer(dir, blocks);
 }
-
-
-void renderExplosions(struct Explosion* expl)
-{
-    if (expl != NULL)
-    {
-        struct Explosion* exp = expl;
-        int i = 0;
-        while (expl != NULL && exp != NULL)
-        {
-            if (exp == NULL) {
-                break;
-            }
-            
-            //printf("Address Now: %p\n", exp);
-            //float fac = (1 - (exp->i / Player->bombRange));
-            //printf("FAC: %lf\n", fac);
-            float size = 128 * exp->timeLeft;
-            // printf("size: %lf\n", size);
-            al_draw_filled_circle(exp->gridX-cam_x_offset, exp->gridY-cam_y_offset, size, al_map_rgb(180, 140, 0));
-            if (exp != NULL) {
-                exp = exp->next;
-                
-            }
-            else break;
-        }
-    }
-}
-
-void loopExplosions(struct Explosion** expl, bool* removed)
-{
-    if (expl != NULL)
-    {
-        struct Explosion* exp = (*expl);
-        while (exp != NULL)
-        {
-            exp->timeLeft -= deltaTime;
-            if (exp->timeLeft <= 0)
-            {
-                (*removed) = Explosion_Remove(&exp);
-                //printf("Removed %p ??? - %d\n", exp, *removed);
-                (*expl) = exp; // update the value of exp
-
-                return;
-            }
-            if (exp->next != NULL) {
-                exp = exp->next;
-            }
-            else break;
-        }
-    }
-}
-
-
+/**
+ * @brief Nawigacja po menu glownym (ekranie startowym)
+ *
+ * @param down Czy gracz zjezdza w dol czy do gory.
+ * @param val Wskaznik na wartosc (ID) przycisku na ktory gracz sie przelacza (zmieniany poprzez wskaznik).
+ * @param level Poziom (0 to menu glowne).
+ * @param buttondown Czy klawisz byl wcisniety (a nie podniesiony).
+ */
 void menuMove(bool down, unsigned short* val, int level, bool buttondown)
 {
     if (buttondown)
@@ -226,6 +222,14 @@ void menuMove(bool down, unsigned short* val, int level, bool buttondown)
         }
     }
 }
+/**
+ * @brief Obsluga przyciskow
+ *
+ * @param key Ktory klawisz wcisnieto.
+ * @param down Czy klawisz byl wcisniety (a nie podniesiony).
+ * @param currentLevel Wskaznik na numer aktualnego poziomu.
+ * @param menuChoiceValue Wskaznik na wartosc (ID) aktualnie wybranego przycisku w menu.
+ */
 void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceValue)
 {
     switch (key)
@@ -328,6 +332,15 @@ void button(int key, bool down, int *currentLevel, unsigned short* menuChoiceVal
     }
     }
 }
+/**
+ * @brief Wyswietlanie UI (Interfejsu Uzytkownika)
+ *
+ * @param uiFont Jedna z czcionek
+ * @param LevelFont Jedna z czcionek
+ * @param level Numer aktualnego poziomu.
+ * @param enemies Wskaznik na liste przeciwnikow.
+ * @param blocks Wskaznik na liste blokow.
+ */
 void drawUI(ALLEGRO_FONT** uiFont, ALLEGRO_FONT** LevelFont, int level, struct Enemy* enemies, struct dstr_block* blocks)
 {
     al_draw_filled_rectangle(5, 5, WIDTH - 5, 55, al_map_rgba(0, 0, 0, 150));
@@ -337,35 +350,9 @@ void drawUI(ALLEGRO_FONT** uiFont, ALLEGRO_FONT** LevelFont, int level, struct E
     al_draw_textf(*LevelFont, al_map_rgba(255, 255, 255, 80), WIDTH/2, 15, ALLEGRO_ALIGN_CENTER, "POZIOM: %d/5", level);
     al_draw_textf(*uiFont, al_map_rgba(255, 255, 255, 80), WIDTH - 15, 15, ALLEGRO_ALIGN_RIGHT, "BOMBY: %d/%d", Bomb_count(bombs), Player->maxBombs);
 }
-void drawGrid(int maxx, int maxy, int xsize, int ysize)
-{
-    if (Player != NULL) {
-        int i, j;
-        float x_offset = fmod(cam_x_offset, WIDTH);
-        int window_ext = (int)(cam_x_offset / WIDTH);
-
-        for (i = -window_ext; i < maxx + 1; i++)
-        {
-            float x1 = (i * xsize) - xsize - x_offset;
-            float x2 = (i * xsize) + xsize - x_offset;
-
-            if (x1 > WIDTH) {
-                x1 -= WIDTH;
-                x2 -= WIDTH;
-            }
-            else if (x2 < 0) {
-                x1 += WIDTH;
-                x2 += WIDTH;
-            }
-
-            for (j = 0; j < maxy; j++)
-            {
-                al_draw_rectangle(x1+xsize, (j * ysize) - ysize, x2 + xsize, (j * ysize) + ysize, al_map_rgba(255, 180, 30, 1), 1.5);
-            }
-        }
-    }
-}
-
+/**
+ * @brief Funkcja glowna (startowa) - MAIN
+ */
 int main()
 {
     const bool debug = false;
@@ -493,8 +480,6 @@ int main()
         int level = 0;
         cam_y_offset = 0;
         struct dstr_block* blocks = NULL;
-        float dTest = 0;
-        bool gridEnabled = false;
         unsigned short MenuChoice = 0;
         if (!saveSystem_init()) return -10;
         int loadedLevel = saveSystem_LoadLevel();
@@ -509,7 +494,7 @@ int main()
         al_set_sample_instance_playmode(GMusicInstance, ALLEGRO_PLAYMODE_LOOP);
         al_attach_sample_instance_to_mixer(GMusicInstance, al_get_default_mixer());
         al_attach_sample_instance_to_mixer(DeathSoundInstance, al_get_default_mixer());
-
+        struct Explosion* explosions = NULL;
         struct Enemy* EnemyList = NULL;
         struct SampleStackElement* samples = NULL;
         struct Boost* Boosts = NULL;
@@ -707,18 +692,13 @@ int main()
                         al_draw_rounded_rectangle((Player->Transform.gridPosition.x - (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset - (128 * Player->Transform.scale.y) / 2), (Player->Transform.gridPosition.x + (128 * Player->Transform.scale.x) / 2) - cam_x_offset, (Player->Transform.gridPosition.y - cam_y_offset + (128 * Player->Transform.scale.y) / 2), 20, 20, al_map_rgba(150, 20, 20, 3), 2);
                     }
                 }
-                if (gridEnabled)
-                {
-                    drawGrid(maxx, maxy, xsize, ysize);
-                }
                 check = false;
                 if (!Pause)
                 {
-                    loopExplosions(&explosions, &check);
-
+                    loopExplosions(&explosions, &check, deltaTime);
                     if (!check)
                     {
-                        renderExplosions(explosions);
+                        renderExplosions(explosions, cam_x_offset, cam_y_offset);
                     }
                     loopBombs(&bombs, &blocks, explosionSound, &samples, deltaTime, Player, &cam_y_offset, &explosions, &EnemyList, &Boosts);
                 }

@@ -1,11 +1,13 @@
 #pragma once
 #include <allegro5/allegro_audio.h>
-#define ISON false
+/**
+ * @brief Struktura Dzwieku w stosie
+ */
 struct SampleStackElement
 {
-	float timePassed;
-	ALLEGRO_SAMPLE_INSTANCE* myInstance;
-	struct SampleStackElement* next;
+	float timePassed; /**< Miniony czas */
+	ALLEGRO_SAMPLE_INSTANCE* myInstance; /**< Sample Instance*/
+	struct SampleStackElement* next; /**< nastepny element*/
 };
 
 

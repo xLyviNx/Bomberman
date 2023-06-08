@@ -18,3 +18,5 @@ struct Explosion
 struct Explosion* Explosion_Insert(struct Explosion**, int, int, int);
 bool Explosion_Remove(struct Explosion**);
 bool Explosion_RemoveList(struct Explosion**);
+void renderExplosions(struct Explosion*, float, float);
+void loopExplosions(struct Explosion**, bool*, float);

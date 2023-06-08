@@ -6,16 +6,16 @@
 \doxysubsubsection*{Funkcje}
 \begin{DoxyCompactItemize}
 \item 
-bool \mbox{\hyperlink{types_8c_a78f4d5e1ae7ef7321353ab5c6d470f7d}{is\+\_\+on\+\_\+block}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, float x, float y, bool \texorpdfstring{$\ast$}{*}destroyable, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}}, bool bombanyway)
+bool \mbox{\hyperlink{types_8c_a92a05dfa1e9fb3903c841af327ee0990}{is\+\_\+on\+\_\+block}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks, float x, float y, bool \texorpdfstring{$\ast$}{*}destroyable, struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}}, struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}}, bool bombanyway, int sub\+Pixels)
 \begin{DoxyCompactList}\small\item\em Sprawdza, czy na danych koordynatach miesci sie blok lub bomba. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Dokumentacja funkcji}
-\Hypertarget{types_8c_a78f4d5e1ae7ef7321353ab5c6d470f7d}\label{types_8c_a78f4d5e1ae7ef7321353ab5c6d470f7d} 
+\Hypertarget{types_8c_a92a05dfa1e9fb3903c841af327ee0990}\label{types_8c_a92a05dfa1e9fb3903c841af327ee0990} 
 \index{types.c@{types.c}!is\_on\_block@{is\_on\_block}}
 \index{is\_on\_block@{is\_on\_block}!types.c@{types.c}}
 \doxysubsubsection{\texorpdfstring{is\_on\_block()}{is\_on\_block()}}
-{\footnotesize\ttfamily bool is\+\_\+on\+\_\+block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{destroyable,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{bool}]{bombanyway }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bool is\+\_\+on\+\_\+block (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}}]{blocks,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{destroyable,  }\item[{struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*}}]{Player,  }\item[{struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*}}]{bombs,  }\item[{bool}]{bombanyway,  }\item[{int}]{sub\+Pixels }\end{DoxyParamCaption})}
 
 
 
@@ -37,8 +37,10 @@ Sprawdza, czy na danych koordynatach miesci sie blok lub bomba.
 \hline
 {\em bombanyway} & Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby). \\
 \hline
+{\em sub\+Pixels} & Zmiana wielkosci wykrywania kolizji (w pikselach). \\
+\hline
 \end{DoxyParams}
 
 
-Definicja w linii \mbox{\hyperlink{types_8c_source_l00016}{16}} pliku \mbox{\hyperlink{types_8c_source}{types.\+c}}.
+Definicja w linii \mbox{\hyperlink{types_8c_source_l00017}{17}} pliku \mbox{\hyperlink{types_8c_source}{types.\+c}}.
 

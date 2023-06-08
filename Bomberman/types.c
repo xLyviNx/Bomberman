@@ -12,10 +12,11 @@
  * @param Player Wskaznik na gracza.
  * @param bombs Wskaznik na liste bomb.
  * @param bombanyway Bezwzgledne sprawdzenie czy na koordynatach miesci sie bomba (uzywane do pozwolenia lub nie graczowi poruszac sie w srodku bomby).
+ * @param subPixels Zmiana wielkosci wykrywania kolizji (w pikselach).
  */
-bool is_on_block(struct dstr_block* blocks, float x, float y, bool* destroyable, struct Character* Player, struct BombList* bombs, bool bombanyway) {
+bool is_on_block(struct dstr_block* blocks, float x, float y, bool* destroyable, struct Character* Player, struct BombList* bombs, bool bombanyway, int subPixels) {
 
-    struct dstr_block* blck = Block_Find(blocks, x, y, false, Player);
+    struct dstr_block* blck = Block_Find(blocks, x, y, false, Player, subPixels);
     struct BombList* atBomb = Bomb_Find(bombs, x, y, false, Player);
     bool bombCont = false;
     if (atBomb)

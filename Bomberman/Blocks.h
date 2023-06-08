@@ -25,7 +25,7 @@ bool Block_Exists(struct dstr_block*, int, int, bool, struct Character*);
 struct dstr_block* Block_Insert(struct dstr_block**, int, int, bool);
 struct dstr_block* Block_createList(int, int, bool);
 bool Block_RemoveList(struct dstr_block**);
-struct dstr_block* Block_Find(struct dstr_block*, int, int, bool, struct Character*);
+struct dstr_block* Block_Find(struct dstr_block*, int, int, bool, struct Character*, int);
 bool Block_Remove(struct dstr_block*, struct dstr_block**, struct Enemy*);
 unsigned int Blocks_Count(struct dstr_block*);
 void Blocks_draw(struct dstr_block*, ALLEGRO_BITMAP*, ALLEGRO_BITMAP*, struct Character*, float, float);

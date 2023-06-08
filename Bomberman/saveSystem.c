@@ -1,7 +1,19 @@
 #include "saveSystem.h"
 #include <stdlib.h>
-#define SAVEFILE_LOCATION "data/save.bmb"
+/**
+ * @brief Lokalizacja pliku zapisu
+ */
+#define SAVEFILE_LOCATION "data/save.txt"
+ /**
+  * @brief Lokalizacja pliku tymczasowego
+  */
 #define TEMPFILE_LOCATION "data/save.tmp"
+
+/**
+ * @brief Inicjalizacja systemu zapisu
+ *
+ * @return Czy zainicjowano.
+ */
 bool saveSystem_init()
 {
 	if (!saveFile)
@@ -23,6 +35,10 @@ bool saveSystem_init()
 		printf("[SAVE SYSTEM] Save System ALREADY INITIALIZED!\n");
 	return (saveFile != NULL);
 }
+/**
+ * @brief Zamkniecie systemu zapisu
+ *
+ */
 void saveSystem_close()
 {
 	if (saveFile) {
@@ -30,7 +46,12 @@ void saveSystem_close()
 		saveFile = NULL;
 	}
 }
-
+/**
+ * @brief Odczyt linii pliku zapisu
+ *
+ * @param lineNumber Numer linii
+ * @return Odczytana zawartosc linii.
+ */
 char* saveSystem_readLine(int lineNumber)
 {
 	char* buf = (char*)malloc(LINE_LENGTH * sizeof(char));
@@ -64,6 +85,13 @@ char* saveSystem_readLine(int lineNumber)
 	return buf != NULL ? buf : NULL;
 
 }
+/**
+ * @brief Przyciecie tekstu.
+ *
+ * @param text Tekst do przyciecia.
+ * @param n Dlugosc.
+ * @return Wartosc logiczna - przyciecie/koniec tekstu.
+ */
 bool trimText(char* text, int n)
 {
 	for (int i = 0; i < n - 1; i++)
@@ -76,6 +104,12 @@ bool trimText(char* text, int n)
 	}
 	return false;
 }
+/**
+ * @brief Sprawdzenie czy gracz odblokowal osiagniecie
+ *
+ * @param achievementId ID osiagniecia.
+ * @return Czy gracz odblokowal osiagniecie.
+ */
 bool hasAchievement(int achievementId)
 {
 	int line = 1;
@@ -104,6 +138,11 @@ bool hasAchievement(int achievementId)
 	free(loadS);
 	return tret == 1;
 }
+/**
+ * @brief Wczytanie poziomu z pliku zapisu.
+ *
+ * @return Wczytany poziom.
+ */
 int saveSystem_LoadLevel()
 {
 	int tret = 1;
@@ -114,6 +153,11 @@ int saveSystem_LoadLevel()
 	free(loadS);
 	return tret;
 }
+/**
+ * @brief Wczytanie bomb z pliku zapisu.
+ *
+ * @return Wczytana ilosc bomb.
+ */
 int saveSystem_LoadBombs()
 {
 	int tret = 2;
@@ -124,6 +168,11 @@ int saveSystem_LoadBombs()
 	free(loadS);
 	return tret;
 }
+/**
+ * @brief Wczytanie zasiegu bomb z pliku zapisu.
+ *
+ * @return Wczytany zasieg bomb.
+ */
 int saveSystem_LoadRange()
 {
 	int tret = 1;
@@ -134,6 +183,11 @@ int saveSystem_LoadRange()
 	free(loadS);
 	return tret;
 }
+/**
+ * @brief Wczytanie predkosci gracza z pliku zapisu.
+ *
+ * @return Wczytana predkosc gracza.
+ */
 float saveSystem_LoadSpeed()
 {
 	float tret = 3.0;
@@ -144,7 +198,12 @@ float saveSystem_LoadSpeed()
 	free(loadS);
 	return tret;
 }
-
+/**
+ * @brief Zapis do linii pliku zapisu.
+ *
+ * @param lineNumber Docelowa linia tekstu pliku.
+ * @param content Tekst do zapisu.
+ */
 void saveSystem_printAtLine(int lineNumber, const char* content)
 {
 	if (!saveFile)
@@ -165,14 +224,11 @@ void saveSystem_printAtLine(int lineNumber, const char* content)
 			if (currLine == lineNumber)
 			{
 				strcpy_s(buf, LINE_LENGTH * sizeof(char), content);
-				//printf("line: %d, '%s'\n", currLine, buf);
 			}
-			//printf("Putting '%s'\n", buf);
 			fputs(buf, tempfile);
 			int lastl = strlen(buf) - 1;
 			if (buf[lastl] != '\n' && buf[lastl] != '\0' && !feof(saveFile)) {
 				fputc('\n', tempfile);
-				//printf("CBUF: '%c' (+1: %d)\n", buf[lastl], buf[lastl+1]);
 			}
 			currLine++;
 		}
@@ -190,7 +246,6 @@ void saveSystem_printAtLine(int lineNumber, const char* content)
 			int lastl = strlen(buf) - 1;
 			if (buf[lastl] != '\n' && buf[lastl] != '\0' && !feof(saveFile)) {
 				fputc('\n', tempfile);
-				//printf("CBUF: '%c' (+1: %d)\n", buf[lastl], buf[lastl + 1]);
 			}
 		}
 		puts("[SAVE SYSTEM] Reloading the SAVE SYSTEM (replacing files)");
@@ -206,7 +261,9 @@ void saveSystem_printAtLine(int lineNumber, const char* content)
 		puts("[SAVE SYSTEM] ERROR CREATING TEMP FILE.");
 	}
 }
-
+/**
+ * @brief Reset zapisu gracza.
+ */
 void saveSystem_resetData()
 {
 	puts("[SAVE SYSTEM] RESETTING DATA");
@@ -215,6 +272,9 @@ void saveSystem_resetData()
 	saveSystem_init();
 	saveSystem_setStartData();
 }
+/**
+ * @brief Ustawienie domyslnych wartosci w pliku zapisu.
+ */
 void saveSystem_setStartData()
 {
 	saveSystem_printAtLine(1, "1");

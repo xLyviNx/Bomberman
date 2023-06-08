@@ -257,7 +257,7 @@ void plantBomb(bool isPaused, struct Character* Player, struct BombList** bombs,
             if (count > 0)
             {
                 bool dst = false;
-                if (count < Player->maxBombs && !is_on_block(blocks, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, &dst, Player, *bombs, true))
+                if (count < Player->maxBombs && !is_on_block(blocks, Player->Transform.gridPosition.x, Player->Transform.gridPosition.y, &dst, Player, *bombs, true, 0))
                 {
 
                     canplant = true;
@@ -386,11 +386,11 @@ void explodeBomb(struct BombList** bomb, struct BombList** bombs, struct dstr_bl
             {
                 int X = (*bomb)->Position.x + (xdir * i * gridSize);
                 int Y = (*bomb)->Position.y + (ydir * i * gridSize);
-                struct dstr_block* mblock = (Block_Find((*blocks), X, Y, true, Player));
+                struct dstr_block* mblock = (Block_Find((*blocks), X, Y, true, Player, 0));
                 bool destroyable = mblock != NULL && mblock->destroyable;
                 bool test = false;
 
-                if (is_on_block((*blocks), X, Y, &test, Player, *bombs, true) || mblock != NULL)
+                if (is_on_block((*blocks), X, Y, &test, Player, *bombs, true, 0) || mblock != NULL)
                 {
 
                     if (mblock && destroyable) {

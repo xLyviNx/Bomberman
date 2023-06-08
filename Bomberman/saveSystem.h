@@ -2,8 +2,13 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+/**
+ * @brief Dlugosc linijki w pliku zapisu.
+ */
 #define LINE_LENGTH 32
-
+/**
+ * @brief Zaladowany plik zapisu.
+ */
 FILE* saveFile;
 
 bool saveSystem_init();

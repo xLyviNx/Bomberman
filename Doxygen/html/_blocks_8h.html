@@ -115,9 +115,9 @@ Funkcje</h2></td></tr>
 <tr class="memitem:a82939e1ed58889031b197c00358df92b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8h.html#a82939e1ed58889031b197c00358df92b">Block_RemoveList</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **)</td></tr>
 <tr class="memdesc:a82939e1ed58889031b197c00358df92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa liste blokow.  <br /></td></tr>
 <tr class="separator:a82939e1ed58889031b197c00358df92b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95d4f321561bf4ac332199068f43ae41"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8h.html#a95d4f321561bf4ac332199068f43ae41">Block_Find</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *, int, int, bool, struct <a class="el" href="struct_character.html">Character</a> *)</td></tr>
-<tr class="memdesc:a95d4f321561bf4ac332199068f43ae41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Szuka bloku na danych koordynatach.  <br /></td></tr>
-<tr class="separator:a95d4f321561bf4ac332199068f43ae41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61af9f9dfb33cab74d6974f47fa1fedc"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8h.html#a61af9f9dfb33cab74d6974f47fa1fedc">Block_Find</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *, int, int, bool, struct <a class="el" href="struct_character.html">Character</a> *, int)</td></tr>
+<tr class="memdesc:a61af9f9dfb33cab74d6974f47fa1fedc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Szuka bloku na danych koordynatach.  <br /></td></tr>
+<tr class="separator:a61af9f9dfb33cab74d6974f47fa1fedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a39d0009c133ff1ed234bb433de7c996d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8h.html#a39d0009c133ff1ed234bb433de7c996d">Block_Remove</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *, struct <a class="el" href="structdstr__block.html">dstr_block</a> **, struct <a class="el" href="struct_enemy.html">Enemy</a> *)</td></tr>
 <tr class="memdesc:a39d0009c133ff1ed234bb433de7c996d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa konkretny blok z listy.  <br /></td></tr>
 <tr class="separator:a39d0009c133ff1ed234bb433de7c996d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -282,8 +282,8 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a95d4f321561bf4ac332199068f43ae41" name="a95d4f321561bf4ac332199068f43ae41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95d4f321561bf4ac332199068f43ae41">&#9670;&#160;</a></span>Block_Find()</h2>
+<a id="a61af9f9dfb33cab74d6974f47fa1fedc" name="a61af9f9dfb33cab74d6974f47fa1fedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61af9f9dfb33cab74d6974f47fa1fedc">&#9670;&#160;</a></span>Block_Find()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -316,7 +316,13 @@ Funkcje</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
-          <td class="paramname"><em>Player</em>&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subPixels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -334,12 +340,13 @@ Funkcje</h2></td></tr>
     <tr><td class="paramname">Y</td><td>Wspolrzedna osi y. </td></tr>
     <tr><td class="paramname">gridMethod</td><td>Metoda szukania (czy tylko po konkretnych koordynatach siatki). </td></tr>
     <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">subPixels</td><td>Zmiana wielkosci wykrywania kolizji (w pikselach). </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Blok, o ile znaleziono. (Inaczej NULL) </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00144">144</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00145">145</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -460,7 +467,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00317">317</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00318">318</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -507,7 +514,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Czy usunieto blok. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00184">184</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00185">185</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -565,7 +572,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Ilosc blokow. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00219">219</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00220">220</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -632,7 +639,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00249">249</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00250">250</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -672,7 +679,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Lista blokow. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00359">359</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00360">360</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -711,7 +718,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00341">341</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00342">342</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -750,7 +757,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00286">286</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00287">287</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>

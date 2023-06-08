@@ -5,37 +5,37 @@
 \doxysubsubsection*{Definicje}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{save_system_8c_a53c83a66e461adf57ea7f7b94ac51568}{SAVEFILE\+\_\+\+LOCATION}}~\"{}data/save.\+bmb\"{}
-\item 
+\#define \mbox{\hyperlink{save_system_8c_a53c83a66e461adf57ea7f7b94ac51568}{SAVEFILE\+\_\+\+LOCATION}}~\"{}data/save.\+txt\"{}
+\begin{DoxyCompactList}\small\item\em Lokalizacja pliku zapisu. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{save_system_8c_ac7e10e0cf8292253429695b8b1346ee3}{TEMPFILE\+\_\+\+LOCATION}}~\"{}data/save.\+tmp\"{}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Lokalizacja pliku tymczasowego. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Funkcje}
 \begin{DoxyCompactItemize}
 \item 
 bool \mbox{\hyperlink{save_system_8c_a65bc2bfdd845f4843d68e58349684bcb}{save\+System\+\_\+init}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Inicjalizacja systemu zapisu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{save_system_8c_a2dba782e8e440ce1b2a164b5e5e42129}{save\+System\+\_\+close}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Zamkniecie systemu zapisu. \end{DoxyCompactList}\item 
 char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{save_system_8c_a3728a9658374383ae83ad77db77b344c}{save\+System\+\_\+read\+Line}} (int line\+Number)
-\item 
+\begin{DoxyCompactList}\small\item\em Odczyt linii pliku zapisu. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{save_system_8c_a33f5cc6288afda6c963a938c3fea53cc}{trim\+Text}} (char \texorpdfstring{$\ast$}{*}text, int n)
-\item 
+\begin{DoxyCompactList}\small\item\em Przyciecie tekstu. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{save_system_8c_a468a98a7be2e13678092133d5157e404}{has\+Achievement}} (int achievement\+Id)
-\item 
+\begin{DoxyCompactList}\small\item\em Sprawdzenie czy gracz odblokowal osiagniecie. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{save_system_8c_a8629066b437fe98d77c456ae248a8500}{save\+System\+\_\+\+Load\+Level}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Wczytanie poziomu z pliku zapisu. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{save_system_8c_af24120518da9bb3e4797d445b2daeaca}{save\+System\+\_\+\+Load\+Bombs}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Wczytanie bomb z pliku zapisu. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{save_system_8c_af88a77ff799146acde4ba37bdccf9468}{save\+System\+\_\+\+Load\+Range}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Wczytanie zasiegu bomb z pliku zapisu. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{save_system_8c_ad424455bd34d93697c04676898d98251}{save\+System\+\_\+\+Load\+Speed}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Wczytanie predkosci gracza z pliku zapisu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{save_system_8c_a9fee469e473f1031fd15c443997ed4b3}{save\+System\+\_\+print\+At\+Line}} (int line\+Number, const char \texorpdfstring{$\ast$}{*}content)
-\item 
+\begin{DoxyCompactList}\small\item\em Zapis do linii pliku zapisu. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{save_system_8c_a778c8e92886fd11fa783e7b2df815622}{save\+System\+\_\+reset\+Data}} ()
-\item 
+\begin{DoxyCompactList}\small\item\em Reset zapisu gracza. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{save_system_8c_a26cbc408b43a66b3b12704f702abfd75}{save\+System\+\_\+set\+Start\+Data}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Ustawienie domyslnych wartosci w pliku zapisu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Dokumentacja definicji}
@@ -43,11 +43,15 @@ void \mbox{\hyperlink{save_system_8c_a26cbc408b43a66b3b12704f702abfd75}{save\+Sy
 \index{saveSystem.c@{saveSystem.c}!SAVEFILE\_LOCATION@{SAVEFILE\_LOCATION}}
 \index{SAVEFILE\_LOCATION@{SAVEFILE\_LOCATION}!saveSystem.c@{saveSystem.c}}
 \doxysubsubsection{\texorpdfstring{SAVEFILE\_LOCATION}{SAVEFILE\_LOCATION}}
-{\footnotesize\ttfamily \#define SAVEFILE\+\_\+\+LOCATION~\"{}data/save.\+bmb\"{}}
+{\footnotesize\ttfamily \#define SAVEFILE\+\_\+\+LOCATION~\"{}data/save.\+txt\"{}}
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00003}{3}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Lokalizacja pliku zapisu. 
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00006}{6}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_ac7e10e0cf8292253429695b8b1346ee3}\label{save_system_8c_ac7e10e0cf8292253429695b8b1346ee3} 
 \index{saveSystem.c@{saveSystem.c}!TEMPFILE\_LOCATION@{TEMPFILE\_LOCATION}}
@@ -57,7 +61,11 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00003}{3}} pliku \mbox
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00004}{4}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Lokalizacja pliku tymczasowego. 
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00010}{10}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 
 
@@ -70,7 +78,19 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00004}{4}} pliku \mbox
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00079}{79}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Sprawdzenie czy gracz odblokowal osiagniecie. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em achievement\+Id} & ID osiagniecia. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Czy gracz odblokowal osiagniecie. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00113}{113}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a2dba782e8e440ce1b2a164b5e5e42129}\label{save_system_8c_a2dba782e8e440ce1b2a164b5e5e42129} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_close@{saveSystem\_close}}
@@ -80,7 +100,11 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00079}{79}} pliku \mbo
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00026}{26}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Zamkniecie systemu zapisu. 
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00042}{42}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a65bc2bfdd845f4843d68e58349684bcb}\label{save_system_8c_a65bc2bfdd845f4843d68e58349684bcb} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_init@{saveSystem\_init}}
@@ -90,7 +114,14 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00026}{26}} pliku \mbo
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00005}{5}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Inicjalizacja systemu zapisu. 
+
+\begin{DoxyReturn}{Zwraca}
+Czy zainicjowano. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00017}{17}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_af24120518da9bb3e4797d445b2daeaca}\label{save_system_8c_af24120518da9bb3e4797d445b2daeaca} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_LoadBombs@{saveSystem\_LoadBombs}}
@@ -100,7 +131,14 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00005}{5}} pliku \mbox
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00117}{117}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Wczytanie bomb z pliku zapisu. 
+
+\begin{DoxyReturn}{Zwraca}
+Wczytana ilosc bomb. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00161}{161}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a8629066b437fe98d77c456ae248a8500}\label{save_system_8c_a8629066b437fe98d77c456ae248a8500} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_LoadLevel@{saveSystem\_LoadLevel}}
@@ -110,7 +148,14 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00117}{117}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00107}{107}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Wczytanie poziomu z pliku zapisu. 
+
+\begin{DoxyReturn}{Zwraca}
+Wczytany poziom. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00146}{146}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_af88a77ff799146acde4ba37bdccf9468}\label{save_system_8c_af88a77ff799146acde4ba37bdccf9468} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_LoadRange@{saveSystem\_LoadRange}}
@@ -120,7 +165,14 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00107}{107}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00127}{127}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Wczytanie zasiegu bomb z pliku zapisu. 
+
+\begin{DoxyReturn}{Zwraca}
+Wczytany zasieg bomb. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00176}{176}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_ad424455bd34d93697c04676898d98251}\label{save_system_8c_ad424455bd34d93697c04676898d98251} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_LoadSpeed@{saveSystem\_LoadSpeed}}
@@ -130,7 +182,14 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00127}{127}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00137}{137}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Wczytanie predkosci gracza z pliku zapisu. 
+
+\begin{DoxyReturn}{Zwraca}
+Wczytana predkosc gracza. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00191}{191}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a9fee469e473f1031fd15c443997ed4b3}\label{save_system_8c_a9fee469e473f1031fd15c443997ed4b3} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_printAtLine@{saveSystem\_printAtLine}}
@@ -140,7 +199,18 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00137}{137}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00148}{148}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Zapis do linii pliku zapisu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em line\+Number} & Docelowa linia tekstu pliku. \\
+\hline
+{\em content} & Tekst do zapisu. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00207}{207}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a3728a9658374383ae83ad77db77b344c}\label{save_system_8c_a3728a9658374383ae83ad77db77b344c} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_readLine@{saveSystem\_readLine}}
@@ -150,7 +220,19 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00148}{148}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00034}{34}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Odczyt linii pliku zapisu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em line\+Number} & Numer linii \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Odczytana zawartosc linii. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00055}{55}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a778c8e92886fd11fa783e7b2df815622}\label{save_system_8c_a778c8e92886fd11fa783e7b2df815622} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_resetData@{saveSystem\_resetData}}
@@ -160,7 +242,11 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00034}{34}} pliku \mbo
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00210}{210}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Reset zapisu gracza. 
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00267}{267}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a26cbc408b43a66b3b12704f702abfd75}\label{save_system_8c_a26cbc408b43a66b3b12704f702abfd75} 
 \index{saveSystem.c@{saveSystem.c}!saveSystem\_setStartData@{saveSystem\_setStartData}}
@@ -170,7 +256,11 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00210}{210}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00218}{218}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Ustawienie domyslnych wartosci w pliku zapisu. 
+
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00278}{278}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 
 \Hypertarget{save_system_8c_a33f5cc6288afda6c963a938c3fea53cc}\label{save_system_8c_a33f5cc6288afda6c963a938c3fea53cc} 
 \index{saveSystem.c@{saveSystem.c}!trimText@{trimText}}
@@ -180,5 +270,19 @@ Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00218}{218}} pliku \mb
 
 
 
-Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00067}{67}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
+Przyciecie tekstu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em text} & Tekst do przyciecia. \\
+\hline
+{\em n} & Dlugosc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Zwraca}
+Wartosc logiczna -\/ przyciecie/koniec tekstu. 
+\end{DoxyReturn}
+
+
+Definicja w linii \mbox{\hyperlink{save_system_8c_source_l00095}{95}} pliku \mbox{\hyperlink{save_system_8c_source}{save\+System.\+c}}.
 

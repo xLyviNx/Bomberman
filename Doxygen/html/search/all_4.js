@@ -25,8 +25,7 @@ var searchData=
   ['explosion_5finsert_22',['Explosion_Insert',['../_explosions_8c.html#aa716f2c51fe8c12ff189a221515fe911',1,'Explosion_Insert(struct Explosion **first, int X, int Y, int i):&#160;Explosions.c'],['../_explosions_8h.html#ae782399ec19c3f61b7f8c67b1c401bee',1,'Explosion_Insert(struct Explosion **, int, int, int):&#160;Explosions.c']]],
   ['explosion_5fremove_23',['Explosion_Remove',['../_explosions_8c.html#a9c4771b8dd88d973a32598e250b5f116',1,'Explosion_Remove(struct Explosion **exp):&#160;Explosions.c'],['../_explosions_8h.html#ae091a808cd4a2dd7176ed6005f2b2f67',1,'Explosion_Remove(struct Explosion **):&#160;Explosions.c']]],
   ['explosion_5fremovelist_24',['Explosion_RemoveList',['../_explosions_8c.html#ad1d4dc1ab61e811d238a00d2287b0759',1,'Explosion_RemoveList(struct Explosion **explosions):&#160;Explosions.c'],['../_explosions_8h.html#ae923ba3dc4765d401963f4456b69ee44',1,'Explosion_RemoveList(struct Explosion **):&#160;Explosions.c']]],
-  ['explosions_25',['explosions',['../main_8c.html#a552dc66db0005fc65d2da465f5b65bab',1,'main.c']]],
-  ['explosions_2ec_26',['Explosions.c',['../_explosions_8c.html',1,'']]],
-  ['explosions_2eh_27',['Explosions.h',['../_explosions_8h.html',1,'']]],
-  ['explotime_28',['exploTime',['../_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab',1,'Bombs.c']]]
+  ['explosions_2ec_25',['Explosions.c',['../_explosions_8c.html',1,'']]],
+  ['explosions_2eh_26',['Explosions.h',['../_explosions_8h.html',1,'']]],
+  ['explotime_27',['exploTime',['../_bombs_8c.html#a69ddd433c747d36f771b9000799e96ab',1,'Bombs.c']]]
 ];

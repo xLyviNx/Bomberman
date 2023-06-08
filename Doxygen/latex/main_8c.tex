@@ -28,44 +28,36 @@
 \begin{DoxyCompactItemize}
 \item 
 void \mbox{\hyperlink{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd}{Move\+Player}} (struct \mbox{\hyperlink{struct_vector2}{Vector2}} dir, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
-\item 
+\begin{DoxyCompactList}\small\item\em Finalne poruszanie sie gracza wraz z sprawdzaniem kolizji. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a99c600c7ab794c26c3d142fe0c4b4ba6}{Achievement}} (float \texorpdfstring{$\ast$}{*}timeleft, int id, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}font2)
-\item 
+\begin{DoxyCompactList}\small\item\em Wyswietlanie osiagniecia. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_a260156233ddc906c4545cedacebbd8d1}{player\+Movement}} (struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
-\item 
-void \mbox{\hyperlink{main_8c_a13c95e670d96a5e351b602a833e42c99}{render\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}expl)
-\item 
-void \mbox{\hyperlink{main_8c_ab9b972cc25c97319c531bd050a009bcc}{loop\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}expl, bool \texorpdfstring{$\ast$}{*}removed)
-\item 
+\begin{DoxyCompactList}\small\item\em Zarzadzanie poruszaniem sie gracza. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4}{menu\+Move}} (bool down, unsigned short \texorpdfstring{$\ast$}{*}val, int level, bool buttondown)
-\item 
+\begin{DoxyCompactList}\small\item\em Nawigacja po menu glownym (ekranie startowym) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_ad8d2c549db062face4a58e191844cdd8}{button}} (int key, bool down, int \texorpdfstring{$\ast$}{*}current\+Level, unsigned short \texorpdfstring{$\ast$}{*}menu\+Choice\+Value)
-\item 
+\begin{DoxyCompactList}\small\item\em Obsluga przyciskow. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{main_8c_ac55ee0a4b8070d80e00b83d067d91614}{draw\+UI}} (ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}ui\+Font, ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}Level\+Font, int level, struct \mbox{\hyperlink{struct_enemy}{Enemy}} \texorpdfstring{$\ast$}{*}enemies, struct \mbox{\hyperlink{structdstr__block}{dstr\+\_\+block}} \texorpdfstring{$\ast$}{*}blocks)
-\item 
-void \mbox{\hyperlink{main_8c_ac8b97f071c4711d5d652c2136dc0698b}{draw\+Grid}} (int maxx, int maxy, int xsize, int ysize)
-\item 
+\begin{DoxyCompactList}\small\item\em Wyswietlanie UI (Interfejsu Uzytkownika) \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Funkcja glowna (startowa) -\/ MAIN. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Zmienne}
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{struct_bomb_list}{Bomb\+List}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a0c6b025e3d49adb23ede839eb339aaba}{bombs}} = NULL
-\item 
+\begin{DoxyCompactList}\small\item\em Wskaznik na liste bomb (jej pierwszy element) \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{main_8c_a67dd12859b2bef7eb52210aa47e88a7d}{wasd}} \mbox{[}4\mbox{]} = \{ false, false, false, false \}
-\item 
+\begin{DoxyCompactList}\small\item\em Tablica wcisnietych przyciskow (do poruszania sie gracza) \end{DoxyCompactList}\item 
 double \mbox{\hyperlink{main_8c_afac460bb6131314e58628ebd514f53c7}{delta\+Time}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Czas miedzy klatkami. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{main_8c_a8235c6e9e346e312c0452da60148bc21}{cam\+\_\+x\+\_\+offset}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Offset kamery na osi X. \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}{cam\+\_\+y\+\_\+offset}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Offset kamery na osi Y. \end{DoxyCompactList}\item 
 unsigned short \mbox{\hyperlink{main_8c_a23c39ea291d6ab3eedc01ede1fe795fd}{Global\+Action}} = 0
-\item 
+\begin{DoxyCompactList}\small\item\em Zmienna globalna odpowiadajaca za \"{}zdalne akcje\"{} z kazdego poziomu kodu. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{struct_character}{Character}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a3980a30693d2af1a413698203929f1be}{Player}} = NULL
-\item 
-struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}} = NULL
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Wskaznik na gracza. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Dokumentacja funkcji}
@@ -77,7 +69,22 @@ struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00091}{91}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Wyswietlanie osiagniecia. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em timeleft} & Wskaznik na wartosc pozostalego czasu (float\texorpdfstring{$\ast$}{*}) \\
+\hline
+{\em id} & ID osiagniecia \\
+\hline
+{\em font} & Jedna z czcionek \\
+\hline
+{\em font2} & Jedna z czcionek \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00130}{130}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_ad8d2c549db062face4a58e191844cdd8}\label{main_8c_ad8d2c549db062face4a58e191844cdd8} 
 \index{main.c@{main.c}!button@{button}}
@@ -87,17 +94,22 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00091}{91}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00229}{229}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
-
-\Hypertarget{main_8c_ac8b97f071c4711d5d652c2136dc0698b}\label{main_8c_ac8b97f071c4711d5d652c2136dc0698b} 
-\index{main.c@{main.c}!drawGrid@{drawGrid}}
-\index{drawGrid@{drawGrid}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{drawGrid()}{drawGrid()}}
-{\footnotesize\ttfamily void draw\+Grid (\begin{DoxyParamCaption}\item[{int}]{maxx,  }\item[{int}]{maxy,  }\item[{int}]{xsize,  }\item[{int}]{ysize }\end{DoxyParamCaption})}
+Obsluga przyciskow. 
 
 
+\begin{DoxyParams}{Parametry}
+{\em key} & Ktory klawisz wcisnieto. \\
+\hline
+{\em down} & Czy klawisz byl wcisniety (a nie podniesiony). \\
+\hline
+{\em current\+Level} & Wskaznik na numer aktualnego poziomu. \\
+\hline
+{\em menu\+Choice\+Value} & Wskaznik na wartosc (ID) aktualnie wybranego przycisku w menu. \\
+\hline
+\end{DoxyParams}
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00340}{340}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00233}{233}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_ac55ee0a4b8070d80e00b83d067d91614}\label{main_8c_ac55ee0a4b8070d80e00b83d067d91614} 
 \index{main.c@{main.c}!drawUI@{drawUI}}
@@ -107,17 +119,24 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00340}{340}} pliku \mbox{\hyp
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00331}{331}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
-
-\Hypertarget{main_8c_ab9b972cc25c97319c531bd050a009bcc}\label{main_8c_ab9b972cc25c97319c531bd050a009bcc} 
-\index{main.c@{main.c}!loopExplosions@{loopExplosions}}
-\index{loopExplosions@{loopExplosions}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{loopExplosions()}{loopExplosions()}}
-{\footnotesize\ttfamily void loop\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{expl,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{removed }\end{DoxyParamCaption})}
+Wyswietlanie UI (Interfejsu Uzytkownika) 
 
 
+\begin{DoxyParams}{Parametry}
+{\em ui\+Font} & Jedna z czcionek \\
+\hline
+{\em Level\+Font} & Jedna z czcionek \\
+\hline
+{\em level} & Numer aktualnego poziomu. \\
+\hline
+{\em enemies} & Wskaznik na liste przeciwnikow. \\
+\hline
+{\em blocks} & Wskaznik na liste blokow. \\
+\hline
+\end{DoxyParams}
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00182}{182}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00344}{344}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4} 
 \index{main.c@{main.c}!main@{main}}
@@ -127,7 +146,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00182}{182}} pliku \mbox{\hyp
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00369}{369}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Funkcja glowna (startowa) -\/ MAIN. 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00356}{356}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4}\label{main_8c_aad35b35cb31e825018ca4a66ac2ef4d4} 
 \index{main.c@{main.c}!menuMove@{menuMove}}
@@ -137,7 +160,22 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00369}{369}} pliku \mbox{\hyp
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00207}{207}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Nawigacja po menu glownym (ekranie startowym) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em down} & Czy gracz zjezdza w dol czy do gory. \\
+\hline
+{\em val} & Wskaznik na wartosc (ID) przycisku na ktory gracz sie przelacza (zmieniany poprzez wskaznik). \\
+\hline
+{\em level} & Poziom (0 to menu glowne). \\
+\hline
+{\em buttondown} & Czy klawisz byl wcisniety (a nie podniesiony). \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00203}{203}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd}\label{main_8c_a2c8d9ac5db098d0fce6b24fbb28c7ccd} 
 \index{main.c@{main.c}!MovePlayer@{MovePlayer}}
@@ -147,7 +185,18 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00207}{207}} pliku \mbox{\hyp
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00042}{42}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Finalne poruszanie sie gracza wraz z sprawdzaniem kolizji. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em dir} & Kierunek poruszania sie gracza \\
+\hline
+{\em blocks} & Wskaznik na liste blokow \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00064}{64}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a260156233ddc906c4545cedacebbd8d1}\label{main_8c_a260156233ddc906c4545cedacebbd8d1} 
 \index{main.c@{main.c}!playerMovement@{playerMovement}}
@@ -157,17 +206,16 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00042}{42}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00120}{120}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
-
-\Hypertarget{main_8c_a13c95e670d96a5e351b602a833e42c99}\label{main_8c_a13c95e670d96a5e351b602a833e42c99} 
-\index{main.c@{main.c}!renderExplosions@{renderExplosions}}
-\index{renderExplosions@{renderExplosions}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{renderExplosions()}{renderExplosions()}}
-{\footnotesize\ttfamily void render\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}}]{expl }\end{DoxyParamCaption})}
+Zarzadzanie poruszaniem sie gracza. 
 
 
+\begin{DoxyParams}{Parametry}
+{\em blocks} & Wskaznik na liste blokow \\
+\hline
+\end{DoxyParams}
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00155}{155}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00164}{164}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 
 
@@ -180,7 +228,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00155}{155}} pliku \mbox{\hyp
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00030}{30}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Wskaznik na liste bomb (jej pierwszy element) 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00032}{32}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a8235c6e9e346e312c0452da60148bc21}\label{main_8c_a8235c6e9e346e312c0452da60148bc21} 
 \index{main.c@{main.c}!cam\_x\_offset@{cam\_x\_offset}}
@@ -190,7 +242,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00030}{30}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00033}{33}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Offset kamery na osi X. 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00044}{44}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}\label{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6} 
 \index{main.c@{main.c}!cam\_y\_offset@{cam\_y\_offset}}
@@ -200,7 +256,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00033}{33}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00034}{34}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Offset kamery na osi Y. 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00048}{48}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_afac460bb6131314e58628ebd514f53c7}\label{main_8c_afac460bb6131314e58628ebd514f53c7} 
 \index{main.c@{main.c}!deltaTime@{deltaTime}}
@@ -210,13 +270,7 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00034}{34}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00032}{32}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
-
-\Hypertarget{main_8c_a552dc66db0005fc65d2da465f5b65bab}\label{main_8c_a552dc66db0005fc65d2da465f5b65bab} 
-\index{main.c@{main.c}!explosions@{explosions}}
-\index{explosions@{explosions}!main.c@{main.c}}
-\doxysubsubsection{\texorpdfstring{explosions}{explosions}}
-{\footnotesize\ttfamily struct \mbox{\hyperlink{struct_explosion}{Explosion}}\texorpdfstring{$\ast$}{*} explosions = NULL}
+Czas miedzy klatkami. 
 
 
 
@@ -230,7 +284,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00040}{40}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00035}{35}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Zmienna globalna odpowiadajaca za \"{}zdalne akcje\"{} z kazdego poziomu kodu. 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00052}{52}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a3980a30693d2af1a413698203929f1be}\label{main_8c_a3980a30693d2af1a413698203929f1be} 
 \index{main.c@{main.c}!Player@{Player}}
@@ -240,7 +298,11 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00035}{35}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00037}{37}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Wskaznik na gracza. 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00056}{56}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 
 \Hypertarget{main_8c_a67dd12859b2bef7eb52210aa47e88a7d}\label{main_8c_a67dd12859b2bef7eb52210aa47e88a7d} 
 \index{main.c@{main.c}!wasd@{wasd}}
@@ -250,5 +312,9 @@ Definicja w linii \mbox{\hyperlink{main_8c_source_l00037}{37}} pliku \mbox{\hype
 
 
 
-Definicja w linii \mbox{\hyperlink{main_8c_source_l00031}{31}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
+Tablica wcisnietych przyciskow (do poruszania sie gracza) 
+
+
+
+Definicja w linii \mbox{\hyperlink{main_8c_source_l00036}{36}} pliku \mbox{\hyperlink{main_8c_source}{main.\+c}}.
 

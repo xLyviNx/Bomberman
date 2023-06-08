@@ -82,6 +82,8 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_explosions_8h_source.html">Explosions.h</a>&quot;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro.h&gt;</code><br />
+<code>#include &lt;allegro5/allegro_primitives.h&gt;</code><br />
 </div>
 <p><a href="_explosions_8c_source.html">Idź do kodu źródłowego tego pliku.</a></p>
 <table class="memberdecls">
@@ -93,9 +95,15 @@ Funkcje</h2></td></tr>
 <tr class="memitem:a9c4771b8dd88d973a32598e250b5f116"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_explosions_8c.html#a9c4771b8dd88d973a32598e250b5f116">Explosion_Remove</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> **exp)</td></tr>
 <tr class="memdesc:a9c4771b8dd88d973a32598e250b5f116"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa eksplozje.  <br /></td></tr>
 <tr class="separator:a9c4771b8dd88d973a32598e250b5f116"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1d4dc1ab61e811d238a00d2287b0759"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_explosions_8c.html#ad1d4dc1ab61e811d238a00d2287b0759">Explosion_RemoveList</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> **<a class="el" href="main_8c.html#a552dc66db0005fc65d2da465f5b65bab">explosions</a>)</td></tr>
+<tr class="memitem:ad1d4dc1ab61e811d238a00d2287b0759"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_explosions_8c.html#ad1d4dc1ab61e811d238a00d2287b0759">Explosion_RemoveList</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> **explosions)</td></tr>
 <tr class="memdesc:ad1d4dc1ab61e811d238a00d2287b0759"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa liste eksplozji.  <br /></td></tr>
 <tr class="separator:ad1d4dc1ab61e811d238a00d2287b0759"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2daf7e8930e0aa366eb2cc20e2b4cb4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_explosions_8c.html#a2daf7e8930e0aa366eb2cc20e2b4cb4b">renderExplosions</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> *expl, float <a class="el" href="main_8c.html#a8235c6e9e346e312c0452da60148bc21">cam_x_offset</a>, float <a class="el" href="main_8c.html#a0045c0d05a62c5e4e87ae58cfd3c05c6">cam_y_offset</a>)</td></tr>
+<tr class="memdesc:a2daf7e8930e0aa366eb2cc20e2b4cb4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renderuje (wyswietla) istniejace eksplozje.  <br /></td></tr>
+<tr class="separator:a2daf7e8930e0aa366eb2cc20e2b4cb4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af86c76bef3bc4844d73406fd4e560dba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_explosions_8c.html#af86c76bef3bc4844d73406fd4e560dba">loopExplosions</a> (struct <a class="el" href="struct_explosion.html">Explosion</a> **expl, bool *removed, float <a class="el" href="main_8c.html#afac460bb6131314e58628ebd514f53c7">deltaTime</a>)</td></tr>
+<tr class="memdesc:af86c76bef3bc4844d73406fd4e560dba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funkcja obslugujaca wszystkie istniejace eksplozje wywolywana co klatke.  <br /></td></tr>
+<tr class="separator:af86c76bef3bc4844d73406fd4e560dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
 <a id="aa716f2c51fe8c12ff189a221515fe911" name="aa716f2c51fe8c12ff189a221515fe911"></a>
@@ -148,7 +156,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Stworzona eksplozja. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00013">13</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00014">14</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
 
 </div>
 </div>
@@ -177,7 +185,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Czy usunieto eksplozje. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00056">56</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00057">57</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
 
 </div>
 </div>
@@ -206,7 +214,99 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Czy usunieto liste eksplozji. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00090">90</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00091">91</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
+
+</div>
+</div>
+<a id="af86c76bef3bc4844d73406fd4e560dba" name="af86c76bef3bc4844d73406fd4e560dba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86c76bef3bc4844d73406fd4e560dba">&#9670;&#160;</a></span>loopExplosions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loopExplosions </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_explosion.html">Explosion</a> **&#160;</td>
+          <td class="paramname"><em>expl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool *&#160;</td>
+          <td class="paramname"><em>removed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>deltaTime</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funkcja obslugujaca wszystkie istniejace eksplozje wywolywana co klatke. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expl</td><td>Podwojny wskaznik na liste eksplozji. </td></tr>
+    <tr><td class="paramname">removed</td><td>Wskaznik na wartosc logiczna (czy zniszczono jakas bombe, zwracanie przez wskaznik). </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Czas od ostatniej klatki. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00136">136</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
+
+</div>
+</div>
+<a id="a2daf7e8930e0aa366eb2cc20e2b4cb4b" name="a2daf7e8930e0aa366eb2cc20e2b4cb4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2daf7e8930e0aa366eb2cc20e2b4cb4b">&#9670;&#160;</a></span>renderExplosions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void renderExplosions </td>
+          <td>(</td>
+          <td class="paramtype">struct <a class="el" href="struct_explosion.html">Explosion</a> *&#160;</td>
+          <td class="paramname"><em>expl</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cam_x_offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>cam_y_offset</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Renderuje (wyswietla) istniejace eksplozje. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">expl</td><td>Wskaznik na liste eksplozji. </td></tr>
+    <tr><td class="paramname">cam_x_offset</td><td>Offset kamery na osi X. </td></tr>
+    <tr><td class="paramname">cam_y_offset</td><td>Offset kamery na osi Y. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="_explosions_8c_source.html#l00108">108</a> pliku <a class="el" href="_explosions_8c_source.html">Explosions.c</a>.</p>
 
 </div>
 </div>

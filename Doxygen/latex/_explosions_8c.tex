@@ -2,6 +2,8 @@
 \hypertarget{_explosions_8c}{}\label{_explosions_8c}\index{Bomberman/Explosions.c@{Bomberman/Explosions.c}}
 {\ttfamily \#include \"{}Explosions.\+h\"{}}\newline
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro.\+h$>$}\newline
+{\ttfamily \#include $<$allegro5/allegro\+\_\+primitives.\+h$>$}\newline
 \doxysubsubsection*{Funkcje}
 \begin{DoxyCompactItemize}
 \item 
@@ -9,8 +11,12 @@ struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}
 \begin{DoxyCompactList}\small\item\em Tworzy i umieszcza nowy element na liscie eksplozji. \end{DoxyCompactList}\item 
 bool \mbox{\hyperlink{_explosions_8c_a9c4771b8dd88d973a32598e250b5f116}{Explosion\+\_\+\+Remove}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}exp)
 \begin{DoxyCompactList}\small\item\em Usuwa eksplozje. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759}{Explosion\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\mbox{\hyperlink{main_8c_a552dc66db0005fc65d2da465f5b65bab}{explosions}})
-\begin{DoxyCompactList}\small\item\em Usuwa liste eksplozji. \end{DoxyCompactList}\end{DoxyCompactItemize}
+bool \mbox{\hyperlink{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759}{Explosion\+\_\+\+Remove\+List}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}explosions)
+\begin{DoxyCompactList}\small\item\em Usuwa liste eksplozji. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_explosions_8c_a2daf7e8930e0aa366eb2cc20e2b4cb4b}{render\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}expl, float \mbox{\hyperlink{main_8c_a8235c6e9e346e312c0452da60148bc21}{cam\+\_\+x\+\_\+offset}}, float \mbox{\hyperlink{main_8c_a0045c0d05a62c5e4e87ae58cfd3c05c6}{cam\+\_\+y\+\_\+offset}})
+\begin{DoxyCompactList}\small\item\em Renderuje (wyswietla) istniejace eksplozje. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_explosions_8c_af86c76bef3bc4844d73406fd4e560dba}{loop\+Explosions}} (struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}expl, bool \texorpdfstring{$\ast$}{*}removed, float \mbox{\hyperlink{main_8c_afac460bb6131314e58628ebd514f53c7}{delta\+Time}})
+\begin{DoxyCompactList}\small\item\em Funkcja obslugujaca wszystkie istniejace eksplozje wywolywana co klatke. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Dokumentacja funkcji}
@@ -40,7 +46,7 @@ Stworzona eksplozja.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00013}{13}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00014}{14}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
 
 \Hypertarget{_explosions_8c_a9c4771b8dd88d973a32598e250b5f116}\label{_explosions_8c_a9c4771b8dd88d973a32598e250b5f116} 
 \index{Explosions.c@{Explosions.c}!Explosion\_Remove@{Explosion\_Remove}}
@@ -62,7 +68,7 @@ Czy usunieto eksplozje.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00056}{56}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00057}{57}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
 
 \Hypertarget{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759}\label{_explosions_8c_ad1d4dc1ab61e811d238a00d2287b0759} 
 \index{Explosions.c@{Explosions.c}!Explosion\_RemoveList@{Explosion\_RemoveList}}
@@ -84,5 +90,51 @@ Czy usunieto liste eksplozji.
 \end{DoxyReturn}
 
 
-Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00090}{90}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00091}{91}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+
+\Hypertarget{_explosions_8c_af86c76bef3bc4844d73406fd4e560dba}\label{_explosions_8c_af86c76bef3bc4844d73406fd4e560dba} 
+\index{Explosions.c@{Explosions.c}!loopExplosions@{loopExplosions}}
+\index{loopExplosions@{loopExplosions}!Explosions.c@{Explosions.c}}
+\doxysubsubsection{\texorpdfstring{loopExplosions()}{loopExplosions()}}
+{\footnotesize\ttfamily void loop\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{expl,  }\item[{bool \texorpdfstring{$\ast$}{*}}]{removed,  }\item[{float}]{delta\+Time }\end{DoxyParamCaption})}
+
+
+
+Funkcja obslugujaca wszystkie istniejace eksplozje wywolywana co klatke. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em expl} & Podwojny wskaznik na liste eksplozji. \\
+\hline
+{\em removed} & Wskaznik na wartosc logiczna (czy zniszczono jakas bombe, zwracanie przez wskaznik). \\
+\hline
+{\em delta\+Time} & Czas od ostatniej klatki. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00136}{136}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
+
+\Hypertarget{_explosions_8c_a2daf7e8930e0aa366eb2cc20e2b4cb4b}\label{_explosions_8c_a2daf7e8930e0aa366eb2cc20e2b4cb4b} 
+\index{Explosions.c@{Explosions.c}!renderExplosions@{renderExplosions}}
+\index{renderExplosions@{renderExplosions}!Explosions.c@{Explosions.c}}
+\doxysubsubsection{\texorpdfstring{renderExplosions()}{renderExplosions()}}
+{\footnotesize\ttfamily void render\+Explosions (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{struct_explosion}{Explosion}} \texorpdfstring{$\ast$}{*}}]{expl,  }\item[{float}]{cam\+\_\+x\+\_\+offset,  }\item[{float}]{cam\+\_\+y\+\_\+offset }\end{DoxyParamCaption})}
+
+
+
+Renderuje (wyswietla) istniejace eksplozje. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em expl} & Wskaznik na liste eksplozji. \\
+\hline
+{\em cam\+\_\+x\+\_\+offset} & Offset kamery na osi X. \\
+\hline
+{\em cam\+\_\+y\+\_\+offset} & Offset kamery na osi Y. \\
+\hline
+\end{DoxyParams}
+
+
+Definicja w linii \mbox{\hyperlink{_explosions_8c_source_l00108}{108}} pliku \mbox{\hyperlink{_explosions_8c_source}{Explosions.\+c}}.
 

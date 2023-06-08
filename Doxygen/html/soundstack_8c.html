@@ -87,10 +87,13 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Funkcje</h2></td></tr>
 <tr class="memitem:a8daadf335fa00aa30d365e271572cb54"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sample_stack_element.html">SampleStackElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="soundstack_8c.html#a8daadf335fa00aa30d365e271572cb54">SampleStack_Push</a> (struct <a class="el" href="struct_sample_stack_element.html">SampleStackElement</a> *first, ALLEGRO_SAMPLE_INSTANCE *instance)</td></tr>
+<tr class="memdesc:a8daadf335fa00aa30d365e271572cb54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dodanie dzwieku do stosu.  <br /></td></tr>
 <tr class="separator:a8daadf335fa00aa30d365e271572cb54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6953d18a0813fc25e901f2d50d6fbac5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="soundstack_8c.html#a6953d18a0813fc25e901f2d50d6fbac5">SampleStack_Loop</a> (struct <a class="el" href="struct_sample_stack_element.html">SampleStackElement</a> **first, float dT)</td></tr>
+<tr class="memdesc:a6953d18a0813fc25e901f2d50d6fbac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wykrywanie kiedy wyrzucic element ze stosu (swego rodzaju PEEK z odczytaniem czasu)  <br /></td></tr>
 <tr class="separator:a6953d18a0813fc25e901f2d50d6fbac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab305c09a5e37058d545deac7fd2a5b10"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct_sample_stack_element.html">SampleStackElement</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="soundstack_8c.html#ab305c09a5e37058d545deac7fd2a5b10">SampleStack_Pop</a> (struct <a class="el" href="struct_sample_stack_element.html">SampleStackElement</a> *first)</td></tr>
+<tr class="memdesc:ab305c09a5e37058d545deac7fd2a5b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zdjecie elementu ze stosu.  <br /></td></tr>
 <tr class="separator:ab305c09a5e37058d545deac7fd2a5b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Dokumentacja funkcji</h2>
@@ -120,7 +123,16 @@ Funkcje</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00037">37</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
+<p>Wykrywanie kiedy wyrzucic element ze stosu (swego rodzaju PEEK z odczytaniem czasu) </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Stos (podwojny wskaznik) </td></tr>
+    <tr><td class="paramname">dT</td><td>deltaTime (czas od ostatniej klatki) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00042">42</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
 
 </div>
 </div>
@@ -140,7 +152,16 @@ Funkcje</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00051">51</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
+<p>Zdjecie elementu ze stosu. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Stos (wskaznik) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Zwraca</dt><dd>Wskaznik na stos </dd></dl>
+
+<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00061">61</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
 
 </div>
 </div>
@@ -170,7 +191,16 @@ Funkcje</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00003">3</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
+<p>Dodanie dzwieku do stosu. </p>
+<dl class="params"><dt>Parametry</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>Stos (wskaznik) </td></tr>
+    <tr><td class="paramname">instance</td><td>Allegro Sample Instance (wskaznik) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definicja w linii <a class="el" href="soundstack_8c_source.html#l00008">8</a> pliku <a class="el" href="soundstack_8c_source.html">soundstack.c</a>.</p>
 
 </div>
 </div>

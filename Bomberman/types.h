@@ -35,4 +35,4 @@ struct Character
     bool enabled; /**< Zmienna mowiaca o tym, czy gracz jest aktywny. */
     unsigned short walking; /**< Kierunek poruszania sie gracza. */
 };
-bool is_on_block(struct dstr_block*, float, float, bool*, struct Character*, struct BombList*, bool);
+bool is_on_block(struct dstr_block*, float, float, bool*, struct Character*, struct BombList*, bool, int);

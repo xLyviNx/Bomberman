@@ -101,9 +101,9 @@ Funkcje</h2></td></tr>
 <tr class="memitem:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a1b9a2086f824bd39e348a7f64ebe0e91">Block_RemoveList</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> **block)</td></tr>
 <tr class="memdesc:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa liste blokow.  <br /></td></tr>
 <tr class="separator:a1b9a2086f824bd39e348a7f64ebe0e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a4bc0f7f832b8f6eff367a64f5d66396d">Block_Find</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, int X, int Y, bool gridMethod, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>)</td></tr>
-<tr class="memdesc:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Szuka bloku na danych koordynatach.  <br /></td></tr>
-<tr class="separator:a4bc0f7f832b8f6eff367a64f5d66396d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84e3283c99c15d6229ffd41cb0bf40bf"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="structdstr__block.html">dstr_block</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#a84e3283c99c15d6229ffd41cb0bf40bf">Block_Find</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *blocks, int X, int Y, bool gridMethod, struct <a class="el" href="struct_character.html">Character</a> *<a class="el" href="main_8c.html#a3980a30693d2af1a413698203929f1be">Player</a>, int subPixels)</td></tr>
+<tr class="memdesc:a84e3283c99c15d6229ffd41cb0bf40bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Szuka bloku na danych koordynatach.  <br /></td></tr>
+<tr class="separator:a84e3283c99c15d6229ffd41cb0bf40bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aadaf5d30b885ab1730b5a383f8d29db3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_blocks_8c.html#aadaf5d30b885ab1730b5a383f8d29db3">Block_Remove</a> (struct <a class="el" href="structdstr__block.html">dstr_block</a> *element, struct <a class="el" href="structdstr__block.html">dstr_block</a> **first, struct <a class="el" href="struct_enemy.html">Enemy</a> *enemies)</td></tr>
 <tr class="memdesc:aadaf5d30b885ab1730b5a383f8d29db3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Usuwa konkretny blok z listy.  <br /></td></tr>
 <tr class="separator:aadaf5d30b885ab1730b5a383f8d29db3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,8 +235,8 @@ Funkcje</h2></td></tr>
 
 </div>
 </div>
-<a id="a4bc0f7f832b8f6eff367a64f5d66396d" name="a4bc0f7f832b8f6eff367a64f5d66396d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4bc0f7f832b8f6eff367a64f5d66396d">&#9670;&#160;</a></span>Block_Find()</h2>
+<a id="a84e3283c99c15d6229ffd41cb0bf40bf" name="a84e3283c99c15d6229ffd41cb0bf40bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84e3283c99c15d6229ffd41cb0bf40bf">&#9670;&#160;</a></span>Block_Find()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -269,7 +269,13 @@ Funkcje</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">struct <a class="el" href="struct_character.html">Character</a> *&#160;</td>
-          <td class="paramname"><em>Player</em>&#160;</td>
+          <td class="paramname"><em>Player</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>subPixels</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -287,12 +293,13 @@ Funkcje</h2></td></tr>
     <tr><td class="paramname">Y</td><td>Wspolrzedna osi y. </td></tr>
     <tr><td class="paramname">gridMethod</td><td>Metoda szukania (czy tylko po konkretnych koordynatach siatki). </td></tr>
     <tr><td class="paramname">Player</td><td>Wskaznik na gracza. </td></tr>
+    <tr><td class="paramname">subPixels</td><td>Zmiana wielkosci wykrywania kolizji (w pikselach). </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Blok, o ile znaleziono. (Inaczej NULL) </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00144">144</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00145">145</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -413,7 +420,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00317">317</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00318">318</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -460,7 +467,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Czy usunieto blok. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00184">184</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00185">185</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -518,7 +525,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Ilosc blokow. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00219">219</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00220">220</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -585,7 +592,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00249">249</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00250">250</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -625,7 +632,7 @@ Funkcje</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Zwraca</dt><dd>Lista blokow. </dd></dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00359">359</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00360">360</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -664,7 +671,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00341">341</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00342">342</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
@@ -703,7 +710,7 @@ Funkcje</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00286">286</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
+<p class="definition">Definicja w linii <a class="el" href="_blocks_8c_source.html#l00287">287</a> pliku <a class="el" href="_blocks_8c_source.html">Blocks.c</a>.</p>
 
 </div>
 </div>
