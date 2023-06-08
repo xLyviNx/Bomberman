@@ -94,7 +94,7 @@ void MovePlayer(struct Vector2 dir, struct dstr_block* blocks)
                         (npx - cam_x_offset + 50 > WIDTH - ((Player->Transform.scale.x / 2.0) * 128)
                             && nDir.x > 0))
                     {
-                        cam_x_offset += nDir.x * 5;
+                        cam_x_offset += nDir.x * 65 * deltaTime;
                     }
                 }
                 Player->Transform.position.x = npx;
