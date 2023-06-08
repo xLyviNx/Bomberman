@@ -787,7 +787,7 @@ int main()
                     }
                     al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgba(0, 0, 0, 180));
                     al_draw_textf(TitleFont, al_map_rgba(255, 255, 255, 255), WIDTH / 2, HEIGHT / 2 - 150, ALLEGRO_ALIGN_CENTER, "GAME OVER");
-                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT / 2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij aby wyjsc do menu...");
+                    al_draw_textf(uiFont, al_map_rgba(255, 255, 255, 120), WIDTH / 2, HEIGHT / 2 - 50, ALLEGRO_ALIGN_CENTER, "Kliknij ENTER aby wyjsc do menu...");
                 }
                 if (Pause)
                 {
