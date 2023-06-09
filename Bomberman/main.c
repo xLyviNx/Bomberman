@@ -23,7 +23,13 @@
 #include "endDoor.h"
 #include "boosts.h"
 #ifndef WIDTH
+    /**
+    * @brief Szerokosc okna.
+    */
     #define WIDTH 832
+    /**
+    * @brief Wysokosc okna.
+    */
     #define HEIGHT 832
 #endif // !WIDTH
 /**
